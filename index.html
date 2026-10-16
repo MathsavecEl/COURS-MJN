@@ -59,7 +59,7 @@
 
   $('apropos').innerHTML = (SITE.aPropos || []).map(t => `<p>${echap(t)}</p>`).join('');
   if (SITE.signature) $('apropos').innerHTML += `<p class="signature">${echap(SITE.signature)}</p>`;
-  if (SITE.blague) $('apropos').innerHTML += `<p class="blague"><span aria-hidden="true">😄</span> ${echap(SITE.blague)}</p>`;
+  if (SITE.blague) $('pied').innerHTML += `<p class="blague-bas"><span aria-hidden="true">😄</span>${echap(SITE.blague)}</p>`;
   if (SITE.email) {
     $('contact').innerHTML = `<strong>Une coquille, une erreur ?</strong>
       <p>Merci de me la signaler, je la corrigerai rapidement.</p>
