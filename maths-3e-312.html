@@ -340,6 +340,7 @@ sup{font-size:.72em;line-height:0}
 .rb1{fill:var(--amber-soft);stroke:var(--amber);stroke-width:1.6}
 .rb2{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.6}
 
+.angle-letter{display:inline-block;position:relative;padding-top:.12em;line-height:1.25;white-space:nowrap}.angle-letter .hat-mark{position:absolute;left:0;right:0;top:-.48em;text-align:center;font-size:.78em;font-style:normal;line-height:1;pointer-events:none}
 </style>
 </head>
 <body>
@@ -371,7 +372,7 @@ Une erreur, un blocage ? Écrivez-moi : <a href="mailto:mathsclavie20@gmail.com"
    ============================================================ */
 const F = (n, d) => `<span class="fr"><span>${n}</span><span>${d}</span></span>`;
 const R = s => `<span class="rad">√<span>${s}</span></span>`;
-const V = s => `<i>${s}</i>`;
+const V = s => { const n = s.normalize('NFD'); return n.includes('\u0302') ? `<span class="angle-letter"><i>${n.replace(/\u0302/g, '')}</i><span class="hat-mark">⌃</span></span>` : `<i>${s}</i>`; };
 const fmt = s => String(s).replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>').replace(/\^(−?-?\d+|[a-zA-Z])/g, '<sup>$1</sup>');
 
 /* nombre en écriture française : virgule, espace des milliers, signe − */
