@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap');
+
+:root {
+  --fond: #f7f5f0; --surface: #ffffff; --surface-2: #f0ede6;
+  --texte: #1c1b22; --doux: #5f5c69; --bord: #e4e0d6;
+  --accent: #3d4bd8; --accent-doux: #e8eafc;
+  --ombre: 0 1px 2px rgb(28 27 34 / .04), 0 8px 24px rgb(28 27 34 / .06);
+  --rayon: 16px;
+  --titre-font: "Fraunces", Georgia, serif;
+  --corps-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: #121218; --surface: #1b1b23; --surface-2: #23232d;
+    --texte: #eceaf2; --doux: #a19eae; --bord: #2e2e3a;
+    --accent: #8f9bff; --accent-doux: #262a4d;
+    --ombre: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .25);
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background-image: radial-gradient(900px 500px at 90% -10%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 70%); background-repeat: no-repeat; font-family: var(--corps-font); background: var(--fond); color: var(--texte); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+.conteneur { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- En-tête ---------- */
+.hero { padding: 56px 0 32px; }
+
+.surtitre { display: inline-flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: .85rem; font-weight: 500; color: var(--doux); margin: 0 0 12px; }
+.surtitre span + span::before { content: "·"; margin-right: 8px; }
+.hero h1 { font-family: var(--titre-font); font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 16px; }
+.hero p.intro { font-size: 1.1rem; color: var(--doux); max-width: 60ch; margin: 0; }
+
+/* ---------- Classes ---------- */
+.classes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 8px 0 28px; }
+.classe { --h: 230; position: relative; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: var(--rayon);
+  background: var(--surface); border: 1px solid var(--bord); color: inherit; font: inherit; text-align: left; cursor: pointer;
+  box-shadow: var(--ombre); transition: transform .15s, border-color .15s, background .15s; }
+.classe:hover { transform: translateY(-2px); border-color: hsl(var(--h) 60% 60%); }
+.classe .pastille { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px;
+  background: hsl(var(--h) 75% 94%); color: hsl(var(--h) 55% 38%); font-weight: 700; font-size: .95rem; }
+.classe strong { display: block; font-weight: 600; line-height: 1.25; }
+.classe small { display: block; font-size: .8rem; }
+.classe small { color: var(--doux); }
+.classe[aria-pressed="true"] { background: hsl(var(--h) 60% 50%); border-color: transparent; color: #fff; }
+.classe[aria-pressed="true"] small { color: rgb(255 255 255 / .8); }
+.classe[aria-pressed="true"] .pastille { background: rgb(255 255 255 / .2); color: #fff; }
+@media (prefers-color-scheme: dark) {
+  .classe .pastille { background: hsl(var(--h) 40% 22%); color: hsl(var(--h) 80% 80%); }
+  .classe[aria-pressed="true"] { background: hsl(var(--h) 45% 40%); }
+}
+
+/* ---------- Recherche ---------- */
+.outils { position: sticky; top: 0; z-index: 5; padding: 12px 0; background: color-mix(in oklab, var(--fond) 88%, transparent); backdrop-filter: blur(10px); }
+.recherche { position: relative; }
+.recherche svg { position: absolute; left: 16px; top: 50%; translate: 0 -50%; color: var(--doux); }
+.recherche input { width: 100%; padding: 14px 16px 14px 46px; font: inherit; border: 1px solid var(--bord); border-radius: 999px; background: var(--surface); color: var(--texte); outline: none; transition: border-color .15s, box-shadow .15s; }
+.recherche input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-doux); }
+
+/* ---------- Cours ---------- */
+section.groupe { margin: 28px 0 8px; scroll-margin-top: 80px; }
+section.groupe h2 { --h: 230; display: flex; align-items: center; gap: 10px; font-family: var(--titre-font); font-size: 1.6rem; margin: 0 0 14px; }
+section.groupe h2::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: hsl(var(--h) 60% 55%); }
+section.groupe h2 .compte { font-family: var(--corps-font); font-size: .85rem; font-weight: 500; color: var(--doux); }
+.grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.carte { --h: 230; position: relative; display: flex; flex-direction: column; gap: 8px; padding: 20px; min-height: 150px; text-decoration: none; color: inherit;
+  background: var(--surface); border: 1px solid var(--bord); border-radius: var(--rayon); box-shadow: var(--ombre);
+  transition: transform .18s, border-color .18s, box-shadow .18s; }
+.carte::after { content: ""; position: absolute; left: 20px; right: 20px; top: 0; height: 3px; border-radius: 0 0 3px 3px; background: hsl(var(--h) 60% 55%); opacity: .8; }
+.carte:hover { transform: translateY(-3px); border-color: hsl(var(--h) 55% 65%); }
+.carte .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.etiquette { font-size: .75rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); color: var(--doux); }
+.etiquette.type { background: hsl(var(--h) 75% 94%); color: hsl(var(--h) 55% 35%); }
+.etiquette.nouveau { background: #fde9c8; color: #8a4b00; }
+@media (prefers-color-scheme: dark) { .etiquette.type { background: hsl(var(--h) 40% 22%); color: hsl(var(--h) 80% 82%); } .etiquette.nouveau { background: #4a3210; color: #ffd58f; } }
+.carte h3 { margin: 4px 0 0; font-size: 1.1rem; font-weight: 600; line-height: 1.3; }
+.carte p { margin: 0; color: var(--doux); font-size: .95rem; }
+.carte .ouvrir { margin-top: auto; padding-top: 6px; font-size: .9rem; font-weight: 600; color: hsl(var(--h) 55% 45%); }
+@media (prefers-color-scheme: dark) { .carte .ouvrir { color: hsl(var(--h) 80% 75%); } }
+.carte:hover .ouvrir { text-decoration: underline; }
+.vide { padding: 22px; border: 1.5px dashed var(--bord); border-radius: var(--rayon); color: var(--doux); text-align: center; }
+
+/* ---------- À propos ---------- */
+.a-propos { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; margin-top: 56px; padding: 28px; background: var(--surface); border: 1px solid var(--bord); border-radius: calc(var(--rayon) + 4px); box-shadow: var(--ombre); }
+.a-propos h2 { font-family: var(--titre-font); font-size: 1.6rem; margin: 0 0 8px; }
+.a-propos p { margin: 0 0 10px; color: var(--doux); max-width: 62ch; }
+.a-propos p.droits { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--bord); font-size: .92rem; }
+.a-propos p.signature { font-family: "Caveat", cursive; font-size: 2rem; line-height: 1; color: var(--accent); margin: 6px 0 18px; transform: rotate(-3deg); transform-origin: left; }
+.a-propos p.blague { display: inline-block; margin: 0; padding: 8px 14px; border-radius: 999px; background: var(--surface-2); font-size: .95rem; color: var(--texte); }
+.contact { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px; border-radius: var(--rayon); background: var(--accent-doux); }
+.contact p { margin: 0; }
+.contact small { color: var(--doux); word-break: break-all; }
+.contact .bouton { text-decoration: none; }
+@media (max-width: 720px) { .a-propos { grid-template-columns: 1fr; padding: 20px; } }
+
+footer { margin-top: 40px; padding: 28px 0 40px; border-top: 1px solid var(--bord); color: var(--doux); font-size: .85rem; }
+
+/* ---------- Pages de cours ---------- */
+.page-cours { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
+.retour { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; font-size: .95rem; }
+.page-cours h1 { font-family: var(--titre-font); font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.1; margin: 18px 0 8px; }
+.page-cours .chapo { color: var(--doux); margin: 0 0 24px; }
+.bloc { background: var(--surface); border: 1px solid var(--bord); border-radius: var(--rayon); padding: 20px; margin: 16px 0; box-shadow: var(--ombre); }
+.bloc.retenir { border-left: 4px solid var(--accent); }
+.bouton { display: inline-block; padding: 10px 18px; border-radius: 999px; border: 0; background: var(--accent); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
