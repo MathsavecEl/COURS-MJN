@@ -1,6 +1,6 @@
 /* Configuration du site et catalogue des ressources. */
 const SITE = {
-  titre: "Mathématiques interactives",
+  titre: "COURS MJN",
   presentation: "Cours, automatismes et exercices interactifs pour réviser les mathématiques depuis un téléphone, une tablette ou un ordinateur.",
   enseignant: "M. AHA MAJANI",
   matiere: "Mathématiques",
