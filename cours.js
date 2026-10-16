@@ -24,7 +24,8 @@ const CLASSES = [
   { nom: "3e", court: "3e", couleur: 25 },
   { nom: "Seconde", court: "2de", couleur: 330 },
   { nom: "Première", court: "1re", couleur: 45 },
-  { nom: "Terminale", court: "Tle", couleur: 190 }
+  { nom: "Terminale", court: "Tle", couleur: 190 },
+  { nom: "Divers", court: "★", couleur: 285 }
 ];
 
 const COURS = [
@@ -71,6 +72,15 @@ const COURS = [
     type: "Site de classe",
     description: "Cours, séries d'exercices et automatismes de Première spécialité.",
     lien: "maths-premiere-specialite.html",
+    nouveau: true
+  },
+  {
+    classe: "Divers",
+    titre: "Scratch pas à pas — apprendre en programmant",
+    chapitre: "Programmation et mathématiques",
+    type: "Activité interactive",
+    description: "Découvre les blocs Scratch, construis des scripts et teste tes idées dans une activité guidée et interactive.",
+    lien: "scratch-pas-a-pas.html",
     nouveau: true
   }
 ];
