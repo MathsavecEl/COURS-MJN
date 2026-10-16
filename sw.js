@@ -1,8 +1,8 @@
-const CACHE = 'maths-interactives-v6';
+const CACHE = 'maths-interactives-v7';
 const FILES = [
-  './', './index.html', './style.css?v=6', './cours.js?v=6', './manifest.webmanifest',
+  './', './index.html', './style.css?v=7', './cours.js?v=7', './manifest.webmanifest',
   './maths-4e-416.html', './maths-3e-306.html', './maths-3e-312.html',
-  './maths-seconde.html', './maths-premiere-specialite.html',
+  './maths-seconde.html', './maths-premiere-specialite.html', './scratch-pas-a-pas.html',
   './icon-192.png', './icon-512.png'
 ];
 self.addEventListener('install', event => {
