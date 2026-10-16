@@ -1,4 +1,4 @@
-# Mathématiques interactives
+# COURS MJN — Mathématiques interactives
 
 Site mobile de ressources pédagogiques de M. AHA MAJANI, sans compte élève. Il contient les classes 4e (416), 3e (306 et 312), Seconde et Première spécialité.
 
