@@ -173,6 +173,47 @@ details.rap[open]{padding-bottom:10px}
 
 .maj{font-size:.85em;color:var(--muted);text-align:center;margin:18px 8px 6px;line-height:1.5}
 input[type=checkbox]{flex-shrink:0;width:16px;height:16px}
+
+/* ---------- Accueil de Seconde et Première ---------- */
+main#main { background:linear-gradient(180deg,#eef3ff 0,#f4f6fb 360px); }
+.home-hero {
+  position:relative; isolation:isolate; overflow:hidden;
+  padding:clamp(24px,4vw,42px) clamp(20px,4vw,38px);
+  border:0; border-radius:22px;
+  background:linear-gradient(125deg,#162653 0%,#2852b8 58%,#7053d8 100%);
+  color:#fff; box-shadow:0 14px 32px rgba(32,65,150,.19);
+}
+.home-hero::after {
+  content:'π'; position:absolute; z-index:-1; right:5%; top:50%;
+  transform:translateY(-55%) rotate(-9deg); font:700 clamp(170px,25vw,300px)/.8 Georgia,serif;
+  color:#fff; opacity:.12; pointer-events:none;
+}
+.home-hero .kicker { color:#dce7ff!important; letter-spacing:1.2px; }
+.home-hero h1 { color:#fff; font-size:clamp(32px,4vw,48px); line-height:1.1; max-width:18ch; margin:9px 0 12px; }
+.home-hero .sub { color:#e6edff; max-width:68ch; font-size:clamp(16px,1.6vw,19px); line-height:1.65; }
+.home-hero .who { display:inline-flex; align-items:center; gap:8px; margin-top:8px; padding:7px 13px; border:1px solid rgba(255,255,255,.24); border-radius:999px; background:rgba(255,255,255,.1); font-size:15px; }
+.home-hero .who::before { content:'✦'; color:#f7d879; }
+.home-guide { border-color:#dce5f7; }
+.home-guide h2, .chapter-group h2 { display:flex; align-items:center; gap:9px; }
+.home-guide h2::before { content:'✦'; display:grid; place-items:center; width:30px; height:30px; border-radius:10px; background:#e7eefc; color:#2f5bd3; font-size:15px; }
+.home-guide .steps { padding-left:25px; }
+.home-guide .steps li { padding-left:3px; margin:8px 0; }
+.home-guide .bar { height:10px; margin-top:10px; }
+.chapter-group { border-color:#e0e6f2; }
+.chapter-group h2 { padding-bottom:9px; border-bottom:1px solid #e8edf6; }
+.chapter-group h2::before { content:''; width:5px; height:24px; border-radius:5px; background:linear-gradient(#2f5bd3,#7951d4); }
+.chapter-group .grid { gap:14px; }
+.chapter-group .tile { position:relative; overflow:hidden; padding:17px 18px; border-radius:14px; border-color:#e0e6f2; box-shadow:0 2px 7px rgba(25,45,90,.035); }
+.chapter-group .tile::before { content:''; position:absolute; inset:0 auto 0 0; width:3px; background:linear-gradient(#2f5bd3,#7951d4); opacity:.8; }
+.chapter-group .tile .t { margin:4px 0 7px; line-height:1.35; }
+.chapter-group .tile .m { line-height:1.45; }
+.chapter-group .tile:hover { transform:translateY(-2px); background:#fbfdff; }
+.card.mail { border:1px solid #dce5f7; }
+@media(max-width:900px) {
+  main#main { background:linear-gradient(180deg,#eef3ff 0,#f4f6fb 300px); }
+  .home-hero { border-radius:18px; padding:23px 20px; }
+  .home-hero::after { right:-12px; opacity:.09; }
+}
 </style></head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '1spe', classe: 'Première', court: '1re', titre: 'Maths en Première spécialité', prof: 'M AHA MAJANI', mail: 'mathsclavie20@gmail.com',
@@ -768,18 +809,18 @@ function activeNav(rt){ document.querySelectorAll('#nav a').forEach(a => a.class
 /* ---------- Accueil ---------- */
 function pageHome(){
   let tot = 0, dn = 0; CHAPS.forEach(c => { const s = chapStats(c); tot += s.n; dn += s.d; });
-  let h = `<div class="card hero"><div class="kicker" style="color:#dfe4ff">À l’attention de mes anciens élèves de ${SITE.classe}</div><h1>${SITE.titre}</h1><p class="sub">${SITE.accroche}</p><div class="who">${SITE.prof}</div></div>`;
+  let h = `<div class="card hero home-hero"><div class="kicker">À l’attention de mes anciens élèves de ${SITE.classe}</div><h1>${SITE.titre}</h1><p class="sub">${SITE.accroche}</p><div class="who">${SITE.prof}</div></div>`;
   h += `<div class="cheer">🌟 <span>${pick(CHEERS)}</span></div>`;
-  h += `<div class="card"><h2>Comment utiliser ce site ?</h2><ol class="steps">
+  h += `<div class="card home-guide"><h2>Comment utiliser ce site ?</h2><ol class="steps">
     <li><b>Choisis un chapitre</b> dans le menu (dans l’ordre du programme).</li>
     <li>Lis les <b>rappels de cours</b> et leurs exemples, brouillon à la main.</li>
     <li>Fais les <b>exercices d’application directe</b>, puis les <b>problèmes d’approfondissement</b>. Chaque réponse est corrigée tout de suite, et une correction détaillée est disponible.</li>
     <li>Entretiens tes réflexes avec les <b>automatismes</b> : quelques minutes par jour suffisent, les questions changent à chaque série.</li></ol>
     <p style="margin-top:10px">Ta progression : <b>${dn} / ${tot}</b> exercices réussis (elle est gardée sur cet appareil).</p><div class="bar"><div style="width:${tot ? 100 * dn / tot : 0}%"></div></div></div>`;
-  h += `<div class="card"><h2>⚡ Automatismes</h2><p class="sub">Des séries de 10 questions rapides, tirées au hasard, à refaire autant de fois que tu veux.</p><a class="btn" href="#auto">Lancer une série</a></div>`;
+  h += `<div class="card home-guide"><h2>⚡ Automatismes</h2><p class="sub">Des séries de 10 questions rapides, tirées au hasard, à refaire autant de fois que tu veux.</p><a class="btn" href="#auto">Lancer une série</a></div>`;
   let th = '';
   CHAPS.forEach((c, k) => {
-    if (c.th !== th){ if (th) h += `</div></div>`; th = c.th; h += `<div class="card"><h2>${th}</h2><div class="grid">`; }
+    if (c.th !== th){ if (th) h += `</div></div>`; th = c.th; h += `<div class="card chapter-group"><h2>${th}</h2><div class="grid">`; }
     const s = chapStats(c);
     h += `<a class="tile" href="#ch/${c.id}"><div class="m">Chapitre ${k + 1}</div><div class="t">${c.t}</div><div class="m">${c.app.length} exercices · ${c.appro.length} problèmes</div><div class="bar"><div style="width:${s.n ? 100 * s.d / s.n : 0}%"></div></div></a>`;
   });
