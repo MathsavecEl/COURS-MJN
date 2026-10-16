@@ -66,6 +66,15 @@ const COURS = [
     nouveau: true
   },
   {
+    classe: "Seconde",
+    titre: "SNT — Sciences numériques et technologie",
+    chapitre: "SNT",
+    type: "Espace à compléter",
+    description: "Espace réservé aux ressources de SNT. Le contenu sera ajouté ultérieurement.",
+    lien: "snt-seconde.html",
+    nouveau: true
+  },
+  {
     classe: "Première",
     titre: "Mathématiques en Première spécialité",
     chapitre: "Spécialité mathématiques",
