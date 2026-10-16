@@ -3,7 +3,7 @@
 :root {
   --fond: #f7f5f0; --surface: #ffffff; --surface-2: #f0ede6;
   --texte: #1c1b22; --doux: #5f5c69; --bord: #e4e0d6;
-  --accent: #3d4bd8; --accent-doux: #e8eafc;
+  --accent: #176b55; --accent-doux: #e2f3eb;
   --ombre: 0 1px 2px rgb(28 27 34 / .04), 0 8px 24px rgb(28 27 34 / .06);
   --rayon: 16px;
   --titre-font: "Fraunces", Georgia, serif;
@@ -14,7 +14,7 @@
   :root {
     --fond: #121218; --surface: #1b1b23; --surface-2: #23232d;
     --texte: #eceaf2; --doux: #a19eae; --bord: #2e2e3a;
-    --accent: #8f9bff; --accent-doux: #262a4d;
+    --accent: #69c7a3; --accent-doux: #203b32;
     --ombre: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .25);
     color-scheme: dark;
   }
@@ -29,16 +29,16 @@ a { color: var(--accent); }
 .hero {
  position:relative; isolation:isolate; overflow:hidden;
  padding:clamp(58px, 9vw, 100px) 0 clamp(48px, 7vw, 76px);
- color:#fff; background:linear-gradient(125deg,#172554 0%,#293caa 52%,#5967e8 100%);
- border-radius:0 0 32px 32px; box-shadow:0 18px 45px rgb(41 60 170 / .2);
+ color:#fff; background:linear-gradient(125deg,#123d32 0%,#176b55 52%,#4d9b7d 100%);
+ border-radius:0 0 32px 32px; box-shadow:0 18px 45px rgb(23 107 85 / .18);
 }
 .hero::after { content:'π'; position:absolute; z-index:-1; right:clamp(12px,9vw,130px); top:50%; transform:translateY(-58%) rotate(-8deg); font-family:Georgia,serif; font-size:clamp(15rem,36vw,31rem); font-weight:700; line-height:.8; color:#fff; opacity:.11; pointer-events:none; user-select:none; }
 .hero .conteneur { position:relative; z-index:1; }
-.hero .surtitre { color:#dbe4ff; }
+.hero .surtitre { color:#e1f5eb; }
 .hero .surtitre span { padding:6px 11px; border:1px solid rgb(255 255 255 / .23); border-radius:999px; background:rgb(255 255 255 / .08); }
 .hero .surtitre span + span::before { content:none; }
 .hero h1 { max-width:13ch; font-size:clamp(2.8rem,7vw,5.2rem); text-wrap:balance; }
-.hero p.intro { color:#e1e7ff; max-width:52ch; font-size:clamp(1.05rem,2.2vw,1.25rem); }
+.hero p.intro { color:#e5f6ed; max-width:52ch; font-size:clamp(1.05rem,2.2vw,1.25rem); }
 @media (max-width:520px) { .hero { border-radius:0 0 24px 24px; } .hero::after { right:-18px; opacity:.09; } }
 
 .surtitre { display: inline-flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: .85rem; font-weight: 500; color: var(--doux); margin: 0 0 12px; }
