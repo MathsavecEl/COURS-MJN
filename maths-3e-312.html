@@ -3373,7 +3373,7 @@ function pageHome() {
       </div></section>
     <section class="sheet"><h3>Comment travailler ?</h3><ol class="howto"><li><b>Je retiens</b> : lis le rappel de cours et l'exemple corrigé.</li><li><b>Je m'entraîne</b> : fais les exercices d'application directe. Tape ta réponse et clique sur « Vérifier ».</li><li><b>Je vais plus loin</b> : attaque les exercices d'approfondissement, comme au brevet.</li><li>Bloqué(e) ? Ouvre le <b>coup de pouce</b>. Après deux essais, la <b>correction</b> est disponible.</li></ol>
       <p class="muted">Pour écrire : virgule ou point pour les décimaux (4,5), barre pour les fractions (3/4), ^ pour les puissances (x^2 ou 2^3), point-virgule entre plusieurs solutions (3 ; −5). Ta progression est enregistrée sur cet appareil.</p>${mailBox()}</section>
-    <p class="maj"><b>Dernière mise à jour : ${MAJ}</b><br>Ce site n'est pas hébergé sur internet : M. AHA MAJANI le met à jour régulièrement (nouveaux exercices, corrections). Compare la date ci-dessus avec celle de tes camarades et, en cas de doute, demande-lui la version la plus récente.</p>`;
+    <p class="maj"><b>Dernière mise à jour : ${MAJ}</b><br>Compare la date ci-dessus avec celle de tes camarades et, en cas de doute, demande la version la plus récente.</p>`;
   const setName = () => { ST.name = document.getElementById('nm').value.trim().slice(0, 24); save(); document.getElementById('hello').textContent = ST.name ? 'Bon courage ' + ST.name + ' ! On y va !' : 'Bon courage à tous !'; };
   document.getElementById('nmok').onclick = setName;
   document.getElementById('nm').onkeydown = e => { if (e.key === 'Enter') setName(); };
