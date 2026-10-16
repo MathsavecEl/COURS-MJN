@@ -1,9 +1,9 @@
-const CACHE = 'maths-interactives-v1';
+const CACHE = 'maths-interactives-v2';
 const FILES = [
   './', './index.html', './style.css', './cours.js', './manifest.webmanifest',
-  './cours/maths-4e-416.html', './cours/maths-3e-306.html', './cours/maths-3e-312.html',
-  './cours/maths-seconde.html', './cours/maths-premiere-specialite.html',
-  './icons/icon-192.png', './icons/icon-512.png'
+  './maths-4e-416.html', './maths-3e-306.html', './maths-3e-312.html',
+  './maths-seconde.html', './maths-premiere-specialite.html',
+  './icon-192.png', './icon-512.png'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));

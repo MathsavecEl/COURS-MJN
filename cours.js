@@ -33,7 +33,7 @@ const COURS = [
     chapitre: "Cours et exercices interactifs",
     type: "Site de classe",
     description: "Chapitres, rappels de cours, exercices interactifs et automatismes.",
-    lien: "cours/maths-4e-416.html",
+    lien: "maths-4e-416.html",
     nouveau: true
   },
   {
@@ -42,7 +42,7 @@ const COURS = [
     chapitre: "Cours, automatismes et entraînement",
     type: "Site de classe",
     description: "Cours interactifs, chapitres, QCM et préparation aux évaluations.",
-    lien: "cours/maths-3e-306.html",
+    lien: "maths-3e-306.html",
     nouveau: true
   },
   {
@@ -51,7 +51,7 @@ const COURS = [
     chapitre: "Cours, automatismes et brevet",
     type: "Site de classe",
     description: "Chapitres, rappels de cours, exercices interactifs et problèmes type brevet.",
-    lien: "cours/maths-3e-312.html",
+    lien: "maths-3e-312.html",
     nouveau: true
   },
   {
@@ -60,7 +60,7 @@ const COURS = [
     chapitre: "Cours et exercices interactifs",
     type: "Site de classe",
     description: "Cours, séries d'exercices et automatismes de Seconde.",
-    lien: "cours/maths-seconde.html",
+    lien: "maths-seconde.html",
     nouveau: true
   },
   {
@@ -69,7 +69,7 @@ const COURS = [
     chapitre: "Spécialité mathématiques",
     type: "Site de classe",
     description: "Cours, séries d'exercices et automatismes de Première spécialité.",
-    lien: "cours/maths-premiere-specialite.html",
+    lien: "maths-premiere-specialite.html",
     nouveau: true
   }
 ];
