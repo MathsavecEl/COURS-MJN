@@ -721,7 +721,7 @@ function pageAccueil(){
     '<li>Relève les <b>défis d\'approfondissement</b> : ce sont des problèmes, comme au brevet.</li>'+
     '<li>Chaque jour, fais une série d\'<b>automatismes</b> (5 minutes suffisent !).</li></ol>'+
     '<p class="muted">Pour écrire un nombre décimal, tu peux utiliser la virgule ou le point. Pour une fraction, écris par exemple 3/4. Pour un nombre négatif, mets le signe − devant.</p></section>';
-  h+='<p class="maj">🗓️ Dernière mise à jour du site : <b>'+MAJ+'</b>.<br>Ce site n\'est pas hébergé en ligne : M. AHA MAJANI le met à jour régulièrement (nouveaux exercices, corrections). Si ta version date un peu, demande-lui la version la plus récente.</p>';
+  h+='<p class="maj">🗓️ Dernière mise à jour du site : <b>'+MAJ+'</b>.<br>M. AHA MAJANI met régulièrement le site à jour (nouveaux exercices et corrections). Si ta version date un peu, demande-lui la plus récente.</p>';
   app.innerHTML=h;
   document.getElementById('nmok').onclick=function(){ ST.name=document.getElementById('nm').value.trim().slice(0,30); save(); document.getElementById('nmfb').textContent=ST.name?'Bonjour '+ST.name+' ! Bon travail.':''; };
 }
