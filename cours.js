@@ -76,6 +76,15 @@ const COURS = [
   },
   {
     classe: "Divers",
+    titre: "Course aux nombres — 3e",
+    chapitre: "Calcul mental et automatismes",
+    type: "Activité interactive",
+    description: "Entraîne-toi avec des questions interactives, consulte les corrections et suis tes progrès.",
+    lien: "course-aux-nombres-3e.html",
+    nouveau: true
+  },
+  {
+    classe: "Divers",
     titre: "Scratch pas à pas — apprendre en programmant",
     chapitre: "Programmation et mathématiques",
     type: "Activité interactive",
