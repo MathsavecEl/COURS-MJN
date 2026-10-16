@@ -11,8 +11,8 @@ const SITE = {
     "Les activités interactives sont accessibles sans compte élève.",
     "Certains éléments (polices ou contenus externes) peuvent nécessiter une connexion Internet."
   ],
-  signature: "",
-  blague: "",
+  signature: "Khalili ☺",
+  blague: "Un matheux n’urine pas, il fait pi-pi.",
   email: ""
 };
 
