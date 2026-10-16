@@ -1,0 +1,2263 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scratch pas à pas | COURS MJN</title>
+<meta name="description" content="Apprends Scratch pas à pas avec une activité interactive de mathématiques : découvre les blocs, programme et teste tes idées.">
+<link rel="canonical" href="https://mathsavecel.github.io/COURS-MJN/scratch-pas-a-pas.html">
+<meta name="robots" content="index, follow">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@700&display=swap">
+<style>
+/* Mise en page : feuille de cahier (même famille que la course aux nombres), scène Scratch 480×360 au centre des exercices,
+   blocs aux couleurs officielles de Scratch 3 (identiques dans les deux thèmes pour que les élèves les reconnaissent). */
+:root{
+  --paper:#f4f6fb; --grid:#e2e8f4; --card:#ffffff; --text:#1c2135; --ink:#24318a; --muted:#596282;
+  --line:#d4dbeb; --red:#c22e2e; --red-soft:#fcebea; --green:#16764a; --green-soft:#e2f3e9;
+  --amber:#985600; --amber-soft:#fbefdc; --mark:#ffef9e; --accent:#3d5bd9; --accent-soft:#e8edff;
+  --violet:#6b3fc9; --violet-soft:#f0eaff; --stage:#ffffff; --stage-grid:#e6eaf3; --stage-axis:#9aa3bd; --pen:#2a46c4;
+  --c-ev:#FFBF00; --c-mo:#4C97FF; --c-lo:#9966FF; --c-pe:#0FBD8C; --c-ct:#FFAB19; --c-se:#5CB1D6; --c-op:#59C059; --c-va:#FF8C1A; --c-my:#FF6680; --c-li:#FF661A;
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'Atkinson Hyperlegible',Verdana,'Segoe UI',system-ui,sans-serif;
+  --f-hand:'Caveat','Segoe Print','Comic Sans MS',cursive;
+  --f-block:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#10142a; --grid:#181e3a; --card:#181e36; --text:#e8ebf6; --ink:#b9c6ff; --muted:#9ba4c3;
+  --line:#2b3459; --red:#ff7f76; --red-soft:#3a1d25; --green:#5fd59c; --green-soft:#12321f;
+  --amber:#ffbb63; --amber-soft:#382811; --mark:#5c4c0e; --accent:#93a8ff; --accent-soft:#232c57;
+  --violet:#c4a8ff; --violet-soft:#2a2050; --stage:#0d1124; --stage-grid:#1f2645; --stage-axis:#4c5680; --pen:#93a8ff; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --paper:#10142a; --grid:#181e3a; --card:#181e36; --text:#e8ebf6; --ink:#b9c6ff; --muted:#9ba4c3;
+  --line:#2b3459; --red:#ff7f76; --red-soft:#3a1d25; --green:#5fd59c; --green-soft:#12321f;
+  --amber:#ffbb63; --amber-soft:#382811; --mark:#5c4c0e; --accent:#93a8ff; --accent-soft:#232c57;
+  --violet:#c4a8ff; --violet-soft:#2a2050; --stage:#0d1124; --stage-grid:#1f2645; --stage-axis:#4c5680; --pen:#93a8ff; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background-color:var(--paper);color:var(--text);font:17px/1.55 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:26px 26px;}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+table{border-collapse:collapse}
+
+/* En-tête */
+.top{background:var(--card);border-bottom:2px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 18px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0;background:none;border:0;padding:0;text-align:left}
+.logo{width:42px;height:42px;flex:none;border-radius:10px;background:var(--c-ct);display:grid;place-items:center}
+.logo svg{width:28px;height:28px}
+.brand h1{font-size:1.2rem;font-weight:800;color:var(--ink)}
+.brand p{font-size:.78rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.brand p b{color:var(--red);letter-spacing:.08em}
+nav.tabs{display:flex;flex-wrap:wrap;gap:4px}
+nav.tabs a{padding:6px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;font-size:.93rem}
+nav.tabs a:hover{color:var(--ink);background:var(--accent-soft)}
+nav.tabs a.on{color:var(--ink);background:var(--accent-soft)}
+
+main{padding-block:22px 40px;display:flex;flex-direction:column;gap:22px}
+footer{padding-block:4px 32px;color:var(--muted);font-size:.85rem;text-align:center}
+
+/* Feuille */
+.sheet{position:relative;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px 22px 24px 62px;min-width:0}
+.sheet::before{content:"";position:absolute;left:46px;top:0;bottom:0;width:2px;background:var(--red);opacity:.5}
+@media (max-width:600px){ .sheet{padding:18px 14px 20px 30px} .sheet::before{left:18px} }
+.sheet > * + *{margin-top:14px}
+.sheet h2{font-size:1.45rem;color:var(--ink)}
+.sheet h3{font-size:1.15rem;color:var(--ink)}
+.lead{max-width:66ch}
+.muted{color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--ink);background:var(--ink);color:var(--card);padding:9px 18px;border-radius:10px;font-weight:700;font-size:.98rem;min-height:44px;text-decoration:none}
+.btn:hover{filter:brightness(1.12)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.small{padding:5px 12px;min-height:36px;font-size:.9rem}
+.btn:disabled{opacity:.45;cursor:default;filter:none}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* Accueil */
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+.hero h2{font-size:2rem;font-weight:800}
+.hero .kicker{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--red)}
+.hero .demo{min-width:0}
+.demo .sb-scripts{display:none}
+.demo .sb-wrap{grid-template-columns:minmax(0,1fr)}
+.demo .run-ctl label{display:none}
+.namebox{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.namebox input{border:2px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 12px;font-size:1rem;width:min(220px,100%)}
+.parcours{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.parcours{grid-template-columns:1fr}}
+.pc{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:10px;padding:14px 16px}
+.pc:hover{border-color:var(--accent)}
+.pc.on{border-color:var(--ink);background:var(--accent-soft)}
+.pc .pt{font:800 1.08rem var(--f-display);color:var(--ink)}
+.pc .pd{font-size:.92rem;color:var(--muted)}
+.pc .ps{font-size:.82rem;font-weight:700;color:var(--text)}
+.pc .on-flag{font-size:.78rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em}
+
+.year{display:grid;grid-template-columns:86px minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:600px){.year{grid-template-columns:1fr}}
+.year-lab{font:800 1.6rem var(--f-display);color:var(--card);background:var(--ink);border-radius:10px;text-align:center;padding:10px 0 8px;line-height:1}
+.year-lab small{display:block;font:700 .7rem var(--f-body);letter-spacing:.06em;text-transform:uppercase;margin-top:4px;opacity:.85}
+.y5 .year-lab{background:#2f7d4f}.y4 .year-lab{background:#b86200}.y3 .year-lab{background:#a52a4a}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.scard{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:11px 13px;text-decoration:none;color:var(--text);min-height:118px;transition:transform .15s,border-color .15s}
+.scard:hover{border-color:var(--accent);transform:translateY(-2px)}
+.scard.off{opacity:.55}
+.scard.reco{border:2px solid var(--green)}
+.scard .num{font:800 .9rem var(--f-display);color:var(--red)}
+.scard .th{font-weight:700;line-height:1.3}
+.scard .meta{margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:.8rem;color:var(--muted);width:100%}
+.minibar{flex:1;min-width:50px;height:7px;border-radius:9px;background:var(--line);overflow:hidden}
+.minibar span{display:block;height:100%;background:var(--green)}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:.8rem;font-variant-numeric:tabular-nums;background:var(--paper);border:1px solid var(--line);color:var(--muted)}
+.pill.g{background:var(--green-soft);color:var(--green);border-color:transparent}
+.pill.r{background:var(--red-soft);color:var(--red);border-color:transparent}
+
+/* Diagnostic */
+.diag-q{border-top:1px dashed var(--line);padding-top:12px}
+.diag-q .dq{font-weight:700;margin-bottom:8px}
+.diag-res{border-radius:8px;padding:12px 16px;background:var(--green-soft);color:var(--text)}
+
+/* Page d'étape */
+.band{border-radius:10px;padding:18px 20px;color:#fff;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;align-items:center}
+.band.y5{background:#2f7d4f}.band.y4{background:#b86200}.band.y3{background:#a52a4a}
+.band .bn{grid-row:span 3;font:800 3rem/1 var(--f-display);text-align:center;min-width:70px}
+.band .bn small{display:block;font:700 .7rem var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.band h2{font-size:1.65rem;font-weight:800;color:#fff}
+.band p{opacity:.92}
+.band .bt{display:flex;gap:6px;flex-wrap:wrap}
+.band .bt span{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:rgba(255,255,255,.18);padding:2px 9px;border-radius:99px}
+.objectifs{display:grid;gap:4px;padding-left:1.2em;margin:0}
+
+.box{border-radius:8px;padding:14px 16px;border-left:5px solid var(--bc);background:var(--bs);min-width:0}
+.box > * + *{margin-top:10px}
+.box h4{font:700 .8rem var(--f-body);text-transform:uppercase;letter-spacing:.07em;color:var(--bc)}
+.box h4 b{color:var(--text);text-transform:none;letter-spacing:0;font-size:.95rem}
+.box ul,.box ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.box.def{--bc:var(--accent);--bs:var(--accent-soft)}
+.box.sav{--bc:var(--violet);--bs:var(--violet-soft)}
+.box.met{--bc:var(--amber);--bs:var(--amber-soft)}
+.box.exe{--bc:var(--green);--bs:var(--green-soft)}
+.box.pie{--bc:var(--red);--bs:var(--red-soft)}
+.box.ast{--bc:var(--muted);--bs:var(--paper)}
+.box.ret{--bc:var(--ink);--bs:var(--card);border:2px solid var(--ink);border-left-width:6px}
+.formula{font:800 1.25rem var(--f-display);color:var(--ink);text-align:center;padding:4px 0}
+.split{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 20px;align-items:start}
+@media (max-width:640px){.split{grid-template-columns:1fr}}
+.tbl{overflow-x:auto;max-width:100%}
+.tbl table{min-width:100%;font-size:.93rem;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{border:1px solid var(--line);padding:5px 10px;text-align:left;vertical-align:middle}
+.tbl th{background:var(--paper);font-weight:700;font-size:.85rem}
+.tbl td.c,.tbl th.c{text-align:center}
+.faux{color:var(--red);font-weight:700}.vrai{color:var(--green);font-weight:700}
+mark{color:inherit;background:var(--mark);padding:0 3px;border-radius:3px;font-weight:700}
+.hand{font:700 1.45rem var(--f-hand);color:var(--red)}
+
+/* Exercices */
+.lvl-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:6px;margin-top:22px!important}
+.lvl-h .stars{color:var(--amber);font-size:1.15rem;letter-spacing:2px}
+.lvl-h h3{font-size:1.15rem}
+.lvl-h span.muted{font-size:.9rem}
+.lvl-h .reco-tag{font-size:.75rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em}
+.ex{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--card);min-width:0}
+.ex > * + *{margin-top:10px}
+.ex.done{border-color:var(--green)}
+.ex-h{display:flex;gap:8px 12px;align-items:baseline;flex-wrap:wrap}
+.ex-h .en{font:800 1rem var(--f-display);color:var(--red)}
+.ex-h h4{font-size:1.05rem;color:var(--ink)}
+.ex-h .src{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--violet);border:1px solid var(--violet);border-radius:6px;padding:1px 7px}
+.ex-h .ok-flag{margin-left:auto;font-size:.8rem;font-weight:700;color:var(--green)}
+.qs{display:grid;gap:10px;margin:0;padding-left:1.5em}
+.qs > li::marker{font-weight:800;color:var(--ink)}
+.qa{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.qa input{width:min(170px,100%);border:2px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--paper);font-weight:700;font-variant-numeric:tabular-nums}
+.qa input.ok{border-color:var(--green);background:var(--green-soft)}
+.qa input.ko{border-color:var(--red);background:var(--red-soft)}
+.qa .choice{border:2px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 12px;font-weight:700;min-height:38px}
+.qa .choice:hover{border-color:var(--accent)}
+.qa .choice.ok{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+.qa .choice.ko{border-color:var(--red);background:var(--red-soft);color:var(--red)}
+.fb{font-weight:700;font-size:.92rem}
+.fb.ok{color:var(--green)}.fb.ko{color:var(--red)}
+.ex-actions{display:flex;flex-wrap:wrap;gap:8px}
+.hint{background:var(--amber-soft);border-radius:8px;padding:10px 14px;border-left:4px solid var(--amber)}
+.hint b.hl{color:var(--amber)}
+.corr{border:2px dashed var(--red);border-radius:8px;padding:10px 16px 14px}
+.corr > * + *{margin-top:8px}
+.corr .ct{font:700 1.6rem/1 var(--f-hand);color:var(--red)}
+.corr ol{margin:0;padding-left:1.4em;display:grid;gap:6px}
+.res{display:inline-block;padding:2px 10px;border:2px solid var(--green);border-radius:8px;color:var(--green);font-weight:700}
+.pnav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+/* Mémo */
+.memo td:first-child{white-space:nowrap}
+
+/* Blocs Scratch */
+.k{display:inline-block;font:700 .84em/1.3 var(--f-block);color:#fff;background:var(--kc);border-radius:5px;padding:1px 7px;white-space:nowrap;vertical-align:baseline}
+.k.ev{--kc:#D9A300}.k.mo{--kc:#3d7fe0}.k.lo{--kc:#7f55e0}.k.pe{--kc:#0b9a72}.k.ct{--kc:#e08f00}.k.se{--kc:#3b97be}.k.op{--kc:#3e9e3e}.k.va{--kc:#e67300}.k.my{--kc:#e64d6a}
+.sb-wrap{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:16px;align-items:start}
+.sb-wrap.solo{grid-template-columns:minmax(0,1fr)}
+@media (max-width:760px){.sb-wrap{grid-template-columns:minmax(0,1fr)}}
+.sb-scripts{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;overflow-x:auto;max-width:100%;padding:10px;background:var(--paper);border:1px solid var(--line);border-radius:8px;background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:14px 14px}
+.sb{display:inline-flex;flex-direction:column;align-items:flex-start;font:700 13px/1 var(--f-block);color:#fff;vertical-align:top}
+.blk{--c:var(--c-mo);background:var(--c);border:1px solid rgba(0,0,0,.18);border-radius:5px;padding:5px 9px;min-height:32px;display:flex;align-items:center;gap:5px;white-space:nowrap;position:relative;margin-top:-1px;transition:box-shadow .15s}
+.blk::after{content:"";position:absolute;left:14px;bottom:-5px;width:16px;height:5px;background:var(--c);border-radius:0 0 4px 4px;border:1px solid rgba(0,0,0,.18);border-top:0;z-index:1}
+.blk.hat{border-radius:18px 18px 5px 5px;padding-top:12px;min-width:110px}
+.blk.def{border-radius:18px 18px 5px 5px;padding-top:12px;padding-bottom:8px}
+.blk.cap::after{display:none}
+.cb{display:flex;flex-direction:column;align-items:flex-start;--c:var(--c-ct)}
+.cb > .blk{border-bottom-left-radius:0}
+.cb .mouth{border-left:14px solid var(--c);min-height:22px;padding:1px 0 4px;display:flex;flex-direction:column;align-items:flex-start;margin-top:-1px}
+.cb .arm{background:var(--c);height:18px;width:max(90px,40%);border-radius:0 5px 5px 5px;border:1px solid rgba(0,0,0,.18);border-top:0;margin-top:-1px;position:relative}
+.cb .arm.mid{height:auto;width:auto;min-height:26px;border-radius:0 5px 5px 0;padding:5px 9px;display:flex;align-items:center}
+.cb .arm:not(.mid)::after{content:"";position:absolute;left:14px;bottom:-5px;width:16px;height:5px;background:var(--c);border-radius:0 0 4px 4px}
+.c-ev{--c:var(--c-ev)}.c-mo{--c:var(--c-mo)}.c-lo{--c:var(--c-lo)}.c-pe{--c:var(--c-pe)}.c-ct{--c:var(--c-ct)}.c-se{--c:var(--c-se)}.c-op{--c:var(--c-op)}.c-va{--c:var(--c-va)}.c-my{--c:var(--c-my)}
+.in{background:#fff;color:#4a5068;border-radius:999px;padding:3px 9px;min-width:26px;text-align:center;font-weight:600;border:1px solid rgba(0,0,0,.12)}
+.in.dd{background:rgba(0,0,0,.16);color:#fff;border-color:rgba(0,0,0,.2)}
+.in.blank{background:#fff7d6;border:2px dashed #e07800;color:#b85a00;min-width:38px}
+.in.slot{background:none;border:0;padding:0;min-width:0}
+.rep{background:var(--c);border-radius:999px;padding:3px 8px;display:inline-flex;align-items:center;gap:4px;border:1px solid rgba(0,0,0,.2)}
+.bool{background:var(--c);padding:4px 14px;display:inline-flex;align-items:center;gap:4px;clip-path:polygon(11px 0,calc(100% - 11px) 0,100% 50%,calc(100% - 11px) 100%,11px 100%,0 50%)}
+.flag{color:#4cbf56;font-size:15px}
+.blk.now{box-shadow:0 0 0 3px #ffe14d,0 0 14px 4px rgba(255,214,0,.75);z-index:3}
+.blk.badblock{outline:3px solid var(--red)}
+
+/* Scène */
+.runner{display:flex;flex-direction:column;gap:8px;min-width:0}
+.stage-box{position:relative;width:100%;max-width:480px;aspect-ratio:4/3;border:2px solid var(--line);border-radius:8px;overflow:hidden;background:var(--stage)}
+.stage-box canvas{width:100%;height:100%;display:block}
+.run-ctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.run-ctl .go{background:#3fa34d;border-color:#3fa34d;color:#fff}
+.run-ctl label{font-size:.88rem;font-weight:700;display:flex;gap:6px;align-items:center}
+.run-ctl input[type=text]{width:110px;border:2px solid var(--line);border-radius:8px;padding:5px 8px;background:var(--paper);font-weight:700}
+.run-status{font-size:.88rem;color:var(--muted);min-height:1.3em}
+.run-status b{color:var(--text)}
+.run-status .warn{color:var(--red);font-weight:700}
+.trace{max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.trace table{width:100%;font-size:.84rem;font-variant-numeric:tabular-nums}
+.trace th,.trace td{border-bottom:1px solid var(--line);padding:4px 8px;text-align:left;white-space:nowrap}
+.trace th{position:sticky;top:0;background:var(--paper);font-size:.78rem}
+.trace tr.cur td{background:var(--mark)}
+.say{font-weight:700;color:var(--violet)}
+
+.prof .hidden-prof{display:none}
+.teacher-flag{font-size:.8rem;font-weight:700;color:var(--red)}
+
+@media print{
+  .top,.run-ctl,.ex-actions,.qa,.runner,nav,.pnav,.no-print{display:none!important}
+  body{background:#fff}
+  .sheet{border:0;padding-left:0}.sheet::before{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <button class="brand" type="button" id="brandHome" aria-label="Retour à l'accueil">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28"><path d="M4 8a3 3 0 0 1 3-3h4l2 2h2l2-2h4a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z" fill="#fff"/><path d="M4 18a3 3 0 0 1 3-3h4l2 2h2l2-2h4a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z" fill="#fff" opacity=".7"/></svg></span>
+      <span><h1>Scratch pas à pas</h1><p>De la 5<sup>e</sup> à la 3<sup>e</sup> · <b>M. AHA MAJANI</b></p></span>
+    </button>
+    <nav class="tabs" aria-label="Navigation">
+      <a href="#accueil" data-nav="accueil">Accueil</a>
+      <a href="#etapes" data-nav="etapes">Les 12 étapes</a>
+      <a href="#memo" data-nav="memo">Mémo</a>
+      <a href="#e12" data-nav="e12">Brevet</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<footer class="wrap">Cours progressif d'algorithmique et programmation · M. AHA MAJANI · Cycle 4 (5<sup>e</sup>, 4<sup>e</sup>, 3<sup>e</sup>)<br>
+<button class="btn small ghost no-print" type="button" id="profBtn" style="margin-top:10px">Mode professeur : afficher toutes les corrections</button></footer>
+<script>
+/* ============================================================
+   MOTEUR : lecture des scripts, dessin des blocs, exécution
+   Syntaxe d'un script (une ligne = un bloc, 2 espaces = imbrication) :
+     ev quand ⚑ est cliqué
+     ct répéter [4] fois
+       mo avancer de [50] pas
+     ct sinon            (à la hauteur du « si »)
+   [x] case blanche · [x▾] menu · [?] ou […] case à compléter
+   {va:score} reporter (catégorie:contenu) · ⟨op:[a] > [b]⟩ condition
+   Une ligne vide sépare deux scripts.
+   ============================================================ */
+const CATS = ['ev','mo','lo','pe','ct','se','op','va','my'];
+let BID = 0;
+
+function parseInline(s, i, close){
+  const parts = []; let txt = '';
+  const flush = () => { if (txt) { parts.push({t:'text', v:txt}); txt=''; } };
+  while (i < s.length){
+    const c = s[i];
+    if (close && c === close){ flush(); return {parts, i:i+1}; }
+    if (c === '['){
+      flush();
+      const r = parseInline(s, i+1, ']');
+      const nodes = r.parts.filter(p => !(p.t==='text' && !p.v.trim()));
+      if (nodes.length === 1 && nodes[0].t !== 'text') parts.push({t:'in', node:nodes[0]});
+      else parts.push({t:'in', v: r.parts.map(p=>p.v||'').join('')});
+      i = r.i; continue;
+    }
+    if (c === '{' || c === '⟨'){
+      flush();
+      const j = s.indexOf(':', i);
+      const cat = s.slice(i+1, j);
+      const r = parseInline(s, j+1, c === '{' ? '}' : '⟩');
+      parts.push({t: c === '{' ? 'rep' : 'bool', cat, parts:r.parts});
+      i = r.i; continue;
+    }
+    txt += c; i++;
+  }
+  flush(); return {parts, i};
+}
+const sigOf = parts => parts.map(p => p.t==='text' ? p.v : ' _ ').join('').replace(/\s+/g,' ').trim();
+const plain = parts => parts.map(p => p.t==='text' ? p.v : p.t==='in' ? (p.node ? '('+plain(p.node.parts)+')' : (p.v||'').replace('▾','')) : '('+plain(p.parts)+')').join('').replace(/\s+/g,' ').trim();
+
+function parseScripts(src){
+  return src.replace(/\r/g,'').split(/\n\s*\n/).map(chunk => {
+    const root = []; const stack = [{indent:-1, list:root}];
+    chunk.split('\n').forEach(line => {
+      if (!line.trim()) return;
+      const indent = line.match(/^ */)[0].length;
+      const m = line.trim().match(/^(\w\w)\s+(.*)$/);
+      if (!m) return;
+      const cat = m[1], text = m[2];
+      if (cat === 'ct' && text === 'sinon'){
+        while (stack.length > 1 && stack[stack.length-1].indent > indent) stack.pop();
+        const top = stack[stack.length-1];
+        if (top.block){ top.block.els = []; top.list = top.block.els; }
+        return;
+      }
+      while (stack.length > 1 && stack[stack.length-1].indent >= indent) stack.pop();
+      const b = {id: ++BID, cat, parts: parseInline(text, 0, null).parts, kids: []};
+      b.sig = sigOf(b.parts);
+      b.c = cat === 'ct' && /^(répéter|si )/.test(b.sig);
+      stack[stack.length-1].list.push(b);
+      stack.push({indent, list:b.kids, block:b});
+    });
+    return root;
+  }).filter(s => s.length);
+}
+
+/* ---------- Dessin des blocs ---------- */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function inlineHTML(parts, cat){
+  return parts.map(p => {
+    if (p.t === 'text') return esc(p.v.trim()).replace('⚑','<span class="flag">⚑</span>');
+    if (p.t === 'in'){
+      if (p.node) return '<span class="in slot">'+inlineHTML([p.node], cat)+'</span>';
+      const v = p.v.trim();
+      if (v === '?' || v === '…' || v === '...') return '<span class="in blank">…</span>';
+      if (v.endsWith('▾')) return '<span class="in dd">'+esc(v)+'</span>';
+      return '<span class="in">'+esc(v||' ')+'</span>';
+    }
+    const cls = p.t === 'rep' ? 'rep' : 'bool';
+    return '<span class="'+cls+' c-'+p.cat+'">'+inlineHTML(p.parts, p.cat)+'</span>';
+  }).join(' ');
+}
+function blockHTML(b, isLast){
+  const head = inlineHTML(b.parts, b.cat);
+  const hat = /^(quand|définir)/.test(b.sig);
+  if (!b.c){
+    const cls = 'blk c-'+b.cat + (hat ? (b.sig.startsWith('définir') ? ' def' : ' hat') : '') + (/^(stop tout|répéter indéfiniment)/.test(b.sig) ? ' cap':'');
+    return '<div class="'+cls+'" data-b="'+b.id+'">'+head+'</div>';
+  }
+  const list = l => l.map(blockHTML).join('');
+  let h = '<div class="cb c-'+b.cat+'"><div class="blk c-'+b.cat+'" data-b="'+b.id+'">'+head+'</div><div class="mouth">'+list(b.kids)+'</div>';
+  if (b.els) h += '<div class="arm mid">sinon</div><div class="mouth">'+list(b.els)+'</div>';
+  return h + '<div class="arm"></div></div>';
+}
+const scriptHTML = s => '<div class="sb">'+s.map(blockHTML).join('')+'</div>';
+
+/* ---------- Exécution ---------- */
+const num = v => { if (typeof v === 'number') return v; const n = parseFloat(String(v).replace(/[−–]/g,'-').replace(',','.').replace(/\s/g,'')); return isNaN(n) ? 0 : n; };
+const isNum = v => typeof v === 'number' || /^\s*[-−–]?\d+([.,]\d+)?\s*$/.test(String(v));
+const fmt = v => { if (typeof v !== 'number') return String(v); const r = Math.round(v*1e6)/1e6; return String(r).replace('.',',').replace('-','−'); };
+
+function Machine(scripts, answers){
+  this.procs = {}; this.main = null;
+  scripts.forEach(s => {
+    const h = s[0];
+    if (h.sig.startsWith('définir')){
+      const params = []; const p2 = h.parts.slice();
+      p2[0] = {t:'text', v:p2[0].v.replace(/^\s*définir\s*/,'')};
+      p2.forEach(p => { if (p.t === 'in') params.push((p.v||'').trim()); else if (p.t !== 'text') params.push(sigOf(p.parts)); });
+      this.procs[sigOf(p2)] = {params, body: s.slice(1)};
+    } else if (h.sig.startsWith('quand ⚑') && !this.main) this.main = s.slice(1);
+  });
+  this.x = 0; this.y = 0; this.dir = 90; this.pen = false; this.lines = [];
+  this.vars = {}; this.varOrder = []; this.say = ''; this.t = 0; this.answer = '';
+  this.answers = answers.slice(); this.frames = []; this.usesMotion = false; this.steps = 0;
+}
+Machine.prototype.setVar = function(n, v){ if (!(n in this.vars)) this.varOrder.push(n); this.vars[n] = v; };
+Machine.prototype.ev = function(p){
+  if (!p) return '';
+  if (p.t === 'in') return p.node ? this.ev(p.node) : (isNum(p.v) ? num(p.v) : (p.v.includes('▾') ? p.v.replace('▾','').trim() : p.v));
+  if (p.t === 'text') return p.v.trim();
+  const ins = p.parts.filter(q => q.t !== 'text' || false);
+  const a = () => this.ev(ins[0]), b = () => this.ev(ins[1]);
+  const sig = sigOf(p.parts);
+  switch (sig){
+    case '_ + _': return num(a()) + num(b());
+    case '_ - _': return num(a()) - num(b());
+    case '_ * _': return num(a()) * num(b());
+    case '_ / _': return num(a()) / num(b());
+    case '_ modulo _': { const m = num(b()); return ((num(a()) % m) + m) % m; }
+    case 'nombre aléatoire entre _ et _': { const lo = Math.ceil(num(a())), hi = Math.floor(num(b())); return lo + Math.floor(Math.random()*(hi-lo+1)); }
+    case 'regrouper _ et _': return fmt(a()) + fmt(b());
+    case 'arrondi de _': return Math.round(num(a()));
+    case 'racine de _': return Math.sqrt(num(a()));
+    case '_ < _': return num(a()) < num(b());
+    case '_ > _': return num(a()) > num(b());
+    case '_ = _': { const x = a(), y = b(); return (isNum(x) && isNum(y)) ? num(x) === num(y) : String(x).toLowerCase() === String(y).toLowerCase(); }
+    case '_ et _': return !!a() && !!b();
+    case '_ ou _': return !!a() || !!b();
+    case 'non _': return !a();
+    case 'réponse': return this.answer;
+    case 'abscisse x': this.usesMotion = true; return this.x;
+    case 'ordonnée y': this.usesMotion = true; return this.y;
+    case 'direction': return this.dir;
+  }
+  if (p.cat === 'my'){ for (let i = this.frames.length-1; i >= 0; i--) if (sig in this.frames[i]) return this.frames[i][sig]; return 0; }
+  if (p.cat === 'va') return (sig in this.vars) ? this.vars[sig] : 0;
+  return 0;
+};
+Machine.prototype.moveTo = function(nx, ny){
+  if (this.pen) this.lines.push([this.x, this.y, nx, ny]);
+  this.x = nx; this.y = ny; this.usesMotion = true;
+};
+Machine.prototype.run = function*(list){
+  for (const b of list){
+    if (++this.steps > this.limit) throw new Error('limit');
+    const ins = b.parts.filter(p => p.t !== 'text');
+    const A = i => this.ev(ins[i]);
+    const s = b.sig; let note = '';
+    if (s === 'répéter _ fois'){
+      const n = Math.round(num(A(0)));
+      for (let k = 1; k <= n; k++){ if (++this.steps > this.limit) throw new Error('limit'); yield {b, note:'tour '+k+' / '+n}; yield* this.run(b.kids); }
+      continue;
+    }
+    if (s === 'répéter jusqu\'à ce que _'){
+      let k = 0;
+      while (true){
+        if (++this.steps > this.limit) throw new Error('limit');
+        const c = A(0);
+        yield {b, note: c ? 'condition vraie → on sort' : 'condition fausse → tour '+(++k)};
+        if (c) break;
+        yield* this.run(b.kids);
+      }
+      continue;
+    }
+    if (s === 'répéter indéfiniment'){ let k=0; while (true){ if (++this.steps > this.limit) throw new Error('limit'); yield {b, note:'tour '+(++k)}; yield* this.run(b.kids); } }
+    if (s === 'si _ alors'){
+      const c = A(0);
+      yield {b, note: c ? 'condition vraie' : 'condition fausse'};
+      if (c) yield* this.run(b.kids); else if (b.els) yield* this.run(b.els);
+      continue;
+    }
+    // appel d'un bloc personnalisé
+    if (b.cat === 'my' && this.procs[s]){
+      const pr = this.procs[s], fr = {};
+      pr.params.forEach((nm, i) => fr[nm] = A(i));
+      yield {b, note: pr.params.map(nm => nm+' = '+fmt(fr[nm])).join(', ')};
+      this.frames.push(fr); yield* this.run(pr.body); this.frames.pop();
+      continue;
+    }
+    const d = this.dir*Math.PI/180;
+    switch (s){
+      case 'avancer de _ pas': { const n = num(A(0)); this.moveTo(this.x + n*Math.sin(d), this.y + n*Math.cos(d)); break; }
+      case 'reculer de _ pas': { const n = -num(A(0)); this.moveTo(this.x + n*Math.sin(d), this.y + n*Math.cos(d)); break; }
+      case 'tourner ↻ de _ degrés': this.dir = norm(this.dir + num(A(0))); this.usesMotion = true; break;
+      case 'tourner ↺ de _ degrés': this.dir = norm(this.dir - num(A(0))); this.usesMotion = true; break;
+      case 's\'orienter à _': this.dir = norm(num(A(0))); this.usesMotion = true; break;
+      case 'aller à x: _ y: _': this.moveTo(num(A(0)), num(A(1))); break;
+      case 'ajouter _ à x': this.moveTo(this.x + num(A(0)), this.y); break;
+      case 'ajouter _ à y': this.moveTo(this.x, this.y + num(A(0))); break;
+      case 'mettre x à _': this.moveTo(num(A(0)), this.y); break;
+      case 'mettre y à _': this.moveTo(this.x, num(A(0))); break;
+      case 'effacer tout': this.lines = []; break;
+      case 'stylo en position d\'écriture': this.pen = true; break;
+      case 'relever le stylo': this.pen = false; break;
+      case 'dire _': this.say = fmt(A(0)); break;
+      case 'penser à _': this.say = fmt(A(0)); break;
+      case 'dire _ pendant _ secondes': this.say = fmt(A(0)); this.t += num(A(1)); break;
+      case 'attendre _ secondes': this.t += num(A(0)); break;
+      case 'demander _ et attendre': {
+        const v = this.answers.length ? this.answers.shift() : '';
+        this.answer = isNum(v) ? num(v) : v; this.say = '';
+        note = 'question : « '+fmt(A(0))+' » · réponse tapée : '+fmt(this.answer); break;
+      }
+      case 'mettre _ à _': this.setVar(String(A(0)), A(1)); break;
+      case 'ajouter _ à _': { const n = String(A(1)); this.setVar(n, num(this.vars[n]||0) + num(A(0))); break; }
+      case 'stop tout': yield {b, note:'arrêt'}; throw new Error('stop');
+    }    yield {b, note};
+  }
+};
+const norm = d => { d = ((d % 360) + 360) % 360; return d > 180 ? d - 360 : d; };
+const dirName = d => ({'90':'droite','0':'haut','180':'bas','-90':'gauche','-180':'bas'})[String(Math.round(d))] || '';
+
+/* ---------- La scène ---------- */
+function drawStage(cv, m, opts){
+  const ctx = cv.getContext('2d'); const W = 480, H = 360, R = cv.width / W;
+  const cs = getComputedStyle(document.documentElement);
+  const col = n => cs.getPropertyValue(n).trim();
+  ctx.setTransform(R,0,0,R,0,0);
+  ctx.fillStyle = col('--stage'); ctx.fillRect(0,0,W,H);
+  const X = x => W/2 + x, Y = y => H/2 - y;
+  if (opts.grid){
+    ctx.strokeStyle = col('--stage-grid'); ctx.lineWidth = 1;
+    for (let x = -240; x <= 240; x += 20){ ctx.beginPath(); ctx.moveTo(X(x)+.5,0); ctx.lineTo(X(x)+.5,H); ctx.stroke(); }
+    for (let y = -180; y <= 180; y += 20){ ctx.beginPath(); ctx.moveTo(0,Y(y)+.5); ctx.lineTo(W,Y(y)+.5); ctx.stroke(); }
+    ctx.fillStyle = col('--stage-axis'); ctx.font = '10px sans-serif';
+    [-200,-100,100,200].forEach(v => { ctx.fillText(v, X(v)+2, Y(0)+11); });
+    [-100,100].forEach(v => { ctx.fillText(v, X(0)+3, Y(v)-2); });
+  }
+  ctx.strokeStyle = col('--stage-axis'); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(0,Y(0)+.5); ctx.lineTo(W,Y(0)+.5); ctx.moveTo(X(0)+.5,0); ctx.lineTo(X(0)+.5,H); ctx.stroke();
+  ctx.strokeStyle = col('--pen'); ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+  ctx.beginPath(); m.lines.forEach(l => { ctx.moveTo(X(l[0]),Y(l[1])); ctx.lineTo(X(l[2]),Y(l[3])); }); ctx.stroke();
+  // le lutin : une flèche orange qui montre sa direction
+  ctx.save(); ctx.translate(X(m.x), Y(m.y)); ctx.rotate((m.dir-90)*Math.PI/180);
+  ctx.fillStyle = '#ff9a1f'; ctx.strokeStyle = '#8a4b00'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(14,0); ctx.lineTo(-9,-10); ctx.lineTo(-4,0); ctx.lineTo(-9,10); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.restore();
+  if (m.say !== ''){
+    ctx.font = 'bold 14px sans-serif';
+    const t = String(m.say).slice(0,40), w = ctx.measureText(t).width + 18;
+    let bx = Math.min(Math.max(X(m.x)+10, 4), W - w - 4), by = Math.max(Y(m.y) - 52, 4);
+    ctx.fillStyle = '#fff'; ctx.strokeStyle = '#9aa3bd'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(bx,by,w,30,12) : ctx.rect(bx,by,w,30); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#1c2135'; ctx.fillText(t, bx+9, by+20);
+  }
+}
+
+/* ---------- Un script prêt à l'emploi (blocs + scène + tableau de suivi) ---------- */
+function mountScript(el){
+  const src = el.textContent;
+  const scripts = parseScripts(src);
+  const runnable = el.dataset.run !== undefined;
+  const wrap = document.createElement('div');
+  wrap.className = 'sb-wrap' + (runnable ? '' : ' solo');
+  wrap.innerHTML = '<div class="sb-scripts">'+scripts.map(scriptHTML).join('')+'</div>';
+  el.replaceWith(wrap);
+  if (!runnable) { wrap.style.display = 'block'; wrap.firstChild.style.display = 'inline-flex'; return; }
+  const ask = /demander/.test(src);
+  const grid = el.dataset.grid !== undefined;
+  const r = document.createElement('div'); r.className = 'runner';
+  const uid = 'r' + (++BID);
+  r.innerHTML =
+    '<div class="stage-box"><canvas width="960" height="720" aria-label="Scène Scratch"></canvas></div>' +
+    '<div class="run-ctl">' +
+      (ask ? '<label for="'+uid+'">Je tape :<input type="text" id="'+uid+'" value="'+esc(el.dataset.ask||'')+'"></label>' : '') +
+      '<button class="btn small go" type="button" data-a="run">⚑ Exécuter</button>' +
+      '<button class="btn small ghost" type="button" data-a="step">Pas à pas ▸</button>' +
+      '<button class="btn small ghost" type="button" data-a="reset">Effacer</button>' +
+      '<label><input type="checkbox" data-a="tr"> Tableau de suivi</label>' +
+    '</div><div class="run-status" aria-live="polite"></div><div class="trace" hidden></div>';
+  wrap.appendChild(r);
+  const cv = r.querySelector('canvas'), st = r.querySelector('.run-status'), tr = r.querySelector('.trace');
+  const opts = {grid};
+  let M, G, rows, timer = null, done = false;
+  const blocks = () => wrap.querySelectorAll('.blk[data-b]');
+  function reset(){
+    clearTimeout(timer); timer = null; done = false;
+    const answers = ask ? r.querySelector('input[type=text]').value.split(';').map(s => s.trim()) : [];
+    M = new Machine(scripts, answers); M.limit = 4000;
+    G = M.main ? M.run(M.main) : null; rows = [];
+    blocks().forEach(b => b.classList.remove('now'));
+    drawStage(cv, M, opts); st.innerHTML = 'Clique sur <b>⚑ Exécuter</b> ou avance <b>pas à pas</b>.'; renderTrace();
+  }
+  function snapshot(info){
+    rows.push({txt: plain(info.b.parts), note: info.note, x:M.x, y:M.y, dir:M.dir, vars: Object.assign({}, M.vars), say: M.say});
+  }
+  function step(){
+    if (done || !G) return false;
+    let r1;
+    try { r1 = G.next(); }
+    catch(e){
+      done = true;
+      if (e.message === 'limit') st.innerHTML = '<span class="warn">⚠ Le programme tourne encore après '+M.limit+' blocs : c\'est sûrement une boucle infinie. Le lutin est arrêté.</span>';
+      else finish();
+      return false;
+    }
+    if (r1.done){ done = true; finish(); return false; }
+    blocks().forEach(b => b.classList.toggle('now', +b.dataset.b === r1.value.b.id));
+    snapshot(r1.value);
+    return true;
+  }
+  function status(){
+    const parts = [];
+    if (M.usesMotion) parts.push('Position <b>('+fmt(M.x)+' ; '+fmt(M.y)+')</b> · direction <b>'+fmt(M.dir)+'</b>'+(dirName(M.dir)?' ('+dirName(M.dir)+')':''));
+    M.varOrder.forEach(v => parts.push(esc(v)+' = <b>'+esc(fmt(M.vars[v]))+'</b>'));
+    if (M.say !== '') parts.push('le lutin dit <b class="say">'+esc(M.say)+'</b>');
+    if (M.t) parts.push('durée <b>'+fmt(M.t)+' s</b>');
+    return parts.join(' · ');
+  }
+  function finish(){
+    blocks().forEach(b => b.classList.remove('now'));
+    drawStage(cv, M, opts);
+    st.innerHTML = '✔ Fin du programme ('+rows.length+' étapes). ' + status();
+    renderTrace();
+  }
+  function renderTrace(){
+    if (tr.hidden) return;
+    const vs = M.varOrder;
+    let h = '<table><thead><tr><th>n°</th><th>Bloc exécuté</th>' + (M.usesMotion ? '<th>x</th><th>y</th><th>direction</th>' : '') +
+      vs.map(v => '<th>'+esc(v)+'</th>').join('') + '<th>Le lutin dit</th></tr></thead><tbody>';
+    const show = rows.slice(0, 400);
+    show.forEach((r2, i) => {
+      h += '<tr'+(i === rows.length-1 && !done ? ' class="cur"' : '')+'><td>'+(i+1)+'</td><td>'+esc(r2.txt)+(r2.note?' <span class="muted">('+esc(r2.note)+')</span>':'')+'</td>' +
+        (M.usesMotion ? '<td>'+fmt(r2.x)+'</td><td>'+fmt(r2.y)+'</td><td>'+fmt(r2.dir)+'</td>' : '') +
+        vs.map(v => '<td>'+(v in r2.vars ? esc(fmt(r2.vars[v])) : '')+'</td>').join('') + '<td class="say">'+esc(r2.say)+'</td></tr>';
+    });
+    if (rows.length > 400) h += '<tr><td colspan="9" class="muted">… '+(rows.length-400)+' lignes de plus</td></tr>';
+    tr.innerHTML = h + '</tbody></table>';
+    if (!done) tr.scrollTop = tr.scrollHeight;
+  }
+  r.addEventListener('click', e => {
+    const a = e.target.dataset.a; if (!a || a === 'tr') return;
+    if (a === 'reset'){ reset(); return; }
+    if (a === 'step'){
+      if (timer){ clearTimeout(timer); timer = null; }
+      if (done) reset();
+      if (step()){ drawStage(cv, M, opts); st.innerHTML = 'Bloc '+rows.length+' : <b>'+esc(rows[rows.length-1].txt)+'</b>'+(rows[rows.length-1].note?' ('+esc(rows[rows.length-1].note)+')':'')+'<br>'+status(); renderTrace(); }
+      return;
+    }
+    if (a === 'run'){
+      if (timer) return;
+      if (done || rows.length) reset();
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const tick = () => {
+        const n = reduce ? 100000 : 1 + Math.floor(rows.length / 25);
+        let alive = true;
+        for (let i = 0; i < n && alive; i++) alive = step();
+        if (alive){ drawStage(cv, M, opts); st.innerHTML = status(); renderTrace(); timer = setTimeout(tick, 140); }
+        else timer = null;
+      };
+      tick();
+    }
+  });
+  r.querySelector('[data-a=tr]').addEventListener('change', e => { tr.hidden = !e.target.checked; renderTrace(); });
+  reset();
+}
+/* ============================================================
+   CONTENU — étapes 1 à 4 (niveau 5e)
+   ============================================================ */
+const LAB = {def:'Définition', sav:'À savoir', met:'Méthode', exe:'Exemple', pie:'Attention, piège', ast:'Astuce', ret:'À retenir'};
+const B = (cls, title, html) => '<div class="box '+cls+'"><h4>'+LAB[cls]+(title ? ' · <b>'+title+'</b>' : '')+'</h4>'+html+'</div>';
+function S(src, opt){
+  const lines = src.replace(/^\n+|\s+$/g,'').split('\n');
+  const ind = Math.min(...lines.filter(l => l.trim()).map(l => l.match(/^ */)[0].length));
+  const body = lines.map(l => l.slice(ind)).join('\n').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return '<pre class="sbsrc" '+(opt||'')+'>'+body+'</pre>';
+}
+const R = 'data-run';                 // script exécutable
+const RG = 'data-run data-grid';      // exécutable, avec quadrillage
+const T = (head, rows) => '<div class="tbl"><table><thead><tr>'+head.map(h => '<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r => '<tr>'+r.map(c => '<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+const K = (cat, t) => '<span class="k '+cat+'">'+t+'</span>';
+
+const STEPS = [];
+
+/* ---------------- ÉTAPE 1 ---------------- */
+STEPS.push({
+  n:1, y:5, t:'Algorithme et séquence', sub:'Donner des instructions dans le bon ordre',
+  obj:['savoir ce qu\'est un algorithme et une séquence de blocs','lire un script de haut en bas','dérouler un programme pas à pas'],
+  lesson:
+  '<p class="lead">Une recette de cuisine, la suite de touches pour réussir un geste sur ta manette, le chemin pour aller au collège : ce sont des suites d\'instructions dans un ordre précis. C\'est exactement ce qu\'on appelle un <b>algorithme</b>.</p>' +
+  B('def','Algorithme, instruction, séquence','<p>Un <b>algorithme</b> est une suite d\'instructions, écrites dans un ordre précis, qui décrit comment réaliser une tâche du début à la fin.</p><p>Sur Scratch, chaque instruction est un <b>bloc</b>. Une <b>séquence</b> est une suite de blocs empilés : le lutin les exécute <b>un par un, du haut vers le bas</b>.</p>') +
+  B('sav','L\'écran de Scratch','<p>Les blocs sont rangés par catégories, chacune avec sa couleur :</p>' +
+    T(['Catégorie','À quoi elle sert','Exemple'],[
+      [K('ev','Événements'),'Démarrer un script',K('ev','quand ⚑ est cliqué')],
+      [K('mo','Mouvement'),'Déplacer et orienter le lutin',K('mo','avancer de 10 pas')],
+      [K('lo','Apparence'),'Faire parler le lutin',K('lo','dire Bonjour !')],
+      [K('pe','Stylo'),'Dessiner sur la scène',K('pe','stylo en position d\'écriture')],
+      [K('ct','Contrôle'),'Boucles, conditions, attentes',K('ct','répéter 10 fois')],
+      [K('se','Capteurs'),'Poser une question',K('se','demander … et attendre')],
+      [K('op','Opérateurs'),'Calculer et comparer',K('op','( ) + ( )')],
+      [K('va','Variables'),'Mémoriser des valeurs',K('va','mettre score à 0')]])) +
+  B('exe','Mon premier programme','<p>Un script commence toujours par un <b>bloc chapeau</b> (arrondi en haut) : ici, il démarre quand on clique sur le drapeau vert. Clique sur <b>⚑ Exécuter</b> pour voir le lutin parler, ou sur <b>Pas à pas</b> pour avancer bloc par bloc.</p>' +
+    S(`
+    ev quand ⚑ est cliqué
+    lo dire [Bonjour !] pendant [2] secondes
+    lo dire [Je suis le lutin.] pendant [2] secondes
+    lo dire [Au revoir !] pendant [2] secondes
+    `, R) + '<p>Le lutin dit successivement les trois phrases. Le programme dure <b>2 + 2 + 2 = 6 secondes</b>.</p>') +
+  B('sav','L\'ordre des blocs compte','<p>Si l\'on échange deux blocs, le résultat peut changer complètement. La machine fait toujours ce qui est écrit en premier, puis ce qui vient juste en dessous. Mettre ses chaussures puis ses chaussettes, ce n\'est pas pareil que l\'inverse !</p>') +
+  B('met','Dérouler un programme pas à pas','<ol><li>Je repère l\'<b>état de départ</b> du lutin (où il est, vers où il regarde, ce qu\'il dit).</li><li>Je lis le <b>premier bloc</b> et je note ce qui change.</li><li>Je passe au bloc suivant, jusqu\'au dernier.</li><li>Je décris l\'<b>état final</b>.</li></ol><p>Ce petit « film » du programme s\'appelle <b>dérouler l\'algorithme</b>. Le bouton <b>Pas à pas</b> fait exactement ça.</p>') +
+  B('ret','','<p>Un algorithme est une suite d\'instructions dans un ordre précis. Sur Scratch, une séquence de blocs s\'exécute <b>de haut en bas</b>, un bloc après l\'autre. Pour prévoir ce que fait un script, je le déroule pas à pas.</p>'),
+  ex:[
+    {n:'1.1', lvl:1, t:'Remettre dans l\'ordre',
+     body:'<p>Voici l\'algorithme « préparer un chocolat chaud », dans le désordre :</p><p><b>a.</b> Verser le lait chaud dans la tasse. &nbsp; <b>b.</b> Sortir une tasse. &nbsp; <b>c.</b> Boire. &nbsp; <b>d.</b> Faire chauffer le lait.</p>',
+     qs:[{q:'Quelle instruction vient forcément en dernier ?', choices:['a','b','c','d'], a:'c'},
+         {q:'Écris un ordre logique des quatre lettres (exemple : abcd).', a:['bdac','dbac']},
+         {q:'Peut-on mettre <b>a</b> avant <b>d</b> ?', choices:['oui','non'], a:'non'}],
+     hints:['On ne peut pas boire avant d\'avoir versé, ni verser un lait qui n\'est pas encore chaud.','Commence par ce qu\'on prépare : la tasse (b) et le lait (d). Puis on verse (a), puis on boit (c).'],
+     sol:'<ol><li>Il faut que le lait soit chaud (d) et la tasse sortie (b) avant de verser (a).</li><li>On boit en dernier (c).</li><li>Ordre possible : <span class="res">b, d, a, c</span> (ou d, b, a, c : sortir la tasse et chauffer le lait peuvent s\'échanger).</li><li>On ne peut pas verser (a) avant d\'avoir chauffé le lait (d) : l\'ordre compte.</li></ol>'},
+    {n:'1.2', lvl:1, t:'Lire un script',
+     body:S(`
+     ev quand ⚑ est cliqué
+     lo dire [Salut !] pendant [2] secondes
+     lo dire [Ça va ?] pendant [1] secondes
+     lo dire [À bientôt !] pendant [3] secondes
+     `, R),
+     qs:[{q:'Quelle est la <b>deuxième</b> phrase dite par le lutin ?', choices:['Salut !','Ça va ?','À bientôt !'], a:'Ça va ?'},
+         {q:'Combien de temps dure ce programme ?', a:'6', unit:'secondes'}],
+     hints:['Lis les blocs de haut en bas : le premier bloc parle en premier.','Additionne les durées écrites dans chaque bloc.'],
+     sol:'<ol><li>Le lutin dit « Salut ! » (2 s), puis <span class="res">« Ça va ? »</span> (1 s), puis « À bientôt ! » (3 s).</li><li>Durée : 2 + 1 + 3 = <span class="res">6 secondes</span>.</li></ol>'},
+    {n:'1.3', lvl:2, t:'Vrai ou faux ?',
+     body:'<p>Réponds par vrai ou faux.</p>',
+     qs:[{q:'Le lutin peut exécuter deux blocs d\'une même séquence en même temps.', choices:['vrai','faux'], a:'faux'},
+         {q:'Échanger deux blocs peut changer le résultat du programme.', choices:['vrai','faux'], a:'vrai'},
+         {q:'Le bloc '+K('ev','quand ⚑ est cliqué')+' se place tout en haut du script.', choices:['vrai','faux'], a:'vrai'}],
+     hints:['Relis l\'encadré « Définition » : comment sont exécutés les blocs d\'une séquence ?'],
+     sol:'<ol><li><span class="faux">Faux</span> : les blocs s\'exécutent un par un, de haut en bas.</li><li><span class="vrai">Vrai</span> : l\'ordre compte.</li><li><span class="vrai">Vrai</span> : c\'est un bloc chapeau, il démarre le script.</li></ol>'},
+    {n:'1.4', lvl:2, t:'Le lutin s\'est trompé',
+     body:'<p>Inès veut que le lutin dise « Bonjour ! », puis « Je m\'appelle Scratchy », puis « Au revoir ! ». Elle a écrit :</p>'+S(`
+     ev quand ⚑ est cliqué
+     lo dire [Au revoir !] pendant [2] secondes
+     lo dire [Je m'appelle Scratchy] pendant [2] secondes
+     lo dire [Bonjour !] pendant [2] secondes
+     `, R),
+     qs:[{q:'Quel bloc doit être placé juste sous le drapeau ?', choices:['dire Au revoir !','dire Je m\'appelle Scratchy','dire Bonjour !'], a:'dire Bonjour !'},
+         {q:'Combien de blocs « dire » faut-il déplacer au minimum ?', a:'2'}],
+     hints:['Exécute le script : dans quel ordre les phrases apparaissent-elles ?','Le bloc du milieu est déjà à la bonne place. Il suffit d\'échanger le premier et le dernier.'],
+     sol:'<ol><li>Le script affiche les phrases à l\'envers.</li><li>On échange le premier et le dernier bloc « dire » (<span class="res">2 blocs</span> déplacés) ; le bloc du milieu ne bouge pas.</li></ol>'+S(`
+     ev quand ⚑ est cliqué
+     lo dire [Bonjour !] pendant [2] secondes
+     lo dire [Je m'appelle Scratchy] pendant [2] secondes
+     lo dire [Au revoir !] pendant [2] secondes
+     `, R)},
+    {n:'1.5', lvl:3, t:'À toi d\'écrire',
+     body:'<p>Écris (sur ta feuille ou dans Scratch) un script qui fait dire au lutin trois phrases pour se présenter : son prénom, son âge, son jeu préféré. Le programme doit durer <b>exactement 7 secondes</b>.</p>',
+     qs:[{q:'Si les deux premières phrases durent 2 secondes chacune, combien de secondes doit durer la troisième ?', a:'3', unit:'s'}],
+     hints:['Il faut trois blocs '+K('lo','dire … pendant … secondes')+' sous le bloc '+K('ev','quand ⚑ est cliqué')+'.','La somme des trois durées doit faire 7 : 2 + 2 + ? = 7.'],
+     sol:'<p>Une solution possible (2 + 2 + 3 = <span class="res">7 s</span>) :</p>'+S(`
+     ev quand ⚑ est cliqué
+     lo dire [Je m'appelle Scratchy] pendant [2] secondes
+     lo dire [J'ai 13 ans] pendant [2] secondes
+     lo dire [Mon jeu préféré : Roblox] pendant [3] secondes
+     `, R)}
+  ]
+});
+
+/* ---------------- ÉTAPE 2 ---------------- */
+const STAGE_SVG = '<svg viewBox="0 0 500 380" role="img" aria-label="Repère de la scène : x de −240 à 240, y de −180 à 180" style="width:100%;max-width:480px;display:block">' +
+  '<rect x="10" y="10" width="480" height="360" style="fill:var(--stage);stroke:var(--line)" stroke-width="2"/>' +
+  '<line x1="10" y1="190" x2="490" y2="190" style="stroke:var(--stage-axis)" stroke-width="1.5"/><line x1="250" y1="10" x2="250" y2="370" style="stroke:var(--stage-axis)" stroke-width="1.5"/>' +
+  '<g style="fill:var(--muted)" font-size="13" font-family="sans-serif"><text x="16" y="205">−240</text><text x="452" y="205">240</text><text x="256" y="26">180</text><text x="256" y="364">−180</text><text x="478" y="182" font-weight="bold">x</text><text x="238" y="24" font-weight="bold">y</text><text x="256" y="206">O (0 ; 0)</text></g>' +
+  '<g style="fill:var(--muted)" font-size="12" font-family="sans-serif" opacity=".85"><text x="330" y="80">x &gt; 0 et y &gt; 0</text><text x="70" y="80">x &lt; 0 et y &gt; 0</text><text x="70" y="300">x &lt; 0 et y &lt; 0</text><text x="330" y="300">x &gt; 0 et y &lt; 0</text></g>' +
+  '<line x1="350" y1="190" x2="350" y2="140" stroke-dasharray="4 3" style="stroke:var(--accent)"/><line x1="250" y1="140" x2="350" y2="140" stroke-dasharray="4 3" style="stroke:var(--accent)"/><circle cx="350" cy="140" r="6" style="fill:var(--accent)"/><text x="358" y="135" font-size="14" font-weight="bold" font-family="sans-serif" style="fill:var(--accent)">P (100 ; 50)</text>' +
+  '<line x1="90" y1="190" x2="90" y2="310" stroke-dasharray="4 3" style="stroke:var(--amber)"/><line x1="90" y1="310" x2="250" y2="310" stroke-dasharray="4 3" style="stroke:var(--amber)"/><circle cx="90" cy="310" r="6" style="fill:var(--amber)"/><text x="98" y="330" font-size="14" font-weight="bold" font-family="sans-serif" style="fill:var(--amber)">Q (−160 ; −120)</text></svg>';
+
+STEPS.push({
+  n:2, y:5, t:'Se repérer sur la scène', sub:'Les coordonnées (x ; y) et le bloc « aller à »',
+  obj:['repérer un point de la scène par ses coordonnées','placer le lutin avec « aller à x: y: »','décaler le lutin avec « ajouter … à x / à y »'],
+  lesson:
+  '<p class="lead">Pour dire au lutin où aller, il faut un moyen de repérer chaque endroit de la scène. Comme sur une carte, on utilise <b>deux nombres</b>.</p>' +
+  B('def','Le repère de la scène','<p>La scène est un <b>repère</b> : chaque point est repéré par un couple de <b>coordonnées (x ; y)</b>.</p><ul><li>l\'<b>abscisse x</b> donne la position de <b>gauche à droite</b> (de −240 à 240) ;</li><li>l\'<b>ordonnée y</b> donne la position de <b>bas en haut</b> (de −180 à 180) ;</li><li>le centre de la scène est l\'<b>origine O (0 ; 0)</b>.</li></ul>' + STAGE_SVG) +
+  B('sav','Lire le signe des coordonnées','<p>À partir du centre : si <b>x &gt; 0</b>, le point est à <b>droite</b> ; si <b>x &lt; 0</b>, il est à <b>gauche</b>. Si <b>y &gt; 0</b>, il est en <b>haut</b> ; si <b>y &lt; 0</b>, il est en <b>bas</b>.</p><p>P (100 ; 50) est à droite et en haut ; Q (−160 ; −120) est à gauche et en bas.</p>') +
+  B('met','Placer puis décaler le lutin','<div class="split">'+S(`
+    ev quand ⚑ est cliqué
+    mo aller à x: [0] y: [0]
+    mo ajouter [50] à x
+    mo ajouter [-30] à y
+    `, RG)+'</div>'+T(['Bloc','Position du lutin'],[[K('mo','aller à x: 0 y: 0'),'(0 ; 0)'],[K('mo','ajouter 50 à x'),'(0 + 50 ; 0) = (50 ; 0)'],[K('mo','ajouter −30 à y'),'(50 ; 0 − 30) = (50 ; −30)']])+'<p>'+K('mo','aller à x: … y: …')+' <b>téléporte</b> le lutin. '+K('mo','ajouter … à x')+' le décale horizontalement, '+K('mo','ajouter … à y')+' verticalement.</p>') +
+  B('pie','L\'ordre des coordonnées','<p><span class="faux">FAUX</span> : pour aller « 100 vers la droite et 50 vers le haut », écrire '+K('mo','aller à x: 50 y: 100')+'.</p><p><span class="vrai">VRAI</span> : « vers la droite » concerne x, « vers le haut » concerne y : '+K('mo','aller à x: 100 y: 50')+'.</p>') +
+  B('ast','x d\'abord, y ensuite','<p>Dans l\'alphabet, x vient avant y. Sur la scène, on regarde d\'abord <b>où</b> (gauche-droite), puis à quelle <b>hauteur</b>.</p>') +
+  B('ret','','<p>Un point est repéré par (x ; y) : x pour gauche-droite, y pour bas-haut. Le centre est (0 ; 0). '+K('mo','aller à x: … y: …')+' place le lutin ; '+K('mo','ajouter … à x')+' (ou à y) le décale.</p>'),
+  ex:[
+    {n:'2.1', lvl:1, t:'Situer des points',
+     body:'<p>On donne A (120 ; −80), B (−160 ; 90) et C (−60 ; −150).</p>',
+     qs:[{q:'A est-il à droite ou à gauche du centre ?', choices:['droite','gauche'], a:'droite'},
+         {q:'A est-il en haut ou en bas ?', choices:['haut','bas'], a:'bas'},
+         {q:'Où est B ?', choices:['à droite en haut','à gauche en haut','à gauche en bas','à droite en bas'], a:'à gauche en haut'},
+         {q:'Où est C ?', choices:['à droite en haut','à gauche en haut','à gauche en bas','à droite en bas'], a:'à gauche en bas'}],
+     hints:['Regarde le signe de x (le premier nombre) : positif = droite, négatif = gauche.','Puis le signe de y (le second nombre) : positif = haut, négatif = bas.'],
+     sol:'<ol><li>A (120 ; −80) : x = 120 &gt; 0 donc <b>droite</b>, y = −80 &lt; 0 donc <b>bas</b>.</li><li>B (−160 ; 90) : <span class="res">à gauche en haut</span>.</li><li>C (−60 ; −150) : <span class="res">à gauche en bas</span>.</li></ol>'},
+    {n:'2.2', lvl:1, t:'Écrire le bon bloc',
+     body:'<p>Le lutin doit aller <b>120 pas à gauche</b> et <b>80 pas au-dessus</b> du centre. On complète le bloc :</p>'+S(`mo aller à x: [?] y: [?]`),
+     qs:[{q:'Valeur de x :', a:'-120'},{q:'Valeur de y :', a:'80'}],
+     hints:['« À gauche » : x est négatif.','« Au-dessus » : y est positif.'],
+     sol:'<p>À gauche donc x = <span class="res">−120</span> ; au-dessus donc y = <span class="res">80</span>.</p>'+S(`
+     ev quand ⚑ est cliqué
+     mo aller à x: [-120] y: [80]
+     `, RG)},
+    {n:'2.3', lvl:2, t:'Suivre les déplacements',
+     body:'<p>Fais d\'abord le tableau de suivi sur ta feuille, puis vérifie avec <b>Pas à pas</b> et la case « Tableau de suivi ».</p>'+S(`
+     ev quand ⚑ est cliqué
+     mo aller à x: [-50] y: [30]
+     mo ajouter [100] à x
+     mo ajouter [-60] à y
+     `, RG),
+     qs:[{q:'Abscisse x finale :', a:'50'},{q:'Ordonnée y finale :', a:'-30'}],
+     hints:['Après le premier bloc, le lutin est en (−50 ; 30).','−50 + 100 = 50 ; puis 30 + (−60) = 30 − 60.'],
+     sol:T(['Bloc','Position'],[['aller à x: −50 y: 30','(−50 ; 30)'],['ajouter 100 à x','(−50 + 100 ; 30) = (50 ; 30)'],['ajouter −60 à y','(50 ; 30 − 60) = (50 ; −30)']])+'<p>Position finale : <span class="res">(50 ; −30)</span>.</p>'},
+    {n:'2.4', lvl:2, t:'L\'erreur de Léo',
+     body:'<p>Léo veut placer le lutin <b>70 pas à droite</b> et <b>40 pas en bas</b> du centre. Il écrit '+K('mo','aller à x: −40 y: 70')+'.</p>',
+     qs:[{q:'Où arrive le lutin de Léo ?', choices:['à droite en bas','à gauche en haut','à droite en haut','à gauche en bas'], a:'à gauche en haut'},
+         {q:'Quelle valeur faut-il mettre dans x ?', a:'70'},{q:'Et dans y ?', a:'-40'}],
+     hints:['x = −40 est négatif : à gauche ! y = 70 est positif : en haut.','Léo a inversé x et y, et s\'est trompé de signe.'],
+     sol:'<p>Léo a inversé les coordonnées. Le bon bloc est '+K('mo','aller à x: 70 y: −40')+' : x = <span class="res">70</span>, y = <span class="res">−40</span>.</p>'},
+    {n:'2.5', lvl:3, t:'Un rectangle avec « aller à »',
+     body:S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-100] y: [50]
+     pe stylo en position d'écriture
+     mo aller à x: [100] y: [50]
+     mo aller à x: [100] y: [-50]
+     mo aller à x: [-100] y: [-50]
+     mo aller à x: [-100] y: [50]
+     pe relever le stylo
+     `, RG),
+     qs:[{q:'Quelle figure le lutin trace-t-il ?', choices:['un carré','un rectangle','un triangle'], a:'un rectangle'},
+         {q:'Longueur du côté du haut (de x = −100 à x = 100) :', a:'200', unit:'pas'},
+         {q:'Longueur du côté de droite (de y = 50 à y = −50) :', a:'100', unit:'pas'},
+         {q:'Périmètre de la figure :', a:'600', unit:'pas'}],
+     hints:['Place les 4 points sur un quadrillage et relie-les dans l\'ordre.','Une longueur horizontale = différence des x : 100 − (−100). Une longueur verticale = différence des y.'],
+     sol:'<ol><li>Les sommets sont (−100 ; 50), (100 ; 50), (100 ; −50), (−100 ; −50) : <span class="res">un rectangle</span>.</li><li>Longueur : 100 − (−100) = 200 ; largeur : 50 − (−50) = 100.</li><li>Périmètre : 2 × (200 + 100) = <span class="res">600 pas</span>.</li></ol>'}
+  ]
+});
+
+/* ---------------- ÉTAPE 3 ---------------- */
+STEPS.push({
+  n:3, y:5, t:'Se déplacer et dessiner', sub:'Orienter, avancer, tourner et utiliser le stylo',
+  obj:['orienter le lutin','faire la différence entre avancer et tourner','dessiner avec le stylo'],
+  lesson:
+  B('def','Orientation, avancer, tourner','<ul><li>'+K('mo','s\'orienter à 90')+' : le lutin regarde dans une direction (<b>90 = droite, 0 = haut, 180 = bas, −90 = gauche</b>).</li><li>'+K('mo','avancer de n pas')+' : le lutin se déplace tout droit, <b>dans la direction où il regarde</b>. Il ne tourne pas.</li><li>'+K('mo','tourner ↻ de a degrés')+' (vers la droite) ou '+K('mo','tourner ↺ de a degrés')+' (vers la gauche) : le lutin <b>pivote sur place</b>. Il ne se déplace pas.</li></ul>') +
+  B('exe','Un angle droit','<div class="split">'+S(`
+    ev quand ⚑ est cliqué
+    pe effacer tout
+    mo aller à x: [0] y: [0]
+    mo s'orienter à [90]
+    pe stylo en position d'écriture
+    mo avancer de [100] pas
+    mo tourner ↻ de [90] degrés
+    mo avancer de [100] pas
+    pe relever le stylo
+    `, RG)+T(['Bloc','Position · direction'],[['départ','(0 ; 0) · droite'],['avancer de 100','(100 ; 0) · droite'],['tourner ↻ de 90','(100 ; 0) · bas'],['avancer de 100','(100 ; −100) · bas']])+'</div>') +
+  B('sav','Laisser une trace : le stylo','<p>On ajoute l\'extension <b>Stylo</b> (bouton en bas à gauche de Scratch).</p><ul><li>'+K('pe','effacer tout')+' efface les anciens dessins ;</li><li>'+K('pe','stylo en position d\'écriture')+' : le lutin trace en se déplaçant ;</li><li>'+K('pe','relever le stylo')+' : il se déplace sans tracer.</li></ul>') +
+  B('pie','Confondre « avancer » et « tourner »','<p><span class="faux">FAUX</span> : « '+K('mo','tourner ↻ de 90 degrés')+' déplace le lutin vers la droite ».</p><p><span class="vrai">VRAI</span> : tourner fait seulement <b>pivoter</b> le lutin. Il faut un bloc avancer pour qu\'il change de position.</p>') +
+  B('ast','Tourner d\'un quart de tour','<p>Un quart de tour = 90°, un demi-tour = 180°, un tour complet = 360°. Si le lutin regarde à droite (90) et tourne ↻ de 90, il regarde en bas (180).</p>') +
+  B('ret','','<p>avancer déplace le lutin dans sa direction ; tourner le fait pivoter sur place. Pour dessiner : stylo en position d\'écriture avant de tracer, relever le stylo à la fin.</p>'),
+  ex:[
+    {n:'3.1', lvl:1, t:'Vers où regarde le lutin ?',
+     body:'<p>Le lutin exécute '+K('mo','s\'orienter à 90')+' puis '+K('mo','tourner ↻ de 90 degrés')+'.</p>',
+     qs:[{q:'Vers où regarde-t-il ?', choices:['haut','bas','gauche','droite'], a:'bas'},
+         {q:'S\'il fait ensuite '+K('mo','tourner ↻ de 90 degrés')+' une 2<sup>e</sup> fois, vers où regarde-t-il ?', choices:['haut','bas','gauche','droite'], a:'gauche'}],
+     hints:['90 = droite. Tourner ↻, c\'est tourner dans le sens des aiguilles d\'une montre.','Droite → bas → gauche → haut, à chaque quart de tour ↻.'],
+     sol:'<p>Droite (90) ↻ 90° → <span class="res">bas</span> (180) ↻ 90° → <span class="res">gauche</span> (−90).</p>'},
+    {n:'3.2', lvl:1, t:'Où est le lutin ?',
+     body:S(`
+     ev quand ⚑ est cliqué
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     mo avancer de [60] pas
+     mo tourner ↺ de [90] degrés
+     mo avancer de [40] pas
+     `, RG),
+     qs:[{q:'Abscisse x finale :', a:'60'},{q:'Ordonnée y finale :', a:'40'},{q:'Vers où regarde-t-il à la fin ?', choices:['haut','bas','gauche','droite'], a:'haut'}],
+     hints:['Il avance de 60 vers la droite : x devient 60.','↺ = vers la gauche : depuis « droite », un quart de tour ↺ le fait regarder vers le haut. Il avance alors de 40 vers le haut.'],
+     sol:T(['Bloc','Position · direction'],[['aller à 0 ; 0 / s\'orienter à 90','(0 ; 0) · droite'],['avancer de 60','(60 ; 0) · droite'],['tourner ↺ de 90','(60 ; 0) · haut'],['avancer de 40','(60 ; 40) · haut']])+'<p>Le lutin finit en <span class="res">(60 ; 40)</span> et regarde vers le <span class="res">haut</span>.</p>'},
+    {n:'3.3', lvl:2, t:'Que dessine le lutin ?',
+     body:'<p>Sur une feuille quadrillée (1 carreau = 20 pas), dessine la figure, puis vérifie.</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-100] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     mo avancer de [100] pas
+     mo tourner ↻ de [90] degrés
+     mo avancer de [80] pas
+     pe relever le stylo
+     `, RG),
+     qs:[{q:'Combien de segments sont tracés ?', a:'2'},{q:'Quel angle forment-ils ?', choices:['aigu','droit','obtus','plat'], a:'droit'},{q:'Coordonnées finales : x = ?', a:'0'},{q:'y = ?', a:'-80'}],
+     hints:['Le premier segment va vers la droite, de x = −100 à x = 0.','Après tourner ↻ 90, le lutin regarde vers le bas : il descend de 80.'],
+     sol:'<p>Un segment horizontal de 100 pas, puis un segment vertical de 80 pas vers le bas : ils forment un <span class="res">angle droit</span>. Le lutin finit en <span class="res">(0 ; −80)</span>.</p>'},
+    {n:'3.4', lvl:2, t:'À toi d\'écrire',
+     body:'<p>Complète le script pour tracer un segment horizontal de 150 pas, en partant du point (−100 ; 50), vers la droite.</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [?] y: [?]
+     mo s'orienter à [?]
+     pe stylo en position d'écriture
+     mo avancer de [?] pas
+     pe relever le stylo
+     `),
+     qs:[{q:'Valeur dans s\'orienter à :', a:'90'},{q:'Valeur dans avancer de :', a:'150'},{q:'Abscisse x du point d\'arrivée :', a:'50'}],
+     hints:['Les deux premières cases : x = −100 et y = 50.','Vers la droite = direction 90. Arrivée : −100 + 150.'],
+     sol:S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-100] y: [50]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     mo avancer de [150] pas
+     pe relever le stylo
+     `, RG)+'<p>Le lutin arrive en (−100 + 150 ; 50) = <span class="res">(50 ; 50)</span>.</p>'},
+    {n:'3.5', lvl:3, t:'L\'aller-retour du stream',
+     body:'<p>Dans une animation de stream, le lutin part de sa position, avance de 100 pas vers la droite, puis revient <b>exactement</b> à son point de départ. Au début, il regarde vers la droite.</p>'+S(`
+     ev quand ⚑ est cliqué
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     mo avancer de [100] pas
+     mo tourner ↻ de [?] degrés
+     mo avancer de [100] pas
+     `),
+     qs:[{q:'De combien de degrés doit-il tourner ?', a:'180'},{q:'Vers où regarde-t-il à la fin ?', choices:['droite','gauche','haut','bas'], a:'gauche'}],
+     hints:['Pour revenir en arrière, il faut faire demi-tour.','Un demi-tour, c\'est la moitié de 360°.'],
+     sol:'<p>Il faut un <b>demi-tour</b> : 360 ÷ 2 = <span class="res">180°</span>. Il revient au départ en regardant vers la <span class="res">gauche</span>.</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     mo avancer de [100] pas
+     mo tourner ↻ de [180] degrés
+     mo avancer de [100] pas
+     `, RG)},
+    {n:'3.6', lvl:3, t:'Un escalier de 3 marches (sans boucle)',
+     body:'<p>Une marche se trace ainsi : avancer de 30 vers la droite, tourner ↺ de 90, avancer de 30 vers le haut, tourner ↻ de 90. On trace <b>3 marches</b> en recopiant les blocs.</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-60] y: [-60]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     mo avancer de [30] pas
+     mo tourner ↺ de [90] degrés
+     mo avancer de [30] pas
+     mo tourner ↻ de [90] degrés
+     mo avancer de [30] pas
+     mo tourner ↺ de [90] degrés
+     mo avancer de [30] pas
+     mo tourner ↻ de [90] degrés
+     mo avancer de [30] pas
+     mo tourner ↺ de [90] degrés
+     mo avancer de [30] pas
+     mo tourner ↻ de [90] degrés
+     `, RG),
+     qs:[{q:'Combien de blocs « avancer » faut-il ?', a:'6'},{q:'Distance horizontale totale :', a:'90', unit:'pas'},{q:'Coordonnées finales : x = ?', a:'30'},{q:'y = ?', a:'30'}],
+     hints:['Chaque marche contient 2 blocs avancer : un horizontal, un vertical.','3 marches × 30 pas à l\'horizontale. Départ x = −60, donc arrivée −60 + 90.'],
+     sol:'<p>6 blocs avancer (3 horizontaux, 3 verticaux). Horizontalement : 3 × 30 = <span class="res">90 pas</span>, verticalement aussi. Arrivée : (−60 + 90 ; −60 + 90) = <span class="res">(30 ; 30)</span>.</p><p class="hand">C\'est long à recopier… à l\'étape 4, la boucle va faire ça en 4 blocs !</p>'}
+  ]
+});
+
+/* ---------------- ÉTAPE 4 ---------------- */
+STEPS.push({
+  n:4, y:5, t:'Répéter : la boucle « répéter n fois »', sub:'Ne plus recopier les mêmes blocs · tracer des polygones réguliers',
+  obj:['utiliser la boucle « répéter n fois »','calculer l\'angle de rotation : 360 ÷ n','tracer un polygone régulier'],
+  lesson:
+  '<p class="lead">Pour tracer un carré, le lutin doit faire 4 fois la même chose : avancer, puis tourner. Recopier 8 blocs, c\'est long… et on risque d\'en oublier un !</p>' +
+  B('def','La boucle « répéter n fois »','<p>Le bloc '+K('ct','répéter n fois')+' exécute <b>n fois de suite</b> les blocs placés à l\'intérieur. C\'est une <b>boucle bornée</b> : on connaît le nombre de tours à l\'avance.</p><div class="split">'+S(`
+    ev quand ⚑ est cliqué
+    pe effacer tout
+    mo aller à x: [-40] y: [-40]
+    mo s'orienter à [90]
+    pe stylo en position d'écriture
+    ct répéter [4] fois
+      mo avancer de [80] pas
+      mo tourner ↺ de [90] degrés
+    pe relever le stylo
+    `, RG)+'</div>') +
+  B('exe','Dérouler « répéter 3 fois »',T(['Tour','Ce que fait le lutin'],[['1','avance de 100 (1<sup>er</sup> côté), tourne de 120°'],['2','avance de 100 (2<sup>e</sup> côté), tourne de 120°'],['3','avance de 100 (3<sup>e</sup> côté), tourne de 120°']])+'<p>Il a tracé 3 côtés égaux et tourné en tout 3 × 120 = 360° : c\'est un <b>triangle équilatéral</b>.</p>') +
+  B('sav','L\'angle pour faire le tour d\'une figure','<p>Quand le lutin trace une figure fermée et revient à son point de départ en regardant dans la même direction, il a fait <b>un tour complet : 360°</b>. Pour un polygone régulier à n côtés :</p><p class="formula">angle de rotation = 360 ÷ n</p>'+T(['Figure','Triangle','Carré','Pentagone','Hexagone','Octogone'],[['n','3','4','5','6','8'],['Angle','120°','90°','72°','60°','45°']])) +
+  B('pie','L\'angle du triangle équilatéral','<p><span class="faux">FAUX</span> : écrire '+K('mo','tourner de 60 degrés')+' parce que les angles d\'un triangle équilatéral mesurent 60°.</p><p><span class="vrai">VRAI</span> : on indique l\'angle dont le lutin <b>tourne</b>, pas l\'angle de la figure. Il tourne de 360 ÷ 3 = <b>120°</b>. (120 + 60 = 180 : ces angles sont supplémentaires.)</p>') +
+  B('met','Écrire un programme de tracé complet','<ol><li><b>Préparer</b> : effacer tout.</li><li><b>Se placer</b> : aller à x: … y: … et s\'orienter à ….</li><li><b>Baisser le stylo</b>.</li><li><b>Tracer</b> : répéter n fois (avancer de côté ; tourner de 360 ÷ n).</li><li><b>Relever le stylo</b> à la fin.</li></ol>') +
+  B('ast','Vérifier','<p>Nombre de tours × angle = 360. Si ça ne fait pas 360, la figure ne se ferme pas !</p>') +
+  B('ret','','<p>'+K('ct','répéter n fois')+' exécute n fois les blocs placés à l\'intérieur. Pour un polygone régulier à n côtés : répéter n fois (avancer de longueur ; tourner de 360 ÷ n degrés).</p>'),
+  ex:[
+    {n:'4.1', lvl:1, t:'Le tableau des angles',
+     body:'<p>Complète : angle de rotation = 360 ÷ nombre de côtés.</p>',
+     qs:[{q:'Triangle équilatéral (3 côtés) :', a:'120', unit:'°'},{q:'Carré (4 côtés) :', a:'90', unit:'°'},{q:'Pentagone (5 côtés) :', a:'72', unit:'°'},{q:'Hexagone (6 côtés) :', a:'60', unit:'°'},{q:'Octogone (8 côtés) :', a:'45', unit:'°'},{q:'Décagone (10 côtés) :', a:'36', unit:'°'}],
+     hints:['Divise 360 par le nombre de côtés.','360 ÷ 5 : pense à 360 = 350 + 10, ou pose la division.'],
+     sol:T(['Polygone','n','Angle','Bloc répéter'],[['Triangle','3','<b>120°</b>','répéter 3 fois'],['Carré','4','<b>90°</b>','répéter 4 fois'],['Pentagone','5','<b>72°</b>','répéter 5 fois'],['Hexagone','6','<b>60°</b>','répéter 6 fois'],['Octogone','8','<b>45°</b>','répéter 8 fois'],['Décagone','10','<b>36°</b>','répéter 10 fois']])},
+    {n:'4.2', lvl:1, t:'Dérouler une boucle',
+     body:'<p>Pour une animation de chaîne TikTok, on lance :</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [3] fois
+       mo avancer de [30] pas
+       mo tourner ↻ de [90] degrés
+     `, RG),
+     qs:[{q:'Combien de pas le lutin avance-t-il en tout ?', a:'90'},{q:'De combien de degrés a-t-il tourné en tout ?', a:'270'},{q:'La figure est-elle fermée ?', choices:['oui','non'], a:'non'}],
+     hints:['La boucle fait 3 tours. À chaque tour : 30 pas et 90°.','Pour fermer la figure il faudrait tourner de 360° en tout.'],
+     sol:'<p>3 × 30 = <span class="res">90 pas</span> ; 3 × 90 = <span class="res">270°</span>. Comme 270 ≠ 360, la figure n\'est pas fermée : c\'est un carré auquel il manque un côté.</p>'},
+    {n:'4.3', lvl:2, t:'Tracer un hexagone',
+     body:'<p>On veut tracer un hexagone régulier de côté 50 (comme une case de ruche).</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [?] fois
+       mo avancer de [50] pas
+       mo tourner ↻ de [?] degrés
+     pe relever le stylo
+     `),
+     qs:[{q:'Nombre de répétitions :', a:'6'},{q:'Angle de rotation :', a:'60', unit:'°'},{q:'Périmètre de l\'hexagone :', a:'300', unit:'pas'}],
+     hints:['Un hexagone a 6 côtés.','360 ÷ 6 = ? Le périmètre, c\'est 6 côtés de 50.'],
+     sol:S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [6] fois
+       mo avancer de [50] pas
+       mo tourner ↻ de [60] degrés
+     pe relever le stylo
+     `, RG)+'<p>répéter <span class="res">6</span> fois, tourner de 360 ÷ 6 = <span class="res">60°</span>. Périmètre : 6 × 50 = <span class="res">300 pas</span>.</p>'},
+    {n:'4.4', lvl:2, t:'Quelle figure ?',
+     body:S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-20] y: [-60]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [8] fois
+       mo avancer de [40] pas
+       mo tourner ↺ de [45] degrés
+     `, RG),
+     qs:[{q:'Combien de côtés a la figure ?', a:'8'},{q:'Comment s\'appelle-t-elle ?', choices:['hexagone','octogone','décagone'], a:'octogone'},{q:'Périmètre :', a:'320', unit:'pas'},{q:'Angle total tourné :', a:'360', unit:'°'}],
+     hints:['Le nombre de côtés = le nombre de tours de boucle.','8 × 40 pour le périmètre, 8 × 45 pour l\'angle total.'],
+     sol:'<p>8 côtés : un <span class="res">octogone</span> régulier. Périmètre 8 × 40 = <span class="res">320 pas</span>. Angle total 8 × 45 = <span class="res">360°</span> : le lutin a bien fait un tour complet.</p>'},
+    {n:'4.5', lvl:2, t:'L\'erreur de Lina',
+     body:'<p>Lina veut tracer un triangle équilatéral de côté 100. Exécute son script.</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-50] y: [-40]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [3] fois
+       mo avancer de [100] pas
+       mo tourner ↺ de [60] degrés
+     `, RG),
+     qs:[{q:'De combien de degrés le lutin a-t-il tourné en tout ?', a:'180'},{q:'La figure est-elle fermée ?', choices:['oui','non'], a:'non'},{q:'Quel angle faut-il écrire ?', a:'120', unit:'°'}],
+     hints:['3 × 60 = ?','Relis l\'encadré « Attention, piège » : on tourne de 360 ÷ 3.'],
+     sol:'<p>3 × 60 = <span class="res">180°</span> seulement : la figure n\'est pas fermée. Il faut tourner de 360 ÷ 3 = <span class="res">120°</span>.</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-50] y: [-40]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [3] fois
+       mo avancer de [100] pas
+       mo tourner ↺ de [120] degrés
+     `, RG)},
+    {n:'4.6', lvl:3, t:'L\'escalier avec une boucle',
+     body:'<p>On reprend l\'escalier de l\'exercice 3.6, mais avec <b>4 marches de 40</b> et une boucle.</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-80] y: [-80]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [4] fois
+       mo avancer de [40] pas
+       mo tourner ↺ de [90] degrés
+       mo avancer de [40] pas
+       mo tourner ↻ de [90] degrés
+     `, RG),
+     qs:[{q:'Distance horizontale totale :', a:'160', unit:'pas'},{q:'Distance verticale totale :', a:'160', unit:'pas'},{q:'Combien de blocs sont dans la boucle ?', a:'4'},{q:'Sans boucle, combien de blocs « avancer » et « tourner » faudrait-il écrire ?', a:'16'}],
+     hints:['À chaque tour : 40 pas horizontaux, 40 pas verticaux.','Sans boucle : 4 blocs × 4 marches.'],
+     sol:'<p>Horizontal : 4 × 40 = <span class="res">160 pas</span> ; vertical : <span class="res">160 pas</span>. La boucle contient 4 blocs ; sans boucle il en faudrait 4 × 4 = <span class="res">16</span>.</p>'},
+    {n:'4.7', lvl:3, t:'Une boucle dans une boucle : la rosace',
+     body:'<p>On place une boucle à l\'intérieur d\'une autre (on dit qu\'elles sont <b>imbriquées</b>).</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [6] fois
+       ct répéter [4] fois
+         mo avancer de [60] pas
+         mo tourner ↻ de [90] degrés
+       mo tourner ↻ de [60] degrés
+     `, RG),
+     qs:[{q:'Combien de carrés sont tracés ?', a:'6'},{q:'Combien de fois le bloc « avancer » est-il exécuté ?', a:'24'},{q:'Si on veut 12 carrés régulièrement répartis, de combien doit-on tourner entre deux carrés ?', a:'30', unit:'°'}],
+     hints:['La petite boucle trace un carré ; la grande boucle la lance 6 fois.','6 × 4 avancer. Pour 12 carrés : 360 ÷ 12.'],
+     sol:'<p>La boucle intérieure trace un carré ; elle est lancée <span class="res">6</span> fois, avec une rotation de 60° (360 ÷ 6) entre deux carrés. « avancer » est exécuté 6 × 4 = <span class="res">24</span> fois. Pour 12 carrés : 360 ÷ 12 = <span class="res">30°</span> (et répéter 12 fois).</p>'}
+  ]
+});
+/* ============================================================
+   CONTENU — étapes 5 à 8 (niveau 4e)
+   ============================================================ */
+
+/* ---------------- ÉTAPE 5 ---------------- */
+STEPS.push({
+  n:5, y:4, t:'Les variables', sub:'Mémoriser une valeur qui change',
+  obj:['créer, initialiser et modifier une variable','faire la différence entre « mettre » et « ajouter »','suivre une variable dans un tableau'],
+  lesson:
+  '<p class="lead">Dans un jeu, le score, le nombre de vies ou le chrono changent sans arrêt. Le programme doit s\'en souvenir : il les range dans des <b>variables</b>.</p>' +
+  B('def','Variable','<p>Une <b>variable</b> est une case mémoire (une « boîte ») qui porte un <b>nom</b> et contient une <b>valeur</b>, souvent un nombre. Cette valeur peut changer pendant le programme. On la crée avec le bouton « Créer une variable ».</p>' +
+    T(['Action','Bloc','Ce qu\'il fait'],[['Initialiser',K('va','mettre score à 0'),'Range une valeur de départ (et <b>remplace</b> l\'ancienne).'],['Modifier',K('va','ajouter 10 à score'),'<b>Ajoute</b> 10 à la valeur déjà dans la boîte.'],['Afficher',K('lo','dire score'),'Le lutin montre la valeur actuelle.']])) +
+  B('exe','Un score qui augmente','<div class="split">'+S(`
+    ev quand ⚑ est cliqué
+    va mettre [score▾] à [0]
+    va ajouter [10] à [score▾]
+    va ajouter [10] à [score▾]
+    lo dire {va:score}
+    `, R)+T(['Bloc','Valeur de score'],[['mettre score à 0','0'],['ajouter 10 à score','0 + 10 = 10'],['ajouter 10 à score','10 + 10 = 20'],['dire score','le lutin dit <b>20</b>']])+'</div>') +
+  B('met','Suivre une variable pas à pas','<p>Je lis les blocs dans l\'ordre et je note la valeur de la variable <b>après chaque bloc</b>, dans un <b>tableau de suivi</b>. Tant que je n\'en saute aucun, je ne peux pas me tromper. Coche « Tableau de suivi » sous la scène pour voir le tableau se remplir.</p>') +
+  B('pie','« ajouter » ne remplace pas, « mettre » remplace','<p><span class="faux">FAUX</span> : « après '+K('va','mettre N à 7')+' puis '+K('va','ajouter 3 à N')+', le lutin dit 3 ».</p><p><span class="vrai">VRAI</span> : ajouter 3 à N veut dire « N devient N + 3 » : N = 7 + 3 = <b>10</b>. En revanche, '+K('va','mettre N à 3')+' efface l\'ancienne valeur et range 3.</p>') +
+  B('pie','Oublier d\'initialiser','<p>Une variable garde sa valeur d\'une partie à l\'autre. Si la partie précédente s\'est finie avec 25 points et qu\'on oublie '+K('va','mettre score à 0')+', la nouvelle partie démarre à 25 ! On initialise <b>toujours</b> une variable au début.</p>') +
+  B('ret','','<p>Une variable mémorise une valeur qui peut changer. On l\'initialise avec '+K('va','mettre … à …')+', on la modifie avec '+K('va','ajouter … à …')+', on l\'affiche avec '+K('lo','dire')+'. Pour lire un script : tableau de suivi !</p>'),
+  ex:[
+    {n:'5.1', lvl:1, t:'Tableau de suivi',
+     body:S(`
+     ev quand ⚑ est cliqué
+     va mettre [N▾] à [5]
+     va ajouter [3] à [N▾]
+     va ajouter [3] à [N▾]
+     lo dire {va:N}
+     `, R),
+     qs:[{q:'Valeur de N après le 1<sup>er</sup> « ajouter » :', a:'8'},{q:'Que dit le lutin à la fin ?', a:'11'}],
+     hints:['Au départ N = 5.','5 + 3 = 8, puis 8 + 3 = ?'],
+     sol:T(['Bloc','N'],[['mettre N à 5','5'],['ajouter 3 à N','5 + 3 = 8'],['ajouter 3 à N','8 + 3 = 11']])+'<p>Le lutin dit <span class="res">11</span>.</p>'},
+    {n:'5.2', lvl:1, t:'Mettre ou ajouter ?',
+     body:S(`
+     ev quand ⚑ est cliqué
+     va mettre [N▾] à [7]
+     va ajouter [3] à [N▾]
+     va mettre [N▾] à [3]
+     lo dire {va:N}
+     `, R),
+     qs:[{q:'Valeur de N après le 2<sup>e</sup> bloc :', a:'10'},{q:'Que dit le lutin ?', a:'3'}],
+     hints:['« ajouter 3 » : N devient 7 + 3.','« mettre N à 3 » efface tout et range 3.'],
+     sol:'<p>N = 7, puis 7 + 3 = 10, puis « mettre » <b>remplace</b> : N = 3. Le lutin dit <span class="res">3</span>.</p>'},
+    {n:'5.3', lvl:2, t:'Les vies du joueur',
+     body:'<p>Un joueur commence avec 3 vies et perd une vie deux fois de suite. Complète le script.</p>'+S(`
+     ev quand ⚑ est cliqué
+     va mettre [vies▾] à [?]
+     va ajouter [?] à [vies▾]
+     va ajouter [?] à [vies▾]
+     lo dire {va:vies}
+     `),
+     qs:[{q:'Valeur de départ :', a:'3'},{q:'Que faut-il ajouter pour perdre une vie ?', a:'-1'},{q:'Que dit le lutin ?', a:'1'}],
+     hints:['Perdre une vie, c\'est ajouter un nombre négatif.','3 − 1 − 1 = ?'],
+     sol:S(`
+     ev quand ⚑ est cliqué
+     va mettre [vies▾] à [3]
+     va ajouter [-1] à [vies▾]
+     va ajouter [-1] à [vies▾]
+     lo dire {va:vies}
+     `, R)+'<p>3 + (−1) + (−1) = <span class="res">1</span> vie.</p>'},
+    {n:'5.4', lvl:2, t:'Une variable dans une boucle',
+     body:'<p>Deux scripts à comparer.</p>'+S(`
+     ev quand ⚑ est cliqué
+     va mettre [total▾] à [0]
+     ct répéter [5] fois
+       va ajouter [4] à [total▾]
+     lo dire {va:total}
+     `, R)+S(`
+     ev quand ⚑ est cliqué
+     va mettre [n▾] à [1]
+     ct répéter [4] fois
+       va mettre [n▾] à {op:[{va:n}] * [2]}
+     lo dire {va:n}
+     `, R),
+     qs:[{q:'Que dit le lutin avec le 1<sup>er</sup> script ?', a:'20'},{q:'Que dit le lutin avec le 2<sup>e</sup> script ?', a:'16'}],
+     hints:['1<sup>er</sup> script : on ajoute 4, cinq fois.','2<sup>e</sup> script : n double à chaque tour : 1 → 2 → 4 → …'],
+     sol:'<ol><li>0 + 4 + 4 + 4 + 4 + 4 = 5 × 4 = <span class="res">20</span>.</li><li>1 → 2 → 4 → 8 → <span class="res">16</span> (4 doublements).</li></ol>'},
+    {n:'5.5', lvl:3, t:'La spirale', src:'Inspiré du DNB Métropole, sept. 2017',
+     body:'<p>On utilise une variable <b>longueur</b> qui grandit à chaque tour.</p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     va mettre [longueur▾] à [10]
+     pe stylo en position d'écriture
+     ct répéter [8] fois
+       mo avancer de {va:longueur} pas
+       mo tourner ↺ de [90] degrés
+       va ajouter [10] à [longueur▾]
+     `, RG),
+     qs:[{q:'Longueur du 1<sup>er</sup> segment :', a:'10'},{q:'Longueur du dernier segment tracé :', a:'80'},{q:'Valeur de longueur à la fin :', a:'90'},{q:'Longueur totale tracée :', a:'360'}],
+     hints:['Les segments mesurent 10, 20, 30… : on ajoute 10 après chaque segment.','Après le 8<sup>e</sup> segment, on ajoute encore 10. Total : 10 + 20 + … + 80.'],
+     sol:'<ol><li>Segments : 10, 20, 30, 40, 50, 60, 70, <span class="res">80</span>.</li><li>Après le dernier tour, on ajoute encore 10 : longueur = <span class="res">90</span>.</li><li>Total : 10 + 20 + … + 80 = <span class="res">360 pas</span> (astuce : (10 + 80) × 4 = 360).</li></ol>'},
+    {n:'5.6', lvl:3, t:'Le stand de tacos',
+     body:'<p>À la fête du collège, chaque tacos est vendu 6 € et coûte 2 € à fabriquer. L\'emplacement coûte 30 € pour la journée. On vend 25 tacos.</p>'+S(`
+     ev quand ⚑ est cliqué
+     va mettre [bénéfice▾] à [0]
+     ct répéter [25] fois
+       va ajouter {op:[6] - [2]} à [bénéfice▾]
+     va mettre [bénéfice▾] à {op:[{va:bénéfice}] - [30]}
+     lo dire {va:bénéfice}
+     `, R),
+     qs:[{q:'Marge sur un seul tacos :', a:'4', unit:'€'},{q:'Bénéfice juste après la boucle :', a:'100', unit:'€'},{q:'Nombre affiché à la fin :', a:'70'}],
+     hints:['Marge = prix de vente − coût.','Après la boucle : 25 × 4. Puis on retire 30 une seule fois.'],
+     sol:'<p>Marge : 6 − 2 = <span class="res">4 €</span>. Après la boucle : 25 × 4 = <span class="res">100 €</span>. Le lutin dit 100 − 30 = <span class="res">70</span>.</p>'}
+  ]
+});
+
+/* ---------------- ÉTAPE 6 ---------------- */
+STEPS.push({
+  n:6, y:4, t:'Entrées, sorties et calculs', sub:'Dialoguer avec l\'utilisateur et faire calculer le lutin',
+  obj:['récupérer une entrée avec « demander »','afficher une sortie avec « dire »','utiliser les opérateurs + − * /'],
+  lesson:
+  B('def','Entrée et sortie','<ul><li>Une <b>entrée</b> est une valeur que l\'utilisateur fournit. Avec '+K('se','demander … et attendre')+', le lutin pose une question ; ce qu\'on tape est rangé dans '+K('se','réponse')+'.</li><li>Une <b>sortie</b> est l\'information que le programme renvoie, affichée avec '+K('lo','dire')+'.</li></ul><p class="formula">ENTRÉE → TRAITEMENT → SORTIE</p>') +
+  B('def','Les opérateurs de calcul',T(['Bloc','Opération','Résultat'],[[K('op','7 + 3'),'addition','10'],[K('op','7 - 3'),'soustraction','4'],[K('op','7 * 3'),'multiplication (×)','21'],[K('op','7 / 2'),'division (÷)','3,5']])+'<p>Attention : Scratch écrit <b>*</b> pour × et <b>/</b> pour ÷. On peut emboîter ces blocs les uns dans les autres.</p>') +
+  B('exe','Afficher le double d\'un nombre','<p>Tape un nombre dans la case « Je tape », puis exécute.</p>'+S(`
+    ev quand ⚑ est cliqué
+    se demander [Donne un nombre] et attendre
+    va mettre [double▾] à {op:[{se:réponse}] * [2]}
+    lo dire {va:double}
+    `, R+' data-ask="7"')+'<p>Si l\'utilisateur tape 7 (entrée), double prend la valeur 7 × 2 = 14, et le lutin dit 14 (sortie).</p>') +
+  B('sav','L\'emboîtement remplace les parenthèses','<p>Le bloc le plus à l\'intérieur est calculé en premier. '+K('op','( réponse + 3 ) * 2')+' calcule d\'abord réponse + 3, puis multiplie par 2.</p>') +
+  B('ast','Garder la réponse dans une variable','<p>'+K('se','réponse')+' contient toujours la <b>dernière</b> valeur tapée : à la deuxième question, la première est perdue. Pour la garder, on la range tout de suite : '+K('va','mettre nombre à réponse')+'.</p>') +
+  B('ret','','<p>'+K('se','demander … et attendre')+' récupère une entrée, stockée dans réponse ; '+K('lo','dire')+' affiche une sortie. Entre les deux, le traitement utilise + , − , * (×) et / (÷).</p>'),
+  ex:[
+    {n:'6.1', lvl:1, t:'Prévoir la sortie',
+     body:'<p>Pour tester une autre valeur, change le nombre dans « Je tape ».</p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     lo dire {op:[{op:[{se:réponse}] * [2]}] + [1]}
+     `, R+' data-ask="25"'),
+     qs:[{q:'Qu\'affiche le lutin si on tape 25 ?', a:'51'},{q:'Et si on tape −4 ?', a:'-7'}],
+     hints:['Le bloc intérieur est calculé en premier : réponse × 2.','25 × 2 = 50, puis + 1. Pour −4 : −4 × 2 = −8, puis + 1.'],
+     sol:'<p>25 × 2 + 1 = <span class="res">51</span> ; (−4) × 2 + 1 = −8 + 1 = <span class="res">−7</span>.</p>'},
+    {n:'6.2', lvl:1, t:'Le périmètre d\'un carré',
+     body:'<p>On veut un script qui demande le côté d\'un carré, puis affiche son périmètre.</p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Côté du carré ?] et attendre
+     lo dire {op:[{se:réponse}] * [?]}
+     `),
+     qs:[{q:'Quelle est l\'entrée ?', choices:['le côté','le périmètre'], a:'le côté'},{q:'Par quel nombre multiplier ?', a:'4'},{q:'Affichage si on tape 12 :', a:'48'}],
+     hints:['Un carré a 4 côtés égaux.','Périmètre = 4 × côté.'],
+     sol:S(`
+     ev quand ⚑ est cliqué
+     se demander [Côté du carré ?] et attendre
+     lo dire {op:[{se:réponse}] * [4]}
+     `, R+' data-ask="12"')+'<p>Entrée : le côté ; sortie : le périmètre. 4 × 12 = <span class="res">48</span>.</p>'},
+    {n:'6.3', lvl:2, t:'Plusieurs calculs',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [n▾] à {se:réponse}
+     va mettre [n▾] à {op:[{va:n}] + [3]}
+     va mettre [n▾] à {op:[{va:n}] * [2]}
+     lo dire {va:n}
+     `, R+' data-ask="4"'),
+     qs:[{q:'Qu\'affiche le lutin si on tape 4 ?', a:'14'},{q:'Et si on tape 10 ?', a:'26'}],
+     hints:['Fais le tableau de suivi de n : 4, puis 4 + 3, puis…','(4 + 3) × 2. Attention à l\'ordre des blocs.'],
+     sol:T(['Bloc','n (avec 4)','n (avec 10)'],[['mettre n à réponse','4','10'],['mettre n à n + 3','7','13'],['mettre n à n * 2','14','26']])+'<p>Le lutin dit <span class="res">14</span> puis <span class="res">26</span>.</p>'},
+    {n:'6.4', lvl:2, t:'Aire d\'un rectangle (deux questions)',
+     body:'<p>Pour taper deux réponses, sépare-les par un point-virgule dans « Je tape » (exemple : 7 ; 5).</p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Longueur ?] et attendre
+     va mettre [L▾] à {se:réponse}
+     se demander [Largeur ?] et attendre
+     va mettre [l▾] à {se:réponse}
+     lo dire {op:[{va:L}] * [{va:l}]}
+     `, R+' data-ask="7 ; 5"'),
+     qs:[{q:'Affichage pour une longueur 7 et une largeur 5 :', a:'35'},{q:'Si on supprime le bloc « mettre L à réponse » et qu\'on écrit dire réponse * l, que dit le lutin pour 7 et 5 ?', a:'25'}],
+     hints:['Aire = longueur × largeur.','Sans la variable L, réponse contient la dernière valeur tapée : 5.'],
+     sol:'<p>7 × 5 = <span class="res">35</span>. Sans ranger la première réponse, « réponse » vaut 5 au moment du calcul : 5 × 5 = <span class="res">25</span>. C\'est pour ça qu\'on range chaque réponse dans une variable !</p>'},
+    {n:'6.5', lvl:3, t:'Les soldes',
+     body:'<p>Un magasin fait −20 % sur tout. Le script calcule le prix soldé.</p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Prix de départ ?] et attendre
+     va mettre [prix▾] à {se:réponse}
+     va mettre [remise▾] à {op:[{op:[{va:prix}] * [20]}] / [100]}
+     lo dire {op:[{va:prix}] - [{va:remise}]}
+     `, R+' data-ask="45"'),
+     qs:[{q:'Remise pour un prix de 45 € :', a:'9', unit:'€'},{q:'Prix affiché pour 45 € :', a:'36', unit:'€'},{q:'Prix affiché pour 80 € :', a:'64', unit:'€'}],
+     hints:['20 % de 45 = 45 × 20 ÷ 100.','Prix soldé = prix − remise.'],
+     sol:'<p>Remise : 45 × 20 ÷ 100 = <span class="res">9 €</span>, prix soldé 45 − 9 = <span class="res">36 €</span>. Pour 80 € : remise 16 €, prix <span class="res">64 €</span>.</p>'},
+    {n:'6.6', lvl:3, t:'Les parenthèses cachées',
+     body:'<p>Les deux scripts n\'emboîtent pas les blocs de la même façon.</p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Nombre ?] et attendre
+     lo dire {op:[{op:[{se:réponse}] + [3]}] * [2]}
+     `, R+' data-ask="5"')+S(`
+     ev quand ⚑ est cliqué
+     se demander [Nombre ?] et attendre
+     lo dire {op:[{se:réponse}] + [{op:[3] * [2]}]}
+     `, R+' data-ask="5"'),
+     qs:[{q:'Script 1 avec 5 :', a:'16'},{q:'Script 2 avec 5 :', a:'11'},{q:'Quelle expression correspond au script 1 ? (x est le nombre tapé)', choices:['(x + 3) × 2','x + 3 × 2'], a:'(x + 3) × 2'}],
+     hints:['Calcule toujours le bloc le plus intérieur en premier.','Script 1 : (5 + 3) × 2. Script 2 : 5 + (3 × 2).'],
+     sol:'<p>Script 1 : (5 + 3) × 2 = <span class="res">16</span>. Script 2 : 5 + 3 × 2 = 5 + 6 = <span class="res">11</span>. Le bloc intérieur joue le rôle de parenthèses : script 1 = <b>(x + 3) × 2</b>.</p>'}
+  ]
+});
+
+/* ---------------- ÉTAPE 7 ---------------- */
+STEPS.push({
+  n:7, y:4, t:'Les conditions', sub:'Faire prendre une décision au programme',
+  obj:['utiliser les comparaisons <, =, >','écrire « si … alors … sinon »','utiliser modulo pour pair / impair'],
+  lesson:
+  B('def','Opérateurs de comparaison','<p>Ils comparent deux nombres et répondent <b>vrai</b> ou <b>faux</b>. Ils ont une forme d\'hexagone.</p>'+T(['Bloc','Signification','Exemple'],[[K('op','a < b'),'a est inférieur à b','3 &lt; 8 : vrai'],[K('op','a = b'),'a est égal à b','5 = 7 : faux'],[K('op','a > b'),'a est supérieur à b','8 &gt; 8 : faux']])) +
+  B('def','Instruction conditionnelle','<ul><li><b>si … alors</b> : les blocs à l\'intérieur ne sont exécutés que si la condition est <b>vraie</b> ;</li><li><b>si … alors … sinon</b> : si la condition est vraie, on exécute le « alors », sinon ceux du « sinon ».</li></ul>') +
+  B('exe','Un test selon l\'âge','<div class="split">'+S(`
+    ev quand ⚑ est cliqué
+    se demander [Quel âge as-tu ?] et attendre
+    ct si ⟨op:[{se:réponse}] < [13]⟩ alors
+      lo dire [Mode hors-ligne]
+    ct sinon
+      lo dire [Accès en ligne]
+    `, R+' data-ask="15"')+T(['Âge','réponse &lt; 13 ?','Le lutin dit'],[['15','faux','Accès en ligne'],['11','vrai','Mode hors-ligne'],['13','faux (13 &lt; 13 est faux)','Accès en ligne']])+'</div>') +
+  B('ast','Et « supérieur ou égal » ?','<p>Scratch n\'a pas de bloc ≥. Avec des nombres entiers, « âge ≥ 13 » revient à « âge &gt; 12 ». On peut aussi inverser le test.</p>') +
+  B('def','Le reste : pair ou impair ?','<p>'+K('op','a modulo b')+' donne le <b>reste</b> de la division euclidienne. 17 modulo 5 = 2, car 17 = 3 × 5 + 2.</p><p>Un entier est <b>pair</b> quand n modulo 2 = 0, <b>impair</b> quand n modulo 2 = 1.</p>'+S(`
+    ev quand ⚑ est cliqué
+    se demander [Un nombre entier ?] et attendre
+    ct si ⟨op:[{op:[{se:réponse}] modulo [2]}] = [0]⟩ alors
+      lo dire [pair]
+    ct sinon
+      lo dire [impair]
+    `, R+' data-ask="12"')) +
+  B('pie','Affecter n\'est pas comparer','<p>'+K('va','mettre score à 10')+' <b>range</b> 10 dans score : c\'est une affectation.</p><p>'+K('op','score = 10')+' <b>pose la question</b> « score vaut-il 10 ? » et répond vrai ou faux : c\'est une comparaison.</p>') +
+  B('ret','','<p>Un test (si … alors … sinon) exécute des blocs différents selon qu\'une condition est vraie ou fausse. Les conditions utilisent &lt;, =, &gt; ; modulo donne le reste d\'une division.</p>'),
+  ex:[
+    {n:'7.1', lvl:1, t:'Vrai ou faux ?',
+     body:'<p>Pour chaque comparaison, réponds vrai ou faux.</p>',
+     qs:[{q:'7 &lt; 12', choices:['vrai','faux'], a:'vrai'},{q:'15 = 51', choices:['vrai','faux'], a:'faux'},{q:'8 &gt; 8', choices:['vrai','faux'], a:'faux'},{q:'9 modulo 2 = 1', choices:['vrai','faux'], a:'vrai'},{q:'20 modulo 5 = 0', choices:['vrai','faux'], a:'vrai'},{q:'14 modulo 4 = 2', choices:['vrai','faux'], a:'vrai'}],
+     hints:['8 &gt; 8 : est-ce que 8 est <b>strictement</b> plus grand que 8 ?','Pour modulo : 14 = 3 × 4 + ?'],
+     sol:'<p>vrai, faux, <b>faux</b> (8 n\'est pas strictement supérieur à 8), vrai (9 = 4 × 2 + 1), vrai (20 = 4 × 5 + 0), vrai (14 = 3 × 4 + 2).</p>'},
+    {n:'7.2', lvl:1, t:'Grand ou petit ?',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Un nombre ?] et attendre
+     ct si ⟨op:[{se:réponse}] > [10]⟩ alors
+       lo dire [Grand]
+     ct sinon
+       lo dire [Petit]
+     `, R+' data-ask="15"'),
+     qs:[{q:'Pour 15 :', choices:['Grand','Petit'], a:'Grand'},{q:'Pour 10 :', choices:['Grand','Petit'], a:'Petit'},{q:'Pour 3 :', choices:['Grand','Petit'], a:'Petit'}],
+     hints:['Calcule la condition « réponse &gt; 10 » : vrai → Grand, faux → Petit.','10 &gt; 10 est faux !'],
+     sol:'<p>15 &gt; 10 vrai → <span class="res">Grand</span> ; 10 &gt; 10 faux → <span class="res">Petit</span> ; 3 &gt; 10 faux → <span class="res">Petit</span>.</p>'},
+    {n:'7.3', lvl:2, t:'L\'appréciation (conditions imbriquées)',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Ta note sur 20 ?] et attendre
+     ct si ⟨op:[{se:réponse}] > [14]⟩ alors
+       lo dire [Très bien]
+     ct sinon
+       ct si ⟨op:[{se:réponse}] > [9]⟩ alors
+         lo dire [Assez bien]
+       ct sinon
+         lo dire [Courage, ça va venir !]
+     `, R+' data-ask="12"'),
+     qs:[{q:'Pour 16 :', choices:['Très bien','Assez bien','Courage, ça va venir !'], a:'Très bien'},{q:'Pour 15 :', choices:['Très bien','Assez bien','Courage, ça va venir !'], a:'Très bien'},{q:'Pour 10 :', choices:['Très bien','Assez bien','Courage, ça va venir !'], a:'Assez bien'},{q:'Pour 9 :', choices:['Très bien','Assez bien','Courage, ça va venir !'], a:'Courage, ça va venir !'}],
+     hints:['On teste d\'abord « &gt; 14 ». Si c\'est faux seulement, on teste « &gt; 9 ».','9 &gt; 9 est faux.'],
+     sol:T(['Note','&gt; 14 ?','&gt; 9 ?','Le lutin dit'],[['16','vrai','(pas testé)','Très bien'],['15','vrai','(pas testé)','Très bien'],['10','faux','vrai','Assez bien'],['9','faux','faux','Courage, ça va venir !']])},
+    {n:'7.4', lvl:2, t:'Compléter le script',
+     body:'<p>Complète les deux cases pour que le lutin dise si le nombre tapé est un multiple de 5.</p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Un nombre entier ?] et attendre
+     ct si ⟨op:[{op:[{se:réponse}] modulo [?]}] = [?]⟩ alors
+       lo dire [multiple de 5]
+     ct sinon
+       lo dire [pas multiple de 5]
+     `),
+     qs:[{q:'Première case :', a:'5'},{q:'Deuxième case :', a:'0'}],
+     hints:['Un multiple de 5 se divise par 5 « sans reste ».','Le reste de la division par 5 doit être égal à 0.'],
+     sol:S(`
+     ev quand ⚑ est cliqué
+     se demander [Un nombre entier ?] et attendre
+     ct si ⟨op:[{op:[{se:réponse}] modulo [5]}] = [0]⟩ alors
+       lo dire [multiple de 5]
+     ct sinon
+       lo dire [pas multiple de 5]
+     `, R+' data-ask="35"')+'<p>On teste <b>réponse modulo <span class="res">5</span> = <span class="res">0</span></b>.</p>'},
+    {n:'7.5', lvl:3, t:'Le mot de passe du jeu',
+     body:'<p>Un jeu demande un code. Il donne 1 point bonus si le code est 2026, sinon il retire 5 points.</p>'+S(`
+     ev quand ⚑ est cliqué
+     va mettre [points▾] à [20]
+     se demander [Code secret ?] et attendre
+     ct si ⟨op:[{se:réponse}] = [2026]⟩ alors
+       va ajouter [1] à [points▾]
+     ct sinon
+       va ajouter [-5] à [points▾]
+     lo dire {op:regrouper [Points : ] et [{va:points}]}
+     `, R+' data-ask="2025"'),
+     qs:[{q:'Valeur de points si on tape 2026 :', a:'21'},{q:'Valeur de points si on tape 2025 :', a:'15'}],
+     hints:['Départ : 20 points.','Le bloc « regrouper » colle le texte et le nombre : « Points : 21 ».'],
+     sol:'<p>Code juste : 20 + 1 = <span class="res">21</span>. Code faux : 20 − 5 = <span class="res">15</span>. Le lutin affiche par exemple « Points : 15 ».</p>'},
+    {n:'7.6', lvl:3, t:'Positif ou négatif ?', src:'Inspiré du DNB Polynésie, juin 2017',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [R▾] à {op:[{op:[{se:réponse}] * [-4]}] + [5]}
+     ct si ⟨op:[{va:R}] < [0]⟩ alors
+       lo dire [négatif]
+     ct sinon
+       lo dire {va:R}
+     `, R+' data-ask="2"'),
+     qs:[{q:'Valeur de R si on tape 2 :', a:'-3'},{q:'Qu\'affiche le lutin pour 2 ?', choices:['négatif','-3','5'], a:'négatif'},{q:'Qu\'affiche le lutin pour −1 ?', a:'9'},{q:'Expression de R en fonction de x :', choices:['−4x + 5','4x − 5','−4(x + 5)'], a:'−4x + 5'}],
+     hints:['R = réponse × (−4) + 5.','Pour −1 : (−1) × (−4) = 4, puis 4 + 5. R n\'est pas négatif, donc le lutin dit R.'],
+     sol:'<p>Pour 2 : 2 × (−4) + 5 = −8 + 5 = −3 &lt; 0 → le lutin dit <span class="res">négatif</span>. Pour −1 : 4 + 5 = <span class="res">9</span>. R = <span class="res">−4x + 5</span>.</p>'}
+  ]
+});
+
+/* ---------------- ÉTAPE 8 ---------------- */
+STEPS.push({
+  n:8, y:4, t:'Répéter jusqu\'à…', sub:'Les boucles conditionnelles',
+  obj:['utiliser « répéter jusqu\'à ce que »','compter les tours d\'une boucle non bornée','repérer une boucle infinie'],
+  lesson:
+  '<p class="lead">Parfois, on ne sait pas à l\'avance combien de fois il faut répéter : « avance jusqu\'à toucher le bord », « joue jusqu\'à avoir 20 pièces »…</p>' +
+  B('def','La boucle « répéter jusqu\'à ce que »','<p>'+K('ct','répéter jusqu\'à ce que …')+' recommence les blocs intérieurs <b>tant que la condition est fausse</b>, et s\'arrête <b>dès qu\'elle devient vraie</b>. La condition est vérifiée <b>avant chaque tour</b>. C\'est une boucle <b>non bornée</b>.</p>') +
+  B('exe','Ramasser 20 pièces','<div class="split">'+S(`
+    ev quand ⚑ est cliqué
+    va mettre [pièces▾] à [0]
+    ct répéter jusqu'à ce que ⟨op:[{va:pièces}] = [20]⟩
+      va ajouter [1] à [pièces▾]
+    lo dire [Gagné !]
+    `, R)+'<p>Au départ, pièces = 0. À chaque tour on ajoute 1. La boucle tourne tant que « pièces = 20 » est faux, donc <b>20 fois</b>.</p></div>') +
+  B('met','Compter les tours','<ol><li>Je note la <b>valeur de départ</b> et ce que la variable gagne à chaque tour.</li><li>Je calcule : <b>nombre de tours = (seuil − départ) ÷ gain</b>.</li><li>Je <b>vérifie</b> avec la condition exacte (=, &gt; ou &lt;) en déroulant le dernier tour.</li></ol>') +
+  B('sav','Trois boucles à comparer',T(['','répéter n fois','répéter jusqu\'à ce que','répéter indéfiniment'],[['Nombre de tours','connu (n)','dépend d\'une condition','infini'],['Arrêt','après n tours','quand la condition devient vraie','bouton stop'],['Exemple','tracer un carré','avancer jusqu\'au bord','jeu qui tourne en continu']])) +
+  B('pie','La boucle qui ne s\'arrête jamais','<p>Si la condition d\'arrêt n\'est jamais vraie, la boucle tourne sans fin : c\'est une <b>boucle infinie</b>. Avec un test « = », vérifie que la variable tombe <b>pile</b> sur la valeur ; sinon utilise plutôt « &gt; » ou « &lt; ».</p>') +
+  B('ret','','<p>répéter jusqu\'à ce que répète tant que la condition est fausse et s\'arrête dès qu\'elle est vraie. Nombre de tours = (seuil − départ) ÷ gain, à vérifier avec la condition exacte. Attention aux boucles infinies !</p>'),
+  ex:[
+    {n:'8.1', lvl:1, t:'Combien de tours ?',
+     body:S(`
+     ev quand ⚑ est cliqué
+     va mettre [x▾] à [0]
+     ct répéter jusqu'à ce que ⟨op:[{va:x}] > [100]⟩
+       va ajouter [30] à [x▾]
+     lo dire {va:x}
+     `, R),
+     qs:[{q:'Combien de tours fait la boucle ?', a:'4'},{q:'Qu\'affiche le lutin ?', a:'120'}],
+     hints:['Valeurs de x : 0, 30, 60, …','La boucle s\'arrête quand x dépasse 100 (strictement).'],
+     sol:'<p>x : 0 → 30 → 60 → 90 → 120. Au 4<sup>e</sup> tour x = 120 &gt; 100 : on s\'arrête. <span class="res">4 tours</span>, le lutin dit <span class="res">120</span>.</p>'},
+    {n:'8.2', lvl:1, t:'Économiser pour une console',
+     body:'<p>Sami a 50 € et économise 15 € par semaine.</p>'+S(`
+     ev quand ⚑ est cliqué
+     va mettre [argent▾] à [50]
+     va mettre [semaines▾] à [0]
+     ct répéter jusqu'à ce que ⟨op:[{va:argent}] > [200]⟩
+       va ajouter [15] à [argent▾]
+       va ajouter [1] à [semaines▾]
+     lo dire {va:semaines}
+     `, R),
+     qs:[{q:'Qu\'affiche le lutin ?', a:'11'},{q:'Combien Sami a-t-il à la fin ?', a:'215', unit:'€'}],
+     hints:['Il lui manque 200 − 50 = 150 €. 150 ÷ 15 = 10… mais la condition est « &gt; 200 ».','Après 10 semaines il a exactement 200 € : 200 &gt; 200 est faux, il faut un tour de plus.'],
+     sol:'<p>Après 10 semaines : 50 + 150 = 200 € ; « 200 &gt; 200 » est faux, la boucle continue. Après <span class="res">11</span> semaines : <span class="res">215 €</span>.</p>'},
+    {n:'8.3', lvl:2, t:'Attention au signe',
+     body:S(`
+     ev quand ⚑ est cliqué
+     mo aller à x: [-200] y: [0]
+     ct répéter jusqu'à ce que ⟨op:[{mo:abscisse x}] > [100]⟩
+       mo ajouter [50] à x
+     lo dire {mo:abscisse x}
+     `, RG),
+     qs:[{q:'Combien de tours fait la boucle ?', a:'7'},{q:'Qu\'affiche le lutin ?', a:'150'},{q:'Le calcul (100 − (−200)) ÷ 50 donne :', a:'6'}],
+     hints:['Écris les valeurs de x : −200, −150, −100, …','Quand x = 100, « 100 &gt; 100 » est faux : un tour de plus.'],
+     sol:'<p>x : −200 → −150 → −100 → −50 → 0 → 50 → 100 → 150. <span class="res">7 tours</span>, le lutin dit <span class="res">150</span>. Le calcul donne <span class="res">6</span>, mais avec « &gt; » il faut <b>dépasser</b> 100 : d\'où un tour de plus.</p>'},
+    {n:'8.4', lvl:2, t:'Un bug !',
+     body:'<p>Exécute ce script et observe le message.</p>'+S(`
+     ev quand ⚑ est cliqué
+     va mettre [n▾] à [1]
+     ct répéter jusqu'à ce que ⟨op:[{va:n}] = [10]⟩
+       va ajouter [2] à [n▾]
+     lo dire {va:n}
+     `, R),
+     qs:[{q:'n prend-il un jour la valeur 10 ?', choices:['oui','non'], a:'non'},{q:'Quelle comparaison remplace « = » pour que la boucle s\'arrête ?', choices:['&lt;','&gt;'], a:'&gt;'},{q:'Avec « n &gt; 10 », que dit alors le lutin ?', a:'11'}],
+     hints:['n vaut 1, 3, 5, 7, 9, 11… : que des nombres impairs.','Avec « n &gt; 10 », la boucle s\'arrête au premier n qui dépasse 10.'],
+     sol:'<p>n ne vaut que des nombres impairs : il passe de 9 à 11 sans jamais valoir 10. C\'est une <b>boucle infinie</b>. Correction : « n &gt; 10 » (ou commencer à 0). Le lutin dit alors <span class="res">11</span>.</p>'},
+    {n:'8.5', lvl:3, t:'Le clicker',
+     body:'<p>Règle : on part d\'un score de 0 ; à chaque tour on gagne 1 point ; dès que le score atteint 10, le jeu affiche « Gagné ! ». Complète.</p>'+S(`
+     ev quand ⚑ est cliqué
+     va mettre [score▾] à [?]
+     ct répéter jusqu'à ce que ⟨op:[{va:score}] = [?]⟩
+       va ajouter [?] à [score▾]
+     lo dire [Gagné !]
+     `),
+     qs:[{q:'Valeur de départ :', a:'0'},{q:'Seuil dans la condition :', a:'10'},{q:'Combien de tours (de clics) faut-il ?', a:'10'}],
+     hints:['On gagne 1 point par tour.','(10 − 0) ÷ 1.'],
+     sol:S(`
+     ev quand ⚑ est cliqué
+     va mettre [score▾] à [0]
+     ct répéter jusqu'à ce que ⟨op:[{va:score}] = [10]⟩
+       va ajouter [1] à [score▾]
+     lo dire [Gagné !]
+     `, R)+'<p>(10 − 0) ÷ 1 = <span class="res">10</span> clics.</p>'},
+    {n:'8.6', lvl:3, t:'Le lutin qui avance jusqu\'au bord',
+     body:S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-230] y: [-100]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     va mettre [pas▾] à [0]
+     ct répéter jusqu'à ce que ⟨op:[{mo:abscisse x}] > [200]⟩
+       mo avancer de [40] pas
+       va ajouter [1] à [pas▾]
+     lo dire {va:pas}
+     `, RG),
+     qs:[{q:'Combien de fois le lutin avance-t-il ?', a:'11'},{q:'Abscisse x finale :', a:'210'}],
+     hints:['Il doit passer de −230 à plus de 200 : une distance de plus de 430.','430 ÷ 40 = 10,75 : il faut un nombre entier de tours, juste au-dessus.'],
+     sol:'<p>Après 10 tours x = −230 + 400 = 170 (pas encore &gt; 200). Après <span class="res">11</span> tours x = <span class="res">210</span> &gt; 200 : stop.</p>'}
+  ]});
+/* ============================================================
+   CONTENU — étapes 9 à 12 (niveau 3e et brevet)
+   ============================================================ */
+
+/* ---------------- ÉTAPE 9 ---------------- */
+STEPS.push({
+  n:9, y:3, t:'Les programmes de calcul', sub:'Objectif brevet : des blocs à l\'expression algébrique',
+  obj:['traduire un programme de calcul en blocs','écrire l\'expression algébrique d\'un script','retrouver le nombre de départ avec une équation'],
+  lesson:
+  '<p class="lead">Au brevet, un exercice classique donne un script et demande : ce qu\'il affiche pour un nombre donné, puis l\'expression algébrique qu\'il calcule. Tu as maintenant tous les outils !</p>' +
+  B('def','Programme de calcul','<p>Un <b>programme de calcul</b> transforme un nombre d\'entrée en un nombre de sortie par une suite d\'opérations. En appelant <b>x</b> le nombre choisi, on écrit la sortie sous forme d\'<b>expression algébrique</b>, souvent du type <b>ax + b</b>.</p>') +
+  B('met','Traduire un programme en blocs','<p>« Choisis un nombre, multiplie-le par 4, puis ajoute 3. »</p><div class="split">'+S(`
+    ev quand ⚑ est cliqué
+    se demander [Choisis un nombre] et attendre
+    va mettre [nombre▾] à {se:réponse}
+    va mettre [nombre▾] à {op:[{va:nombre}] * [4]}
+    va mettre [nombre▾] à {op:[{va:nombre}] + [3]}
+    lo dire {va:nombre}
+    `, R+' data-ask="5"')+'<ol><li>Demander le nombre et le ranger dans une variable.</li><li>Multiplier par 4 : mettre nombre à nombre * 4.</li><li>Ajouter 3 : mettre nombre à nombre + 3.</li><li>Afficher le résultat.</li></ol></div><p>Vérification avec 5 : 5 × 4 = 20, puis 20 + 3 = 23.</p>') +
+  B('met','Traduire des blocs en expression','<ol><li>Je pose : « le nombre choisi est <b>x</b> ».</li><li>Je traduis chaque bloc <b>dans l\'ordre</b> (avec des parenthèses si besoin).</li><li>Je <b>simplifie</b> pour obtenir la forme ax + b.</li><li>Je <b>teste</b> avec une valeur.</li></ol>'+T(['Bloc','Valeur de R'],[['mettre R à réponse * 4','R = 4x'],['ajouter 6 à R','R = 4x + 6'],['dire R','affiche 4x + 6']])+'<p>Test avec x = 5 : 4 × 5 + 6 = 26.</p>') +
+  B('met','Retrouver le nombre de départ','<p>Pour que le script précédent affiche 30, on résout <b>4x + 6 = 30</b> : 4x = 24, donc x = 6. Vérification : 4 × 6 + 6 = 30. ✔</p>') +
+  B('pie','Oublier les parenthèses','<p>« Ajoute 2 puis multiplie par 3 » donne <span class="vrai">3(x + 2) = 3x + 6</span>, et pas <span class="faux">x + 2 × 3</span>. Quand une addition est faite <b>avant</b> une multiplication, on met des parenthèses.</p>') +
+  B('ast','La bonne méthode au brevet','<p>Garde un petit tableau de suivi sous les yeux et avance bloc par bloc. C\'est exactement ce qu\'attend le correcteur.</p>') +
+  B('ret','','<p>Pour un programme de calcul : je pose x, je traduis bloc par bloc, je simplifie en ax + b, puis je teste avec une valeur. Pour retrouver l\'entrée, je résous une équation.</p>'),
+  ex:[
+    {n:'9.1', lvl:1, t:'Traduire et tester',
+     body:'<p>Programme : « Choisis un nombre, multiplie-le par 3, puis ajoute 5. » Complète le script.</p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [nombre▾] à {se:réponse}
+     va mettre [nombre▾] à {op:[{va:nombre}] * [?]}
+     va mettre [nombre▾] à {op:[{va:nombre}] + [?]}
+     lo dire {va:nombre}
+     `),
+     qs:[{q:'Première case :', a:'3'},{q:'Deuxième case :', a:'5'},{q:'Résultat avec 4 :', a:'17'},{q:'Expression :', choices:['3x + 5','3(x + 5)','8x'], a:'3x + 5'}],
+     hints:['Les cases suivent l\'ordre de la phrase : d\'abord × 3, puis + 5.','4 × 3 = 12, puis 12 + 5.'],
+     sol:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [nombre▾] à {se:réponse}
+     va mettre [nombre▾] à {op:[{va:nombre}] * [3]}
+     va mettre [nombre▾] à {op:[{va:nombre}] + [5]}
+     lo dire {va:nombre}
+     `, R+' data-ask="4"')+'<p>Avec 4 : 4 × 3 + 5 = <span class="res">17</span>. Expression : <span class="res">3x + 5</span>.</p>'},
+    {n:'9.2', lvl:1, t:'Du script à l\'expression',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [R▾] à {op:[{se:réponse}] * [4]}
+     va ajouter [6] à [R▾]
+     lo dire {va:R}
+     `, R+' data-ask="5"'),
+     qs:[{q:'Qu\'affiche le lutin pour 5 ?', a:'26'},{q:'Expression de R :', choices:['4x + 6','4(x + 6)','10x'], a:'4x + 6'},{q:'Quel nombre taper pour obtenir 30 ?', a:'6'}],
+     hints:['R = x × 4, puis on ajoute 6.','Résous 4x + 6 = 30 : enlève 6 des deux côtés, puis divise par 4.'],
+     sol:'<ol><li>5 × 4 + 6 = <span class="res">26</span>.</li><li>R = <span class="res">4x + 6</span>.</li><li>4x + 6 = 30 ⇔ 4x = 24 ⇔ x = <span class="res">6</span>. Vérification : 4 × 6 + 6 = 30 ✔.</li></ol>'},
+    {n:'9.3', lvl:2, t:'Attention aux parenthèses',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [R▾] à {op:[{se:réponse}] + [2]}
+     va mettre [R▾] à {op:[{va:R}] * [3]}
+     lo dire {va:R}
+     `, R+' data-ask="5"'),
+     qs:[{q:'Qu\'affiche le lutin pour 5 ?', a:'21'},{q:'Expression développée de R :', choices:['3x + 6','x + 6','3x + 2'], a:'3x + 6'},{q:'Quel nombre taper pour obtenir 27 ?', a:'7'}],
+     hints:['On ajoute 2 d\'abord, puis on multiplie tout par 3 : R = 3(x + 2).','Développe : 3 × x + 3 × 2. Puis résous 3x + 6 = 27.'],
+     sol:'<ol><li>(5 + 2) × 3 = <span class="res">21</span>.</li><li>R = 3(x + 2) = <span class="res">3x + 6</span>.</li><li>3x + 6 = 27 ⇔ 3x = 21 ⇔ x = <span class="res">7</span>.</li></ol>'},
+    {n:'9.4', lvl:2, t:'Deux programmes',
+     body:'<p>Programme A et programme B :</p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Nombre ?] et attendre
+     va mettre [A▾] à {op:[{op:[{se:réponse}] + [3]}] * [2]}
+     lo dire {va:A}
+     `, R+' data-ask="4"')+S(`
+     ev quand ⚑ est cliqué
+     se demander [Nombre ?] et attendre
+     va mettre [B▾] à {op:[{op:[{se:réponse}] * [2]}] + [6]}
+     lo dire {va:B}
+     `, R+' data-ask="4"'),
+     qs:[{q:'A avec 4 :', a:'14'},{q:'B avec 4 :', a:'14'},{q:'A avec 0 :', a:'6'},{q:'Les deux programmes donnent-ils toujours le même résultat ?', choices:['oui','non'], a:'oui'}],
+     hints:['A = (x + 3) × 2 et B = x × 2 + 6.','Développe A : 2 × x + 2 × 3.'],
+     sol:'<p>A = (x + 3) × 2 = 2x + 6 et B = 2x + 6. Les expressions sont égales : <span class="res">oui</span>, toujours le même résultat (14 avec 4, 6 avec 0).</p>'},
+    {n:'9.5', lvl:2, t:'À toi d\'écrire',
+     body:'<p>Programme : « Choisis un nombre, soustrais 2, puis multiplie le résultat par 3. »</p>',
+     qs:[{q:'Résultat avec 5 :', a:'9'},{q:'Expression développée :', choices:['3x − 6','3x − 2','x − 6'], a:'3x − 6'},{q:'Résultat avec 0 :', a:'-6'}],
+     hints:['(5 − 2) × 3.','3(x − 2) = 3x − 3 × 2.'],
+     sol:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [R▾] à {op:[{se:réponse}] - [2]}
+     va mettre [R▾] à {op:[{va:R}] * [3]}
+     lo dire {va:R}
+     `, R+' data-ask="5"')+'<p>(5 − 2) × 3 = <span class="res">9</span>. R = 3(x − 2) = <span class="res">3x − 6</span>. Avec 0 : <span class="res">−6</span>.</p>'},
+    {n:'9.6', lvl:3, t:'Un carré dans le programme', src:'Inspiré du DNB Polynésie, sept. 2017',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [x▾] à {se:réponse}
+     va mettre [y▾] à {op:[{op:[{va:x}] * [{va:x}]}] - [9]}
+     lo dire {va:y}
+     `, R+' data-ask="4"'),
+     qs:[{q:'Qu\'affiche le lutin pour 4 ?', a:'7'},{q:'Pour −3 ?', a:'0'},{q:'Quels nombres donnent 0 ?', choices:['3 seulement','3 et −3','9 et −9'], a:'3 et −3'}],
+     hints:['y = x² − 9. Pour 4 : 16 − 9.','x² − 9 = 0 ⇔ x² = 9. Quels nombres ont pour carré 9 ?'],
+     sol:'<ol><li>4 × 4 − 9 = <span class="res">7</span>.</li><li>(−3) × (−3) − 9 = 9 − 9 = <span class="res">0</span>.</li><li>x² = 9 ⇔ x = 3 ou x = −3 : <span class="res">3 et −3</span>.</li></ol>'},
+    {n:'9.7', lvl:3, t:'Démontrer une conjecture',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [n▾] à {se:réponse}
+     va mettre [R▾] à {op:[{op:[{op:[{va:n}] + [1]}] * [{op:[{va:n}] + [1]}]}] - [{op:[{va:n}] * [{va:n}]}]}
+     lo dire {va:R}
+     `, R+' data-ask="5"'),
+     qs:[{q:'Résultat pour 5 :', a:'11'},{q:'Résultat pour 10 :', a:'21'},{q:'Expression simplifiée de R :', choices:['2x + 1','x + 1','2x'], a:'2x + 1'}],
+     hints:['R = (x + 1)² − x². Pour 5 : 36 − 25.','Développe (x + 1)² = x² + 2x + 1, puis enlève x².'],
+     sol:'<ol><li>6² − 5² = 36 − 25 = <span class="res">11</span> ; 11² − 10² = 121 − 100 = <span class="res">21</span>.</li><li>Conjecture : on obtient le double plus 1.</li><li>Preuve : (x + 1)² − x² = x² + 2x + 1 − x² = <span class="res">2x + 1</span>.</li></ol>'}
+  ]
+});
+
+/* ---------------- ÉTAPE 10 ---------------- */
+STEPS.push({
+  n:10, y:3, t:'Les blocs personnalisés', sub:'Créer son propre bloc « définir » pour construire des motifs',
+  obj:['lire un bloc « définir »','utiliser un bloc avec un paramètre','analyser un programme qui répète un motif'],
+  lesson:
+  '<p class="lead">Au brevet, les scripts de tracé utilisent souvent un bloc rose « définir » : on crée son <b>propre bloc</b> (carré, triangle, maison…) puis on l\'utilise plusieurs fois.</p>' +
+  B('def','Bloc personnalisé','<p>Dans <b>Mes blocs</b>, le bouton « Créer un bloc » fabrique un nouveau bloc. Sous le chapeau '+K('my','définir carré')+', on écrit ce qu\'il fait. Ensuite, chaque bloc '+K('my','carré')+' du programme principal lance ces instructions.</p>') +
+  B('exe','Deux carrés côte à côte','<div class="split">'+S(`
+    my définir carré
+    ct répéter [4] fois
+      mo avancer de [50] pas
+      mo tourner ↺ de [90] degrés
+
+    ev quand ⚑ est cliqué
+    pe effacer tout
+    mo aller à x: [-80] y: [0]
+    mo s'orienter à [90]
+    pe stylo en position d'écriture
+    my carré
+    pe relever le stylo
+    mo avancer de [70] pas
+    pe stylo en position d'écriture
+    my carré
+    `, RG)+'</div>') +
+  B('def','Le paramètre','<p>Un bloc peut avoir un <b>paramètre</b> : une valeur qu\'on lui donne à chaque utilisation. Avec '+K('my','définir carré (côté)')+', le bloc '+K('my','carré 30')+' trace un carré de côté 30, et '+K('my','carré 80')+' un carré de côté 80.</p>'+S(`
+    my définir carré {my:côté}
+    ct répéter [4] fois
+      mo avancer de {my:côté} pas
+      mo tourner ↺ de [90] degrés
+
+    ev quand ⚑ est cliqué
+    pe effacer tout
+    mo aller à x: [-60] y: [-60]
+    mo s'orienter à [90]
+    pe stylo en position d'écriture
+    my carré [30]
+    my carré [80]
+    my carré [130]
+    `, RG)) +
+  B('met','Lire un programme avec un bloc personnalisé','<ol><li>Je lis d\'abord le bloc « définir » : quelle figure trace-t-il ? Où finit le lutin ?</li><li>Je lis le programme principal ; à chaque appel du bloc, je remplace le paramètre par sa valeur.</li><li>Je suis les variables (côté, longueur…) dans un tableau.</li></ol>') +
+  B('pie','Où est le lutin après le bloc ?','<p>Un carré tracé avec 4 × (avancer ; tourner 90) ramène le lutin <b>à son point de départ</b>, dans la même direction. C\'est pour ça qu\'il faut un bloc avancer <b>entre</b> deux carrés pour les décaler.</p>') +
+  B('ret','','<p>Un bloc personnalisé (définir) regroupe des instructions qu\'on réutilise. Un paramètre permet de changer une valeur (le côté, la longueur…) à chaque utilisation.</p>'),
+  ex:[
+    {n:'10.1', lvl:1, t:'Combien de carrés ?',
+     body:S(`
+     my définir carré
+     ct répéter [4] fois
+       mo avancer de [40] pas
+       mo tourner ↺ de [90] degrés
+
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-150] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [3] fois
+       my carré
+       mo avancer de [60] pas
+     `, RG),
+     qs:[{q:'Combien de carrés sont tracés ?', a:'3'},{q:'Côté de chaque carré :', a:'40'},{q:'Abscisse x finale du lutin :', a:'30'}],
+     hints:['Le bloc carré est appelé une fois par tour de boucle.','À chaque tour, le lutin revient au coin du carré, puis avance de 60. Départ −150.'],
+     sol:'<p><span class="res">3</span> carrés de côté <span class="res">40</span>. Le lutin avance de 3 × 60 = 180 : x = −150 + 180 = <span class="res">30</span>. (Le stylo reste baissé : on voit aussi un trait entre les carrés.)</p>'},
+    {n:'10.2', lvl:2, t:'Trois triangles',
+     body:S(`
+     my définir triangle {my:côté}
+     ct répéter [3] fois
+       mo avancer de {my:côté} pas
+       mo tourner ↺ de [120] degrés
+
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-60] y: [-60]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     my triangle [40]
+     my triangle [80]
+     my triangle [120]
+     `, RG),
+     qs:[{q:'Combien de triangles ?', a:'3'},{q:'Périmètre du plus grand :', a:'360'},{q:'Pourquoi les triangles partagent-ils un même sommet ?', choices:['le lutin revient au départ après chaque triangle','le bloc aller à est répété'], a:'le lutin revient au départ après chaque triangle'}],
+     hints:['Le paramètre côté vaut 40, puis 80, puis 120.','Après 3 × 120° = 360°, le lutin est revenu au point de départ.'],
+     sol:'<p>3 triangles équilatéraux de côtés 40, 80, 120. Périmètre du plus grand : 3 × 120 = <span class="res">360 pas</span>. Ils partagent un sommet car le lutin <b>revient au départ</b> après chaque triangle.</p>'},
+    {n:'10.3', lvl:2, t:'Des triangles de plus en plus petits', src:'Inspiré du DNB Métropole, juin 2017',
+     body:S(`
+     my définir triangle {my:côté}
+     pe stylo en position d'écriture
+     ct répéter [3] fois
+       mo avancer de {my:côté} pas
+       mo tourner ↺ de [120] degrés
+     pe relever le stylo
+
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-200] y: [-100]
+     mo s'orienter à [90]
+     va mettre [côté▾] à [100]
+     ct répéter [5] fois
+       my triangle [{va:côté}]
+       mo avancer de {va:côté} pas
+       va ajouter [-20] à [côté▾]
+     `, RG),
+     qs:[{q:'Coordonnées du point de départ : x = ?', a:'-200'},{q:'Combien de triangles sont tracés ?', a:'5'},{q:'Côté du dernier triangle :', a:'20'},{q:'Abscisse x finale du lutin :', a:'100'}],
+     hints:['côté vaut 100, 80, 60, 40, 20.','Le lutin avance de 100 + 80 + 60 + 40 + 20 en tout, à partir de −200.'],
+     sol:T(['Tour','côté','triangle tracé','x après avancer'],[['1','100','côté 100','−100'],['2','80','côté 80','−20'],['3','60','côté 60','40'],['4','40','côté 40','80'],['5','20','côté 20','100']])+'<p>Départ (−200 ; −100). <span class="res">5</span> triangles, le dernier de côté <span class="res">20</span>. x final : −200 + 300 = <span class="res">100</span>.</p>'},
+    {n:'10.4', lvl:3, t:'Carrés emboîtés ou frise ?', src:'Inspiré du DNB Amérique du Sud, nov. 2017',
+     body:'<p>Programme 1 :</p>'+S(`
+     my définir carré {my:longueur}
+     ct répéter [4] fois
+       mo avancer de {my:longueur} pas
+       mo tourner ↺ de [90] degrés
+
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-150] y: [-80]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     va mettre [L▾] à [20]
+     ct répéter [4] fois
+       my carré [{va:L}]
+       va ajouter [20] à [L▾]
+     `, RG)+'<p>Programme 2 : on ajoute un bloc '+K('mo','avancer de L pas')+' juste après '+K('my','carré L')+'.</p>'+S(`
+     my définir carré {my:longueur}
+     ct répéter [4] fois
+       mo avancer de {my:longueur} pas
+       mo tourner ↺ de [90] degrés
+
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-150] y: [-80]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     va mettre [L▾] à [20]
+     ct répéter [4] fois
+       my carré [{va:L}]
+       mo avancer de {va:L} pas
+       va ajouter [20] à [L▾]
+     `, RG),
+     qs:[{q:'Côté du plus grand carré :', a:'80'},{q:'Programme 1 : les carrés sont…', choices:['emboîtés (même coin)','côte à côte'], a:'emboîtés (même coin)'},{q:'Programme 2 : largeur totale de la frise :', a:'200'}],
+     hints:['L vaut 20, 40, 60, 80.','Dans le programme 2, le lutin avance de la longueur du carré qu\'il vient de tracer : 20 + 40 + 60 + 80.'],
+     sol:'<p>Côtés : 20, 40, 60, <span class="res">80</span>. Programme 1 : le lutin revient au même coin, les carrés sont <span class="res">emboîtés</span>. Programme 2 : ils sont côte à côte, largeur 20 + 40 + 60 + 80 = <span class="res">200 pas</span>.</p>'},
+    {n:'10.5', lvl:3, t:'La rue de maisons', src:'Inspiré du DNB Centres étrangers, juin 2017',
+     body:S(`
+     my définir maison
+     pe stylo en position d'écriture
+     ct répéter [4] fois
+       mo avancer de [50] pas
+       mo tourner ↺ de [90] degrés
+     mo ajouter [50] à y
+     ct répéter [3] fois
+       mo avancer de [50] pas
+       mo tourner ↺ de [120] degrés
+     mo ajouter [-50] à y
+     pe relever le stylo
+
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-220] y: [-40]
+     mo s'orienter à [90]
+     ct répéter [7] fois
+       my maison
+       mo avancer de [60] pas
+     `, RG),
+     qs:[{q:'Largeur d\'une maison :', a:'50'},{q:'Espace entre deux maisons :', a:'10'},{q:'Abscisse x du coin gauche de la 7<sup>e</sup> maison :', a:'140'},{q:'La scène va jusqu\'à x = 240. Combien de maisons entières peut-on tracer au maximum ?', a:'7'}],
+     hints:['Le lutin avance de 60 entre deux maisons, une maison mesure 50.','Coin gauche de la n<sup>e</sup> maison : −220 + 60 × (n − 1). La maison finit 50 pas plus loin, ce point doit rester ≤ 240.'],
+     sol:'<ol><li>Une maison : 50 de large ; espace : 60 − 50 = <span class="res">10</span>.</li><li>7<sup>e</sup> maison : −220 + 60 × 6 = <span class="res">140</span>, elle finit à 190 ≤ 240 ✔.</li><li>8<sup>e</sup> maison : commence à 200, finit à 250 &gt; 240 ✘. Maximum : <span class="res">7 maisons</span>.</li></ol>'}
+  ]
+});
+
+/* ---------------- ÉTAPE 11 ---------------- */
+STEPS.push({
+  n:11, y:3, t:'Le hasard et les simulations', sub:'Nombre aléatoire, jeux et probabilités',
+  obj:['utiliser « nombre aléatoire entre … et … »','simuler une expérience aléatoire','relier fréquence et probabilité'],
+  lesson:
+  '<p class="lead">Lancer de dé, tirage au sort, ennemi qui apparaît n\'importe où : les jeux utilisent le hasard. Scratch a un bloc pour ça, et le brevet aime le relier aux probabilités.</p>' +
+  B('def','Le bloc aléatoire','<p>'+K('op','nombre aléatoire entre 1 et 6')+' donne un nombre entier au hasard entre 1 et 6, comme un dé. Chaque valeur a la même chance de sortir : 1 chance sur 6.</p>'+S(`
+    ev quand ⚑ est cliqué
+    va mettre [dé▾] à {op:nombre aléatoire entre [1] et [6]}
+    lo dire {va:dé}
+    `, R)+'<p>Exécute plusieurs fois : le résultat change !</p>') +
+  B('exe','Simuler 600 lancers','<div class="split">'+S(`
+    ev quand ⚑ est cliqué
+    va mettre [six▾] à [0]
+    ct répéter [600] fois
+      ct si ⟨op:[{op:nombre aléatoire entre [1] et [6]}] = [6]⟩ alors
+        va ajouter [1] à [six▾]
+    lo dire {va:six}
+    `, R)+'<p>La probabilité d\'obtenir 6 est 1/6, donc sur 600 lancers on attend <b>environ</b> 600 ÷ 6 = 100 six. Le résultat varie un peu à chaque exécution.</p></div>') +
+  B('sav','Fréquence et probabilité','<p>La <b>fréquence</b> d\'un résultat = nombre de fois où il sort ÷ nombre d\'essais. Quand on répète l\'expérience un grand nombre de fois, la fréquence se rapproche de la <b>probabilité</b>.</p>') +
+  B('pie','« Environ », pas « exactement »','<p><span class="faux">FAUX</span> : « sur 600 lancers, il y aura exactement 100 six ». <span class="vrai">VRAI</span> : il y en aura <b>environ</b> 100 ; le hasard fait varier le résultat.</p>') +
+  B('ret','','<p>nombre aléatoire entre a et b donne un entier au hasard. Une boucle permet de simuler beaucoup d\'essais : la fréquence obtenue est proche de la probabilité.</p>'),
+  ex:[
+    {n:'11.1', lvl:1, t:'Le jeu du dé',
+     body:S(`
+     ev quand ⚑ est cliqué
+     va mettre [dé▾] à {op:nombre aléatoire entre [1] et [6]}
+     ct si ⟨op:[{va:dé}] = [6]⟩ alors
+       lo dire [Gagné !]
+     ct sinon
+       lo dire [Perdu…]
+     `, R),
+     qs:[{q:'Combien de valeurs différentes peut prendre dé ?', a:'6'},{q:'Probabilité de gagner :', choices:['1/6','1/2','5/6'], a:'1/6'},{q:'Probabilité de perdre :', choices:['1/6','1/2','5/6'], a:'5/6'}],
+     hints:['dé peut valoir 1, 2, 3, 4, 5 ou 6.','Une seule valeur fait gagner sur 6.'],
+     sol:'<p>6 valeurs équiprobables ; une seule (6) fait gagner : probabilité <span class="res">1/6</span>. Perdre : 1 − 1/6 = <span class="res">5/6</span>.</p>'},
+    {n:'11.2', lvl:2, t:'Pair ou impair ?',
+     body:S(`
+     ev quand ⚑ est cliqué
+     va mettre [pairs▾] à [0]
+     ct répéter [1000] fois
+       ct si ⟨op:[{op:[{op:nombre aléatoire entre [1] et [6]}] modulo [2]}] = [0]⟩ alors
+         va ajouter [1] à [pairs▾]
+     lo dire {va:pairs}
+     `, R),
+     qs:[{q:'Que compte la variable pairs ?', choices:['les nombres pairs obtenus','les 6 obtenus'], a:'les nombres pairs obtenus'},{q:'Probabilité d\'obtenir un nombre pair :', choices:['1/6','1/3','1/2'], a:'1/2'},{q:'Valeur affichée la plus probable :', choices:['environ 500','exactement 500','environ 167'], a:'environ 500'}],
+     hints:['modulo 2 = 0 signifie « pair ».','Les nombres pairs du dé : 2, 4, 6 → 3 chances sur 6.'],
+     sol:'<p>On compte les résultats pairs. P(pair) = 3/6 = <span class="res">1/2</span>. Sur 1 000 lancers : <span class="res">environ 500</span>.</p>'},
+    {n:'11.3', lvl:2, t:'La somme de deux dés',
+     body:S(`
+     ev quand ⚑ est cliqué
+     va mettre [somme▾] à {op:[{op:nombre aléatoire entre [1] et [6]}] + [{op:nombre aléatoire entre [1] et [6]}]}
+     lo dire {va:somme}
+     `, R),
+     qs:[{q:'Plus petite somme possible :', a:'2'},{q:'Plus grande somme possible :', a:'12'},{q:'Combien de couples (dé 1 ; dé 2) sont possibles ?', a:'36'},{q:'Combien de couples donnent 7 ?', a:'6'}],
+     hints:['Fais un tableau 6 × 6 : lignes = dé 1, colonnes = dé 2.','Pour 7 : (1;6), (2;5), (3;4), (4;3), (5;2), (6;1).'],
+     sol:'<p>Sommes de <span class="res">2</span> à <span class="res">12</span>. 6 × 6 = <span class="res">36</span> couples. 7 s\'obtient avec <span class="res">6</span> couples : P(7) = 6/36 = 1/6. C\'est la somme la plus probable.</p>'},
+    {n:'11.4', lvl:3, t:'La marche au hasard',
+     body:S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [0] y: [0]
+     pe stylo en position d'écriture
+     ct répéter [10] fois
+       ct si ⟨op:[{op:nombre aléatoire entre [1] et [2]}] = [1]⟩ alors
+         mo ajouter [20] à x
+       ct sinon
+         mo ajouter [-20] à x
+       mo ajouter [-10] à y
+     `, RG),
+     qs:[{q:'Plus grande valeur possible de x à la fin :', a:'200'},{q:'Ordonnée y finale :', a:'-100'},{q:'x peut-il finir à 20 ?', choices:['oui','non'], a:'non'},{q:'x peut-il finir à 0 ?', choices:['oui','non'], a:'oui'}],
+     hints:['10 pas de +20 : x = 200. y descend de 10 à chaque tour.','Avec k pas à droite et 10 − k à gauche : x = 20k − 20(10 − k) = 40k − 200. C\'est toujours un multiple de 40.'],
+     sol:'<p>x max = 10 × 20 = <span class="res">200</span> ; y = −10 × 10 = <span class="res">−100</span>. x = 40k − 200 : c\'est un multiple de 40, donc x ne peut pas valoir 20 (<span class="res">non</span>), mais peut valoir 0 avec k = 5 (<span class="res">oui</span>).</p>'},
+    {n:'11.5', lvl:3, t:'Le nombre mystère',
+     body:'<p>Ce jeu choisit un nombre entre 1 et 100 ; le joueur propose des nombres et le lutin répond « Plus grand ! » ou « Plus petit ! ».</p>'+S(`
+     ev quand ⚑ est cliqué
+     va mettre [mystère▾] à {op:nombre aléatoire entre [1] et [100]}
+     va mettre [essais▾] à [0]
+     ct répéter jusqu'à ce que ⟨op:[{se:réponse}] = [{va:mystère}]⟩
+       se demander [Ton nombre ?] et attendre
+       va ajouter [1] à [essais▾]
+       ct si ⟨op:[{se:réponse}] < [{va:mystère}]⟩ alors
+         lo dire [Plus grand !] pendant [1] secondes
+       ct si ⟨op:[{se:réponse}] > [{va:mystère}]⟩ alors
+         lo dire [Plus petit !] pendant [1] secondes
+     lo dire {op:regrouper [Trouvé en ] et [{va:essais}]}
+     `),
+     qs:[{q:'Le nombre mystère est 37 et on tape 50. Le lutin dit :', choices:['Plus grand !','Plus petit !'], a:'Plus petit !'},{q:'Si on tape 37 du premier coup, que vaut essais ?', a:'1'},{q:'En coupant à chaque fois l\'intervalle en deux (50, puis 25 ou 75…), combien d\'essais suffisent au maximum ?', choices:['7','10','50'], a:'7'}],
+     hints:['50 &gt; 37 : il faut proposer plus petit.','Chaque essai divise les possibilités par 2 : 100 → 50 → 25 → 13 → 7 → 4 → 2 → 1.'],
+     sol:'<p>50 &gt; 37 → <span class="res">Plus petit !</span>. Trouvé du premier coup : essais = <span class="res">1</span>. En coupant en deux (dichotomie), 100 → 50 → 25 → 13 → 7 → 4 → 2 → 1 : <span class="res">7 essais</span> suffisent toujours (2<sup>7</sup> = 128 ≥ 100).</p>'}
+  ]
+});
+
+/* ---------------- ÉTAPE 12 ---------------- */
+STEPS.push({
+  n:12, y:3, t:'Spécial brevet : sujets complets', sub:'S\'entraîner sur des exercices inspirés des annales',
+  obj:['lire un script de brevet sans ordinateur','rédiger une réponse complète','gérer un exercice en plusieurs parties'],
+  lesson:
+  '<p class="lead">Au DNB, l\'exercice Scratch vaut souvent entre 4 et 9 points sur 100. Il se fait <b>sans ordinateur</b> : il faut savoir dérouler le script sur sa copie. Les exercices ci-dessous reprennent les situations des sujets officiels, avec des nombres modifiés.</p>' +
+  B('met','Lire un script au brevet','<ol><li>Je repère le <b>départ</b> : position, direction, valeurs des variables.</li><li>Je lis les blocs <b>de haut en bas</b>, sans en sauter.</li><li>Je tiens un <b>tableau de suivi</b> (variables, position…).</li><li>Dans une <b>boucle</b>, je compte les tours ; dans un <b>test</b>, je dis si la condition est vraie ou fausse.</li><li>Je réponds à la question et je <b>vérifie</b> (tour complet = 360°, test avec une valeur…).</li></ol>') +
+  B('ast','Ce qui rapporte des points','<ul><li>Écrire les calculs intermédiaires, même simples : 5 × 4 = 20, puis 20 + 3 = 23.</li><li>Pour « quel nombre faut-il choisir ? » : poser l\'équation, la résoudre, <b>vérifier</b>.</li><li>Pour compléter un script : recopier le bloc entier avec la bonne valeur.</li><li>Une réponse fausse mais bien justifiée rapporte souvent des points.</li></ul>') +
+  B('sav','Les vrais sujets','<p>Les exercices « Inspiré du DNB… » de ce cours reprennent des sujets réels : Métropole juin et sept. 2017, Polynésie juin et sept. 2017, Centres étrangers 2017, Amérique du Sud 2017, Amérique du Nord 2017, Wallis-et-Futuna 2017, Pondichéry 2017. Les sujets complets et corrigés sont rassemblés par l\'APMEP : <a href="https://www.apmep.fr" target="_blank" rel="noopener">apmep.fr</a> (rubrique Annales du brevet).</p>') +
+  B('ret','','<p>Au brevet : départ, blocs dans l\'ordre, tableau de suivi, tours de boucle, tests vrai/faux, puis vérification. Chaque calcul écrit compte.</p>'),
+  ex:[
+    {n:'B1', lvl:2, t:'Programme de calcul à plusieurs variables', src:'Inspiré du DNB Pondichéry, mai 2017',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Choisis un nombre] et attendre
+     va mettre [nombre▾] à {se:réponse}
+     va mettre [A▾] à {op:[{va:nombre}] + [4]}
+     va mettre [B▾] à {op:[{va:nombre}] - [4]}
+     va mettre [R▾] à {op:[{va:A}] * [{va:B}]}
+     lo dire {va:R}
+     `, R+' data-ask="5"'),
+     qs:[{q:'Qu\'affiche le lutin pour 5 ?', a:'9'},{q:'Pour 4 ?', a:'0'},{q:'Pour −2 ?', a:'-12'},{q:'Expression de R en fonction de x, développée :', choices:['x² − 16','x² + 16','x² − 8x + 16'], a:'x² − 16'},{q:'Quels nombres donnent 0 ?', choices:['4 seulement','4 et −4','16 et −16'], a:'4 et −4'}],
+     hints:['Tableau de suivi : A = x + 4, B = x − 4, R = A × B.','(x + 4)(x − 4) est une identité remarquable : a² − b².'],
+     sol:T(['','x = 5','x = 4','x = −2'],[['A = x + 4','9','8','2'],['B = x − 4','1','0','−6'],['R = A × B','<b>9</b>','<b>0</b>','<b>−12</b>']])+'<p>R = (x + 4)(x − 4) = <span class="res">x² − 16</span>. R = 0 ⇔ x + 4 = 0 ou x − 4 = 0 (produit nul) ⇔ x = −4 ou x = 4 : <span class="res">4 et −4</span>.</p>'},
+    {n:'B2', lvl:2, t:'Le chat et la balle', src:'Inspiré du DNB Amérique du Nord, juin 2017',
+     body:'<p>Dans ce jeu, le chat se déplace avec les flèches du clavier. La balle est au point (80 ; 40). Le chat la touche quand il arrive exactement sur ce point.</p>'+S(`
+     ev quand ⚑ est cliqué
+     mo aller à x: [-120] y: [-80]
+     lo dire [Attrape la balle !]
+
+     ev quand la touche [flèche droite▾] est pressée
+     mo ajouter [40] à x
+
+     ev quand la touche [flèche gauche▾] est pressée
+     mo ajouter [-40] à x
+
+     ev quand la touche [flèche haut▾] est pressée
+     mo ajouter [40] à y
+     `),
+     qs:[{q:'Après avoir appuyé sur → → ↑, abscisse x du chat :', a:'-40'},{q:'Ordonnée y :', a:'-40'},{q:'Combien d\'appuis au minimum pour attraper la balle ?', a:'8'},{q:'Le chat peut-il atteindre le point (100 ; 40) ?', choices:['oui','non'], a:'non'}],
+     hints:['Chaque flèche droite ajoute 40 à x, chaque flèche haut ajoute 40 à y.','De −120 à 80 : 200 pas, soit 200 ÷ 40 appuis →. De −80 à 40 : 120 ÷ 40 appuis ↑.'],
+     sol:'<ol><li>→ → ↑ : x = −120 + 80 = <span class="res">−40</span>, y = −80 + 40 = <span class="res">−40</span>.</li><li>200 ÷ 40 = 5 appuis → et 120 ÷ 40 = 3 appuis ↑ : <span class="res">8 appuis</span>.</li><li>x vaut toujours −120 + 40 × k : −120, −80, −40, 0, 40, 80, 120… jamais 100 : <span class="res">non</span>.</li></ol>'},
+    {n:'B3', lvl:2, t:'La rosace de losanges', src:'Inspiré du DNB Wallis-et-Futuna, déc. 2017',
+     body:'<p>On veut tracer un losange de côté 60 dont les angles mesurent 60° et 120°, puis une rosace.</p>'+S(`
+     my définir losange
+     ct répéter [2] fois
+       mo avancer de [60] pas
+       mo tourner ↺ de [60] degrés
+       mo avancer de [60] pas
+       mo tourner ↺ de [?] degrés
+
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [?] fois
+       my losange
+       mo tourner ↺ de [60] degrés
+     `),
+     qs:[{q:'Angle manquant dans le bloc losange :', a:'120', unit:'°'},{q:'Nombre de losanges pour faire un tour complet :', a:'6'},{q:'Combien de segments de 60 pas sont tracés (en comptant les superpositions) ?', a:'24'}],
+     hints:['Sur un tour du losange, le lutin doit tourner de 360° en tout : 2 × (60 + ?) = 360.','Entre deux losanges on tourne de 60° : 360 ÷ 60 losanges. Chaque losange a 4 côtés.'],
+     sol:'<p>2 × (60 + a) = 360 ⇔ 60 + a = 180 ⇔ a = <span class="res">120°</span>. 360 ÷ 60 = <span class="res">6</span> losanges, soit 6 × 4 = <span class="res">24</span> segments.</p>'+S(`
+     my définir losange
+     ct répéter [2] fois
+       mo avancer de [60] pas
+       mo tourner ↺ de [60] degrés
+       mo avancer de [60] pas
+       mo tourner ↺ de [120] degrés
+
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [0] y: [0]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [6] fois
+       my losange
+       mo tourner ↺ de [60] degrés
+     `, RG)},
+    {n:'B4', lvl:3, t:'Deux programmes, un même résultat ?',
+     body:S(`
+     ev quand ⚑ est cliqué
+     se demander [Nombre ?] et attendre
+     va mettre [R▾] à {op:[{se:réponse}] * [3]}
+     va ajouter [2] à [R▾]
+     lo dire {va:R}
+     `, R+' data-ask="1"')+S(`
+     ev quand ⚑ est cliqué
+     se demander [Nombre ?] et attendre
+     va mettre [S▾] à {op:[{se:réponse}] * [5]}
+     va ajouter [-6] à [S▾]
+     lo dire {va:S}
+     `, R+' data-ask="1"'),
+     qs:[{q:'Programme A avec 1 :', a:'5'},{q:'Programme B avec 1 :', a:'-1'},{q:'Quel nombre donne le même résultat aux deux programmes ?', a:'4'},{q:'Ce résultat commun vaut :', a:'14'}],
+     hints:['A = 3x + 2 et B = 5x − 6.','Résous 3x + 2 = 5x − 6 : regroupe les x d\'un côté.'],
+     sol:'<p>A(1) = <span class="res">5</span>, B(1) = <span class="res">−1</span>. 3x + 2 = 5x − 6 ⇔ 8 = 2x ⇔ x = <span class="res">4</span>. Vérification : 3 × 4 + 2 = 14 et 5 × 4 − 6 = 14 : résultat commun <span class="res">14</span>.</p>'},
+    {n:'B5', lvl:3, t:'Exercice bilan : un tracé et un calcul',
+     body:'<p><b>Partie A.</b></p>'+S(`
+     ev quand ⚑ est cliqué
+     pe effacer tout
+     mo aller à x: [-50] y: [-60]
+     mo s'orienter à [90]
+     pe stylo en position d'écriture
+     ct répéter [5] fois
+       mo avancer de [80] pas
+       mo tourner ↺ de [72] degrés
+     pe relever le stylo
+     `, RG)+'<p><b>Partie B.</b></p>'+S(`
+     ev quand ⚑ est cliqué
+     se demander [Un nombre entier ?] et attendre
+     ct si ⟨op:[{op:[{se:réponse}] modulo [2]}] = [0]⟩ alors
+       lo dire {op:[{se:réponse}] / [2]}
+     ct sinon
+       lo dire {op:[{op:[{se:réponse}] * [3]}] + [1]}
+     `, R+' data-ask="10"'),
+     qs:[{q:'A. Combien de degrés le lutin tourne-t-il en tout ?', a:'360'},{q:'A. Quelle figure trace-t-il ?', choices:['un hexagone','un pentagone régulier','un octogone'], a:'un pentagone régulier'},{q:'A. Périmètre :', a:'400'},{q:'A. Pour un hexagone de même côté, quel angle ?', a:'60'},{q:'B. Qu\'affiche le lutin pour 10 ?', a:'5'},{q:'B. Pour 7 ?', a:'22'},{q:'B. Pour un nombre impair x, expression du résultat :', choices:['3x + 1','x ÷ 2','3(x + 1)'], a:'3x + 1'}],
+     hints:['A : 5 × 72. Le périmètre : 5 côtés de 80.','B : 10 est pair → 10 ÷ 2. 7 est impair → 3 × 7 + 1.'],
+     sol:'<p><b>A.</b> 5 × 72 = <span class="res">360°</span> : tour complet, c\'est un <span class="res">pentagone régulier</span> de périmètre 5 × 80 = <span class="res">400</span>. Pour un hexagone : répéter 6 fois et tourner de 360 ÷ 6 = <span class="res">60°</span>.</p><p><b>B.</b> 10 est pair : 10 ÷ 2 = <span class="res">5</span>. 7 est impair : 3 × 7 + 1 = <span class="res">22</span>. Pour x impair : <span class="res">3x + 1</span>.</p>'}
+  ]
+});
+
+/* ============================================================
+   PARCOURS, TEST DE POSITIONNEMENT, ENCOURAGEMENTS   ============================================================ */
+const PARCOURS = [
+  {id:'decouverte', t:'Parcours Découverte', d:'Je reprends tout depuis le début, à mon rythme. Les exercices ★ et ★★ d\'abord, les ★★★ en bonus.', steps:[1,2,3,4,5,6,7,8,9,10,11,12], lv:[1,2]},
+  {id:'essentiel', t:'Parcours Essentiel brevet', d:'Je vais droit à ce qui tombe au brevet, avec beaucoup d\'exercices guidés.', steps:[1,3,4,5,6,9,12], lv:[1,2]},
+  {id:'mention', t:'Parcours Objectif mention', d:'Je maîtrise les bases : place aux défis ★★★ et aux sujets de brevet.', steps:[4,7,8,9,10,11,12], lv:[2,3]}
+];
+const DIAG = [
+  {st:1, q:'Dans une séquence, les blocs s\'exécutent…', choices:['tous en même temps','de haut en bas, un par un','de bas en haut'], a:'de haut en bas, un par un'},
+  {st:2, q:'Le point (−60 ; 40) est…', choices:['à droite en haut','à gauche en haut','à gauche en bas'], a:'à gauche en haut'},
+  {st:3, q:'Le lutin regarde à droite (90), puis tourne ↻ de 90°. Il regarde vers…', choices:['le haut','le bas','la gauche'], a:'le bas'},
+  {st:4, q:'Pour tracer un hexagone régulier, le lutin tourne à chaque sommet de…', choices:['60°','120°','90°'], a:'60°'},
+  {st:5, q:'mettre N à 4 · ajouter 2 à N · dire N. Le lutin dit…', choices:['2','6','42'], a:'6'},
+  {st:6, q:'On tape 5. Le lutin dit (réponse * 3) − 1, soit…', choices:['14','10','12'], a:'14'},
+  {st:7, q:'17 modulo 5 vaut…', choices:['3','2','3,4'], a:'2'},
+  {st:8, q:'x = 0 · répéter jusqu\'à ce que x &gt; 10 : ajouter 4 à x. Combien de tours ?', choices:['2','3','4'], a:'3'},
+  {st:9, q:'« Multiplie par 2, puis ajoute 3 » donne l\'expression…', choices:['2x + 3','2(x + 3)','x + 5'], a:'2x + 3'}
+];
+const BRAVO = ['Bravo !','Excellent, continue comme ça !','Super, tu as compris !','C\'est ça ! Tu progresses.','Parfait !','Bien joué, tu assures !','Exact ! Tu deviens un vrai codeur.'];
+const ENCORE = ['Pas encore… Ouvre un indice, il est là pour ça.','Presque ! Relis le script bloc par bloc.','Se tromper, c\'est apprendre. Essaie encore !','Pas tout à fait. Tu peux exécuter le script pour vérifier.'];
+const MOTS = {
+  1:'Chaque grand programme commence par un premier bloc. Prends ton temps : ici, on apprend à lire avant d\'écrire.',
+  2:'Se repérer, c\'est la moitié du travail. Un dessin au brouillon vaut mieux qu\'un long discours.',
+  3:'Tu vas faire bouger et dessiner le lutin. Teste, observe, recommence : c\'est comme ça que travaillent les programmeurs.',
+  4:'Avec la boucle, tu vas gagner du temps. 360°, c\'est le secret de toutes les figures !',
+  5:'Les variables, ce sont la mémoire du programme. Avec un tableau de suivi, tu ne peux pas te perdre.',
+  6:'Le lutin va enfin calculer pour toi. Pense aux parenthèses cachées dans les blocs emboîtés.',
+  7:'Le programme apprend à décider. Vrai ou faux : pose-toi la question à chaque test.',
+  8:'Une boucle qui s\'arrête toute seule : compte bien les tours et vérifie le dernier.',
+  9:'Voici l\'exercice star du brevet. Tu as tous les outils : bloc par bloc, et ça passe !',
+  10:'Créer ses propres blocs, c\'est passer au niveau supérieur. Tu es prêt·e.',
+  11:'Le hasard n\'est pas si mystérieux : avec beaucoup d\'essais, il devient prévisible.',
+  12:'Dernière ligne droite avant le brevet. Lis calmement, écris tes calculs, vérifie. Je crois en toi !'
+};
+/* ============================================================
+   APPLICATION : navigation, parcours, exercices, progression
+   ============================================================ */
+const KEY = 'scratch-aha-majani-v1';
+let ST = {name:'', parcours:'decouverte', done:{}, diag:null};
+try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) ST = Object.assign(ST, s); } catch(e){}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch(e){} };
+let PROF = false;
+const app = document.getElementById('app');
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const YEAR = {5:'5<sup>e</sup>',4:'4<sup>e</sup>',3:'3<sup>e</sup>'};
+const LV = {1:['★','Je démarre','exercices guidés, pas à pas'],2:['★★','Je m\'entraîne','j\'applique seul·e'],3:['★★★','Je vais plus loin','défis et sujets de brevet']};
+const curP = () => PARCOURS.find(p => p.id === ST.parcours) || PARCOURS[0];
+
+function normA(s){
+  return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/[−–]/g,'-').replace(/\s+/g,'').replace(/(\d),(\d)/g,'$1.$2').replace(/[;,.°€](?!\d)/g,'').replace(/pas$|secondes?$|s$/,'');
+}
+function same(given, ans){
+  const list = Array.isArray(ans) ? ans : [ans];
+  const g = normA(given);
+  return list.some(a => { const b = normA(a); if (g === b) return true; const x = parseFloat(g), y = parseFloat(b); return !isNaN(x) && /^-?\d+(\.\d+)?$/.test(g) && x === y; });
+}
+const stepDone = st => st.ex.filter(e => ST.done[e.n]).length;
+
+/* ---------- Accueil ---------- */
+function viewHome(scrollTo){
+  const p = curP();
+  const next = STEPS.find(s => p.steps.includes(s.n) && stepDone(s) < s.ex.length) || STEPS[0];
+  const started = Object.keys(ST.done).length > 0;
+  let h = '<section class="sheet"><div class="hero"><div style="display:grid;gap:12px;min-width:0">' +
+    '<p class="kicker">Algorithmique et programmation · cycle 4</p>' +
+    '<h2>Programmer avec Scratch, pas à pas</h2>' +
+    '<p class="lead">De la 5<sup>e</sup> à la 3<sup>e</sup> : 12 étapes avec une leçon, des exercices guidés, des indices et des corrections détaillées. Chaque script de ce cours peut <b>s\'exécuter</b> : tu vois le lutin bouger bloc par bloc et le tableau de suivi se remplir.</p>' +
+    '<div class="namebox"><label for="nm"><b>Ton prénom :</b></label><input id="nm" type="text" autocomplete="off" placeholder="ex. Yanis" value="'+esc(ST.name)+'"><span class="muted" id="hello">'+(ST.name ? 'Content de te revoir, <b>'+esc(ST.name)+'</b> !' : '')+'</span></div>' +
+    '<div class="row"><a class="btn" href="#e'+next.n+'">'+(started ? 'Continuer : étape '+next.n : 'Commencer l\'étape '+next.n)+'</a><a class="btn ghost" href="#diag">Je fais le test de positionnement</a></div>' +
+    '</div><div class="demo">'+S(`
+      my définir carré
+      ct répéter [4] fois
+        mo avancer de [70] pas
+        mo tourner ↻ de [90] degrés
+
+      ev quand ⚑ est cliqué
+      pe effacer tout
+      mo aller à x: [0] y: [0]
+      pe stylo en position d'écriture
+      ct répéter [12] fois
+        my carré
+        mo tourner ↻ de [30] degrés
+      `, 'data-run id="demo"')+'</div></div></section>';
+
+  h += '<section class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>Ce cours est fait pour toi, même si la programmation te paraît difficile. Avance étape par étape, ouvre les indices sans honte, et exécute les scripts pour vérifier tes idées. Chaque exercice réussi est une vraie victoire : on ne devient pas bon en un jour, on le devient en s\'entraînant. Allez, au travail, je compte sur toi !</p></section>';
+
+  h += '<section class="sheet" id="parcours"><h2>Choisis ton parcours</h2><p class="lead muted">Le parcours met en avant les étapes et les exercices conseillés. Tout le reste reste accessible.</p><div class="parcours">' +
+    PARCOURS.map(q => '<button type="button" class="pc'+(q.id === p.id ? ' on' : '')+'" data-pc="'+q.id+'">'+(q.id === p.id ? '<span class="on-flag">✔ Mon parcours</span>' : '')+'<span class="pt">'+q.t+'</span><span class="pd">'+q.d+'</span><span class="ps">Étapes '+q.steps.join(', ')+' · exercices '+q.lv.map(l => LV[l][0]).join(' et ')+'</span></button>').join('') +
+    '</div></section>';
+
+  h += '<section class="sheet" id="diag"><h2>Test de positionnement</h2><p class="lead muted">9 questions rapides, une par notion. À la fin, je te dis par quelle étape commencer.</p><div id="diagq" style="display:grid;gap:12px">' +
+    DIAG.map((d, i) => '<div class="diag-q"><p class="dq">'+(i+1)+'. '+d.q+' <span class="muted">(étape '+d.st+')</span></p><div class="qa" data-dg="'+i+'">'+d.choices.map(c => '<button type="button" class="choice" data-c="'+esc(c)+'">'+c+'</button>').join('')+'</div></div>').join('') +
+    '</div><div class="row" style="margin-top:14px"><button class="btn" type="button" id="diagGo">Voir mon résultat</button></div><div id="diagRes"></div></section>';
+
+  h += '<section class="sheet" id="etapes"><h2>Les 12 étapes</h2><p class="lead muted">Les étapes de ton parcours sont en couleur ; '+(ST.diag ? 'l\'étape conseillée par le test est entourée en vert.' : 'fais le test pour savoir où commencer.')+'</p>';
+  [5,4,3].forEach(y => {
+    h += '<div class="year y'+y+'"><div class="year-lab">'+YEAR[y]+'<small>'+(y === 5 ? 'Découvrir' : y === 4 ? 'Approfondir' : 'Maîtriser')+'</small></div><div class="steps-grid">' +
+      STEPS.filter(s => s.y === y).map(s => {
+        const d = stepDone(s), tot = s.ex.length;
+        return '<a class="scard'+(p.steps.includes(s.n) ? '' : ' off')+(ST.diag === s.n ? ' reco' : '')+'" href="#e'+s.n+'"><span class="num">Étape '+s.n+'</span><span class="th">'+s.t+'</span><span class="meta"><span class="minibar"><span style="width:'+(100*d/tot)+'%"></span></span><span class="pill'+(d === tot ? ' g' : '')+'">'+d+'/'+tot+'</span></span></a>';
+      }).join('') + '</div></div>';
+  });
+  h += '</section>';
+  app.innerHTML = h;
+  app.querySelectorAll('pre.sbsrc').forEach(mountScript);
+  const demoRun = app.querySelector('.demo [data-a=run]'); if (demoRun) demoRun.click();
+
+  const nm = document.getElementById('nm');
+  nm.addEventListener('input', () => { ST.name = nm.value.trim(); save(); document.getElementById('hello').innerHTML = ST.name ? 'Bienvenue, <b>'+esc(ST.name)+'</b> ! Bon courage.' : ''; });
+  app.querySelectorAll('[data-pc]').forEach(b => b.addEventListener('click', () => { ST.parcours = b.dataset.pc; save(); viewHome('parcours'); }));
+  const picks = {};
+  app.querySelectorAll('[data-dg]').forEach(g => g.addEventListener('click', e => {
+    const b = e.target.closest('.choice'); if (!b) return;
+    g.querySelectorAll('.choice').forEach(c => c.classList.remove('ok','ko'));
+    b.classList.add('ok'); b.style.background = 'var(--accent-soft)'; b.style.color = 'var(--ink)'; b.style.borderColor = 'var(--accent)';
+    g.querySelectorAll('.choice').forEach(c => { if (c !== b){ c.style.background=''; c.style.color=''; c.style.borderColor=''; } });
+    picks[g.dataset.dg] = b.dataset.c;
+  }));
+  document.getElementById('diagGo').addEventListener('click', () => {
+    let score = 0, first = null;
+    DIAG.forEach((d, i) => {
+      const g = app.querySelector('[data-dg="'+i+'"]');
+      g.querySelectorAll('.choice').forEach(c => { c.style.background=''; c.style.color=''; c.style.borderColor=''; c.classList.remove('ok','ko');
+        if (c.dataset.c === d.a) c.classList.add('ok'); else if (c.dataset.c === picks[i]) c.classList.add('ko'); });
+      if (picks[i] === d.a) score++; else if (first === null) first = d.st;
+    });
+    const reco = first === null ? 10 : first;
+    ST.diag = reco;
+    const pc = reco <= 3 ? 'decouverte' : reco <= 6 ? 'essentiel' : 'mention';
+    ST.parcours = pc; save();
+    const P = PARCOURS.find(q => q.id === pc);
+    document.getElementById('diagRes').innerHTML = '<div class="diag-res" style="margin-top:14px"><p><b>'+score+' / '+DIAG.length+'</b> · '+(score >= 8 ? 'Impressionnant, tu as de solides bases !' : score >= 5 ? 'C\'est un bon début, tu as déjà des acquis.' : 'Pas de panique : on va construire tes bases ensemble.')+'</p><p>Je te conseille de commencer à l\'<b>étape '+reco+'</b> avec le <b>'+P.t+'</b> (il est maintenant sélectionné).</p><p style="margin-top:8px"><a class="btn small" href="#e'+reco+'">Aller à l\'étape '+reco+'</a></p><p class="muted" style="margin-top:6px">— M. AHA MAJANI</p></div>';
+  });
+  if (scrollTo){ const el = document.getElementById(scrollTo); if (el) el.scrollIntoView(); } else window.scrollTo(0,0);
+}
+
+/* ---------- Page d'étape ---------- */
+function viewStep(n){
+  const s = STEPS.find(x => x.n === n); if (!s) return viewHome();
+  const p = curP(), inP = p.steps.includes(n);
+  let h = '<section class="band y'+s.y+'"><div class="bn"><small>Étape</small>'+s.n+'</div><div class="bt"><span>Niveau '+YEAR[s.y]+'</span>'+(inP ? '<span>Dans ton parcours</span>' : '<span>Hors de ton parcours</span>')+'</div><h2>'+s.t+'</h2><p>'+s.sub+'</p></section>';
+  h += '<section class="sheet"><div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>'+MOTS[n]+'</p></div>' +
+    '<h3>Mes objectifs · à la fin de cette étape, je sais…</h3><ul class="objectifs">'+s.obj.map(o => '<li>'+o+'</li>').join('')+'</ul></section>';
+  h += '<section class="sheet"><h2>La leçon</h2>'+s.lesson+'</section>';
+  h += '<section class="sheet" id="exos"><h2>✎ Je m\'entraîne</h2><p class="lead muted">Commence par les ★. Si tu bloques, ouvre un indice ; la correction est là quand tu as vraiment cherché. Coche « Tableau de suivi » sous une scène pour vérifier ton tableau.</p>';
+  [1,2,3].forEach(lv => {
+    const list = s.ex.filter(e => e.lvl === lv); if (!list.length) return;
+    h += '<div class="lvl-h"><span class="stars">'+LV[lv][0]+'</span><h3>'+LV[lv][1]+'</h3><span class="muted">'+LV[lv][2]+'</span>'+(p.lv.includes(lv) && inP ? '<span class="reco-tag">conseillé pour ton parcours</span>' : '')+'</div>';
+    list.forEach(e => { h += exHTML(e); });
+  });
+  h += '<div id="stepEnd"></div></section>';
+  const prev = STEPS.find(x => x.n === n-1), next = STEPS.find(x => x.n === n+1);
+  h += '<nav class="pnav">'+(prev ? '<a class="btn ghost" href="#e'+prev.n+'">← Étape '+prev.n+' : '+prev.t+'</a>' : '<a class="btn ghost" href="#accueil">← Accueil</a>')+(next ? '<a class="btn" href="#e'+next.n+'">Étape '+next.n+' : '+next.t+' →</a>' : '<a class="btn" href="#memo">Le mémo →</a>')+'</nav>';
+  app.innerHTML = h;
+  app.querySelectorAll('pre.sbsrc').forEach(mountScript);
+  s.ex.forEach(e => wireEx(e, s));
+  stepEnd(s);
+  window.scrollTo(0,0);
+}
+
+function exHTML(e){
+  const id = 'x'+e.n.replace('.','_');
+  return '<article class="ex'+(ST.done[e.n] ? ' done' : '')+'" id="'+id+'"><div class="ex-h"><span class="en">Exercice '+e.n+'</span><h4>'+e.t+'</h4>'+(e.src ? '<span class="src">'+e.src+'</span>' : '')+'<span class="ok-flag">'+(ST.done[e.n] ? '✔ réussi' : '')+'</span></div>' +
+    e.body +
+    '<ol class="qs">'+e.qs.map((q, i) => '<li><div>'+q.q+'</div><div class="qa" data-q="'+i+'">' +
+      (q.choices ? q.choices.map(c => '<button type="button" class="choice" data-c="'+esc(c)+'">'+c+'</button>').join('')
+        : '<input type="text" inputmode="text" id="'+id+'_'+i+'" aria-label="Ta réponse" autocomplete="off">'+(q.unit ? '<span class="muted">'+q.unit+'</span>' : '')+'<button type="button" class="btn small ghost" data-chk>Vérifier</button>') +
+      '<span class="fb" aria-live="polite"></span></div></li>').join('')+'</ol>' +
+    '<div class="ex-actions"><button type="button" class="btn small ghost" data-hint>💡 Un indice</button><button type="button" class="btn small ghost" data-sol>J\'ai cherché : voir la correction</button></div>' +
+    e.hints.map((t, i) => '<div class="hint" data-h="'+i+'"'+(PROF ? '' : ' hidden')+'><b class="hl">Indice '+(i+1)+'.</b> '+t+'</div>').join('') +
+    '<div class="corr"'+(PROF ? '' : ' hidden')+'><p class="ct">Correction</p>'+e.sol+'</div></article>';
+}
+
+function wireEx(e, s){
+  const el = document.getElementById('x'+e.n.replace('.','_'));
+  const ok = new Set();
+  const finish = () => {
+    if (ok.size === e.qs.length && !ST.done[e.n]){
+      ST.done[e.n] = true; save();
+      el.classList.add('done'); el.querySelector('.ok-flag').textContent = '✔ réussi';
+      stepEnd(s, true);
+    }
+  };
+  e.qs.forEach((q, i) => {
+    const box = el.querySelector('[data-q="'+i+'"]'), fb = box.querySelector('.fb');
+    const verdict = good => {
+      fb.className = 'fb ' + (good ? 'ok' : 'ko');
+      fb.textContent = good ? pick(BRAVO) : pick(ENCORE);
+      if (good) ok.add(i); finish();
+    };
+    if (q.choices){
+      box.addEventListener('click', ev => {
+        const b = ev.target.closest('.choice'); if (!b || ok.has(i)) return;
+        const good = b.dataset.c === q.a || b.dataset.c === esc(q.a);
+        b.classList.add(good ? 'ok' : 'ko'); verdict(good);
+      });
+    } else {
+      const inp = box.querySelector('input');
+      const chk = () => { if (!inp.value.trim()) return; const good = same(inp.value, q.a); inp.classList.toggle('ok', good); inp.classList.toggle('ko', !good); if (good) inp.readOnly = true; verdict(good); };
+      box.querySelector('[data-chk]').addEventListener('click', chk);
+      inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') chk(); });
+    }
+  });
+  const hb = el.querySelector('[data-hint]');
+  hb.addEventListener('click', () => {
+    const hid = [...el.querySelectorAll('.hint')].find(x => x.hidden);
+    if (hid) hid.hidden = false;
+    if (![...el.querySelectorAll('.hint')].some(x => x.hidden)){ hb.disabled = true; hb.textContent = '💡 Tous les indices sont affichés'; }
+  });
+  el.querySelector('[data-sol]').addEventListener('click', ev => {
+    const c = el.querySelector('.corr'); c.hidden = !c.hidden;
+    ev.target.textContent = c.hidden ? 'J\'ai cherché : voir la correction' : 'Cacher la correction';
+  });
+}
+
+function stepEnd(s, fresh){
+  const d = stepDone(s), tot = s.ex.length, box = document.getElementById('stepEnd'); if (!box) return;
+  const next = STEPS.find(x => x.n === s.n+1);
+  if (d === tot){
+    box.innerHTML = '<div class="box exe" style="margin-top:18px"><h4>Étape validée · <b>'+tot+' / '+tot+' exercices</b></h4><p class="hand">'+(ST.name ? 'Bravo '+esc(ST.name)+' !' : 'Bravo !')+' Tu as réussi toute l\'étape '+s.n+'.</p><p>Chaque étape réussie te rapproche du brevet. Quel beau travail : continue comme ça !</p><p class="muted">— M. AHA MAJANI</p>'+(next ? '<p><a class="btn small" href="#e'+next.n+'">Passer à l\'étape '+next.n+' →</a></p>' : '')+'</div>';
+  } else {
+    box.innerHTML = '<div class="box ast" style="margin-top:18px"><h4>Ma progression · <b>'+d+' / '+tot+' exercices réussis</b></h4><p>'+(d === 0 ? 'Lance-toi sur le premier exercice ★ : il est guidé pas à pas.' : d >= tot/2 ? 'Plus de la moitié ! Encore un petit effort, tu y es presque.' : 'Bien parti ! Chaque bonne réponse compte.')+'</p></div>';
+  }
+  if (fresh && d === tot) box.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+/* ---------- Mémo ---------- */
+function viewMemo(){
+  const rows = [
+    ['ev','quand ⚑ est cliqué','Démarre le script'],['mo','aller à x: … y: …','Place le lutin au point (x ; y)'],['mo','ajouter … à x / à y','Décale le lutin horizontalement / verticalement'],
+    ['mo','s\'orienter à …','Choisit la direction (90 = droite, 0 = haut, 180 = bas, −90 = gauche)'],['mo','avancer de … pas','Se déplace tout droit dans sa direction'],['mo','tourner ↻ / ↺ de … degrés','Pivote sur place (droite / gauche)'],
+    ['pe','stylo en position d\'écriture / relever le stylo','Trace / ne trace plus'],['ct','répéter … fois','Boucle bornée'],['ct','répéter jusqu\'à ce que …','Boucle non bornée (s\'arrête quand la condition devient vraie)'],
+    ['ct','si … alors … sinon','Instruction conditionnelle'],['se','demander … et attendre · réponse','Entrée'],['lo','dire …','Sortie'],
+    ['va','mettre … à … / ajouter … à …','Initialiser (remplacer) / modifier (ajouter) une variable'],['op','+ − * / · &lt; = &gt; · modulo','Calculer · comparer · reste d\'une division'],
+    ['op','nombre aléatoire entre … et …','Nombre entier au hasard'],['my','définir …','Créer son propre bloc (avec ou sans paramètre)']];
+  const src = [];
+  STEPS.forEach(s => s.ex.forEach(e => { if (e.src) src.push('<li><a href="#e'+s.n+'">Exercice '+e.n+' · '+e.t+'</a> <span class="muted">('+e.src+')</span></li>'); }));
+  app.innerHTML = '<section class="sheet"><h2>Mémo des blocs essentiels</h2><div class="tbl memo"><table><thead><tr><th>Bloc</th><th>À quoi il sert</th></tr></thead><tbody>'+rows.map(r => '<tr><td><span class="k '+r[0]+'">'+r[1]+'</span></td><td>'+r[2]+'</td></tr>').join('')+'</tbody></table></div></section>' +
+    '<section class="sheet">'+B('met','Lire un script au brevet','<ol><li>Je repère le départ : position, direction, valeurs des variables.</li><li>Je lis les blocs de haut en bas, sans en sauter.</li><li>Je tiens un tableau de suivi.</li><li>Dans une boucle, je compte les tours ; dans un test, je dis si la condition est vraie ou fausse.</li><li>Je réponds et je vérifie (tour complet = 360°, test avec une valeur…).</li></ol>') +
+    B('sav','Les formules à connaître','<ul><li>Polygone régulier à n côtés : <b>répéter n fois (avancer ; tourner de 360 ÷ n)</b>.</li><li>Boucle « jusqu\'à » : <b>tours = (seuil − départ) ÷ gain</b>, puis vérifier le dernier tour.</li><li>Programme de calcul : poser x, traduire bloc par bloc, simplifier en <b>ax + b</b>.</li><li>Pair : <b>n modulo 2 = 0</b> ; multiple de 5 : <b>n modulo 5 = 0</b>.</li></ul>') + '</section>' +
+    '<section class="sheet"><h2>Exercices inspirés des annales du brevet</h2><ul style="display:grid;gap:6px;padding-left:1.2em;margin:0">'+src.join('')+'</ul><p class="muted">Les nombres ont été adaptés ; les situations reprennent celles des sujets officiels.</p></section>';
+  window.scrollTo(0,0);
+}
+
+/* ---------- Routeur ---------- */
+function route(){
+  const h = (location.hash || '#accueil').slice(1);
+  document.querySelectorAll('nav.tabs a').forEach(a => a.classList.toggle('on', a.dataset.nav === h || (h === 'parcours' && a.dataset.nav === 'accueil')));
+  const m = h.match(/^e(\d+)$/);
+  if (m) viewStep(+m[1]);
+  else if (h === 'memo') viewMemo();
+  else if (h === 'etapes' || h === 'diag' || h === 'parcours') viewHome(h);
+  else viewHome();
+}
+window.addEventListener('hashchange', route);
+document.getElementById('brandHome').addEventListener('click', () => { location.hash = '#accueil'; });
+document.getElementById('profBtn').addEventListener('click', ev => {
+  PROF = !PROF; document.body.classList.toggle('prof', PROF);
+  ev.target.textContent = PROF ? 'Mode professeur activé : cliquer pour masquer les corrections' : 'Mode professeur : afficher toutes les corrections';
+  route();
+});
+route();
+</script>
+</body></html>
