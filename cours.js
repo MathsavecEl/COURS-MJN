@@ -1,93 +1,75 @@
-// =====================================================================
-//  RÉGLAGES DU SITE : modifie librement les textes entre guillemets.
-// =====================================================================
-
+/* Configuration du site et catalogue des ressources. */
 const SITE = {
-  titre: "Mes cours interactifs",
+  titre: "Mathématiques interactives",
+  presentation: "Cours, automatismes et exercices interactifs pour réviser les mathématiques depuis un téléphone, une tablette ou un ordinateur.",
   enseignant: "M. AHA MAJANI",
   matiere: "Mathématiques",
-  etablissement: "",         // ex. "Collège Jean Moulin" (laisser vide pour ne rien afficher)
-  email: "mathsclavie20@gmail.com",   // pour signaler une coquille
-  presentation: "Retrouve ici tous les cours, exercices et activités interactives de ta classe. Choisis ta classe, puis ouvre le cours dont tu as besoin.",
-  // Texte de la section « À propos » (chaque élément = un paragraphe).
+  etablissement: "",
+  droits: "Ressources pédagogiques",
   aPropos: [
-    "Je suis enseignant de mathématiques et j'utilise les nouvelles technologies pour faire pratiquer les mathématiques à mes élèves.",
+    "Choisis ta classe, puis ouvre la ressource qui t'intéresse.",
+    "Les activités interactives sont accessibles sans compte élève.",
+    "Certains éléments (polices ou contenus externes) peuvent nécessiter une connexion Internet."
   ],
-  signature: "Khalili",       // signature manuscrite sous « À propos »
-  blague: "Un matheux n'urine pas, il fait π π.",
-  // Mention sur l'utilisation des documents (affichée en bas de page).
-  droits: "Ces documents restent ma propriété, mais toutes les personnes qui le souhaitent peuvent les utiliser librement.",
+  signature: "",
+  blague: "",
+  email: ""
 };
 
-// Les classes, dans l'ordre d'affichage. "couleur" = teinte (0 à 360).
 const CLASSES = [
-  { nom: "3ème",         court: "3e",  couleur: 230 },
-  { nom: "4ème",         court: "4e",  couleur: 190 },
-  { nom: "Seconde",      court: "2de", couleur: 150 },
-  { nom: "Première spé", court: "1re", couleur: 280 },
-  { nom: "Divers",       court: "+",   couleur: 30  },
+  { nom: "6e", court: "6e", couleur: 205 },
+  { nom: "5e", court: "5e", couleur: 260 },
+  { nom: "4e", court: "4e", couleur: 155 },
+  { nom: "3e", court: "3e", couleur: 25 },
+  { nom: "Seconde", court: "2de", couleur: 330 },
+  { nom: "Première", court: "1re", couleur: 45 },
+  { nom: "Terminale", court: "Tle", couleur: 190 }
 ];
-
-// =====================================================================
-//  LISTE DES COURS
-//  Pour ajouter un cours : copie un bloc { ... }, colle-le à la suite,
-//  puis change les infos. "classe" doit être écrite comme dans CLASSES.
-//  type : "Cours", "Exercices", "Quiz", "Activité", "Évaluation"...
-//  nouveau: true affiche une pastille « Nouveau ».
-// =====================================================================
 
 const COURS = [
   {
-    titre: "Maths en 3e (306)",
-    classe: "3ème",
-    chapitre: "Toute l'année",
-    type: "Cours et exercices",
-    description: "Chapitres, exercices interactifs, automatismes et entraînement à l'évaluation pour la 3e prépa métiers.",
-    lien: "cours/3e-maths/index.html",
+    classe: "4e",
+    titre: "Mathématiques en 4e — classe 416",
+    chapitre: "Cours et exercices interactifs",
+    type: "Site de classe",
+    description: "Chapitres, rappels de cours, exercices interactifs et automatismes.",
+    lien: "cours/maths-4e-416.html",
     nouveau: true
   },
   {
-    titre: "Maths en 4e (416)",
-    classe: "4ème",
-    chapitre: "Toute l'année",
-    type: "Cours et exercices",
-    description: "Chapitres, fiches rappels, automatismes et exercices type brevet.",
-    lien: "cours/4e-maths/index.html",
+    classe: "3e",
+    titre: "Mathématiques en 3e prépa-métiers — classe 306",
+    chapitre: "Cours, automatismes et entraînement",
+    type: "Site de classe",
+    description: "Cours interactifs, chapitres, QCM et préparation aux évaluations.",
+    lien: "cours/maths-3e-306.html",
     nouveau: true
   },
   {
-    titre: "Maths en Seconde",
+    classe: "3e",
+    titre: "Mathématiques en 3e — classe 312",
+    chapitre: "Cours, automatismes et brevet",
+    type: "Site de classe",
+    description: "Chapitres, rappels de cours, exercices interactifs et problèmes type brevet.",
+    lien: "cours/maths-3e-312.html",
+    nouveau: true
+  },
+  {
     classe: "Seconde",
-    chapitre: "Toute l'année",
-    type: "Cours et exercices",
-    description: "Rappels avec exemples, exercices corrigés et automatismes, chapitre par chapitre.",
-    lien: "cours/seconde-maths/index.html",
+    titre: "Mathématiques en Seconde",
+    chapitre: "Cours et exercices interactifs",
+    type: "Site de classe",
+    description: "Cours, séries d'exercices et automatismes de Seconde.",
+    lien: "cours/maths-seconde.html",
     nouveau: true
   },
   {
-    titre: "Maths en Première spécialité",
-    classe: "Première spé",
-    chapitre: "Toute l'année",
-    type: "Cours et exercices",
-    description: "Second degré, suites, dérivation, exponentielle… avec exercices corrigés et automatismes.",
-    lien: "cours/premiere-spe-maths/index.html",
+    classe: "Première",
+    titre: "Mathématiques en Première spécialité",
+    chapitre: "Spécialité mathématiques",
+    type: "Site de classe",
+    description: "Cours, séries d'exercices et automatismes de Première spécialité.",
+    lien: "cours/maths-premiere-specialite.html",
     nouveau: true
-  },
-  {
-    titre: "Course aux nombres",
-    classe: "Divers",
-    chapitre: "Automatismes 3e",
-    type: "Entraînement",
-    description: "Séries chronométrées de calcul mental et d'automatismes, avec correction détaillée et suivi des scores.",
-    lien: "cours/divers-course-aux-nombres-3e/index.html",
-    nouveau: true
-  },
-  // {
-  //   titre: "Théorème de Pythagore",
-  //   classe: "4ème",
-  //   chapitre: "Géométrie",
-  //   type: "Cours",
-  //   description: "Calculer une longueur dans un triangle rectangle.",
-  //   lien: "cours/4e-pythagore/index.html"
-  // },
+  }
 ];

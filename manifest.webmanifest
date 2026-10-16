@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "Mathématiques interactives",
+  "short_name": "Maths interactives",
+  "description": "Cours et exercices interactifs de mathématiques de la 4e à la Première.",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f8fc",
+  "theme_color": "#3d4bd8",
+  "icons": [
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
