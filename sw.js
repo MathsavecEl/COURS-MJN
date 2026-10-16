@@ -1,9 +1,9 @@
-const CACHE = 'maths-interactives-v8';
+const CACHE = 'maths-interactives-v9';
 const FILES = [
-  './', './index.html', './style.css?v=8', './cours.js?v=8', './manifest.webmanifest',
+  './', './index.html', './style.css?v=9', './cours.js?v=9', './manifest.webmanifest',
   './maths-4e-416.html', './maths-3e-306.html', './maths-3e-312.html',
   './maths-seconde.html', './maths-premiere-specialite.html', './scratch-pas-a-pas.html',
-  './course-aux-nombres-3e.html',
+  './course-aux-nombres-3e.html', './snt-seconde.html',
   './icon-192.png', './icon-512.png'
 ];
 self.addEventListener('install', event => {
