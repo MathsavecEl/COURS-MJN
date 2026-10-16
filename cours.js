@@ -1,18 +1,19 @@
 /* Configuration du site et catalogue des ressources. */
 const SITE = {
   titre: "COURS MJN",
-  presentation: "Cours, automatismes et exercices interactifs pour réviser les mathématiques depuis un téléphone, une tablette ou un ordinateur.",
+  presentation: "Un espace pour mes élèves, mais aussi pour tous ceux qui souhaitent se défier, renouer avec les mathématiques et revoir les notions à leur rythme.",
   enseignant: "M. AHA MAJANI",
   matiere: "Mathématiques",
   etablissement: "",
   droits: "Ressources pédagogiques",
   aPropos: [
-    "Choisis ta classe, puis ouvre la ressource qui t'intéresse.",
-    "Les activités interactives sont accessibles sans compte élève.",
-    "Certains éléments (polices ou contenus externes) peuvent nécessiter une connexion Internet."
+    "Ce site est destiné à mes élèves, mais aussi à tout élève qui souhaite se défier, renouer avec les mathématiques et revoir les notions à son rythme.",
+    "Les cours proposés pour les classes de 6e, 5e, Seconde et Première sont conformes aux nouveaux programmes.",
+    "Pour les classes de 4e et de 3e, les nouveaux programmes entreront respectivement en vigueur à la rentrée 2027 et à la rentrée 2028.",
+    "Choisis ta classe, puis ouvre la ressource qui t’intéresse. Les activités interactives sont accessibles sans compte élève."
   ],
   signature: "Khalili ☺",
-  blague: "Un matheux n’urine pas, il fait pi-pi.",
+  blague: "Un matheux n’urine pas, il fait π-π.",
   email: ""
 };
 
