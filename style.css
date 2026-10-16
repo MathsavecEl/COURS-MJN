@@ -26,7 +26,20 @@ a { color: var(--accent); }
 .conteneur { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
 /* ---------- En-tête ---------- */
-.hero { padding: 56px 0 32px; }
+.hero {
+ position:relative; isolation:isolate; overflow:hidden;
+ padding:clamp(58px, 9vw, 100px) 0 clamp(48px, 7vw, 76px);
+ color:#fff; background:linear-gradient(125deg,#172554 0%,#293caa 52%,#5967e8 100%);
+ border-radius:0 0 32px 32px; box-shadow:0 18px 45px rgb(41 60 170 / .2);
+}
+.hero::after { content:'π'; position:absolute; z-index:-1; right:clamp(12px,9vw,130px); top:50%; transform:translateY(-58%) rotate(-8deg); font-family:Georgia,serif; font-size:clamp(15rem,36vw,31rem); font-weight:700; line-height:.8; color:#fff; opacity:.11; pointer-events:none; user-select:none; }
+.hero .conteneur { position:relative; z-index:1; }
+.hero .surtitre { color:#dbe4ff; }
+.hero .surtitre span { padding:6px 11px; border:1px solid rgb(255 255 255 / .23); border-radius:999px; background:rgb(255 255 255 / .08); }
+.hero .surtitre span + span::before { content:none; }
+.hero h1 { max-width:13ch; font-size:clamp(2.8rem,7vw,5.2rem); text-wrap:balance; }
+.hero p.intro { color:#e1e7ff; max-width:52ch; font-size:clamp(1.05rem,2.2vw,1.25rem); }
+@media (max-width:520px) { .hero { border-radius:0 0 24px 24px; } .hero::after { right:-18px; opacity:.09; } }
 
 .surtitre { display: inline-flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: .85rem; font-weight: 500; color: var(--doux); margin: 0 0 12px; }
 .surtitre span + span::before { content: "·"; margin-right: 8px; }
@@ -95,7 +108,9 @@ section.groupe h2 .compte { font-family: var(--corps-font); font-size: .85rem; f
 .contact .bouton { text-decoration: none; }
 @media (max-width: 720px) { .a-propos { grid-template-columns: 1fr; padding: 20px; } }
 
-footer { margin-top: 40px; padding: 28px 0 40px; border-top: 1px solid var(--bord); color: var(--doux); font-size: .85rem; }
+footer { margin-top:40px; padding:28px 0 40px; border-top:1px solid var(--bord); color:var(--doux); font-size:.85rem; }
+footer .blague-bas { display:block; width:fit-content; max-width:100%; margin:18px auto 0; padding:11px 18px; border:1px solid var(--bord); border-radius:999px; background:var(--surface); color:var(--texte); text-align:center; font-size:.95rem; box-shadow:var(--ombre); }
+footer .blague-bas span { margin-right:6px; }
 
 /* ---------- Pages de cours ---------- */
 .page-cours { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
