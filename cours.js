@@ -41,6 +41,16 @@ const COURS = [
   {
     classe: "5e",
     titre: "Mathématiques en 5e NLS",
+  {
+    classe: "5e",
+    titre: "Mathématiques en 5e — classe ordinaire",
+    chapitre: "Cours, exercices et automatismes",
+    type: "Site de cours interactif",
+    description: "Cours interactif et exercices de mathématiques destinés aux élèves de 5e.",
+    lien: "maths-5e.html",
+    nouveau: true
+  },
+
     chapitre: "Cours, remise à niveau et automatismes",
     type: "Site de cours interactif",
     description: "Ressources de mathématiques destinées aux élèves de 5e NLS.",
