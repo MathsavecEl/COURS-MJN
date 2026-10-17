@@ -31,7 +31,7 @@ const CLASSES = [
 const COURS = [
   {
     classe: "6e",
-    titre: "Mathématiques en 6e",
+    titre: "Mathématiques en 6e ordinaire",
     chapitre: "Cours, exercices et automatismes",
     type: "Site de cours interactif",
     description: "Cours illustrés, exercices corrigés et automatismes pour les élèves de 6e.",
@@ -39,8 +39,17 @@ const COURS = [
     nouveau: true
   },
   {
+    classe: "6e",
+    titre: "Mathématiques en 6e NLNS",
+    chapitre: "Contenu à venir",
+    type: "Bientôt disponible",
+    description: "L’espace des 6e NLNS est prévu. Le contenu sera ajouté ultérieurement.",
+    lien: "maths-6e-nlns.html",
+    nouveau: true
+  },
+  {
     classe: "5e",
-    titre: "Mathématiques en 5e NLS",
+    titre: "Mathématiques — mes 5e NLS",
     chapitre: "Cours, remise à niveau et automatismes",
     type: "Site de cours interactif",
     description: "Ressources de mathématiques destinées aux élèves de 5e NLS.",
@@ -49,7 +58,7 @@ const COURS = [
   },
   {
     classe: "5e",
-    titre: "Mathématiques en 5e — classe ordinaire",
+    titre: "Mathématiques en 5e ordinaire",
     chapitre: "Cours, exercices et automatismes",
     type: "Site de cours interactif",
     description: "Cours interactif et exercices de mathématiques destinés aux élèves de 5e.",
@@ -58,12 +67,30 @@ const COURS = [
   },
 
   {
+    classe: "5e",
+    titre: "Mathématiques en 5e PLPS",
+    chapitre: "Contenu à venir",
+    type: "Bientôt disponible",
+    description: "L’espace des 5e PLPS sera complété lorsque les ressources seront prêtes.",
+    lien: "maths-5e-plps.html",
+    nouveau: true
+  },
+  {
     classe: "4e",
     titre: "Mathématiques en 4e — classe 416",
     chapitre: "Cours et exercices interactifs",
     type: "Site de classe",
     description: "Chapitres, rappels de cours, exercices interactifs et automatismes.",
     lien: "maths-4e-416.html",
+    nouveau: true
+  },
+  {
+    classe: "4e",
+    titre: "Mathématiques en 4e ordinaire",
+    chapitre: "Contenu à venir",
+    type: "Bientôt disponible",
+    description: "L’espace de 4e ordinaire sera complété lorsque les ressources seront prêtes.",
+    lien: "maths-4e-ordinaire.html",
     nouveau: true
   },
   {
