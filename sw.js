@@ -1,9 +1,9 @@
-const CACHE = 'maths-interactives-v13';
+const CACHE = 'maths-interactives-v14';
 const FILES = [
-  './', './index.html', './style.css?v=10', './cours.js?v=12', './manifest.webmanifest',
+  './', './index.html', './style.css?v=10', './cours.js?v=13', './manifest.webmanifest',
   './maths-4e-416.html', './maths-3e-306.html', './maths-3e-312.html',
   './maths-seconde.html', './maths-premiere-specialite.html', './scratch-pas-a-pas.html',
-  './maths-6e.html', './maths-5e-nls.html', './tableur-pas-a-pas-5e-3e.html',
+  './maths-6e.html', './maths-5e-nls.html', './maths-5e.html', './tableur-pas-a-pas-5e-3e.html',
   './course-aux-nombres-3e.html', './snt-seconde.html',
   './icon-192.png', './icon-512.png'
 ];
