@@ -49,10 +49,10 @@ const COURS = [
   },
   {
     classe: "5e",
-    titre: "Mathématiques — mes 5e NLS",
+    titre: "Mathématiques en 5e — NLS et PLPS",
     chapitre: "Cours, remise à niveau et automatismes",
     type: "Site de cours interactif",
-    description: "Ressources de mathématiques destinées aux élèves de 5e NLS.",
+    description: "Espace commun pour les élèves de 5e NLS et de 5e PLPS. Les ressources PLPS seront ajoutées ultérieurement.",
     lien: "maths-5e-nls.html",
     nouveau: true
   },
@@ -67,30 +67,12 @@ const COURS = [
   },
 
   {
-    classe: "5e",
-    titre: "Mathématiques en 5e PLPS",
-    chapitre: "Contenu à venir",
-    type: "Bientôt disponible",
-    description: "L’espace des 5e PLPS sera complété lorsque les ressources seront prêtes.",
-    lien: "maths-5e-plps.html",
-    nouveau: true
-  },
-  {
     classe: "4e",
-    titre: "Mathématiques en 4e — classe 16",
+    titre: "Mathématiques en 4e — classe 416 et 4e ordinaire",
     chapitre: "Cours et exercices interactifs",
-    type: "Site de classe",
-    description: "Chapitres, rappels de cours, exercices interactifs et automatismes.",
+    type: "Site de cours interactif",
+    description: "Espace commun pour la classe 416 et les élèves de 4e ordinaire. Les ressources complémentaires seront ajoutées ultérieurement.",
     lien: "maths-4e-416.html",
-    nouveau: true
-  },
-  {
-    classe: "4e",
-    titre: "Mathématiques en 4e ordinaire",
-    chapitre: "Contenu à venir",
-    type: "Bientôt disponible",
-    description: "L’espace de 4e ordinaire sera complété lorsque les ressources seront prêtes.",
-    lien: "maths-4e-ordinaire.html",
     nouveau: true
   },
   {
