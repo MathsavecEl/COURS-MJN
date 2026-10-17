@@ -1,6 +1,6 @@
-const CACHE = 'maths-interactives-v12';
+const CACHE = 'maths-interactives-v13';
 const FILES = [
-  './', './index.html', './style.css?v=10', './cours.js?v=11', './manifest.webmanifest',
+  './', './index.html', './style.css?v=10', './cours.js?v=12', './manifest.webmanifest',
   './maths-4e-416.html', './maths-3e-306.html', './maths-3e-312.html',
   './maths-seconde.html', './maths-premiere-specialite.html', './scratch-pas-a-pas.html',
   './maths-6e.html', './maths-5e-nls.html', './tableur-pas-a-pas-5e-3e.html',
