@@ -30,6 +30,25 @@ const CLASSES = [
 
 const COURS = [
   {
+    classe: "6e",
+    titre: "Mathématiques en 6e",
+    chapitre: "Cours, exercices et automatismes",
+    type: "Site de cours interactif",
+    description: "Cours illustrés, exercices corrigés et automatismes pour les élèves de 6e.",
+    lien: "maths-6e.html",
+    nouveau: true
+  },
+  {
+    classe: "5e",
+    titre: "Mathématiques en 5e NLS",
+    chapitre: "Cours, remise à niveau et automatismes",
+    type: "Site de cours interactif",
+    description: "Ressources de mathématiques destinées aux élèves de 5e NLS.",
+    lien: "maths-5e-nls.html",
+    nouveau: true
+  },
+
+  {
     classe: "4e",
     titre: "Mathématiques en 4e — classe 416",
     chapitre: "Cours et exercices interactifs",
@@ -81,6 +100,15 @@ const COURS = [
     type: "Site de classe",
     description: "Cours, séries d'exercices et automatismes de Première spécialité.",
     lien: "maths-premiere-specialite.html",
+    nouveau: true
+  },
+  {
+    classe: "Divers",
+    titre: "Tableur pas à pas — 5e à 3e",
+    chapitre: "Tableur et calculs",
+    type: "Activité interactive",
+    description: "Apprends à utiliser un tableur avec des étapes guidées, des exemples et des exercices interactifs.",
+    lien: "tableur-pas-a-pas-5e-3e.html",
     nouveau: true
   },
   {
