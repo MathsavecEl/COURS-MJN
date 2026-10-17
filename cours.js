@@ -52,7 +52,7 @@ const COURS = [
     titre: "Mathématiques en 5e — NLS et PLPS",
     chapitre: "Cours, remise à niveau et automatismes",
     type: "Site de cours interactif",
-    description: "Espace commun pour les élèves de 5e NLS et de 5e PLPS. Les ressources PLPS seront ajoutées ultérieurement.",
+    description: "Espace commun pour les élèves de 5e NLS et de 5e PLPS.",
     lien: "maths-5e-nls.html",
     nouveau: true
   },
@@ -71,7 +71,7 @@ const COURS = [
     titre: "Mathématiques en 4e — classe 416 et 4e ordinaire",
     chapitre: "Cours et exercices interactifs",
     type: "Site de cours interactif",
-    description: "Espace commun pour la classe 416 et les élèves de 4e ordinaire. Les ressources complémentaires seront ajoutées ultérieurement.",
+    description: "Espace commun pour la classe 416 et les élèves de 4e ordinaire.",
     lien: "maths-4e-416.html",
     nouveau: true
   },
