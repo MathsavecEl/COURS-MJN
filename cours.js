@@ -77,7 +77,7 @@ const COURS = [
   },
   {
     classe: "4e",
-    titre: "Mathématiques en 4e — classe 416",
+    titre: "Mathématiques en 4e — classe 16",
     chapitre: "Cours et exercices interactifs",
     type: "Site de classe",
     description: "Chapitres, rappels de cours, exercices interactifs et automatismes.",
