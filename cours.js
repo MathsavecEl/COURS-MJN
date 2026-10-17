@@ -68,7 +68,7 @@ const COURS = [
   },
   {
     classe: "3e",
-    titre: "Mathématiques en 3e prépa-métiers — classe 306",
+    titre: "Mathématiques en 3e — classe 306 — 3e prépa-métiers",
     chapitre: "Cours, automatismes et entraînement",
     type: "Site de classe",
     description: "Cours interactifs, chapitres, QCM et préparation aux évaluations.",
@@ -77,7 +77,7 @@ const COURS = [
   },
   {
     classe: "3e",
-    titre: "Mathématiques en 3e — classe 312",
+    titre: "Mathématiques en 3e — classe 312 — 3e ordinaire",
     chapitre: "Cours, automatismes et brevet",
     type: "Site de classe",
     description: "Chapitres, rappels de cours, exercices interactifs et problèmes type brevet.",
