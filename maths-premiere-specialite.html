@@ -828,8 +828,6 @@ function pageHome(){
     h += `<a class="tile" href="#ch/${c.id}"><div class="m">Chapitre ${k + 1}</div><div class="t">${c.t}</div><div class="m">${c.app.length} exercices · ${c.appro.length} problèmes</div><div class="bar"><div style="width:${s.n ? 100 * s.d / s.n : 0}%"></div></div></a>`;
   });
   h += `</div></div>`;
-  h += `<div class="card mail">✉️ Si vous remarquez une erreur ou si vous bloquez, n’hésitez pas à m’écrire à <a href="mailto:${SITE.mail}"><b>${SITE.mail}</b></a>. <br><span style="color:var(--muted)">— ${SITE.prof}</span></div>`;
-  h += `<p class="maj">🗓️ Dernière mise à jour : <b>${MAJ}</b>. Je mets ce site à jour régulièrement (corrections, nouveaux exercices).</p>`;
   setPage(h);
 }
 
