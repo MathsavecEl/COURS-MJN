@@ -3243,8 +3243,7 @@ function pageHome() {
         <a class="go" href="#/memo"><span class="gi">📝</span><b>Mémo</b><span>Toutes les formules et les rédactions à connaître</span></a>
       </div></section>
     <section class="sheet"><h3>Comment travailler ?</h3><ol class="howto"><li><b>Je retiens</b> : lis le cours et l'exemple corrigé, sans te presser.</li><li><b>Je m'entraîne</b> : fais les exercices d'application. Tape ta réponse et clique sur « Vérifier ».</li><li><b>Je vais plus loin</b> : attaque les exercices d'approfondissement, comme au brevet.</li><li>Bloqué(e) ? Ouvre le <b>coup de pouce</b>. Après deux essais, la <b>correction</b> est disponible.</li><li>Avant une évaluation, fais le <b>QCM d'entraînement</b> du chapitre, puis une « nouvelle série ».</li></ol>
-      <p class="muted">Pour écrire : virgule ou point pour les décimaux (4,5), barre pour les fractions (3/4), ^ pour les puissances (5^2 ou 10^3). Ta progression est enregistrée sur cet appareil.</p>${mailBox()}</section>
-    <p class="maj"><b>Dernière mise à jour : ${MAJ}</b><br>Consultez la date de mise à jour pour vérifier que vous disposez de la version la plus récente.</p>`;
+      <p class="muted">Pour écrire : virgule ou point pour les décimaux (4,5), barre pour les fractions (3/4), ^ pour les puissances (5^2 ou 10^3). Ta progression est enregistrée sur cet appareil.</p></section>`;
   const setName = () => { ST.name = document.getElementById('nm').value.trim().slice(0, 24); save(); document.getElementById('hello').textContent = ST.name ? 'Bon courage ' + ST.name + ' ! On y va !' : 'Bon courage à tous !'; };
   document.getElementById('nmok').onclick = setName;
   document.getElementById('nm').onkeydown = e => { if (e.key === 'Enter') setName(); };
