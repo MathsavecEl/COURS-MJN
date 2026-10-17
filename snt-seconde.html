@@ -942,7 +942,7 @@ function route(){
 }
 function boot(){
   document.title = SITE.titre + ' · ' + SITE.prof;
-  document.body.innerHTML = `<header class="top"><button class="burger" aria-label="Menu">☰</button><div class="logo" onclick="location.hash='#accueil'"><span>${SITE.court}</span>${SITE.logo}</div><div class="att">À l’attention de mes élèves de ${SITE.classe}</div><div class="prof">${SITE.prof}</div></header>
+  document.body.innerHTML = `<header class="top"><button class="burger" aria-label="Menu">☰</button><div class="logo" onclick="location.hash='#accueil'"><span>${SITE.court}</span>${SITE.logo}</div><div class="att">À l’attention des élèves de ${SITE.classe}</div><div class="prof">${SITE.prof}</div></header>
   <div class="layout"><nav id="nav"></nav><main id="main"></main></div>
   <footer class="foot">✉️ Si vous remarquez une erreur ou si vous bloquez, n’hésitez pas à m’écrire à <a href="mailto:${SITE.mail}"><b>${SITE.mail}</b></a> · ${SITE.prof}</footer>`;
   document.querySelector('.burger').onclick = () => document.getElementById('nav').classList.toggle('open');
