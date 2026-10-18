@@ -81,7 +81,7 @@
 
 <footer><div class="conteneur" id="pied"></div></footer>
 
-<script src="cours.js?v=20"></script>
+<script src="cours.js?v=21"></script>
 <script src="recherche-index.js?v=6"></script>
 <script>
   const $ = id => document.getElementById(id);
@@ -108,15 +108,16 @@
   if (!CLASSES.some(c => c.nom === choisie)) choisie = null;
 
   function afficherClasses() {
-    const ordreAccueil = ["6e", "5e", "4e", "3e", "Seconde", "Première", "Terminale", "Divers"];
+    const ordreAccueil = ["6e", "5e", "4e", "3e", "Divers", "Seconde", "Première", "Terminale"];
     const classesOrdonnees = ordreAccueil.map(nom => CLASSES.find(c => c.nom === nom)).filter(Boolean);
     $('classes').innerHTML = classesOrdonnees.map(c => {
       const n = c.lienDirect ? 1 : COURS.filter(x => x.classe === c.nom).length;
-      const label = c.nom === "Première" ? "Spécialités Première" : (c.label || c.nom);
-      const icone = c.nom === "Divers" ? "▤" : c.nom === "SNT" ? "▣" : "🎓";
-      return `<button class="classe classe-accueil" style="--h:${c.couleur}" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}" ${c.lienDirect ? 'data-lien="' + c.lienDirect + '"' : ''}>
+      const label = c.nom === "Première" ? "Première · spécialité" : (c.label || c.nom);
+      const icone = c.nom === "Divers" ? "▤" : "🎓";
+      const separateur = c.nom === "6e" ? '<div class="separateur-classes">Collège et divers</div>' : (c.nom === "Seconde" ? '<div class="separateur-classes">Lycée</div>' : '');
+      return separateur + `<button class="classe classe-accueil" style="--h:215" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}" ${c.lienDirect ? 'data-lien="' + c.lienDirect + '"' : ''}>
         <span class="icone-classe" aria-hidden="true">${icone}</span>
-        <span class="texte-classe"><strong>${echap(label)}</strong>${c.sousTitre ? '<small>' + echap(c.sousTitre) + '</small>' : ''}${c.lienDirect ? '' : '<small>' + n + ' ressource' + (n > 1 ? 's' : '') + '</small>'}</span>
+        <span class="texte-classe"><strong>${echap(label)}</strong>${c.lienDirect ? '' : '<small>' + n + ' ressource' + (n > 1 ? 's' : '') + '</small>'}</span>
       </button>`;
     }).join('') + `<div class="encouragement-accueil"><span>Crois en toi,</span><strong>tu es capable !</strong><span class="sourire">☺</span></div>`;
     $('classes').querySelectorAll('.classe').forEach(b => b.onclick = () => {
