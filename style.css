@@ -158,3 +158,46 @@ footer .blague-bas span { margin-right:6px; }
   font-size: .9rem;
 }
 .derniere-mise-a-jour strong { color: var(--texte); }
+
+
+/* ---------- Accueil revisité : COURS MJN ---------- */
+.barre-haute {
+  min-height: 76px; display:flex; align-items:center; justify-content:space-between;
+  gap:18px; padding:12px clamp(16px,4vw,48px); color:#fff;
+  background:linear-gradient(110deg,#123d32,#176b55);
+}
+.identite { display:flex; align-items:center; gap:12px; color:#fff; text-decoration:none; min-width:0; }
+.logo-pi { display:grid; place-items:center; width:52px; height:52px; flex:none;
+  border:3px solid #f4d28b; border-radius:10px; color:#fff; font:700 2rem Georgia,serif;
+  transform:rotate(-5deg); }
+.identite strong { display:block; font-size:1.35rem; line-height:1.2; letter-spacing:.02em; }
+.identite small { display:block; color:#e1f5eb; font-family:Georgia,serif; font-style:italic; }
+.liens-haut { display:flex; gap:clamp(10px,2vw,28px); align-items:center; }
+.liens-haut a { color:#fff; text-decoration:none; font-size:.92rem; font-weight:600; padding:10px 4px; }
+.liens-haut a:hover,.liens-haut a:focus-visible { text-decoration:underline; text-underline-offset:6px; }
+.hero { border-radius:0; box-shadow:none; padding:clamp(42px,6vw,68px) 0 34px; text-align:center;
+  color:#104d3e; background:linear-gradient(135deg,#eaf7e7 0%,#f8fbef 55%,#d9f0dd 100%); }
+.hero::after { color:#176b55; opacity:.08; }
+.hero h1 { max-width:none; font-family:var(--corps-font); font-size:clamp(2rem,4.4vw,3.3rem); color:#104d3e; }
+.hero p.intro { margin:0 auto; max-width:720px; color:#164b3d; font-size:clamp(1rem,2vw,1.2rem); }
+.hero .surtitre { justify-content:center; color:#176b55; }
+.hero .surtitre span { border-color:#c8e4cf; background:#ffffff80; color:#176b55; }
+.message-programmes { display:flex; align-items:center; justify-content:center; gap:14px;
+  max-width:760px; margin:28px auto 0; padding:14px 20px; text-align:left;
+  background:#d3ebce; border:1px solid #bde0b8; border-radius:14px; color:#174d3c; }
+.message-programmes > span { font-size:1.8rem; flex:none; }
+.message-programmes p { margin:0; font-size:.94rem; }
+.accueil-main { padding-top:28px; }
+.accueil-main .classes { grid-template-columns:repeat(auto-fit,minmax(175px,1fr)); gap:14px; margin:0 0 18px; }
+.accueil-main .classe { min-height:88px; border-radius:13px; padding:16px; }
+.accueil-main .classe .pastille { width:46px;height:46px;font-size:1.05rem; }
+.accueil-main .classe strong { font-size:1.08rem; }
+.derniere-mise-a-jour { max-width:fit-content; margin:0 auto 18px; }
+@media(max-width:600px) {
+  .barre-haute { align-items:flex-start; flex-direction:column; gap:8px; }
+  .liens-haut { width:100%; justify-content:space-around; }
+  .hero { padding-top:40px; }
+  .message-programmes { align-items:flex-start; padding:12px; }
+  .accueil-main .classes { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .accueil-main .classe { gap:8px; padding:11px; min-height:78px; }
+}
