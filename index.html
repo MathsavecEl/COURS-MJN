@@ -106,14 +106,22 @@
   if (!CLASSES.some(c => c.nom === choisie)) choisie = null;
 
   function afficherClasses() {
-    $('classes').innerHTML = CLASSES.map(c => {
-      const n = COURS.filter(x => x.classe === c.nom).length;
-      return `<button class="classe" style="--h:${c.couleur}" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}">
-        <span class="pastille">${echap(c.court || c.nom.slice(0, 2))}</span>
-        <span><strong>${echap(c.label || c.nom)}</strong><small>${n ? n + ' ressource' + (n > 1 ? 's' : '') : 'Bientôt'}</small></span>
+    const ordreAccueil = ["3e", "4e", "Seconde", "Première", "Divers", "SNT", "6e", "5e", "Terminale"];
+    const classesOrdonnees = ordreAccueil.map(nom => {
+      if (nom === "SNT") return { nom: "SNT", label: "SNT", court: "▣", couleur: 205, lienDirect: "snt-seconde.html", sousTitre: "(Seconde)" };
+      return CLASSES.find(c => c.nom === nom);
+    }).filter(Boolean);
+    $('classes').innerHTML = classesOrdonnees.map(c => {
+      const n = c.lienDirect ? 1 : COURS.filter(x => x.classe === c.nom).length;
+      const label = c.nom === "Première" ? "Spécialités Première" : (c.label || c.nom);
+      const icone = c.nom === "Divers" ? "▤" : c.nom === "SNT" ? "▣" : "🎓";
+      return `<button class="classe classe-accueil" style="--h:${c.couleur}" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}" ${c.lienDirect ? 'data-lien="' + c.lienDirect + '"' : ''}>
+        <span class="icone-classe" aria-hidden="true">${icone}</span>
+        <span class="texte-classe"><strong>${echap(label)}</strong>${c.sousTitre ? '<small>' + echap(c.sousTitre) + '</small>' : ''}${c.lienDirect ? '' : '<small>' + n + ' ressource' + (n > 1 ? 's' : '') + '</small>'}</span>
       </button>`;
-    }).join('');
+    }).join('') + `<div class="encouragement-accueil"><span>Crois en toi,</span><strong>tu es capable !</strong><span class="sourire">☺</span></div>`;
     $('classes').querySelectorAll('.classe').forEach(b => b.onclick = () => {
+      if (b.dataset.lien) { location.href = b.dataset.lien; return; }
       choisie = b.dataset.nom;
       history.pushState({ classe: choisie }, '', '?classe=' + encodeURIComponent(choisie));
       afficherClasses();
