@@ -438,7 +438,7 @@ Une erreur, un blocage ? Écrivez-moi : <a href="mailto:mathsclavie20@gmail.com"
    ============================================================ */
 const F = (n, d) => `<span class="fr"><span>${n}</span><span>${d}</span></span>`;
 const R = s => `<span class="rad">√<span>${s}</span></span>`;
-const V = s => { const n = s.normalize('NFD'); return n.includes('\u0302') ? `<span class="angle-letter"><i>${n.replace(/\u0302/g, '')}</i><span class="hat-mark">⌃</span></span>` : `<i>${s}</i>`; };
+const V = s => { const n = s.normalize('NFD'); return n.includes('\u0302') ? `<span class="angle-letter"><i>${n.replace(/\u0302/g, '')}</i><span class="hat-mark">⌒</span></span>` : `<i>${s}</i>`; };
 const fmt = s => String(s).replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>').replace(/\^(−?-?\d+|[a-zA-Z])/g, '<sup>$1</sup>');
 
 /* nombre en écriture française : virgule, espace des milliers, signe − */
