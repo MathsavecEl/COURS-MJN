@@ -1,7 +1,7 @@
 /* Configuration du site et catalogue des ressources. */
 const SITE = {
   titre: "COURS MJN",
-  presentation: "Un espace pour mes élèves, mais aussi pour tous ceux qui souhaitent se défier, renouer avec les mathématiques et revoir les notions à leur rythme.",
+  presentation: "Et si les mathématiques n’étaient pas si difficiles ? Jeune professeur, je souhaite déconstruire les idées reçues et montrer à mes élèves qu’avec les bons outils et un accompagnement adapté, chacun peut progresser à son rythme et reprendre confiance en soi. C’est avec cette conviction qu’est né MJN COURS !",
   enseignant: "M. AHA MAJANI",
   matiere: "Mathématiques",
   etablissement: "",
