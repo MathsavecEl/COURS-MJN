@@ -40,7 +40,7 @@
 
       var resultats = index.filter(function (item) {
         var titre = normaliserRecherche(item.titre).replace(/^(le|la|les|l)\s+/, '');
-        return titre === terme;
+        return titre.indexOf(terme) !== -1;
       });
 
       if (!resultats.length) {
