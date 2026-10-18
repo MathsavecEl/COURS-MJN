@@ -1,4 +1,4 @@
-const CACHE = 'maths-interactives-v26';
+const CACHE = 'maths-interactives-v27';
 const FILES = [
   './', './index.html', './style.css?v=13', './cours.js?v=19', './recherche-index.js?v=6', './progression.js?v=2', './manifest.webmanifest',
   './maths-4e-416.html', './maths-3e-306.html', './maths-3e-312.html',
@@ -18,7 +18,7 @@ self.addEventListener('fetch', event => {
   const request = event.request;
   const url = new URL(request.url);
   const isPageOrScript = request.mode === 'navigate' ||
-    /\\.(?:html|js|css)$/.test(url.pathname);
+    /\.(?:html|js|css)$/.test(url.pathname);
   if (isPageOrScript) {
     event.respondWith(fetch(request).then(response => {
       if (response.ok) {
