@@ -1,16 +1,16 @@
 /* Configuration du site et catalogue des ressources. */
 const SITE = {
   titre: "MJN COURS",
-  presentation: "Et si les mathématiques n’étaient pas si difficiles ? Jeune professeur, je souhaite déconstruire les idées reçues et montrer à mes élèves qu’avec les bons outils et un accompagnement adapté, chacun peut progresser à son rythme et reprendre confiance en soi. C’est avec cette conviction qu’est né MJN COURS !",
+  presentation: "Cours, exercices et activités interactives pour apprendre, réviser et progresser en mathématiques.",
   enseignant: "M. AHA MAJANI",
   matiere: "Mathématiques",
   etablissement: "",
   droits: "Ressources pédagogiques",
   aPropos: [
-    "Et si les mathématiques n’étaient pas si difficiles ? Jeune professeur, je souhaite déconstruire les idées reçues et montrer à mes élèves qu’avec les bons outils et un accompagnement adapté, chacun peut progresser à son rythme et reprendre confiance en soi. C’est avec cette conviction qu’est né MJN COURS !",
+    "Des cours et des activités interactives pour apprendre, réviser et progresser.",
     "Les cours proposés pour les classes de 6e, 5e et Seconde sont conformes aux nouveaux programmes. En Première et en Terminale, les ressources concernent les spécialités mathématiques.",
     "Pour les classes de 4e et de 3e, les nouveaux programmes entreront respectivement en vigueur à la rentrée 2027 et à la rentrée 2028.",
-    "Choisis ta classe, puis ouvre la ressource qui t’intéresse. Les activités interactives sont accessibles sans compte élève."
+    "Choisis un niveau et ouvre la ressource souhaitée. Aucun compte élève n’est nécessaire."
   ],
   signature: "Khalili ☺",
   blague: "Un matheux n’urine pas, il fait π-π.",
@@ -106,8 +106,8 @@ const COURS = [
     classe: "Seconde",
     titre: "SNT — Sciences numériques et technologie",
     chapitre: "SNT",
-    type: "Site de cours interactif",
-    description: "",
+    type: "",
+    description: "Cours et activités interactives de SNT.",
     lien: "snt-seconde.html",
     nouveau: true
   },
