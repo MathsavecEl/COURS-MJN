@@ -298,3 +298,16 @@ body { background:#f7f8f1; color:#173f35; }
  .carte p,.carte .ouvrir,.classe small { color:var(--doux)!important; }
  .carte h3,.classe strong { color:var(--texte)!important; }
 }
+/* Ajustements de lisibilité pour la charte unifiée */
+.classes { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.separateur-classes { grid-column:1/-1; margin:18px 0 0; padding:0 0 8px; border-bottom:1px solid var(--bord); color:var(--texte); font-size:1.15rem; font-weight:700; }
+.classe,.classe[style],.classe[style*="--h"] { --h:215 !important; }
+.classe .pastille,.classe .icone-classe { background:var(--accent-doux)!important; color:var(--accent)!important; }
+.classe[aria-pressed="true"] { background:var(--accent-doux)!important; border-color:var(--accent)!important; color:var(--texte)!important; }
+.classe[aria-pressed="true"] small { color:var(--doux)!important; }
+.carte .etiquette.type { display:none!important; }
+.hero .surtitre span { background:var(--surface)!important; color:var(--texte)!important; border:1px solid var(--bord)!important; }
+@media(prefers-color-scheme:dark) {
+ .separateur-classes { color:var(--texte); border-color:var(--bord); }
+ .hero .surtitre span { background:#22334a!important; color:#edf2fa!important; border-color:#435570!important; }
+}
