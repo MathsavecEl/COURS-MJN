@@ -44,7 +44,10 @@
   function addResumePanel() {
     if (!isHome) return;
     const last = safeRead(KEY);
-    if (!last || !last.url || !last.url.endsWith('.html') || last.url.endsWith('/index.html')) return;
+    if (!last || !last.url) return;
+    let lastPath = '';
+    try { lastPath = new URL(last.url, location.href).pathname; } catch (_) { return; }
+    if (!lastPath.endsWith('.html') || lastPath.endsWith('/index.html')) return;
     const panel = document.createElement('section');
     panel.id = 'mjn-resume';
     panel.innerHTML = '<div><strong>Reprendre là où tu t’étais arrêté ?</strong><p></p></div><div class="mjn-resume-actions"><button type="button" id="mjn-continue">Continuer</button><button type="button" id="mjn-reset">Recommencer à zéro</button></div>';
