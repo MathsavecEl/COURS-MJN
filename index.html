@@ -119,8 +119,7 @@
   function afficherRecherche(terme) {
     const zone = $('resultats-recherche');
     const listeCours = $('liste');
-    const mots = normaliser(terme).split(/\s+/).filter(Boolean);
-    if (!mots.length) {
+    if (!normaliser(terme)) {
       zone.hidden = true;
       zone.innerHTML = '';
       listeCours.hidden = false;
@@ -128,18 +127,11 @@
     }
     const index = Array.isArray(INDEX_RECHERCHE) ? INDEX_RECHERCHE : [];
     const requete = normaliser(terme);
-    // La recherche porte sur les titres des chapitres, pas sur tout leur contenu.
-    // On ignore seulement les articles initiaux pour reconnaître « Le théorème… »
-    // lorsque l'utilisateur saisit « théorème… ».
+    // Correspondance exacte du titre, en ignorant seulement un article initial.
+    // Les chapitres associés ou les titres plus longs ne sont pas affichés.
     const titreNormalise = item => normaliser(item.titre).replace(/^(le|la|les|l)\s+/, '');
-    const resultats = index.filter(item => {
-      const titre = titreNormalise(item);
-      return titre === requete || mots.every(mot => titre.split(' ').includes(mot));
-    }).sort((a, b) => {
-      const exactA = titreNormalise(a) === requete ? 0 : 1;
-      const exactB = titreNormalise(b) === requete ? 0 : 1;
-      return exactA - exactB || a.titre.localeCompare(b.titre, 'fr');
-    });
+    const resultats = index.filter(item => titreNormalise(item) === requete)
+      .sort((a, b) => a.titre.localeCompare(b.titre, 'fr'));
     zone.hidden = false;
     listeCours.hidden = true;
     if (!resultats.length) {
