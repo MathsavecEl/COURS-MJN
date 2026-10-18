@@ -4475,7 +4475,36 @@ const hintsOf = q => [].concat(q.h || []);
 /* ---------- lecture à voix haute (synthèse vocale du navigateur) ---------- */
 const TTS = typeof speechSynthesis !== 'undefined';
 let frVoice = null;
-if (TTS) { const pickV = () => { const v = speechSynthesis.getVoices().filter(x => /^fr/i.test(x.lang)); frVoice = v.find(x => /fr-FR/i.test(x.lang)) || v[0] || null; }; pickV(); speechSynthesis.onvoiceschanged = pickV; }
+function pickFrenchVoice() {
+  if (!TTS) return null;
+  const voices = speechSynthesis.getVoices();
+  const french = voices.filter(v => /^fr(?:-|$)/i.test(v.lang));
+  frVoice = french.find(v => /^fr-FR$/i.test(v.lang)) || french.find(v => /français|french/i.test(v.name)) || french[0] || null;
+  return frVoice;
+}
+if (TTS) {
+  pickFrenchVoice();
+  speechSynthesis.addEventListener ? speechSynthesis.addEventListener('voiceschanged', pickFrenchVoice) : speechSynthesis.onvoiceschanged = pickFrenchVoice;
+}
+function waitForFrenchVoice() {
+  const current = pickFrenchVoice();
+  if (current) return Promise.resolve(current);
+  return new Promise(resolve => {
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      const voice = pickFrenchVoice();
+      if (voice || Date.now() - startedAt >= 1800) {
+        finished = true;
+        clearInterval(checker);
+        resolve(voice);
+      }
+    };
+    const startedAt = Date.now();
+    const checker = setInterval(finish, 150);
+    finish();
+  });
+}
 function speakText(el) {
   const c = el.cloneNode(true);
   c.querySelectorAll('svg, button, .say, input, .unit, .ans-prof').forEach(x => x.remove());
@@ -4491,15 +4520,31 @@ function speakText(el) {
 }
 let sayBtn = null;
 function stopSpeak() { if (TTS) speechSynthesis.cancel(); if (sayBtn) { sayBtn.classList.remove('on'); sayBtn.textContent = '🔊 Écouter'; } sayBtn = null; }
-function speak(btn) {
-  if (!TTS) return;
+async function speak(btn) {
+  if (!TTS) { alert('La lecture audio n’est pas prise en charge par ce navigateur.'); return; }
   if (sayBtn === btn) return stopSpeak();
   stopSpeak();
+  sayBtn = btn;
+  const voice = await waitForFrenchVoice();
+  if (sayBtn !== btn) return;
+  if (!voice) {
+    sayBtn = null;
+    btn.classList.remove('on');
+    btn.textContent = '🔊 Écouter';
+    alert('Aucune voix française n’est disponible sur cet appareil. Active ou installe une voix française dans les paramètres de synthèse vocale, puis réessaie. Aucune lecture en anglais ne sera lancée.');
+    return;
+  }
   const zone = btn.closest('.box, .q, .ex-e, .qz, .rap, .sayzone') || btn.parentElement;
   const parts = (speakText(zone).match(/[^.!?;:]+[.!?;:]*/g) || []).map(p => p.trim()).filter(Boolean);
-  sayBtn = btn; btn.classList.add('on'); btn.textContent = '⏹ Arrêter';
-  parts.forEach((p, i) => { const u = new SpeechSynthesisUtterance(p); u.lang = 'fr-FR'; if (frVoice) u.voice = frVoice; u.rate = 0.85;
-    if (i === parts.length - 1) u.onend = () => { if (sayBtn === btn) stopSpeak(); }; speechSynthesis.speak(u); });
+  btn.classList.add('on'); btn.textContent = '⏹ Arrêter';
+  parts.forEach((p, i) => {
+    const u = new SpeechSynthesisUtterance(p);
+    u.lang = 'fr-FR';
+    u.voice = voice;
+    u.rate = 0.85;
+    if (i === parts.length - 1) u.onend = () => { if (sayBtn === btn) stopSpeak(); };
+    speechSynthesis.speak(u);
+  });
 }
 
 /* ---------- rendu d'une question et d'un exercice ---------- */
