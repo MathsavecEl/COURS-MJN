@@ -254,3 +254,31 @@ body { background:#f7f8f1; color:#173f35; }
  .accueil-main .classes .classe-accueil[data-nom="Divers"] { grid-column:2; }
  .accueil-main .classes .classe-accueil[data-nom="SNT"] { grid-column:3; }
 }
+
+
+/* --- Charte graphique unifiée : une seule couleur pour les classes --- */
+.accueil-main .classe-accueil,
+.accueil-main .classe-accueil[data-nom],
+.accueil-main .classe-accueil[aria-pressed="true"],
+.accueil-main .classe-accueil[data-nom][aria-pressed="true"] {
+  --h: 215 !important;
+  background: var(--surface) !important;
+  color: var(--texte) !important;
+  border: 1px solid var(--bord) !important;
+  box-shadow: 0 2px 7px rgb(20 35 60 / .07);
+}
+.accueil-main .classe-accueil .icone-classe,
+.accueil-main .classe-accueil .pastille { background: var(--accent-doux); color: var(--accent); }
+.accueil-main .classe-accueil:hover { border-color: var(--accent) !important; }
+.accueil-main .classe-accueil[aria-pressed="true"] { background: var(--accent-doux) !important; border-color: var(--accent) !important; }
+.accueil-main .classe-accueil[aria-pressed="true"] small { color: var(--texte); }
+@media (prefers-color-scheme: dark) {
+  :root { --fond:#111827; --surface:#1b2535; --surface-2:#243247; --texte:#edf2fa; --doux:#b5c0d1; --bord:#3a4960; --accent:#79b6ff; --accent-doux:#233c59; color-scheme:dark; }
+  .hero { background:#17263a !important; color:#edf2fa !important; }
+  .hero h1,.hero p.intro,.hero .surtitre { color:#edf2fa !important; }
+  .hero .surtitre span { background:#22334a !important; color:#edf2fa !important; border-color:#435570 !important; }
+  .encouragement-accueil,.a-propos,.contact { background:var(--surface) !important; color:var(--texte) !important; border-color:var(--bord) !important; }
+  .accueil-main .classe-accueil,.accueil-main .classe-accueil[data-nom] { background:var(--surface) !important; color:var(--texte) !important; border-color:var(--bord) !important; }
+  .accueil-main .classe-accueil .icone-classe { background:var(--accent-doux); color:var(--accent); }
+  input,textarea,select { background:var(--surface) !important; color:var(--texte) !important; border-color:var(--bord) !important; }
+}
