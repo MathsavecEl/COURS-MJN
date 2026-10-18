@@ -118,7 +118,7 @@
 
   function afficherRecherche(terme) {
     const listeCours = $('liste');
-    const requete = normaliser(terme);
+    const requete = normaliser(terme).replace(/^(le|la|les|l)\s+/, '');
     if (!requete) return false;
 
     // Les résultats sont écrits directement dans la liste principale.
@@ -173,10 +173,10 @@
   });
   afficherClasses(); afficherCours();
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=26').catch(() => {}));
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=27').catch(() => {}));
   }
 </script>
-<script src="recherche-correctif.js?v=1"></script>
+<script src="recherche-correctif.js?v=2"></script>
 <script src="progression.js?v=2"></script>
 </body>
 </html>
