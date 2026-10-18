@@ -311,3 +311,16 @@ body { background:#f7f8f1; color:#173f35; }
  .separateur-classes { color:var(--texte); border-color:var(--bord); }
  .hero .surtitre span { background:#22334a!important; color:#edf2fa!important; border-color:#435570!important; }
 }
+
+/* Rubriques repliables de l'accueil */
+.groupe-niveaux { grid-column:1/-1; width:100%; }
+.bouton-groupe { display:flex; width:100%; align-items:center; justify-content:space-between; gap:16px; padding:16px 18px; border:1px solid var(--bord); border-radius:14px; background:var(--surface); color:var(--texte); font:inherit; font-weight:700; text-align:left; cursor:pointer; }
+.bouton-groupe:hover,.bouton-groupe:focus-visible { border-color:var(--accent); outline-color:var(--accent); }
+.chevron-groupe { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:var(--accent-doux); color:var(--accent); font-size:1.25rem; }
+.niveaux-groupe { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:10px; padding:12px 0 4px; }
+.niveaux-groupe[hidden] { display:none!important; }
+@media(prefers-color-scheme:dark) {
+ .bouton-groupe { background:#1b2535!important; color:#edf2fa!important; border-color:#3a4960!important; }
+ .bouton-groupe:hover,.bouton-groupe:focus-visible { border-color:#79b6ff!important; }
+ .chevron-groupe { background:#233c59!important; color:#79b6ff!important; }
+}
