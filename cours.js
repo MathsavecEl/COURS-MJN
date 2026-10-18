@@ -7,10 +7,8 @@ const SITE = {
   etablissement: "",
   droits: "Ressources pédagogiques",
   aPropos: [
-    "Des cours et des activités interactives pour apprendre, réviser et progresser.",
-    "Les cours proposés pour les classes de 6e, 5e et Seconde sont conformes aux nouveaux programmes. En Première et en Terminale, les ressources concernent les spécialités mathématiques.",
-    "Pour les classes de 4e et de 3e, les nouveaux programmes entreront respectivement en vigueur à la rentrée 2027 et à la rentrée 2028.",
-    "Choisis un niveau et ouvre la ressource souhaitée. Aucun compte élève n’est nécessaire."
+    "Cours et activités interactives pour réviser et progresser, sans compte élève.",
+    "Programmes : 6e, 5e et Seconde conformes ; nouveaux programmes de 4e et 3e prévus respectivement pour 2027 et 2028."
   ],
   signature: "Khalili ☺",
   blague: "Un matheux n’urine pas, il fait π-π.",
