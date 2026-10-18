@@ -35,15 +35,30 @@
 <link rel="stylesheet" href="style.css?v=14">
 </head>
 <body>
+<nav class="barre-haute">
+  <a class="identite" href="./" aria-label="Accueil COURS MJN">
+    <span class="logo-pi">π</span>
+    <span><strong>COURS MJN</strong><small>Les maths, un pas à la fois !</small></span>
+  </a>
+  <div class="liens-haut">
+    <a href="./" aria-current="page">⌂ <span>Accueil</span></a>
+    <a href="#recherche">⌕ <span>Recherche</span></a>
+    <a href="#apropos">ⓘ <span>À propos</span></a>
+  </div>
+</nav>
 <header class="hero">
   <div class="conteneur">
     <p class="surtitre" id="surtitre"></p>
-    <h1 id="titre">Mes cours</h1>
+    <h1 id="titre">Bienvenue sur COURS MJN</h1>
     <p class="intro" id="presentation"></p>
+    <div class="message-programmes">
+      <span aria-hidden="true">🎯</span>
+      <p>Les cours de 6e, 5e, Seconde et Première sont conformes aux nouveaux programmes. Les programmes de 4e et de 3e entreront en vigueur respectivement l’année prochaine et l’année suivante.</p>
+    </div>
   </div>
 </header>
 
-<main class="conteneur">
+<main class="conteneur accueil-main">
   <div class="classes" id="classes" role="group" aria-label="Choisir une classe"></div>
   <p id="derniere-mise-a-jour" class="derniere-mise-a-jour">📅 Dernière mise à jour du site : <strong>18 octobre 2026</strong></p>
   <div class="outils">
