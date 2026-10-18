@@ -2779,6 +2779,17 @@ else:
 ]
 });
 
-boot();
 
+(function(){
+  function afficherErreurSNT(erreur){
+    const detail = erreur && (erreur.stack || erreur.message) ? (erreur.stack || erreur.message) : String(erreur || "Erreur inconnue");
+    document.body.innerHTML = '<main style="max-width:760px;margin:8vh auto;padding:24px;font:16px/1.6 Arial,sans-serif;background:Canvas;color:CanvasText;border:1px solid #8793a5;border-radius:16px"><h1 style="font-size:1.5rem">Le cours SNT n’a pas pu se lancer</h1><p>Une erreur technique empêche l’affichage du cours. Tu peux revenir à l’accueil et réessayer plus tard.</p><p><a href="index.html">← Retour à MJN COURS</a></p><details><summary>Détail technique à transmettre</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px"></pre></details></main>';
+    const pre = document.querySelector('details pre');
+    if(pre) pre.textContent = detail;
+  }
+  window.addEventListener('error', function(e){ if(e && e.message) afficherErreurSNT(e.message + (e.filename ? ' ('+e.filename+':'+e.lineno+')' : '')); });
+  window.addEventListener('unhandledrejection', function(e){ afficherErreurSNT(e.reason); });
+  try { boot(); } catch(e) { afficherErreurSNT(e); }
+})();
+ 
 </script></body></html>
