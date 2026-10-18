@@ -32,7 +32,7 @@
 <meta property="og:url" content="https://mathsavecel.github.io/COURS-MJN/">
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%233d4bd8'/><path d='M18 20h18a10 10 0 0 1 10 10v16H28a10 10 0 0 1-10-10z' fill='white'/></svg>">
-<link rel="stylesheet" href="style.css?v=20">
+<link rel="stylesheet" href="style.css?v=21">
 </head>
 <body>
 <nav class="barre-haute">
@@ -81,7 +81,7 @@
 
 <footer><div class="conteneur" id="pied"></div></footer>
 
-<script src="cours.js?v=23"></script>
+<script src="cours.js?v=24"></script>
 <script src="recherche-index.js?v=6"></script>
 <script>
   const $ = id => document.getElementById(id);
@@ -200,32 +200,13 @@
   function afficherCours() {
     const terme = $('recherche').value.trim();
     if (afficherRecherche(terme)) return;
-    const ordre = {
-      "Collège": ["6e", "5e", "4e", "3e"],
-      "Lycée": ["Seconde", "Première", "Terminale"],
-      "Divers": ["Divers"]
-    };
-    const classes = choisie ? CLASSES.filter(c => c.nom === choisie) : CLASSES;
-    let html = '';
     if (!choisie) {
-      for (const [groupe, niveaux] of Object.entries(ordre)) {
-        const présents = niveaux.filter(n => classes.some(c => c.nom === n) && COURS.some(c => c.classe === n));
-        if (!présents.length) continue;
-        html += `<section class="groupe groupe-niveaux"><h2 class="titre-section">${groupe}</h2>`;
-        présents.forEach(nom => {
-          const cl = CLASSES.find(c => c.nom === nom);
-          const liste = COURS.filter(c => c.classe === nom);
-          html += `<section class="sous-groupe" id="${encodeURIComponent(nom)}"><h3>${echap(cl.label || cl.nom)}</h3><div class="grille">${liste.map(carte).join('')}</div></section>`;
-        });
-        html += '</section>';
-      }
-    } else {
-      classes.forEach(cl => {
-        const liste = COURS.filter(c => c.classe === cl.nom);
-        html += `<section class="groupe" id="${encodeURIComponent(cl.nom)}"><h2>${echap(cl.label || cl.nom)}</h2>${liste.length ? `<div class="grille">${liste.map(carte).join('')}</div>` : '<p class="vide">Les ressources de cette classe arrivent bientôt.</p>'}</section>`;
-      });
+      $('liste').innerHTML = '<p class="vide accueil-invite">Choisis « Collège et divers » ou « Lycée », puis un niveau pour afficher les ressources.</p>';
+      return;
     }
-    $('liste').innerHTML = html || '<p class="vide">Aucun cours disponible.</p>';
+    const cl = CLASSES.find(c => c.nom === choisie);
+    const liste = COURS.filter(c => c.classe === choisie);
+    $('liste').innerHTML = `<section class="groupe" id="${encodeURIComponent(choisie)}"><h2>${echap(cl?.label || cl?.nom || choisie)}</h2>${liste.length ? `<div class="grille">${liste.map(carte).join('')}</div>` : '<p class="vide">Les ressources de cette classe arrivent bientôt.</p>'}</section>`;
   }
 
   $('recherche').addEventListener('input', afficherCours);
