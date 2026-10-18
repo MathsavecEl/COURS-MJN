@@ -201,6 +201,21 @@ table.pose .h{background:#fff3dc;border-radius:4px}
 .scr .c>.b:first-child{margin-left:-22px;border-radius:6px 6px 6px 0}
 .scr .c .end{height:14px;margin-left:-22px;border-radius:0 0 6px 6px;width:90px}
 .scr .ev{background:#ffbf00;color:#3d2c00}.scr .mv{background:#4c97ff}.scr .lk{background:#9966ff}.scr .ct{background:#ffab19}.scr .se{background:#5cb1d6}.scr .op{background:#59c059}.scr .va{background:#ff8c1a}.scr .pn{background:#0fbd8c}.scr .my{background:#ff6680}
+
+/* Harmonisation COURS MJN : accueil façon feuille de cahier, boutons d'accès bien visibles */
+body{background-color:#f4f6fb!important;background-image:linear-gradient(#e2e8f4 1px,transparent 1px),linear-gradient(90deg,#e2e8f4 1px,transparent 1px)!important;background-size:26px 26px!important}
+.top,header{background:#fff!important;border-bottom:2px solid #d4dbeb!important}
+.card,.sheet,.home-guide,.contact{border-radius:8px!important;border-color:#d4dbeb!important;box-shadow:0 5px 18px rgba(28,33,53,.06)}
+.card.hero,.home-hero,.hero{border-left:5px solid #c22e2e!important}
+.kicker{color:#c22e2e!important}
+.cheer{border:1px dashed #c22e2e!important;border-radius:10px!important;background:#fff!important;color:#24318a!important;padding:14px 18px!important}
+.logo{background:#c22e2e!important;color:#fff!important;border-radius:10px!important}
+a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-label*="retour" i],[aria-label*="accueil" i],.btn.soft,.btn.ghost,.back-button,.btn-retour{
+ background:#c22e2e!important;border:2px solid #a91f1f!important;color:#fff!important;font-weight:800!important;box-shadow:0 2px 0 rgba(0,0,0,.12)
+}
+a[href="#accueil"]:hover,a[href="#/"]:hover,a[data-nav="accueil"]:hover,a[data-r="accueil"]:hover,.btn.soft:hover,.btn.ghost:hover{background:#a91f1f!important;color:#fff!important}
+nav.tabs a[data-nav="accueil"]{border-radius:9px!important;padding:7px 13px!important}
+
 </style></head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '6e', classe: '6ème', court: '6e', titre: 'Maths en 6ème', prof: 'M AHA MAJANI', mail: 'mathsclavie20@gmail.com',
@@ -4602,7 +4617,8 @@ appro: [
 ]
 });
 
-boot();
+function chargerEncouragementMJN(){var s=document.createElement('script');s.src='encouragement.js?v=3';s.async=true;document.head.appendChild(s);}
+boot(); chargerEncouragementMJN();
 
 </script><script src="progression.js?v=1"></script>
 <script src="encouragement.js?v=2"></script>
