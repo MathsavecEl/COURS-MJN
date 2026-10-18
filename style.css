@@ -282,3 +282,19 @@ body { background:#f7f8f1; color:#173f35; }
   .accueil-main .classe-accueil .icone-classe { background:var(--accent-doux); color:var(--accent); }
   input,textarea,select { background:var(--surface) !important; color:var(--texte) !important; border-color:var(--bord) !important; }
 }
+
+/* Catalogue simplifié : une seule couleur, moins d'étiquettes */
+.classe,.classe[style],.carte,.carte[style] { --h:215 !important; }
+.classe .icone-classe { background:var(--accent-doux)!important; color:var(--accent)!important; }
+.carte .etiquette.type,.carte .etiquette.nouveau { display:none!important; }
+.carte .meta { gap:5px; }
+.groupe-niveaux { margin:30px 0 38px; }
+.groupe-niveaux > .titre-section { color:var(--texte); font-size:1.65rem; padding-bottom:10px; border-bottom:2px solid var(--bord); }
+.sous-groupe { margin:20px 0 26px; }
+.sous-groupe h3 { margin:0 0 12px; font-size:1.15rem; color:var(--doux); font-weight:650; }
+@media(prefers-color-scheme:dark) {
+ .groupe-niveaux > .titre-section,.sous-groupe h3 { color:var(--texte)!important; }
+ .carte,.classe { background:var(--surface)!important; color:var(--texte)!important; border-color:var(--bord)!important; }
+ .carte p,.carte .ouvrir,.classe small { color:var(--doux)!important; }
+ .carte h3,.classe strong { color:var(--texte)!important; }
+}
