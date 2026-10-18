@@ -38,6 +38,7 @@
       <input id="recherche" type="search" placeholder="Rechercher un cours, un chapitre…" aria-label="Rechercher un cours">
     </label>
   </div>
+  <div id="resultats-recherche" class="resultats-recherche" hidden aria-live="polite"></div>
   <div id="liste"></div>
 </main>
 
@@ -53,7 +54,8 @@
 
 <footer><div class="conteneur" id="pied"></div></footer>
 
-<script src="cours.js?v=18"></script>
+<script src="cours.js?v=19"></script>
+<script src="recherche-index.js?v=1"></script>
 <script>
   const $ = id => document.getElementById(id);
   const echap = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -110,20 +112,60 @@
     </a>`;
   }
 
+  const normaliser = texte => String(texte || '')
+    .normalize('NFD').replace(/[\\u0300-\\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+  function afficherRecherche(terme) {
+    const zone = $('resultats-recherche');
+    const listeCours = $('liste');
+    const mots = normaliser(terme).split(/\\s+/).filter(Boolean);
+    if (!mots.length) {
+      zone.hidden = true;
+      zone.innerHTML = '';
+      listeCours.hidden = false;
+      return false;
+    }
+    const index = Array.isArray(INDEX_RECHERCHE) ? INDEX_RECHERCHE : [];
+    const resultats = index.filter(item => {
+      const texte = normaliser([item.titre, item.classe, item.chapitre, item.description].join(' '));
+      return mots.every(mot => texte.includes(mot));
+    }).sort((a, b) => {
+      const exactA = normaliser(a.titre).startsWith(normaliser(terme)) ? 0 : 1;
+      const exactB = normaliser(b.titre).startsWith(normaliser(terme)) ? 0 : 1;
+      return exactA - exactB || a.titre.localeCompare(b.titre, 'fr');
+    });
+    zone.hidden = false;
+    listeCours.hidden = true;
+    if (!resultats.length) {
+      zone.innerHTML = '<p class="vide">Aucun résultat pour « ' + echap(terme) + ' ». Essaie un autre mot ou une formulation plus courte.</p>';
+      return true;
+    }
+    zone.innerHTML = '<h2 class="titre-resultats">' + resultats.length + ' résultat' + (resultats.length > 1 ? 's' : '') + ' pour « ' + echap(terme) + ' »</h2>' +
+      '<div class="grille-resultats">' + resultats.map(item =>
+        '<a class="resultat-recherche" href="' + echap(item.lien) + '">' +
+          '<span class="resultat-classe">' + echap(item.classe) + '</span>' +
+          '<strong>' + echap(item.titre) + '</strong>' +
+          '<span class="resultat-description">' + echap(item.description || 'Cours interactif') + '</span>' +
+          '<span class="ouvrir">Ouvrir le chapitre →</span>' +
+        '</a>'
+      ).join('') + '</div>';
+    return true;
+  }
+
   function afficherCours() {
-    const f = $('recherche').value.trim().toLowerCase();
+    const terme = $('recherche').value.trim();
+    if (afficherRecherche(terme)) return;
     const classes = choisie ? CLASSES.filter(c => c.nom === choisie) : CLASSES;
     let html = '';
     classes.forEach(cl => {
-      const liste = COURS.filter(c => c.classe === cl.nom &&
-        [c.titre, c.chapitre, c.type, c.description].join(' ').toLowerCase().includes(f));
-      if (f && !liste.length) return;
+      const liste = COURS.filter(c => c.classe === cl.nom);
       html += `<section class="groupe" id="${encodeURIComponent(cl.nom)}">
         <h2 style="--h:${cl.couleur}">${echap(cl.nom)} <span class="compte">${liste.length || ''}</span></h2>
         ${liste.length ? `<div class="grille">${liste.map(carte).join('')}</div>` : '<p class="vide">Les ressources de cette classe arrivent bientôt.</p>'}
       </section>`;
     });
-    $('liste').innerHTML = html || '<p class="vide">Aucun résultat pour cette recherche.</p>';
+    $('liste').innerHTML = html || '<p class="vide">Aucun cours disponible.</p>';
   }
 
   $('recherche').addEventListener('input', afficherCours);
