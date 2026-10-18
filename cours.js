@@ -7,7 +7,7 @@ const SITE = {
   etablissement: "",
   droits: "Ressources pédagogiques",
   aPropos: [
-    "Cours et activités interactives pour réviser et progresser, sans compte élève.",
+    "Et si les mathématiques n’étaient pas si difficiles ? Jeune professeur, je souhaite déconstruire les idées reçues et montrer à mes élèves qu’avec les bons outils et un accompagnement adapté, chacun peut progresser à son rythme et reprendre confiance en soi. C’est avec cette conviction qu’est né MJN COURS !",
     "Programmes : 6e, 5e et Seconde conformes ; nouveaux programmes de 4e et 3e prévus respectivement pour 2027 et 2028."
   ],
   signature: "Khalili ☺",
