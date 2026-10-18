@@ -106,7 +106,7 @@
   if (!CLASSES.some(c => c.nom === choisie)) choisie = null;
 
   function afficherClasses() {
-    const ordreAccueil = ["3e", "4e", "Seconde", "Première", "Divers", "6e", "5e", "Terminale"];
+    const ordreAccueil = ["6e", "5e", "4e", "3e", "Seconde", "Première", "Terminale", "Divers"];
     const classesOrdonnees = ordreAccueil.map(nom => CLASSES.find(c => c.nom === nom)).filter(Boolean);
     $('classes').innerHTML = classesOrdonnees.map(c => {
       const n = c.lienDirect ? 1 : COURS.filter(x => x.classe === c.nom).length;
