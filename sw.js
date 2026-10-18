@@ -1,4 +1,4 @@
-const CACHE = 'maths-interactives-v21';
+const CACHE = 'maths-interactives-v22';
 const FILES = [
   './', './index.html', './style.css?v=11', './cours.js?v=19', './recherche-index.js?v=2', './progression.js?v=2', './manifest.webmanifest',
   './maths-4e-416.html', './maths-3e-306.html', './maths-3e-312.html',
