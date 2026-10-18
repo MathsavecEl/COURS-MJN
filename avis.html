@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#176b55">
+<meta name="robots" content="noindex, follow">
+<title>Votre avis · COURS MJN</title>
+<link rel="stylesheet" href="style.css?v=16">
+<style>
+.avis-main{max-width:820px;margin:36px auto 64px}.avis-intro{margin:0 0 22px;color:var(--doux)}.avis-panel{background:var(--surface);border:1px solid var(--bord);border-radius:var(--rayon);box-shadow:var(--ombre);padding:clamp(20px,4vw,34px)}.avis-form{display:grid;gap:20px}.avis-field{display:grid;gap:7px}.avis-field label{font-weight:600}.avis-field input,.avis-field select,.avis-field textarea{width:100%;min-width:0;border:1px solid var(--bord);border-radius:12px;padding:13px 14px;background:var(--fond);color:var(--texte);font:inherit}.avis-field textarea{min-height:120px;resize:vertical}.avis-help{font-size:.9rem;color:var(--doux);margin:0}.avis-check{display:flex;gap:11px;align-items:flex-start;padding:14px;background:var(--accent-doux);border-radius:12px}.avis-check input{margin-top:6px;flex:0 0 auto;width:18px;height:18px}.avis-check label{font-weight:500}.avis-submit{border:0;border-radius:999px;padding:14px 22px;background:var(--accent);color:white;font:inherit;font-weight:700;cursor:pointer}.avis-private{border-left:4px solid var(--accent);padding:12px 15px;background:var(--accent-doux);border-radius:0 10px 10px 0}.avis-private p{margin:0}@media(max-width:560px){.avis-main{margin-top:24px}.avis-panel{padding:18px}.avis-submit{width:100%}}
+</style>
+</head>
+<body>
+<nav class="barre-haute"><a class="identite" href="./" aria-label="Accueil COURS MJN"><span class="logo-pi">π</span><span><strong>COURS MJN</strong><small>Les maths, un pas à la fois !</small></span></a><div class="liens-haut"><a href="./">⌂ <span>Accueil</span></a><a href="./#apropos">ⓘ <span>À propos</span></a></div></nav>
+<main class="conteneur avis-main">
+<a href="./" style="display:inline-block;margin-bottom:18px;text-decoration:none;font-weight:600">← Retour à l’accueil</a>
+<header class="hero" style="border-radius:24px;padding:34px 0;margin-bottom:26px"><div class="conteneur"><p class="surtitre"><span>Ton expérience compte</span></p><h1 style="font-size:clamp(2rem,6vw,3.2rem);margin:10px 0">Votre avis m’intéresse !</h1><p class="intro" style="max-width:620px">Quelques instants suffisent pour m’aider à améliorer COURS MJN.</p></div></header>
+<p class="avis-intro">Que tu sois élève, ancien élève, parent ou enseignant, ton retour est le bienvenu : ce qui t’aide, ce qui pourrait être plus clair, ou ce que tu aimerais trouver sur le site.</p>
+<div class="avis-panel">
+<div class="avis-private" style="margin-bottom:24px"><p><strong>🔒 Tes réponses restent privées par défaut.</strong> Elles me sont transmises pour améliorer le site. Rien ne sera publié automatiquement. Si tu souhaites autoriser la publication d’un témoignage, coche l’option dédiée en bas du formulaire.</p></div>
+<form class="avis-form" action="https://formsubmit.co/mathsclavie20@gmail.com" method="POST">
+<input type="hidden" name="_subject" value="Nouvel avis sur COURS MJN"><input type="hidden" name="_template" value="table"><input type="hidden" name="_next" value="https://mathsavecel.github.io/COURS-MJN/merci-avis.html"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="avis-field"><label for="profil">Tu es…</label><select id="profil" name="Profil" required><option value="" selected disabled>Choisis une réponse</option><option>Élève</option><option>Ancien élève</option><option>Parent</option><option>Enseignant</option><option>Autre</option></select></div>
+<div class="avis-field"><label for="classe">Classe concernée (facultatif)</label><select id="classe" name="Classe concernée"><option value="" selected>Je préfère ne pas préciser</option><option>6e</option><option>5e</option><option>4e</option><option>3e</option><option>Seconde</option><option>Première</option><option>Terminale</option><option>Autre</option></select></div>
+<div class="avis-field"><label for="note">Quelle note donnerais-tu au site ?</label><select id="note" name="Note du site" required><option value="" selected disabled>Choisis une note</option><option>⭐ — À améliorer</option><option>⭐⭐ — Pas mal</option><option>⭐⭐⭐ — Bien</option><option>⭐⭐⭐⭐ — Très bien</option><option>⭐⭐⭐⭐⭐ — Excellent</option></select></div>
+<div class="avis-field"><label for="aime">Qu’est-ce que tu apprécies sur le site ?</label><textarea id="aime" name="Points appréciés" placeholder="Les cours, les exercices interactifs, la navigation, le design…"></textarea></div>
+<div class="avis-field"><label for="ameliorer">Que faudrait-il améliorer ou ajouter ?</label><textarea id="ameliorer" name="Suggestions" placeholder="Un chapitre, un type d’exercice, une fonctionnalité…"></textarea></div>
+<div class="avis-field"><label for="temoignage">Un petit témoignage (facultatif)</label><textarea id="temoignage" name="Témoignage proposé" placeholder="Si tu le souhaites, explique en quelques mots en quoi le site t’a aidé."></textarea><p class="avis-help">N’indique pas d’informations personnelles ou confidentielles dans ton message.</p></div>
+<div class="avis-field"><label for="pseudo">Nom ou pseudonyme à afficher si ton témoignage est retenu (facultatif)</label><input id="pseudo" name="Nom ou pseudonyme proposé" type="text" maxlength="60" placeholder="Ex. : un ancien élève"></div>
+<div class="avis-check"><input id="autorisation" name="Autorisation de publication" type="checkbox" value="Oui, j’autorise la publication après sélection"><label for="autorisation">J’autorise M. Aha Majani à sélectionner et publier tout ou partie de mon témoignage sur le site. Cette autorisation est facultative ; mes autres réponses ne seront pas publiées automatiquement.</label></div>
+<p class="avis-help">Le formulaire est transmis par FormSubmit pour permettre l’envoi depuis ce site. En cliquant sur « Envoyer mon avis », tu acceptes que les informations saisies soient traitées pour recevoir et consulter ton retour.</p>
+<button class="avis-submit" type="submit">Envoyer mon avis</button>
+</form></div></main>
+<footer><div class="conteneur">COURS MJN · Merci de contribuer à améliorer les ressources !</div></footer>
+</body></html>
