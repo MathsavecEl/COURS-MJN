@@ -81,7 +81,7 @@
 
 <footer><div class="conteneur" id="pied"></div></footer>
 
-<script src="cours.js?v=21"></script>
+<script src="cours.js?v=22"></script>
 <script src="recherche-index.js?v=6"></script>
 <script>
   const $ = id => document.getElementById(id);
@@ -117,7 +117,7 @@
       const separateur = c.nom === "6e" ? '<div class="separateur-classes">Collège et divers</div>' : (c.nom === "Seconde" ? '<div class="separateur-classes">Lycée</div>' : '');
       return separateur + `<button class="classe classe-accueil" style="--h:215" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}" ${c.lienDirect ? 'data-lien="' + c.lienDirect + '"' : ''}>
         <span class="icone-classe" aria-hidden="true">${icone}</span>
-        <span class="texte-classe"><strong>${echap(label)}</strong>${c.lienDirect ? '' : '<small>' + n + ' ressource' + (n > 1 ? 's' : '') + '</small>'}</span>
+        <span class="texte-classe"><strong>${echap(label)}</strong></span>
       </button>`;
     }).join('') + `<div class="encouragement-accueil"><span>Crois en toi,</span><strong>tu es capable !</strong><span class="sourire">☺</span></div>`;
     $('classes').querySelectorAll('.classe').forEach(b => b.onclick = () => {
