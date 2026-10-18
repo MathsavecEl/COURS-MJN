@@ -11,14 +11,19 @@
     const bar = document.createElement('nav');
     bar.id = 'mjn-nav';
     bar.setAttribute('aria-label', 'Navigation du site');
-    bar.innerHTML = '<a href="./" class="mjn-nav-btn">← Retour à l’accueil</a><button type="button" class="mjn-nav-btn mjn-home-btn">Accueil</button>';
+    bar.innerHTML = '<button type="button" class="mjn-nav-btn mjn-back-btn">← Retour</button><a href="./" class="mjn-nav-btn">⌂ Accueil</a>';
     document.body.appendChild(bar);
-    bar.querySelector('.mjn-home-btn').addEventListener('click', () => { location.href = HOME; });
+    bar.querySelector('.mjn-back-btn').addEventListener('click', () => {
+      if (history.length > 1 && document.referrer && new URL(document.referrer).origin === location.origin) history.back();
+      else location.href = HOME;
+    });
   }
 
   function trackPage() {
     if (isHome) return;
     const here = location.pathname + location.search;
+    const savedScrollBeforeLoad = safeRead(SCROLL_PREFIX + location.pathname);
+    const shouldResume = sessionStorage.getItem('coursMJN:resume') === '1';
     const save = () => {
       safeWrite(KEY, { url: here, title: document.title || 'Ma ressource', scroll: window.scrollY || 0, updated: Date.now() });
       safeWrite(SCROLL_PREFIX + location.pathname, window.scrollY || 0);
@@ -29,12 +34,10 @@
     window.addEventListener('beforeunload', save);
     save();
 
-    if (sessionStorage.getItem('coursMJN:resume') === '1') {
+    if (shouldResume) {
       sessionStorage.removeItem('coursMJN:resume');
-      const old = safeRead(SCROLL_PREFIX + location.pathname);
-      const progress = safeRead(KEY);
-      const y = progress && progress.url === here ? progress.scroll : old;
-      if (typeof y === 'number' && y > 0) setTimeout(() => window.scrollTo(0, y), 250);
+      const y = typeof savedScrollBeforeLoad === 'number' ? savedScrollBeforeLoad : 0;
+      if (y > 0) setTimeout(() => window.scrollTo(0, y), 350);
     }
   }
 
