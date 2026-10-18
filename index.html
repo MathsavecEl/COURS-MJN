@@ -127,12 +127,17 @@
       return false;
     }
     const index = Array.isArray(INDEX_RECHERCHE) ? INDEX_RECHERCHE : [];
+    const requete = normaliser(terme);
+    // La recherche porte sur les titres des chapitres, pas sur tout leur contenu.
+    // On ignore seulement les articles initiaux pour reconnaître « Le théorème… »
+    // lorsque l'utilisateur saisit « théorème… ».
+    const titreNormalise = item => normaliser(item.titre).replace(/^(le|la|les|l)\\s+/, '');
     const resultats = index.filter(item => {
-      const texte = normaliser([item.titre, item.classe, item.chapitre, item.description, item.motscles].join(' '));
-      return mots.every(mot => texte.includes(mot));
+      const titre = titreNormalise(item);
+      return titre === requete || mots.every(mot => titre.split(' ').includes(mot));
     }).sort((a, b) => {
-      const exactA = normaliser(a.titre).startsWith(normaliser(terme)) ? 0 : 1;
-      const exactB = normaliser(b.titre).startsWith(normaliser(terme)) ? 0 : 1;
+      const exactA = titreNormalise(a) === requete ? 0 : 1;
+      const exactB = titreNormalise(b) === requete ? 0 : 1;
       return exactA - exactB || a.titre.localeCompare(b.titre, 'fr');
     });
     zone.hidden = false;
