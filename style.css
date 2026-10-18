@@ -145,3 +145,16 @@ footer .blague-bas span { margin-right:6px; }
 .resultat-classe { padding: 4px 9px; border-radius: 999px; background: var(--accent-doux); color: var(--accent); font-size: .78rem; font-weight: 700; }
 .resultat-description { color: var(--doux); font-size: .9rem; }
 .resultat-recherche .ouvrir { margin-top: auto; padding-top: 5px; font-weight: 700; color: var(--accent); }
+
+
+/* ---------- Date de mise à jour ---------- */
+.derniere-mise-a-jour {
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--surface);
+  color: var(--doux);
+  font-size: .9rem;
+}
+.derniere-mise-a-jour strong { color: var(--texte); }
