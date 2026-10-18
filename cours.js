@@ -1,6 +1,6 @@
 /* Configuration du site et catalogue des ressources. */
 const SITE = {
-  titre: "COURS MJN",
+  titre: "MJN COURS",
   presentation: "Et si les mathématiques n’étaient pas si difficiles ? Jeune professeur, je souhaite déconstruire les idées reçues et montrer à mes élèves qu’avec les bons outils et un accompagnement adapté, chacun peut progresser à son rythme et reprendre confiance en soi. C’est avec cette conviction qu’est né MJN COURS !",
   enseignant: "M. AHA MAJANI",
   matiere: "Mathématiques",
