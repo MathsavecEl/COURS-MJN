@@ -7,7 +7,7 @@ const SITE = {
   etablissement: "",
   droits: "Ressources pédagogiques",
   aPropos: [
-    "Ce site est destiné à mes élèves, mais aussi à tout élève qui souhaite se défier, renouer avec les mathématiques et revoir les notions à son rythme.",
+    "Et si les mathématiques n’étaient pas si difficiles ? Jeune professeur, je souhaite déconstruire les idées reçues et montrer à mes élèves qu’avec les bons outils et un accompagnement adapté, chacun peut progresser à son rythme et reprendre confiance en soi. C’est avec cette conviction qu’est né MJN COURS !",
     "Les cours proposés pour les classes de 6e, 5e et Seconde sont conformes aux nouveaux programmes. En Première et en Terminale, les ressources concernent les spécialités mathématiques.",
     "Pour les classes de 4e et de 3e, les nouveaux programmes entreront respectivement en vigueur à la rentrée 2027 et à la rentrée 2028.",
     "Choisis ta classe, puis ouvre la ressource qui t’intéresse. Les activités interactives sont accessibles sans compte élève."
