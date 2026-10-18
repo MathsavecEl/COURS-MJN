@@ -79,7 +79,7 @@ const COURS = [
     classe: "3e",
     titre: "Mathématiques en 3e — classe 306 — 3e prépa-métiers",
     chapitre: "Cours, automatismes et entraînement",
-    type: "Site de classe",
+    type: "",
     description: "Cours interactifs, chapitres, QCM et préparation aux évaluations.",
     lien: "maths-3e-306.html",
     nouveau: true
