@@ -1,5 +1,5 @@
 /* Index des chapitres et notions recherchables dans COURS MJN. */
-const INDEX_RECHERCHE = [
+window.INDEX_RECHERCHE = [
   {
     "titre": "Les 4 opérations",
     "classe": "3e · classe 306",
