@@ -87,9 +87,12 @@
       </button>`;
     }).join('');
     $('classes').querySelectorAll('.classe').forEach(b => b.onclick = () => {
-      choisie = choisie === b.dataset.nom ? null : b.dataset.nom;
-      history.replaceState(null, '', choisie ? '?classe=' + encodeURIComponent(choisie) : location.pathname);
-      afficherClasses(); afficherCours();
+      choisie = b.dataset.nom;
+      history.pushState({ classe: choisie }, '', '?classe=' + encodeURIComponent(choisie));
+      afficherClasses();
+      afficherCours();
+      const cible = $('liste');
+      if (cible) setTimeout(() => cible.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
     });
   }
 
@@ -124,10 +127,18 @@
   }
 
   $('recherche').addEventListener('input', afficherCours);
+  window.addEventListener('popstate', () => {
+    const niveau = new URLSearchParams(location.search).get('classe');
+    choisie = CLASSES.some(c => c.nom === niveau) ? niveau : null;
+    afficherClasses(); afficherCours();
+    if (choisie) setTimeout(() => $('liste').scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
   afficherClasses(); afficherCours();
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
   }
 </script>
+<script src="progression.js?v=1"></script>
 </body>
 </html>
