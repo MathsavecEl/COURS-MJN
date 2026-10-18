@@ -113,13 +113,13 @@
   }
 
   const normaliser = texte => String(texte || '')
-    .normalize('NFD').replace(/[\\u0300-\\u036f]/g, '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
   function afficherRecherche(terme) {
     const zone = $('resultats-recherche');
     const listeCours = $('liste');
-    const mots = normaliser(terme).split(/\\s+/).filter(Boolean);
+    const mots = normaliser(terme).split(/\s+/).filter(Boolean);
     if (!mots.length) {
       zone.hidden = true;
       zone.innerHTML = '';
@@ -131,7 +131,7 @@
     // La recherche porte sur les titres des chapitres, pas sur tout leur contenu.
     // On ignore seulement les articles initiaux pour reconnaître « Le théorème… »
     // lorsque l'utilisateur saisit « théorème… ».
-    const titreNormalise = item => normaliser(item.titre).replace(/^(le|la|les|l)\\s+/, '');
+    const titreNormalise = item => normaliser(item.titre).replace(/^(le|la|les|l)\s+/, '');
     const resultats = index.filter(item => {
       const titre = titreNormalise(item);
       return titre === requete || mots.every(mot => titre.split(' ').includes(mot));
