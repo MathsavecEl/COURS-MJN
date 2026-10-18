@@ -55,7 +55,7 @@
 <footer><div class="conteneur" id="pied"></div></footer>
 
 <script src="cours.js?v=19"></script>
-<script src="recherche-index.js?v=5"></script>
+<script src="recherche-index.js?v=6"></script>
 <script>
   const $ = id => document.getElementById(id);
   const echap = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -117,28 +117,27 @@
     .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
   function afficherRecherche(terme) {
-    const zone = $('resultats-recherche');
     const listeCours = $('liste');
-    if (!normaliser(terme)) {
-      zone.hidden = true;
-      zone.innerHTML = '';
-      listeCours.hidden = false;
-      return false;
-    }
-    const index = Array.isArray(window.INDEX_RECHERCHE) ? window.INDEX_RECHERCHE : [];
     const requete = normaliser(terme);
-    // Correspondance exacte du titre, en ignorant seulement un article initial.
-    // Les chapitres associés ou les titres plus longs ne sont pas affichés.
+    if (!requete) return false;
+
+    // Les résultats sont écrits directement dans la liste principale.
+    const index = Array.isArray(window.INDEX_RECHERCHE) ? window.INDEX_RECHERCHE : [];
     const titreNormalise = item => normaliser(item.titre).replace(/^(le|la|les|l)\s+/, '');
     const resultats = index.filter(item => titreNormalise(item) === requete)
       .sort((a, b) => a.titre.localeCompare(b.titre, 'fr'));
-    zone.hidden = false;
-    listeCours.hidden = true;
-    if (!resultats.length) {
-      zone.innerHTML = '<p class="vide">Aucun résultat pour « ' + echap(terme) + ' ». Essaie un autre mot ou une formulation plus courte.</p>';
+
+    if (!index.length) {
+      listeCours.innerHTML = '<p class="vide">La recherche est momentanément indisponible. Recharge la page dans quelques instants.</p>';
       return true;
     }
-    zone.innerHTML = '<h2 class="titre-resultats">' + resultats.length + ' résultat' + (resultats.length > 1 ? 's' : '') + ' pour « ' + echap(terme) + ' »</h2>' +
+    if (!resultats.length) {
+      listeCours.innerHTML = '<p class="vide">Aucun chapitre dont le titre correspond exactement à « ' + echap(terme) + ' ».</p>';
+      return true;
+    }
+    listeCours.innerHTML = '<section class="groupe"><h2 class="titre-resultats">' +
+      resultats.length + ' chapitre' + (resultats.length > 1 ? 's' : '') +
+      ' trouvé' + (resultats.length > 1 ? 's' : '') + '</h2>' +
       '<div class="grille-resultats">' + resultats.map(item =>
         '<a class="resultat-recherche" href="' + echap(item.lien) + '">' +
           '<span class="resultat-classe">' + echap(item.classe) + '</span>' +
@@ -146,10 +145,9 @@
           '<span class="resultat-description">' + echap(item.description || 'Cours interactif') + '</span>' +
           '<span class="ouvrir">Ouvrir le chapitre →</span>' +
         '</a>'
-      ).join('') + '</div>';
+      ).join('') + '</div></section>';
     return true;
   }
-
   function afficherCours() {
     const terme = $('recherche').value.trim();
     if (afficherRecherche(terme)) return;
@@ -175,7 +173,7 @@
   });
   afficherClasses(); afficherCours();
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=24').catch(() => {}));
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=25').catch(() => {}));
   }
 </script>
 <script src="progression.js?v=2"></script>
