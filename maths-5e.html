@@ -216,6 +216,48 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
 a[href="#accueil"]:hover,a[href="#/"]:hover,a[data-nav="accueil"]:hover,a[data-r="accueil"]:hover,.btn.soft:hover,.btn.ghost:hover{background:#a91f1f!important;color:#fff!important}
 nav.tabs a[data-nav="accueil"]{border-radius:9px!important;padding:7px 13px!important}
 
+
+/* --- Charte MJN : bleu pour le cours, vert pour les méthodes, rouge réservé à la vigilance --- */
+:root {
+  --accent:#2563b8; --accent-soft:#e7f0ff; --nav:#173354;
+  --ok:#238451; --ok-soft:#e5f5eb;
+  --ko:#c43d42; --ko-soft:#fbe9ea;
+  --violet:#2563b8; --violet-soft:#e7f0ff;
+}
+.btn.vio,.exo.appro .num { background:var(--accent); }
+button.btn:not(.danger):not(.ko),a.btn { background:var(--accent); color:#fff; }
+.box.demo { background:var(--accent-soft); border-left-color:var(--accent); }
+.box.demo .lab,.corr .lab { color:var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#111827; --card:#1b2535; --ink:#edf2fa; --muted:#b5c0d1; --line:#3a4960;
+    --accent:#79b6ff; --accent-soft:#233c59; --ok:#72d6a0; --ok-soft:#183b2c;
+    --ko:#ff9297; --ko-soft:#48272d; --warn:#f3c56b; --warn-soft:#42351e;
+    --violet:#79b6ff; --violet-soft:#233c59; --nav:#101f33;
+    color-scheme:dark;
+  }
+  body { background:var(--bg) !important; color:var(--ink) !important; }
+  nav#nav { background:#162235 !important; border-color:var(--line) !important; }
+  nav#nav a,nav#nav .grp { color:var(--ink); }
+  .card,.tile,.ch,.themes label,details.rap,.recap li,table.t,table.t th,table.t td,
+  .ans input,.tabs button,.corr,.mail { background:var(--card) !important; color:var(--ink) !important; border-color:var(--line) !important; }
+  .hero { background:#17263a !important; color:var(--ink) !important; }
+  .hero h1,.hero .sub,.hero .who { color:var(--ink) !important; }
+  .box.def,.box.demo { background:var(--accent-soft) !important; color:var(--ink) !important; }
+  .box.meth { background:var(--ok-soft) !important; color:var(--ink) !important; }
+  .box.att,.fb.ko,.ch.ko,.ans input.ko { background:var(--ko-soft) !important; color:var(--ink) !important; }
+  .box.ex,.fb.info { background:#263244 !important; color:var(--ink) !important; }
+  .cheer,.notice,.hint { background:var(--warn-soft) !important; color:#ffe6a8 !important; border-color:#806a3c !important; }
+  .btn.ghost { background:var(--accent-soft) !important; color:var(--accent) !important; }
+  .btn.soft { background:#2b374a !important; color:var(--ink) !important; }
+  .btn:not(.ghost):not(.soft),.btn.vio { background:#285b98 !important; color:#fff !important; }
+  .tabs button.on,nav#nav a.on { background:#285b98 !important; color:#fff !important; }
+  .ans input:focus { border-color:var(--accent) !important; }
+  code { background:#263244 !important; color:#edf2fa !important; }
+  footer.foot { background:#162235 !important; color:var(--muted) !important; border-color:var(--line) !important; }
+  a { color:var(--accent); }
+}
+
 </style></head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '5e', classe: '5ème', court: '5e', titre: 'Maths en 5ème', prof: 'M AHA MAJANI', mail: 'mathsclavie20@gmail.com',
