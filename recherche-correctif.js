@@ -26,7 +26,7 @@
     var contenuInitial = liste.innerHTML;
 
     function chercher() {
-      var terme = normaliserRecherche(champ.value);
+      var terme = normaliserRecherche(champ.value).replace(/^(le|la|les|l)\s+/, '');
       if (!terme) {
         liste.innerHTML = contenuInitial;
         return;
