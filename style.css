@@ -201,3 +201,56 @@ footer .blague-bas span { margin-right:6px; }
   .accueil-main .classes { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
   .accueil-main .classe { gap:8px; padding:11px; min-height:78px; }
 }
+
+
+/* Accueil fidèle au modèle fourni */
+:root { --fond:#f7faef; --surface:#fff; --texte:#174b3e; --doux:#45665b; --bord:#c9dfd0; --accent:#176b55; --accent-doux:#e1f2df; --titre-font:"Inter",system-ui,sans-serif; }
+body { background:#f7f8f1; color:#173f35; }
+.barre-haute { min-height:96px; background:linear-gradient(100deg,#075340,#176b55 70%,#0a4838); padding:12px clamp(14px,3vw,30px); }
+.logo-pi { border-radius:7px; border:3px solid #e4c780; color:#fff7d8; width:66px; height:66px; font-size:2.8rem; }
+.identite strong { font-size:clamp(1.5rem,3vw,2.25rem); letter-spacing:.015em; }
+.identite small { font-size:clamp(.9rem,1.8vw,1.25rem); }
+.liens-haut { gap:clamp(12px,3vw,36px); }
+.liens-haut a { display:flex; flex-direction:column; align-items:center; gap:0; min-width:68px; font-size:1.05rem; }
+.liens-haut a[aria-current="page"] { border-bottom:3px solid #45e4a0; }
+.hero { text-align:center; color:#174b3e; background:linear-gradient(120deg,#e9f7e5,#f8faee 65%,#def2e1); padding:clamp(36px,5vw,62px) 0 26px; border-radius:0; box-shadow:none; }
+.hero::after { opacity:.07; color:#176b55; }
+.hero .surtitre { justify-content:center; }
+.hero .surtitre span { background:#fafff7; border:1px solid #c9dfd0; color:#176b55; padding:8px 18px; font-size:clamp(.95rem,2vw,1.15rem); }
+.hero h1 { max-width:none; color:#104b3e; font-size:clamp(2.3rem,5vw,3.7rem); margin-bottom:18px; }
+.hero p.intro { color:#244f43; max-width:780px; margin:0 auto; font-size:clamp(1.1rem,2.5vw,1.65rem); line-height:1.55; }
+.accueil-main { max-width:1120px; padding-top:26px; }
+.accueil-main .classes { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px 24px; align-items:stretch; margin:0 0 26px; }
+.accueil-main .classe-accueil { min-height:130px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:6px; text-align:center; border-radius:12px; border:1px solid hsl(var(--h) 65% 75%); background:hsl(var(--h) 85% 90%); color:hsl(var(--h) 75% 23%); box-shadow:0 3px 7px rgb(20 60 45 / .09); padding:12px 8px; }
+.accueil-main .classe-accueil:hover { transform:translateY(-3px); box-shadow:0 7px 16px rgb(20 60 45 / .13); }
+.accueil-main .classe-accueil[aria-pressed="true"] { background:hsl(var(--h) 70% 78%); color:#163f34; border-color:hsl(var(--h) 60% 60%); }
+.icone-classe { display:block; font-size:2.15rem; line-height:1.2; }
+.texte-classe strong { display:block; font-size:clamp(1rem,1.9vw,1.35rem); line-height:1.3; }
+.texte-classe small { display:block; margin-top:2px; color:inherit; font-size:.85rem; }
+.accueil-main .classe-accueil[data-nom="3e"] { --h:145 !important; background:#8fe1ad; color:#07583e; }
+.accueil-main .classe-accueil[data-nom="4e"] { --h:205 !important; background:#8dcaf7; color:#064b70; }
+.accueil-main .classe-accueil[data-nom="Seconde"] { --h:275 !important; background:#cba4f0; color:#49206f; }
+.accueil-main .classe-accueil[data-nom="Première"] { --h:350 !important; background:#ffb0b5; color:#792337; }
+.accueil-main .classe-accueil[data-nom="Divers"] { --h:42 !important; background:#ffdc83; color:#66470a; }
+.accueil-main .classe-accueil[data-nom="SNT"] { --h:205 !important; background:#acd9f4; color:#174b65; }
+.encouragement-accueil { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:#172f62; font-family:"Caveat",cursive; font-size:clamp(1.3rem,2.3vw,1.8rem); transform:rotate(-5deg); padding:10px; }
+.encouragement-accueil strong { font-weight:600; }
+.encouragement-accueil .sourire { font-size:2rem; }
+.derniere-mise-a-jour { margin:4px auto 24px; border:0; background:transparent; text-align:center; color:#31584b; }
+.accueil-main .outils { margin-top:24px; }
+@media(max-width:700px) {
+ .barre-haute { gap:10px; }
+ .identite { gap:8px; }
+ .logo-pi { width:52px; height:52px; font-size:2.2rem; }
+ .identite strong { font-size:1.35rem; }
+ .identite small { font-size:.88rem; }
+ .liens-haut { gap:6px; }
+ .liens-haut a { min-width:54px; font-size:.9rem; }
+ .accueil-main .classes { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+ .accueil-main .classe-accueil { min-height:120px; }
+ .encouragement-accueil { min-height:100px; }
+}
+@media(min-width:701px) {
+ .accueil-main .classes .classe-accueil[data-nom="Divers"] { grid-column:2; }
+ .accueil-main .classes .classe-accueil[data-nom="SNT"] { grid-column:3; }
+}
