@@ -106,11 +106,8 @@
   if (!CLASSES.some(c => c.nom === choisie)) choisie = null;
 
   function afficherClasses() {
-    const ordreAccueil = ["3e", "4e", "Seconde", "Première", "Divers", "SNT", "6e", "5e", "Terminale"];
-    const classesOrdonnees = ordreAccueil.map(nom => {
-      if (nom === "SNT") return { nom: "SNT", label: "SNT", court: "▣", couleur: 205, lienDirect: "snt-seconde.html", sousTitre: "(Seconde)" };
-      return CLASSES.find(c => c.nom === nom);
-    }).filter(Boolean);
+    const ordreAccueil = ["3e", "4e", "Seconde", "Première", "Divers", "6e", "5e", "Terminale"];
+    const classesOrdonnees = ordreAccueil.map(nom => CLASSES.find(c => c.nom === nom)).filter(Boolean);
     $('classes').innerHTML = classesOrdonnees.map(c => {
       const n = c.lienDirect ? 1 : COURS.filter(x => x.classe === c.nom).length;
       const label = c.nom === "Première" ? "Spécialités Première" : (c.label || c.nom);
