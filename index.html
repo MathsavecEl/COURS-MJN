@@ -32,7 +32,7 @@
 <meta property="og:url" content="https://mathsavecel.github.io/COURS-MJN/">
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%233d4bd8'/><path d='M18 20h18a10 10 0 0 1 10 10v16H28a10 10 0 0 1-10-10z' fill='white'/></svg>">
-<link rel="stylesheet" href="style.css?v=19">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
 <nav class="barre-haute">
@@ -81,7 +81,7 @@
 
 <footer><div class="conteneur" id="pied"></div></footer>
 
-<script src="cours.js?v=22"></script>
+<script src="cours.js?v=23"></script>
 <script src="recherche-index.js?v=6"></script>
 <script>
   const $ = id => document.getElementById(id);
@@ -107,23 +107,39 @@
   let choisie = new URLSearchParams(location.search).get('classe');
   if (!CLASSES.some(c => c.nom === choisie)) choisie = null;
 
+  let groupeOuvert = "";
   function afficherClasses() {
-    const ordreAccueil = ["6e", "5e", "4e", "3e", "Divers", "Seconde", "Première", "Terminale"];
-    const classesOrdonnees = ordreAccueil.map(nom => CLASSES.find(c => c.nom === nom)).filter(Boolean);
-    $('classes').innerHTML = classesOrdonnees.map(c => {
-      const n = c.lienDirect ? 1 : COURS.filter(x => x.classe === c.nom).length;
-      const label = c.nom === "Première" ? "Première · spécialité" : (c.label || c.nom);
-      const icone = c.nom === "Divers" ? "▤" : "🎓";
-      const separateur = c.nom === "6e" ? '<div class="separateur-classes">Collège et divers</div>' : (c.nom === "Seconde" ? '<div class="separateur-classes">Lycée</div>' : '');
-      return separateur + `<button class="classe classe-accueil" style="--h:215" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}" ${c.lienDirect ? 'data-lien="' + c.lienDirect + '"' : ''}>
-        <span class="icone-classe" aria-hidden="true">${icone}</span>
-        <span class="texte-classe"><strong>${echap(label)}</strong></span>
-      </button>`;
+    const groupes = [
+      { titre: "Collège et divers", id: "college", niveaux: ["6e", "5e", "4e", "3e", "Divers"] },
+      { titre: "Lycée", id: "lycee", niveaux: ["Seconde", "Première", "Terminale"] }
+    ];
+    $('classes').innerHTML = groupes.map(g => {
+      const ouvert = groupeOuvert === g.id;
+      const cartes = g.niveaux.map(nom => CLASSES.find(c => c.nom === nom)).filter(Boolean).map(c => {
+        const label = c.nom === "Première" ? "Première · spécialité" : (c.label || c.nom);
+        const icone = c.nom === "Divers" ? "▤" : "🎓";
+        return `<button class="classe classe-accueil" style="--h:215" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}" ${c.lienDirect ? 'data-lien="' + c.lienDirect + '"' : ''}>
+          <span class="icone-classe" aria-hidden="true">${icone}</span>
+          <span class="texte-classe"><strong>${echap(label)}</strong></span>
+        </button>`;
+      }).join('');
+      return `<section class="groupe-niveaux">
+        <button type="button" class="bouton-groupe" data-groupe="${g.id}" aria-expanded="${ouvert}">
+          <span>${g.titre}</span><span class="chevron-groupe" aria-hidden="true">${ouvert ? '−' : '+'}</span>
+        </button>
+        <div class="niveaux-groupe" ${ouvert ? '' : 'hidden'}>${cartes}</div>
+      </section>`;
     }).join('') + `<div class="encouragement-accueil"><span>Crois en toi,</span><strong>tu es capable !</strong><span class="sourire">☺</span></div>`;
+
+    $('classes').querySelectorAll('.bouton-groupe').forEach(b => b.onclick = () => {
+      groupeOuvert = groupeOuvert === b.dataset.groupe ? "" : b.dataset.groupe;
+      afficherClasses();
+    });
     $('classes').querySelectorAll('.classe').forEach(b => b.onclick = () => {
       if (b.dataset.lien) { location.href = b.dataset.lien; return; }
       choisie = b.dataset.nom;
       history.pushState({ classe: choisie }, '', '?classe=' + encodeURIComponent(choisie));
+      groupeOuvert = ["6e", "5e", "4e", "3e", "Divers"].includes(choisie) ? "college" : "lycee";
       afficherClasses();
       afficherCours();
       const cible = $('liste');
