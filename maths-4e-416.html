@@ -283,6 +283,21 @@ table.t{border-collapse:collapse;margin:8px auto;font-size:.95rem} table.t td,ta
   .top,.subnav,.ex-actions{display:none}
   .sheet{border:0;padding-left:0}.sheet::before{display:none}
 }
+
+/* COURS MJN — navigation et accueil harmonisés */
+body{background-color:#f4f6fb!important;background-image:linear-gradient(#e2e8f4 1px,transparent 1px),linear-gradient(90deg,#e2e8f4 1px,transparent 1px)!important;background-size:26px 26px!important}
+.top{background:#fff!important;border-bottom:2px solid #d4dbeb!important}
+.card,.sheet,.home-guide,.contact{border-radius:8px!important;border-color:#d4dbeb!important;box-shadow:0 5px 18px rgba(28,33,53,.06)}
+.card.hero,.home-hero,.hero{border-left:5px solid #c22e2e!important}
+.kicker{color:#c22e2e!important}
+.cheer{border:1px dashed #c22e2e!important;border-radius:10px!important;background:#fff!important;color:#24318a!important;padding:14px 18px!important}
+.logo{background:#c22e2e!important;color:#fff!important;border-radius:10px!important}
+a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],a[aria-label*="retour" i],a[aria-label*="accueil" i],button[aria-label*="retour" i],button[aria-label*="accueil" i],.btn.soft,.btn.ghost,.back-button,.btn-retour{
+ background:#c22e2e!important;border:2px solid #a91f1f!important;color:#fff!important;font-weight:800!important;box-shadow:0 2px 0 rgba(0,0,0,.12)!important
+}
+a[href="#accueil"]:hover,a[href="#/"]:hover,a[data-nav="accueil"]:hover,a[data-r="accueil"]:hover,.btn.soft:hover,.btn.ghost:hover{background:#a91f1f!important;color:#fff!important}
+nav.tabs a[data-nav="accueil"]{border-radius:9px!important;padding:7px 13px!important}
+
 </style>
 </head>
 <body>
@@ -5040,6 +5055,6 @@ window.addEventListener('hashchange',route); route();
 
 </script>
 <script src="progression.js?v=1"></script>
-<script src="encouragement.js?v=2"></script>
+<script src="encouragement.js?v=3"></script>
 </body>
 </html>
