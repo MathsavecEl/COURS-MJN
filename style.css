@@ -133,3 +133,15 @@ footer .blague-bas span { margin-right:6px; }
   background: rgb(255 255 255 / .42);
 }
 .hero p.intro { color: #111827; }
+
+
+/* ---------- Recherche globale dans les chapitres ---------- */
+.resultats-recherche { margin: 18px 0 30px; }
+.titre-resultats { margin: 0 0 14px; font-size: 1.15rem; }
+.grille-resultats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.resultat-recherche { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; padding: 17px; border: 1px solid var(--bord); border-radius: var(--rayon); background: var(--surface); color: var(--texte); text-decoration: none; box-shadow: var(--ombre); transition: transform .15s ease, border-color .15s ease; }
+.resultat-recherche:hover, .resultat-recherche:focus-visible { border-color: var(--accent); transform: translateY(-2px); outline-offset: 3px; }
+.resultat-recherche strong { font-size: 1.05rem; }
+.resultat-classe { padding: 4px 9px; border-radius: 999px; background: var(--accent-doux); color: var(--accent); font-size: .78rem; font-weight: 700; }
+.resultat-description { color: var(--doux); font-size: .9rem; }
+.resultat-recherche .ouvrir { margin-top: auto; padding-top: 5px; font-weight: 700; color: var(--accent); }
