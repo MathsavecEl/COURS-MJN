@@ -2,6 +2,19 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        return Promise.all(registrations.map(function (registration) { return registration.unregister(); }));
+      }).then(function () {
+        if ('caches' in window) return caches.keys().then(function (keys) {
+          return Promise.all(keys.map(function (key) { return caches.delete(key); }));
+        });
+      }).catch(function () {});
+    });
+  }
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#176b55">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -124,7 +137,7 @@
     // Les résultats sont écrits directement dans la liste principale.
     const index = Array.isArray(window.INDEX_RECHERCHE) ? window.INDEX_RECHERCHE : [];
     const titreNormalise = item => normaliser(item.titre).replace(/^(le|la|les|l)\s+/, '');
-    const resultats = index.filter(item => titreNormalise(item) === requete)
+    const resultats = index.filter(item => titreNormalise(item).includes(requete))
       .sort((a, b) => a.titre.localeCompare(b.titre, 'fr'));
 
     if (!index.length) {
@@ -172,11 +185,9 @@
     else window.scrollTo({ top: 0, behavior: 'smooth' });
   });
   afficherClasses(); afficherCours();
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=27').catch(() => {}));
-  }
+  // Le site utilise désormais les fichiers directement, sans service worker susceptible de servir une ancienne recherche.
 </script>
-<script src="recherche-correctif.js?v=2"></script>
+<script src="recherche-correctif.js?v=3"></script>
 <script src="progression.js?v=2"></script>
 </body>
 </html>
