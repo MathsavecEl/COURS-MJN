@@ -1258,7 +1258,7 @@ function activeNav(rt){ document.querySelectorAll('#nav a').forEach(a => a.class
 /* ---------- Accueil ---------- */
 function pageHome(){
   let tot = 0, dn = 0; CHAPS.forEach(c => { const s = chapStats(c); tot += s.n; dn += s.d; });
-  let h = `<div class="card hero"><div class="kicker" style="color:#dfe4ff">À l’attention des élèves de ${SITE.classe}</div><h1>${SITE.titre}</h1><p class="sub">${SITE.accroche}</p><div class="who">${SITE.prof}</div></div>`;
+  let h = `<div class="card hero"><h1>${SITE.titre}</h1><p class="sub">${SITE.accroche}</p><div class="who">${SITE.prof}</div></div>`;
   h += `<div class="cheer">🌟 <span>${pick(CHEERS)}</span></div>`;
   h += `<div class="card"><h2>Comment utiliser ce site ?</h2><ol class="steps">
     <li><b>Choisis un chapitre</b> dans le menu, ou suis la <b>progression de l’année</b> plus bas (période par période).</li>
@@ -1384,7 +1384,7 @@ function route(){
 }
 function boot(){
   document.title = SITE.titre + ' · ' + SITE.prof;
-  document.body.innerHTML = `<header class="top"><button class="burger" aria-label="Menu">☰</button><div class="logo" onclick="location.hash='#accueil'"><span>${SITE.court}</span>Maths</div><div class="att">À l’attention des élèves de ${SITE.classe}</div><div class="prof">${SITE.prof}</div></header>
+  document.body.innerHTML = `<header class="top"><button class="burger" aria-label="Menu">☰</button><div class="logo" onclick="location.hash='#accueil'"><span>${SITE.court}</span>Maths</div><div class="prof">${SITE.prof}</div></header>
   <div class="layout"><nav id="nav"></nav><main id="main"></main></div>
   <footer class="foot">Ressources de mathématiques pour les élèves de 5e.</footer>`;
   document.querySelector('.burger').onclick = () => document.getElementById('nav').classList.toggle('open');
