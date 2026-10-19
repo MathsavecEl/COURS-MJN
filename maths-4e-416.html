@@ -251,7 +251,7 @@ mark{color:inherit;background:var(--mark);padding:0 3px;border-radius:3px;font-w
 .qz-fb{margin-top:14px;border-radius:10px;padding:12px 15px} .qz-fb.ok{background:var(--green-soft)} .qz-fb.ko{background:var(--red-soft)}
 .qz-fb .qz-h{font-weight:800} .qz-fb.ok .qz-h{color:var(--green)} .qz-fb.ko .qz-h{color:var(--red)}
 .qz-miss{border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:10px 0;background:var(--card)} .qz-good{color:var(--green);font-weight:700}
-/* écriture des QCM de M. AHA MAJANI */
+/* écriture des QCM de l’enseignant */
 i.v{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08em}
 table.t{border-collapse:collapse;margin:8px auto;font-size:.95rem} table.t td,table.t th{border:1px solid var(--line);padding:5px 10px;text-align:center} table.t th{background:var(--accent-soft);font-weight:700}
 .prog{display:inline-block;border:1px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:8px 14px;text-align:left} .prog b{display:block;text-align:center;text-decoration:underline}
@@ -3478,7 +3478,7 @@ return [
 })();
 
 /* =====================================================================
-   ENTRAÎNEMENT À L'ÉVALUATION · moteur de QCM (même fonctionnement que les QCM de M. AHA MAJANI)
+   ENTRAÎNEMENT À L'ÉVALUATION · moteur de QCM (même fonctionnement que les QCM de l’enseignant)
    EVALS : [{id, titre, sous, ch, parties:[{nom, ctx?, qs:[{q, fig?, c:[bonne, …fausses], e}]}]}]
    ===================================================================== */
 var EVALS=[];
@@ -3563,7 +3563,7 @@ var QZKEYS=null;
 document.addEventListener('keydown',function(e){ if(QZKEYS&&!/input|textarea/i.test(e.target.tagName)) QZKEYS(e); });
 
 /* =====================================================================
-   ENTRAÎNEMENT À L'ÉVALUATION · QCM de M. AHA MAJANI (repris tels quels)
+   ENTRAÎNEMENT À L'ÉVALUATION · QCM de l’enseignant (repris tels quels)
    ===================================================================== */
 (function(){
 // Petites aides d'écriture mathématique utilisées par les fichiers de questions
