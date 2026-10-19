@@ -381,7 +381,7 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
 </header>
 <main class="wrap" id="app"></main>
 <div id="toast" role="status" aria-live="polite"></div>
-<footer class="wrap">Site de mathématiques de 3<sup>e</sup> · M. AHA MAJANI · À l'attention de mes élèves de 312<br>
+<footer class="wrap">Site de mathématiques de 3<sup>e</sup> · M. AHA MAJANI · <br>
 Une erreur, un blocage ? Écrivez-moi : <a href="mailto:mathsclavie20@gmail.com">mathsclavie20@gmail.com</a><br>
 <button class="btn small ghost no-print" type="button" id="profBtn" style="margin-top:10px">Mode professeur : afficher toutes les corrections</button></footer>
 <script>
@@ -3201,7 +3201,7 @@ function evShuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { 
 
 function pageEvalList() {
   nav('eval'); CUR = null; EV = null; evSort();
-  let h = `<section class="sheet"><p class="kicker">À l'attention de mes élèves de 312</p><h2>Entraînement à l'évaluation</h2><p class="lead">Avant chaque évaluation, entraîne-toi avec le QCM du chapitre. Fais le calcul au brouillon avant de cliquer, puis lis bien la correction. À la fin, tu peux refaire uniquement tes erreurs. Tes records sont gardés sur cet appareil.</p></section>`;
+  let h = `<section class="sheet"><h2>Entraînement à l'évaluation</h2><p class="lead">Avant chaque évaluation, entraîne-toi avec le QCM du chapitre. Fais le calcul au brouillon avant de cliquer, puis lis bien la correction. À la fin, tu peux refaire uniquement tes erreurs. Tes records sont gardés sur cet appareil.</p></section>`;
   for (let p = 1; p <= 5; p++) {
     const L = EVALS.filter(e => (evChap(e) || {}).per === p); if (!L.length) continue;
     h += `<section class="sheet per p${p}"><h3><span class="pdot"></span>${PER[p]}</h3><div class="steps-grid">` + L.map(e => {
@@ -3219,7 +3219,7 @@ function pageEval(id) {
 }
 function evHead(e) {
   const c = evChap(e);
-  return `<p class="kicker">Entraînement à l'évaluation · Chapitre ${c.n} · À l'attention de mes élèves de 312</p><h2>${e.titre}</h2>`;
+  return `<p class="kicker">Entraînement à l'évaluation · Chapitre ${c.n} · </p><h2>${e.titre}</h2>`;
 }
 function evMenu() {
   const e = EV.e, b = evBest(e.id), c = evChap(e); EV.run = null;
@@ -3379,7 +3379,7 @@ function pageHome() {
   nav('accueil');
   const all = CH.flatMap(chapQs), d = doneCount(all);
   app().innerHTML = `<section class="sheet hero"><div>
-      <p class="kicker">À l'attention de mes élèves de 312 (troisième)</p>
+      
       <h2>Les maths de 3<sup>e</sup>, pas à pas</h2>
       <p class="lead">Bienvenue sur votre site de mathématiques ! Vous y trouverez tous les chapitres de l'année dans l'ordre de notre progression, avec pour chacun un cours court, des exemples, des exercices d'application et des exercices pour aller plus loin. Une partie <b>Automatismes</b> vous entraîne aux calculs rapides du brevet.</p>
       <div class="namebox"><label for="nm"><b>Ton prénom :</b></label><input id="nm" type="text" maxlength="24" value="${esc(ST.name)}" placeholder="Écris ton prénom" autocomplete="given-name"><button class="btn small" id="nmok" type="button">OK</button></div>
@@ -3402,7 +3402,7 @@ function pageHome() {
 
 function pageChapters() {
   nav('chapitres');
-  let h = `<section class="sheet"><p class="kicker">À l'attention de mes élèves de 312</p><h2>Les chapitres de l'année</h2><p class="lead">Les chapitres suivent notre progression de 3<sup>e</sup>, période par période. Dans chaque chapitre : <b>Je retiens</b>, <b>Je m'entraîne</b>, <b>Je vais plus loin</b>.</p></section>`;
+  let h = `<section class="sheet"><h2>Les chapitres de l'année</h2><p class="lead">Les chapitres suivent notre progression de 3<sup>e</sup>, période par période. Dans chaque chapitre : <b>Je retiens</b>, <b>Je m'entraîne</b>, <b>Je vais plus loin</b>.</p></section>`;
   for (let p = 1; p <= 5; p++) {
     h += `<section class="sheet per p${p}"><h3><span class="pdot"></span>${PER[p]}</h3><div class="steps-grid">` + CH.filter(c => c.per === p).map(c => { const L = chapQs(c), d = doneCount(L); return `<a class="scard${d === L.length ? ' full' : ''}" href="#/ch/${c.n}"><span class="num">Chapitre ${c.n}</span><span class="th">${c.t}</span><span class="dm">${c.dom}</span><span class="meta">${bar(d, L.length)}</span></a>`; }).join('') + `</div></section>`;
   }
@@ -3418,7 +3418,7 @@ function pageChapter(n) {
   const c = CH.find(x => x.n === n); if (!c) return pageChapters();
   CUR = c; nav('chapitres');
   const prev = CH.find(x => x.n === n - 1), next = CH.find(x => x.n === n + 1);
-  app().innerHTML = `<section class="band p${c.per}"><div class="bn"><small>Chapitre</small>${c.n}</div><h2>${c.t}</h2><p>${c.dom} · ${PER[c.per]}</p><p class="ded">À l'attention de mes élèves de 312</p></section>
+  app().innerHTML = `<section class="band p${c.per}"><div class="bn"><small>Chapitre</small>${c.n}</div><h2>${c.t}</h2><p>${c.dom} · ${PER[c.per]}</p></section>
     <nav class="subnav" aria-label="Parties du chapitre"><a href="#retiens" data-jump="retiens">1. Je retiens</a><a href="#entraine" data-jump="entraine">2. Je m'entraîne</a><a href="#loin" data-jump="loin">3. Je vais plus loin</a></nav>
     <section class="sheet"><div class="split2"><div><h3>Ce que je dois savoir faire</h3><ul class="objectifs">${c.obj.map(o => `<li>${o}</li>`).join('')}</ul></div><div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>${c.mot}</p></div></div></section>
     <section class="sheet" id="retiens"><h2>1. Je retiens</h2>${c.cours.map(k => `<div class="box ${k.k}"><h4>${{ def: 'Définition', sav: 'Propriété', met: 'Méthode', pie: 'Attention' }[k.k]} · <b>${k.h}</b></h4><div>${fmt(k.b)}</div>${k.ex ? `<div class="exemple"><span class="exl">Exemple</span><div>${fmt(k.ex)}</div></div>` : ''}</div>`).join('')}</section>
@@ -3432,7 +3432,7 @@ function pageChapter(n) {
 let SERIE = null;
 function pageAutoList() {
   nav('automatismes');
-  app().innerHTML = `<section class="sheet"><p class="kicker">À l'attention de mes élèves de 312</p><h2>Automatismes</h2><p class="lead">Les automatismes, ce sont les calculs que l'on doit savoir faire vite et sans hésiter. Au brevet, une partie de l'épreuve leur est consacrée. Choisis un thème : à chaque fois, une nouvelle série de 10 questions est tirée au hasard. Refais-les souvent, quelques minutes par jour suffisent !</p>
+  app().innerHTML = `<section class="sheet"><h2>Automatismes</h2><p class="lead">Les automatismes, ce sont les calculs que l'on doit savoir faire vite et sans hésiter. Au brevet, une partie de l'épreuve leur est consacrée. Choisis un thème : à chaque fois, une nouvelle série de 10 questions est tirée au hasard. Refais-les souvent, quelques minutes par jour suffisent !</p>
     <a class="go wide" href="#/auto/mix"><span class="gi">🎯</span><b>Mélange spécial brevet</b><span>12 questions de tous les thèmes, comme le jour J</span>${ST.auto.mix !== undefined ? `<span class="pill g">Meilleur score : ${ST.auto.mix}/12</span>` : ''}</a>
     <div class="auto-grid">${AUTO.map(a => `<a class="acard" href="#/auto/${a.id}"><span class="aic">${a.ic}</span><b>${a.t}</b>${ST.auto[a.id] !== undefined ? `<span class="pill${ST.auto[a.id] === 10 ? ' g' : ''}">Record : ${ST.auto[a.id]}/10</span>` : '<span class="pill">Pas encore fait</span>'}</a>`).join('')}</div>${mailBox()}</section>`;
 }
@@ -3469,7 +3469,7 @@ function renderSerie() {
   const id = SERIE.id, th = AUTO.find(a => a.id === id);
   const head = id === 'mix' ? `<h2>Mélange spécial brevet</h2><p class="lead">12 questions tirées dans tous les thèmes. Seul ton premier essai compte pour le score, mais tu peux réessayer pour comprendre.</p>`
     : `<h2>${th.t}</h2><div class="box sav"><h4>Rappel</h4><div>${fmt(th.rap)}</div><div class="exemple"><span class="exl">Exemples</span><div>${fmt(th.ex)}</div></div></div>`;
-  app().innerHTML = `<section class="sheet"><p class="kicker">Automatismes · À l'attention de mes élèves de 312</p>${head}
+  app().innerHTML = `<section class="sheet"><p class="kicker">Automatismes · </p>${head}
     <div class="row"><span id="aScore" class="pill">Score : 0 / ${SERIE.N}</span><button class="btn small ghost" type="button" id="reroll">Nouvelle série</button><a class="btn small ghost" href="#/automatismes">Tous les thèmes</a></div>
     <article class="ex"><ol class="qs">${SERIE.qs.map(q => qHTML(q).replace('<div class="qt">', `<div class="qt">${id === 'mix' ? `<span class="tag">${q.th}</span> ` : ''}`)).join('')}</ol></article><div id="aEnd"></div>${mailBox()}</section>`;
   document.getElementById('reroll').onclick = () => { newSerie(id); renderSerie(); };
@@ -3478,13 +3478,13 @@ function renderSerie() {
 /* ---------- brevet & mémo ---------- */
 function pageBrevet() {
   nav('brevet'); CUR = null;
-  app().innerHTML = `<section class="sheet"><p class="kicker">À l'attention de mes élèves de 312</p><h2>Problèmes type brevet</h2><p class="lead">Ces problèmes mélangent plusieurs chapitres, comme au brevet. Lis tout l'énoncé avant de commencer, et n'oublie pas : on peut réussir les dernières questions même si on a bloqué sur une des premières.</p></section>
+  app().innerHTML = `<section class="sheet"><h2>Problèmes type brevet</h2><p class="lead">Ces problèmes mélangent plusieurs chapitres, comme au brevet. Lis tout l'énoncé avant de commencer, et n'oublie pas : on peut réussir les dernières questions même si on a bloqué sur une des premières.</p></section>
     <section class="sheet">${BREVET.app.map((e, i) => exHTML(e, i + 1, 'p')).join('')}${mailBox()}</section>`;
 }
 function pageMemo() {
   nav('memo');
   const T = rows => TB(rows.map(r => r.map(fmt)), 'memo');
-  app().innerHTML = `<section class="sheet"><p class="kicker">À l'attention de mes élèves de 312</p><h2>Mémo : les formules à connaître</h2><p class="lead">Garde cette page sous la main pendant que tu fais tes exercices. Avec le temps, tu n'en auras plus besoin !</p>
+  app().innerHTML = `<section class="sheet"><h2>Mémo : les formules à connaître</h2><p class="lead">Garde cette page sous la main pendant que tu fais tes exercices. Avec le temps, tu n'en auras plus besoin !</p>
     <h3>Nombres et calculs</h3>${T([['#Notion', '#À retenir'], ['Priorités', 'Parenthèses, puis × et ÷, puis + et −'], ['Fractions', `${F('a', 'b')} + ${F('c', 'b')} = ${F('a + c', 'b')} ; ${F('a', 'b')} × ${F('c', 'd')} = ${F('ac', 'bd')} ; diviser = multiplier par l'inverse`], ['Puissances', 'a^m × a^n = a^{m+n} ; a^m ÷ a^n = a^{m−n} ; (a^m)^n = a^{m×n} ; a^{−n} = 1/a^n ; notation scientifique a × 10^n avec 1 ≤ a &lt; 10'], ['Nombre premier', 'Exactement deux diviseurs : 1 et lui-même'], ['Pourcentages', 'Augmenter de t % : × (1 + t/100) ; diminuer : × (1 − t/100)'], ['Ratio', 'a et b dans le ratio 2 : 3 : a/2 = b/3 ; partager : total ÷ nombre de parts, puis × parts']])}
     <h3>Calcul littéral et équations</h3>${T([['#Notion', '#À retenir'], ['Distributivité', 'k(a + b) = ka + kb ; (a + b)(c + d) = ac + ad + bc + bd'], ['Identités remarquables', '(a + b)^2 = a^2 + 2ab + b^2 ; (a − b)^2 = a^2 − 2ab + b^2 ; (a + b)(a − b) = a^2 − b^2'], ['Produit nul', 'A × B = 0 ⟺ A = 0 ou B = 0'], ['x^2 = a', 'a &gt; 0 : √a et −√a ; a = 0 : 0 ; a &lt; 0 : aucune solution']])}
     <h3>Fonctions</h3>${T([['#Notion', '#À retenir'], ['Vocabulaire', 'f(a) = b : b est l\'image de a, a est un antécédent de b'], ['Linéaire', 'f(x) = ax : droite passant par l\'origine ; proportionnalité'], ['Affine', 'f(x) = ax + b : droite ; a coefficient directeur, b ordonnée à l\'origine'], ['Coefficient', `a = ${F('f(x<sub>2</sub>) − f(x<sub>1</sub>)', 'x<sub>2</sub> − x<sub>1</sub>')}`]])}
