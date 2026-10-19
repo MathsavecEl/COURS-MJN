@@ -2813,7 +2813,7 @@ QCM.chap = 'c3'; QCM.prof = true; return QCM;
 })());
 
 /* ============================================================
-   QCM D'ENTRAÎNEMENT À L'ÉVALUATION — sur le modèle des QCM de M. AHA MAJANI
+   QCM D'ENTRAÎNEMENT À L'ÉVALUATION — sur le modèle des QCM de l’enseignant
    chaque question : { q, c: [bonne réponse, fausses…], e: correction, fig? }
    ============================================================ */
 {
@@ -3188,7 +3188,7 @@ EVALS.push({ id: 'sphere', chap: 'c16', titre: 'Repérage sur la sphère', sous:
 
 /* ============================================================
    ONGLET « ENTRAÎNEMENT À L'ÉVALUATION » : moteur de QCM
-   (même fonctionnement que les QCM de M. AHA MAJANI)
+   (même fonctionnement que les QCM de l’enseignant)
    ============================================================ */
 var EV = null;
 function evChap(e) { return CH.find(c => c.id === e.chap); }
@@ -3206,7 +3206,7 @@ function pageEvalList() {
     const L = EVALS.filter(e => (evChap(e) || {}).per === p); if (!L.length) continue;
     h += `<section class="sheet per p${p}"><h3><span class="pdot"></span>${PER[p]}</h3><div class="steps-grid">` + L.map(e => {
       const c = evChap(e), n = evAll(e).length, b = evBest(e.id).all;
-      return `<a class="scard${b && b[0] === b[1] ? ' full' : ''}" href="#/eval/${e.id}"><span class="num">Chapitre ${c.n}</span><span class="th">${e.titre}</span><span class="dm">${e.prof ? 'QCM de M. AHA MAJANI' : 'QCM d\'entraînement'} · ${n} questions</span><span class="meta">${b ? `<span class="pill${b[0] === b[1] ? ' g' : ''}">record ${b[0]}/${b[1]}</span>` : '<span class="pill">pas encore fait</span>'}</span></a>`;
+      return `<a class="scard${b && b[0] === b[1] ? ' full' : ''}" href="#/eval/${e.id}"><span class="num">Chapitre ${c.n}</span><span class="th">${e.titre}</span><span class="dm">${e.prof ? 'QCM de l’enseignant' : 'QCM d\'entraînement'} · ${n} questions</span><span class="meta">${b ? `<span class="pill${b[0] === b[1] ? ' g' : ''}">record ${b[0]}/${b[1]}</span>` : '<span class="pill">pas encore fait</span>'}</span></a>`;
     }).join('') + `</div></section>`;
   }
   app().innerHTML = h + `<section class="sheet">${mailBox()}</section>`;
