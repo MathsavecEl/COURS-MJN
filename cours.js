@@ -32,7 +32,7 @@ const COURS = [
     titre: "Mathématiques en 6e ordinaire",
     chapitre: "Cours, exercices et automatismes",
     type: "Site de cours interactif",
-    description: "Cours illustrés, exercices corrigés et automatismes pour les élèves de 6e.",
+    description: "Cours illustrés, exercices corrigés et automatismes.",
     lien: "maths-6e.html",
     nouveau: true
   },
@@ -59,14 +59,14 @@ const COURS = [
     titre: "Mathématiques en 5e ordinaire",
     chapitre: "Cours, exercices et automatismes",
     type: "Site de cours interactif",
-    description: "Cours interactif et exercices de mathématiques destinés aux élèves de 5e.",
+    description: "Cours interactif et exercices de mathématiques.",
     lien: "maths-5e.html",
     nouveau: true
   },
 
   {
     classe: "4e",
-    titre: "Mathématiques en 4e — classe 416 et 4e ordinaire",
+    titre: "Mathématiques en 4e",
     chapitre: "Cours et exercices interactifs",
     type: "Site de cours interactif",
     description: "",
@@ -75,16 +75,16 @@ const COURS = [
   },
   {
     classe: "3e",
-    titre: "Mathématiques en 3e — classe 306 — 3e prépa-métiers",
+    titre: "Mathématiques en 3e — prépa-métiers",
     chapitre: "Cours, automatismes et entraînement",
     type: "",
-    description: "Cours interactifs, chapitres, QCM et préparation aux évaluations.",
+    description: "Chapitres, QCM et préparation aux évaluations."
     lien: "maths-3e-306.html",
     nouveau: true
   },
   {
     classe: "3e",
-    titre: "Mathématiques en 3e — classe 312 — 3e ordinaire",
+    titre: "Mathématiques en 3e — ordinaire",
     chapitre: "Cours, automatismes et brevet",
     type: "Site de classe",
     description: "Chapitres, rappels de cours, exercices interactifs et problèmes type brevet.",
