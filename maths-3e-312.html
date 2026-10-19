@@ -3584,7 +3584,11 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
   const r=current(); if(!r||!r.order||!r.order[k])return;
   const q=r.list[r.i],o=r.order[k];answers[r.i]={q,chosen:o.t,good:o.ok};
   answer0(k);
-  if(mode==='end'){const fb=document.getElementById('evFb');if(fb)fb.hidden=true}
+  if(mode==='end'){
+   const fb=document.getElementById('evFb');if(fb)fb.hidden=true;
+   document.querySelectorAll('.ev-c').forEach(b=>b.classList.remove('ok','ko','dim'));
+   const score=document.getElementById('evSc');if(score)score.textContent='';
+  }
  };
  evEnd=function(){
   stop();deadline=0;end0();const r=EV&&EV.run;if(!r)return;
