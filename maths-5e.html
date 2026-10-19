@@ -258,6 +258,9 @@ button.btn:not(.danger):not(.ko),a.btn { background:var(--accent); color:#fff; }
   a { color:var(--accent); }
 }
 
+</style><style id="mjn-print-style">
+#mjnPrintBtn{position:fixed;right:14px;bottom:14px;z-index:9999;border:0;border-radius:999px;padding:12px 16px;background:#176b55;color:#fff;font:700 14px system-ui;box-shadow:0 4px 18px #0003;cursor:pointer}
+@media print{#mjnPrintBtn{display:none!important} body{background:#fff!important;color:#000!important} a{color:#000!important;text-decoration:none!important} .top,nav#nav,.tools,.tabs,.burger{display:none!important}}
 </style></head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '5e', classe: '5ème', court: '5e', titre: 'Maths en 5ème', prof: 'Enseignant', mail: 'mathsclavie20@gmail.com',
@@ -4974,4 +4977,4 @@ boot();
 
 </script><script src="progression.js?v=1"></script>
 <script src="encouragement.js?v=3"></script>
-</body></html>
+<script id="mjn-print-script">(()=>{const b=document.createElement('button');b.id='mjnPrintBtn';b.type='button';b.textContent='🖨️ Imprimer / PDF';b.setAttribute('aria-label','Imprimer la page ou l’enregistrer en PDF');b.addEventListener('click',()=>window.print());document.body.appendChild(b)})();</script></body></html>
