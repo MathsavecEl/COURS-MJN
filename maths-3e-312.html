@@ -362,7 +362,7 @@ nav.tabs a[data-nav="accueil"]{border-radius:9px!important;padding:7px 13px!impo
 a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-label*="retour" i],[aria-label*="accueil" i],.btn.soft,.btn.ghost,.back-button,.btn-retour{background:var(--accent)!important;border:1px solid var(--accent)!important;color:#fff!important;box-shadow:none!important}
 @media(prefers-color-scheme:dark){:root{--bg:#111827;--card:#1b2535;--ink:#edf2fa;--muted:#b5c0d1;--line:#3a4960;--accent:#79b6ff;--accent-soft:#233c59;--ok:#72d6a0;--ok-soft:#183b2c;--ko:#ff9297;--ko-soft:#48272d;--warn:#f3c56b;--warn-soft:#42351e;--violet:#79b6ff;--violet-soft:#233c59;--nav:#101f33;color-scheme:dark}body{background:var(--bg)!important;color:var(--ink)!important}nav#nav{background:#162235!important;border-color:var(--line)!important}nav#nav a,nav#nav .grp{color:var(--ink)}.card,.tile,.ch,.themes label,details.rap,.recap li,table.t,table.t th,table.t td,.ans input,.tabs button,.corr,.mail{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}.hero,.home-hero{background:#17263a!important;color:var(--ink)!important}.hero h1,.hero .sub,.hero .who,.home-hero h1,.home-hero .sub,.home-hero .who{color:var(--ink)!important}.box.def,.box.demo{background:var(--accent-soft)!important;color:var(--ink)!important}.box.meth{background:var(--ok-soft)!important;color:var(--ink)!important}.box.att,.fb.ko,.ch.ko,.ans input.ko{background:var(--ko-soft)!important;color:var(--ink)!important}.box.ex,.fb.info{background:#263244!important;color:var(--ink)!important}.cheer,.notice,.hint{background:var(--warn-soft)!important;color:#ffe6a8!important;border-color:#806a3c!important}.btn.ghost{background:var(--accent-soft)!important;color:var(--accent)!important}.btn.soft{background:#2b374a!important;color:var(--ink)!important}.btn:not(.ghost):not(.soft),.btn.vio{background:#285b98!important;color:#fff!important}.tabs button.on,nav#nav a.on{background:#285b98!important;color:#fff!important}code{background:#263244!important;color:#edf2fa!important}footer.foot{background:#162235!important;color:var(--muted)!important;border-color:var(--line)!important}a{color:var(--accent)}}</style>
 <style id="mjn-print-style">
-#mjnPrintBtn{position:fixed;right:14px;bottom:14px;z-index:9999;border:0;border-radius:999px;padding:12px 16px;background:#176b55;color:#fff;font:700 14px system-ui;box-shadow:0 4px 18px #0003;cursor:pointer}
+#mjnPrintBtn{position:fixed;right:14px;bottom:76px;z-index:9999;border:0;border-radius:999px;padding:12px 16px;background:#176b55;color:#fff;font:700 14px system-ui;box-shadow:0 4px 18px #0003;cursor:pointer}
 @media print{#mjnPrintBtn{display:none!important} body{background:#fff!important;color:#000!important} a{color:#000!important;text-decoration:none!important} .top,nav#nav,.tools,.tabs,.burger{display:none!important}}
 </style></head>
 <body>
@@ -3546,7 +3546,7 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
  const menu0=evMenu,start0=evStart,answer0=evAnswer,end0=evEnd,show0=evShow;
  let mode='each',timer=null,deadline=0,expired=false,answers=[];
  const st=document.createElement('style');
- st.textContent='.ev-options{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:10px}.ev-clock{font-weight:800;padding:5px 10px;border:1px solid var(--line);border-radius:20px;font-variant-numeric:tabular-nums}.ev-clock.urgent{color:#b22;border-color:#b22}@media print{.ev-options,.btn,.row,nav,footer{display:none!important}.sheet{box-shadow:none!important}}';
+ st.textContent='.ev-options{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:10px}.ev-deferred-correction .ev-c.ok,.ev-deferred-correction .ev-c.ko,.ev-deferred-correction .ev-c.dim{background:var(--card)!important;border-color:var(--line)!important;color:var(--text)!important;opacity:1!important}.ev-deferred-correction .ev-c .L{background:var(--accent-soft)!important;color:var(--accent)!important}.ev-deferred-correction #evSc{visibility:hidden!important}.ev-clock{font-weight:800;padding:5px 10px;border:1px solid var(--line);border-radius:20px;font-variant-numeric:tabular-nums}.ev-clock.urgent{color:#b22;border-color:#b22}@media print{.ev-options,.btn,.row,nav,footer{display:none!important}.sheet{box-shadow:none!important}}';
  document.head.appendChild(st);
  function stop(){if(timer)clearInterval(timer);timer=null}
  function current(){return EV&&EV.run&&!EV.run.end?EV.run:null}
@@ -3562,7 +3562,7 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
   const box=document.createElement('div');box.id='evOptions';box.className='ev-options';
   box.innerHTML='<label for="evMode">Correction :</label><select id="evMode"><option value="each">Après chaque question</option><option value="end">À la fin, avec la note</option></select><span>Durée maximale : 45 min</span><div class="row"><button type="button" class="btn ghost" id="evPaper">Imprimer sans correction</button><button type="button" class="btn ghost" id="evPaperCorr">Imprimer avec correction</button></div>';
   const lead=sheet.querySelector('.lead'); if(lead)lead.after(box);else sheet.append(box);
-  document.getElementById('evMode').value=mode;document.getElementById('evMode').onchange=e=>mode=e.target.value;
+  document.getElementById('evMode').value=mode;document.getElementById('evMode').onchange=e=>{mode=e.target.value;document.body.classList.toggle('ev-deferred-correction',mode==='end'&&!!current())};
   document.getElementById('evPaper').onclick=()=>paper(false);document.getElementById('evPaperCorr').onclick=()=>paper(true);
  }
  function paper(corr){
@@ -3574,7 +3574,7 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
  }
  evMenu=function(){menu0();addOptions()};
  evStart=function(list,key,label){
-  answers=[];expired=false;stop();start0(list,key,label);
+  answers=[];expired=false;stop();document.body.classList.toggle('ev-deferred-correction',mode==='end');start0(list,key,label);
   if(EV&&EV.run){EV.run.answers=answers;deadline=Date.now()+45*60*1000;timer=setInterval(tick,1000);
    const meta=document.querySelector('.ev-meta');if(meta&&!document.getElementById('evClock')){const c=document.createElement('span');c.id='evClock';c.className='ev-clock';meta.append(c)}tick()
   }
@@ -3586,12 +3586,13 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
   answer0(k);
   if(mode==='end'){
    const fb=document.getElementById('evFb');if(fb)fb.hidden=true;
+   document.body.classList.add('ev-deferred-correction');
    document.querySelectorAll('.ev-c').forEach(b=>b.classList.remove('ok','ko','dim'));
    const score=document.getElementById('evSc');if(score)score.textContent='';
   }
  };
  evEnd=function(){
-  stop();deadline=0;end0();const r=EV&&EV.run;if(!r)return;
+  stop();deadline=0;document.body.classList.remove('ev-deferred-correction');end0();const r=EV&&EV.run;if(!r)return;
   const score=Number(r.score)||0,total=(r.list||[]).length,score20=total?Math.round(score/total*200)/10:0;
   const review=document.createElement('section');review.className='sheet';
   review.innerHTML='<h2>Correction complète</h2><p class="lead">Résultat : '+score+' / '+total+' — soit '+String(score20).replace('.',',')+' / 20.</p>'+(expired?'<p class="lead">Les 45 minutes sont écoulées : le QCM est terminé.</p>':'')+r.list.map((q,i)=>'<article class="ev-miss"><h3>Question '+(i+1)+'</h3><div class="ev-q">'+q.q+'</div>'+(q.fig||'')+'<p><b>Bonne réponse :</b> '+q.c[0]+'</p><div>'+q.e+'</div></article>').join('')+'<button type="button" class="btn ghost" id="evPrintReview">Imprimer la correction</button>';
