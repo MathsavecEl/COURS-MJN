@@ -4537,12 +4537,16 @@ async function speak(btn) {
   sayBtn = btn;
   const voice = await waitForFrenchVoice();
   if (sayBtn !== btn) return;
+  if (!voice) {
+    stopSpeak();
+    alert('Aucune voix française n’est disponible pour le moment. Sur Android, ouvre les paramètres de synthèse vocale et installe/active une voix française, puis réessaie. Le site ne lancera pas une voix anglaise à la place.');
+    return;
+  }
   const zone = btn.closest('.box, .q, .ex-e, .qz, .rap, .sayzone') || btn.parentElement;
   const parts = (speakText(zone).match(/[^.!?;:]+[.!?;:]*/g) || []).map(p => p.trim()).filter(Boolean);
   if (!parts.length) { stopSpeak(); return; }
   btn.classList.add('on'); btn.textContent = '⏹ Arrêter';
-  // Sur certains téléphones, la liste des voix arrive tard ou reste vide.
-  // On lance tout de même la lecture avec la langue française explicitement demandée.
+  // On exige une voix française pour éviter que l’appareil lise le texte en anglais.
   let i = 0;
   const next = () => {
     if (sayBtn !== btn || i >= parts.length) { if (sayBtn === btn) stopSpeak(); return; }
