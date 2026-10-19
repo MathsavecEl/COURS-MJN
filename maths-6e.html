@@ -4677,4 +4677,39 @@ function open(){const exs=list(),target=document.getElementById('mjnPdfList');ta
 btn.addEventListener('click',open);document.getElementById('mjnCancelPdf').onclick=()=>panel.classList.remove('open');document.getElementById('mjnSelectAll').onclick=()=>panel.querySelectorAll('.mjn-pdf-list input').forEach(x=>x.checked=true);document.getElementById('mjnSelectNone').onclick=()=>panel.querySelectorAll('.mjn-pdf-list input').forEach(x=>x.checked=false);
 document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array.from(panel.querySelectorAll('.mjn-pdf-list input:checked')).map(x=>exs[+x.dataset.index]).filter(Boolean);if(!chosen.length){alert('Sélectionne au moins un exercice.');return}area.innerHTML='<h1>COURS MJN — Ma série d’exercices</h1><p>Nom : ____________________　 Date : ____________________</p>';chosen.forEach(el=>{const clone=el.cloneNode(true);clone.classList.add('mjn-print-ex');clone.querySelectorAll('button,.qbtns,.fb,.ok-flag').forEach(x=>x.remove());clone.querySelectorAll('input').forEach(x=>{const line=document.createElement('div');line.style.cssText='height:28px;border-bottom:1px solid #bbb;margin:8px 0';x.replaceWith(line)});clone.querySelectorAll('.corr').forEach(x=>{if(document.getElementById('mjnWithCorrections').checked)x.hidden=false;else x.remove()});clone.querySelectorAll('.hint').forEach(x=>x.remove());area.appendChild(clone)});panel.classList.remove('open');window.print()};})();</script>
 <style id="mjn-floating-buttons-spacing">/* Le bouton PDF est placé au-dessus du bouton Retour à l’accueil pour éviter leur chevauchement, notamment sur téléphone. */ #mjnPrintBtn{bottom:92px!important;right:14px!important;max-width:calc(100vw - 28px);white-space:normal}@media(max-width:600px){#mjnPrintBtn{bottom:92px!important;right:12px!important;max-width:calc(100vw - 24px);font-size:14px;padding:11px 13px}}</style>
+
+<!-- mjn-angle-notation-fix : chapeau couvrant les trois lettres de l’angle -->
+<style id="mjn-angle-notation-fix">
+.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.24em;line-height:1}
+.mjn-angle3::before{content:"";position:absolute;left:2%;right:2%;top:.06em;height:.22em;border-top:1.5px solid currentColor;border-radius:55% 55% 0 0}
+@media print{.mjn-angle3{padding-top:.24em}.mjn-angle3::before{border-top-width:1.3px}}
+</style>
+<script id="mjn-angle-notation-fix-script">
+(function(){
+ if(window.__mjnAngleNotationFix)return;window.__mjnAngleNotationFix=true;
+ const rx=/(\bangle\s+)([A-Z]{3}\b)|(\bcos\s*\()([A-Z]{3})(\))/g;
+ function fix(root){
+  if(!root)return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+   const p=n.parentElement;if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-angle3'))return NodeFilter.FILTER_REJECT;
+   return rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+  }});
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(n=>{
+   rx.lastIndex=0;const value=n.nodeValue;let m,last=0,changed=false;const frag=document.createDocumentFragment();
+   while((m=rx.exec(value))){
+    changed=true;frag.appendChild(document.createTextNode(value.slice(last,m.index)));
+    if(m[1]){frag.appendChild(document.createTextNode(m[1]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[2];frag.appendChild(s);}
+    else{frag.appendChild(document.createTextNode(m[3]));frag.appendChild(document.createTextNode(m[4]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[5];frag.appendChild(s);frag.appendChild(document.createTextNode(m[6]));}
+    last=rx.lastIndex;
+   }
+   if(changed){frag.appendChild(document.createTextNode(value.slice(last)));n.parentNode.replaceChild(frag,n);}
+  });
+ }
+ function run(){fix(document.body);}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+ new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3&&n.parentNode)fix(n.parentNode);}))).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
 </body></html>
