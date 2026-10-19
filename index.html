@@ -104,8 +104,28 @@
       <small>${echap(SITE.email)}</small>`;
   } else $('contact').remove();
 
+  // Filtre d'accès de test pour la partie lycée.
+  // Attention : ce code côté navigateur est un filtre pratique, pas une protection confidentielle.
+  const CODE_LYCEE = "MJN-LYCEE-26";
+  const CLE_LYCEE = "mjnLyceeAutorise";
+  function lyceeAutorise() {
+    try { return sessionStorage.getItem(CLE_LYCEE) === "oui"; } catch (_) { return false; }
+  }
+  function demanderAccesLycee() {
+    if (lyceeAutorise()) return true;
+    const saisie = window.prompt("Cette partie est réservée aux personnes autorisées. Saisis le code d’accès au lycée :");
+    if (saisie === null) return false;
+    if (saisie.trim() === CODE_LYCEE) {
+      try { sessionStorage.setItem(CLE_LYCEE, "oui"); } catch (_) {}
+      return true;
+    }
+    window.alert("Code incorrect. L’accès à la partie lycée reste fermé.");
+    return false;
+  }
+  const NIVEAUX_LYCEE = ["Seconde", "Première", "Terminale"];
   let choisie = new URLSearchParams(location.search).get('classe');
   if (!CLASSES.some(c => c.nom === choisie)) choisie = null;
+  if (choisie && NIVEAUX_LYCEE.includes(choisie) && !demanderAccesLycee()) choisie = null;
 
   let groupeOuvert = "";
   function afficherClasses() {
@@ -132,10 +152,12 @@
     }).join('') + `<div class="encouragement-accueil"><span>Crois en toi,</span><strong>tu es capable !</strong><span class="sourire">☺</span></div>`;
 
     $('classes').querySelectorAll('.bouton-groupe').forEach(b => b.onclick = () => {
+      if (b.dataset.groupe === "lycee" && groupeOuvert !== "lycee" && !demanderAccesLycee()) return;
       groupeOuvert = groupeOuvert === b.dataset.groupe ? "" : b.dataset.groupe;
       afficherClasses();
     });
     $('classes').querySelectorAll('.classe').forEach(b => b.onclick = () => {
+      if (NIVEAUX_LYCEE.includes(b.dataset.nom) && !demanderAccesLycee()) return;
       if (b.dataset.lien) { location.href = b.dataset.lien; return; }
       choisie = b.dataset.nom;
       history.pushState({ classe: choisie }, '', '?classe=' + encodeURIComponent(choisie));
@@ -210,9 +232,20 @@
   }
 
   $('recherche').addEventListener('input', afficherCours);
+  // Bloque aussi les clics de résultats de recherche menant vers les pages du lycée.
+  $('liste').addEventListener('click', event => {
+    const lien = event.target.closest('a[href]');
+    if (!lien) return;
+    const destination = lien.getAttribute('href') || '';
+    if (/^(maths-seconde|snt-seconde|maths-premiere-specialite|maths-terminale)/i.test(destination) && !demanderAccesLycee()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  });
   window.addEventListener('popstate', () => {
     const niveau = new URLSearchParams(location.search).get('classe');
     choisie = CLASSES.some(c => c.nom === niveau) ? niveau : null;
+    if (choisie && NIVEAUX_LYCEE.includes(choisie) && !demanderAccesLycee()) choisie = null;
     afficherClasses(); afficherCours();
     if (choisie) setTimeout(() => $('liste').scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
     else window.scrollTo({ top: 0, behavior: 'smooth' });
