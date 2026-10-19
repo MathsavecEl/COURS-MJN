@@ -447,7 +447,7 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
 </header>
 <main class="wrap" id="app"></main>
 <div id="toast" role="status" aria-live="polite"></div>
-<footer class="wrap">Site de mathématiques de 3<sup>e</sup> prépa métiers · M. AHA MAJANI · À l'attention de mes élèves de 306<br>
+<footer class="wrap">Site de mathématiques de 3<sup>e</sup> prépa métiers · M. AHA MAJANI · <br>
 Une erreur, un blocage ? Écrivez-moi : <a href="mailto:mathsclavie20@gmail.com">mathsclavie20@gmail.com</a><br>
 <button class="btn small ghost no-print" type="button" id="profBtn" style="margin-top:10px">Mode professeur : afficher toutes les corrections</button></footer>
 <script>
@@ -1964,7 +1964,7 @@ const QZ = (() => {
     return list;
   }
   let S = null;
-  const head = E => `<section class="sheet"><p class="kicker">Entraînement à l'évaluation · À l'attention de mes élèves de 306</p><h2>${E.htitle}</h2><div class="row"><a class="btn small ghost" href="#/evals">← Tous les QCM</a>${E.ch ? `<a class="btn small ghost" href="#/ch/${E.ch}">Revoir le chapitre ${E.ch}</a>` : ''}</div></section>`;
+  const head = E => `<section class="sheet"><p class="kicker">Entraînement à l'évaluation · </p><h2>${E.htitle}</h2><div class="row"><a class="btn small ghost" href="#/evals">← Tous les QCM</a>${E.ch ? `<a class="btn small ghost" href="#/ch/${E.ch}">Revoir le chapitre ${E.ch}</a>` : ''}</div></section>`;
   function home(E) {
     S = null;
     const n = E.exs.reduce((s, e) => s + e.qs.length, 0), best = store.get('qcm306-' + E.id);
