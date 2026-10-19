@@ -3544,19 +3544,57 @@ btn.addEventListener('click',open);document.getElementById('mjnCancelPdf').oncli
 document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array.from(panel.querySelectorAll('.mjn-pdf-list input:checked')).map(x=>exs[+x.dataset.index]).filter(Boolean);if(!chosen.length){alert('Sélectionne au moins un exercice.');return}area.innerHTML='<h1>COURS MJN — Ma série d’exercices</h1><p>Nom : ____________________　 Date : ____________________</p>';chosen.forEach(el=>{const clone=el.cloneNode(true);clone.classList.add('mjn-print-ex');clone.querySelectorAll('button,.qbtns,.fb,.ok-flag').forEach(x=>x.remove());clone.querySelectorAll('input').forEach(x=>{const line=document.createElement('div');line.style.cssText='height:28px;border-bottom:1px solid #bbb;margin:8px 0';x.replaceWith(line)});clone.querySelectorAll('.corr').forEach(x=>{if(document.getElementById('mjnWithCorrections').checked)x.hidden=false;else x.remove()});clone.querySelectorAll('.hint').forEach(x=>x.remove());area.appendChild(clone)});panel.classList.remove('open');window.print()};})();</script><script id="eval-options-45">
 (function(){
  const menu0=evMenu,start0=evStart,answer0=evAnswer,end0=evEnd,show0=evShow;
- let mode='end',timer=null,deadline=0,expired=false;
- const st=document.createElement('style');st.textContent='.ev-options{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:10px}.ev-clock{font-weight:800;padding:5px 10px;border:1px solid var(--line);border-radius:20px;font-variant-numeric:tabular-nums}.ev-clock.urgent{color:#b22;border-color:#b22}@media print{.ev-options,.btn,.row,nav,footer{display:none!important}.sheet{box-shadow:none!important}}';document.head.appendChild(st);
+ let mode='each',timer=null,deadline=0,expired=false,answers=[];
+ const st=document.createElement('style');
+ st.textContent='.ev-options{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:10px}.ev-clock{font-weight:800;padding:5px 10px;border:1px solid var(--line);border-radius:20px;font-variant-numeric:tabular-nums}.ev-clock.urgent{color:#b22;border-color:#b22}@media print{.ev-options,.btn,.row,nav,footer{display:none!important}.sheet{box-shadow:none!important}}';
+ document.head.appendChild(st);
  function stop(){if(timer)clearInterval(timer);timer=null}
- function tick(){if(!EV||!EV.run||EV.run.end||!deadline){stop();return}let left=deadline-Date.now(),el=document.getElementById('evClock');if(el){let s=Math.max(0,Math.ceil(left/1000));el.textContent='Temps restant : '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');el.classList.toggle('urgent',left<300000)}if(left<=0){stop();expired=true;end0()}}
- function addOptions(){let sheet=document.querySelector('.ev.sheet,section.sheet.ev,.ev');if(!sheet||document.getElementById('evOptions'))return;let box=document.createElement('div');box.id='evOptions';box.className='ev-options';box.innerHTML='<label for="evMode">Correction :</label><select id="evMode"><option value="each">Après chaque question</option><option value="end">À la fin, avec la note</option></select><span>Durée maximale : 45 min</span><div class="row"><button type="button" class="btn ghost" id="evPaper">Imprimer sans correction</button><button type="button" class="btn ghost" id="evPaperCorr">Imprimer avec correction</button></div>';let lead=sheet.querySelector('.lead');if(lead)lead.after(box);else sheet.append(box);document.getElementById('evMode').value=mode;document.getElementById('evMode').onchange=e=>mode=e.target.value;document.getElementById('evPaper').onclick=()=>paper(false);document.getElementById('evPaperCorr').onclick=()=>paper(true)}
- function paper(corr){if(!EV||!EV.e)return;let e=EV.e,clean=s=>String(s||'');let html=e.parties.map((p,i)=>'<h2>Partie '+(i+1)+' — '+p.nom+'</h2>'+p.qs.map((q,j)=>'<article><p><b>'+(j+1)+'.</b> '+clean(q.q)+'</p>'+(q.fig||'')+'<ol type="A">'+q.c.map(a=>'<li>'+a+'</li>').join('')+'</ol>'+(corr?'<p><b>Réponse :</b> '+q.c[0]+'</p><p>'+q.e+'</p>':'<p>Réponse : ____________________________________</p><p>____________________________________________</p>')).join('')).join('');
- let w=window.open('','_blank');if(!w){alert('Autorise les fenêtres contextuelles pour imprimer.');return}w.document.write('<!doctype html><html lang="fr"><meta charset="utf-8"><title>'+e.titre+'</title><style>body{font:12pt Arial;line-height:1.45;max-width:800px;margin:25px auto;color:#111}article{break-inside:avoid;margin:18px 0}h2{border-bottom:1px solid #aaa;padding-bottom:5px}@page{size:A4;margin:15mm}</style><h1>'+e.titre+'</h1><p>Nom : ____________________ Date : __________ Durée : 45 min</p>'+html+'<script>onload=()=>print()<\\/script></html>');w.document.close()}
+ function current(){return EV&&EV.run&&!EV.run.end?EV.run:null}
+ function tick(){
+  const r=current(); if(!r||!deadline){stop();return}
+  const left=deadline-Date.now(),el=document.getElementById('evClock');
+  if(el){const sec=Math.max(0,Math.ceil(left/1000));el.textContent='Temps restant : '+String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');el.classList.toggle('urgent',left<300000)}
+  if(left<=0){stop();expired=true;end0()}
+ }
+ function addOptions(){
+  const appEl=document.getElementById('app'); if(!appEl||!EV||EV.run||document.getElementById('evOptions'))return;
+  const sheet=appEl.querySelector('.sheet'); if(!sheet)return;
+  const box=document.createElement('div');box.id='evOptions';box.className='ev-options';
+  box.innerHTML='<label for="evMode">Correction :</label><select id="evMode"><option value="each">Après chaque question</option><option value="end">À la fin, avec la note</option></select><span>Durée maximale : 45 min</span><div class="row"><button type="button" class="btn ghost" id="evPaper">Imprimer sans correction</button><button type="button" class="btn ghost" id="evPaperCorr">Imprimer avec correction</button></div>';
+  const lead=sheet.querySelector('.lead'); if(lead)lead.after(box);else sheet.append(box);
+  document.getElementById('evMode').value=mode;document.getElementById('evMode').onchange=e=>mode=e.target.value;
+  document.getElementById('evPaper').onclick=()=>paper(false);document.getElementById('evPaperCorr').onclick=()=>paper(true);
+ }
+ function paper(corr){
+  if(!EV||!EV.e){alert('Ouvre d’abord le QCM du chapitre à imprimer.');return}
+  const e=EV.e,esc=s=>String(s||'');
+  const html=e.parties.map((p,i)=>'<h2>Partie '+(i+1)+' — '+esc(p.nom)+'</h2>'+p.qs.map((q,j)=>'<article><p><b>'+(j+1)+'.</b> '+esc(q.q)+'</p>'+(q.fig||'')+'<ol type="A">'+q.c.map(a=>'<li>'+a+'</li>').join('')+'</ol>'+(corr?'<p><b>Réponse :</b> '+q.c[0]+'</p><p>'+q.e+'</p>':'<p>Réponse : ____________________________________</p><p>____________________________________________</p>')).join('')).join('');
+  const w=window.open('','_blank');if(!w){alert('Autorise les fenêtres contextuelles pour imprimer.');return}
+  w.document.write('<!doctype html><html lang="fr"><meta charset="utf-8"><title>'+esc(e.titre)+'</title><style>body{font:12pt Arial;line-height:1.45;max-width:800px;margin:25px auto;color:#111}article{break-inside:avoid;margin:18px 0}h2{border-bottom:1px solid #aaa;padding-bottom:5px}@page{size:A4;margin:15mm}</style><h1>'+esc(e.titre)+'</h1><p>Nom : ____________________ Date : __________ Durée : 45 min</p>'+html+'<script>onload=()=>print()<\\/script></html>');w.document.close()
+ }
  evMenu=function(){menu0();addOptions()};
- evStart=function(list,key,label){start0(list,key,label);if(EV&&EV.run){EV.run.answers=[];stop();deadline=Date.now()+45*60*1000;expired=false;timer=setInterval(tick,1000);let m=document.querySelector('.ev-meta');if(m&&!document.getElementById('evClock')){let c=document.createElement('span');c.id='evClock';c.className='ev-clock';m.append(c)}tick()}};
+ evStart=function(list,key,label){
+  answers=[];expired=false;stop();start0(list,key,label);
+  if(EV&&EV.run){EV.run.answers=answers;deadline=Date.now()+45*60*1000;timer=setInterval(tick,1000);
+   const meta=document.querySelector('.ev-meta');if(meta&&!document.getElementById('evClock')){const c=document.createElement('span');c.id='evClock';c.className='ev-clock';meta.append(c)}tick()
+  }
+ };
  evShow=function(){show0();tick()};
- evAnswer=function(k){if(!EV||!EV.run||EV.run.done||!EV.run.order||!EV.run.order[k])return;let r=EV.run,q=r.list[r.i],o=r.order[k];r.answers=r.answers||[];r.answers[r.i]={q,chosen:o.t,good:o.ok};answer0(k);if(mode==='end'){let fb=document.getElementById('evFb');if(fb)fb.hidden=true}};
- evEnd=function(){stop();deadline=0;end0();if(!EV||!EV.run)return;let r=EV.run,review=document.createElement('section');review.className='sheet';review.innerHTML='<h2>Correction complète</h2>'+r.list.map((q,i)=>'<article class="ev-miss"><h3>Question '+(i+1)+'</h3><div class="ev-q">'+q.q+'</div>'+(q.fig||'')+'<p><b>Bonne réponse :</b> '+q.c[0]+'</p><div>'+q.e+'</div></article>').join('')+'<button type="button" class="btn ghost" id="evPrintReview">Imprimer la correction</button>';app().append(review);document.getElementById('evPrintReview').onclick=()=>print();if(expired){let p=document.createElement('p');p.className='lead';p.textContent='Les 45 minutes sont écoulées : le QCM est terminé.';review.prepend(p)}window.scrollTo(0,0)};
- const obs=new MutationObserver(()=>{if(EV&&!EV.run)addOptions()});obs.observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
+ evAnswer=function(k){
+  const r=current(); if(!r||!r.order||!r.order[k])return;
+  const q=r.list[r.i],o=r.order[k];answers[r.i]={q,chosen:o.t,good:o.ok};
+  answer0(k);
+  if(mode==='end'){const fb=document.getElementById('evFb');if(fb)fb.hidden=true}
+ };
+ evEnd=function(){
+  stop();deadline=0;end0();const r=EV&&EV.run;if(!r)return;
+  const score=Number(r.score)||0,total=(r.list||[]).length,score20=total?Math.round(score/total*200)/10:0;
+  const review=document.createElement('section');review.className='sheet';
+  review.innerHTML='<h2>Correction complète</h2><p class="lead">Résultat : '+score+' / '+total+' — soit '+String(score20).replace('.',',')+' / 20.</p>'+(expired?'<p class="lead">Les 45 minutes sont écoulées : le QCM est terminé.</p>':'')+r.list.map((q,i)=>'<article class="ev-miss"><h3>Question '+(i+1)+'</h3><div class="ev-q">'+q.q+'</div>'+(q.fig||'')+'<p><b>Bonne réponse :</b> '+q.c[0]+'</p><div>'+q.e+'</div></article>').join('')+'<button type="button" class="btn ghost" id="evPrintReview">Imprimer la correction</button>';
+  app().append(review);document.getElementById('evPrintReview').onclick=()=>window.print();window.scrollTo(0,0)
+ };
+ const obs=new MutationObserver(()=>{if(EV&&!EV.run)addOptions()});
+ obs.observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
 })();
 </script>
 </body>
