@@ -3629,14 +3629,14 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 
 <!-- mjn-angle-notation-fix : chapeau couvrant les trois lettres de l’angle -->
 <style id="mjn-angle-notation-fix">
-.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.24em;line-height:1}
-.mjn-angle3::before{content:"";position:absolute;left:2%;right:2%;top:.06em;height:.22em;border-top:1.5px solid currentColor;border-radius:55% 55% 0 0}
-@media print{.mjn-angle3{padding-top:.24em}.mjn-angle3::before{border-top-width:1.3px}}
+.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.18em;line-height:1.15}
+.mjn-angle3::before{content:"⌒";position:absolute;left:0;right:0;top:-.43em;height:.35em;line-height:.35em;text-align:center;font-family:Arial,sans-serif;font-size:.9em;font-weight:400;color:currentColor;transform:none}
+@media print{.mjn-angle3{padding-top:.18em}.mjn-angle3::before{top:-.43em}}
 </style>
 <script id="mjn-angle-notation-fix-script">
 (function(){
  if(window.__mjnAngleNotationFix)return;window.__mjnAngleNotationFix=true;
- const rx=/(\bangle\s+)([A-Z]{3}\b)|(\bcos\s*\()([A-Z]{3})(\))/g;
+ const rx=/(\\bangle\\s+)([A-Z]{3}\\b|[xy]O[xy])|(\\bcos\\s*\\()([A-Z]{3})(\\))/g;
  function fix(root){
   if(!root)return;
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
