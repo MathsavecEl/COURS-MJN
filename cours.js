@@ -78,7 +78,7 @@ const COURS = [
     titre: "Mathématiques en 3e — prépa-métiers",
     chapitre: "Cours, automatismes et entraînement",
     type: "",
-    description: "Chapitres, QCM et préparation aux évaluations."
+    description: "Chapitres, QCM et préparation aux évaluations.",
     lien: "maths-3e-306.html",
     nouveau: true
   },
