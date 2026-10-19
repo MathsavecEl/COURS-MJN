@@ -511,7 +511,10 @@ html.big .q .qt{font-size:1.08em}
 .btn.vio,.exo.appro .num{background:var(--accent)}
 a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-label*="retour" i],[aria-label*="accueil" i],.btn.soft,.btn.ghost,.back-button,.btn-retour{background:var(--accent)!important;border:1px solid var(--accent)!important;color:#fff!important;box-shadow:none!important}
 @media(prefers-color-scheme:dark){:root{--bg:#111827;--card:#1b2535;--ink:#edf2fa;--muted:#b5c0d1;--line:#3a4960;--accent:#79b6ff;--accent-soft:#233c59;--ok:#72d6a0;--ok-soft:#183b2c;--ko:#ff9297;--ko-soft:#48272d;--warn:#f3c56b;--warn-soft:#42351e;--violet:#79b6ff;--violet-soft:#233c59;--nav:#101f33;color-scheme:dark}body{background:var(--bg)!important;color:var(--ink)!important}nav#nav{background:#162235!important;border-color:var(--line)!important}nav#nav a,nav#nav .grp{color:var(--ink)}.card,.tile,.ch,.themes label,details.rap,.recap li,table.t,table.t th,table.t td,.ans input,.tabs button,.corr,.mail{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}.hero,.home-hero{background:#17263a!important;color:var(--ink)!important}.hero h1,.hero .sub,.hero .who,.home-hero h1,.home-hero .sub,.home-hero .who{color:var(--ink)!important}.box.def,.box.demo{background:var(--accent-soft)!important;color:var(--ink)!important}.box.meth{background:var(--ok-soft)!important;color:var(--ink)!important}.box.att,.fb.ko,.ch.ko,.ans input.ko{background:var(--ko-soft)!important;color:var(--ink)!important}.box.ex,.fb.info{background:#263244!important;color:var(--ink)!important}.cheer,.notice,.hint{background:var(--warn-soft)!important;color:#ffe6a8!important;border-color:#806a3c!important}.btn.ghost{background:var(--accent-soft)!important;color:var(--accent)!important}.btn.soft{background:#2b374a!important;color:var(--ink)!important}.btn:not(.ghost):not(.soft),.btn.vio{background:#285b98!important;color:#fff!important}.tabs button.on,nav#nav a.on{background:#285b98!important;color:#fff!important}code{background:#263244!important;color:#edf2fa!important}footer.foot{background:#162235!important;color:var(--muted)!important;border-color:var(--line)!important}a{color:var(--accent)}}</style>
-</head>
+<style id="mjn-print-style">
+#mjnPrintBtn{position:fixed;right:14px;bottom:14px;z-index:9999;border:0;border-radius:999px;padding:12px 16px;background:#176b55;color:#fff;font:700 14px system-ui;box-shadow:0 4px 18px #0003;cursor:pointer}
+@media print{#mjnPrintBtn{display:none!important} body{background:#fff!important;color:#000!important} .on{color:inherit}}
+</style></head>
 <body>
 <header class="top">
   <div class="wrap">
@@ -4481,9 +4484,9 @@ const TTS = typeof speechSynthesis !== 'undefined';
 let frVoice = null;
 function pickFrenchVoice() {
   if (!TTS) return null;
-  const voices = speechSynthesis.getVoices();
-  const french = voices.filter(v => /^fr(?:-|$)/i.test(v.lang));
-  frVoice = french.find(v => /^fr-FR$/i.test(v.lang)) || french.find(v => /français|french/i.test(v.name)) || french[0] || null;
+  const voices = speechSynthesis.getVoices() || [];
+  const french = voices.filter(v => /^fr(?:-|$)/i.test(v.lang) || /français|french/i.test(v.name));
+  frVoice = french.find(v => /^fr-FR$/i.test(v.lang)) || french.find(v => /^fr/i.test(v.lang)) || french[0] || null;
   return frVoice;
 }
 if (TTS) {
@@ -4525,30 +4528,33 @@ function speakText(el) {
 let sayBtn = null;
 function stopSpeak() { if (TTS) speechSynthesis.cancel(); if (sayBtn) { sayBtn.classList.remove('on'); sayBtn.textContent = '🔊 Écouter'; } sayBtn = null; }
 async function speak(btn) {
-  if (!TTS) { alert('La lecture audio n’est pas prise en charge par ce navigateur.'); return; }
+  if (!TTS || typeof SpeechSynthesisUtterance === 'undefined') {
+    alert('La lecture audio n’est pas disponible dans ce navigateur. Essaie avec Chrome et vérifie que la synthèse vocale est activée sur ton appareil.');
+    return;
+  }
   if (sayBtn === btn) return stopSpeak();
   stopSpeak();
   sayBtn = btn;
   const voice = await waitForFrenchVoice();
   if (sayBtn !== btn) return;
-  if (!voice) {
-    sayBtn = null;
-    btn.classList.remove('on');
-    btn.textContent = '🔊 Écouter';
-    alert('Aucune voix française n’est disponible sur cet appareil. Active ou installe une voix française dans les paramètres de synthèse vocale, puis réessaie. Aucune lecture en anglais ne sera lancée.');
-    return;
-  }
   const zone = btn.closest('.box, .q, .ex-e, .qz, .rap, .sayzone') || btn.parentElement;
   const parts = (speakText(zone).match(/[^.!?;:]+[.!?;:]*/g) || []).map(p => p.trim()).filter(Boolean);
+  if (!parts.length) { stopSpeak(); return; }
   btn.classList.add('on'); btn.textContent = '⏹ Arrêter';
-  parts.forEach((p, i) => {
-    const u = new SpeechSynthesisUtterance(p);
+  // Sur certains téléphones, la liste des voix arrive tard ou reste vide.
+  // On lance tout de même la lecture avec la langue française explicitement demandée.
+  let i = 0;
+  const next = () => {
+    if (sayBtn !== btn || i >= parts.length) { if (sayBtn === btn) stopSpeak(); return; }
+    const u = new SpeechSynthesisUtterance(parts[i++]);
     u.lang = 'fr-FR';
-    u.voice = voice;
+    if (voice) u.voice = voice;
     u.rate = 0.85;
-    if (i === parts.length - 1) u.onend = () => { if (sayBtn === btn) stopSpeak(); };
+    u.onend = next;
+    u.onerror = () => { if (sayBtn === btn) stopSpeak(); };
     speechSynthesis.speak(u);
-  });
+  };
+  next();
 }
 
 /* ---------- rendu d'une question et d'un exercice ---------- */
@@ -4842,5 +4848,5 @@ register(); route();
 </script>
 <script src="progression.js?v=1"></script>
 <script src="encouragement.js?v=3"></script>
-</body>
+<script id="mjn-print-script">(()=>{const b=document.createElement('button');b.id='mjnPrintBtn';b.type='button';b.textContent='🖨️ Imprimer / PDF';b.setAttribute('aria-label','Imprimer la page affichée ou l’enregistrer en PDF');b.addEventListener('click',()=>window.print());document.body.appendChild(b)})();</script></body>
 </html>
