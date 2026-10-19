@@ -2,7 +2,7 @@
 const SITE = {
   titre: "MJN COURS",
   presentation: "Cours, exercices et activités interactives pour apprendre, réviser et progresser en mathématiques.",
-  enseignant: "M. AHA MAJANI",
+  enseignant: "",
   matiere: "Mathématiques",
   etablissement: "",
   droits: "Ressources pédagogiques",
