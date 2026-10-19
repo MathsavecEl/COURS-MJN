@@ -3533,7 +3533,7 @@ register(); route();
 <script src="progression.js?v=1"></script>
 <script src="encouragement.js?v=3"></script>
 <script id="mjn-print-script">(()=>{const css=document.createElement('style');css.textContent=`
-#mjnPrintBtn{position:fixed;right:14px;bottom:14px;z-index:9999;border:0;border-radius:999px;padding:12px 16px;background:#24318a;color:#fff;font:700 15px system-ui;box-shadow:0 4px 16px #0003;cursor:pointer}
+#mjnPrintBtn{position:fixed;right:14px;bottom:82px;z-index:9999;border:0;border-radius:999px;padding:12px 16px;background:#24318a;color:#fff;font:700 15px system-ui;box-shadow:0 4px 16px #0003;cursor:pointer}
 #mjnPdfPanel{position:fixed;inset:0;z-index:10000;background:#10142acc;display:none;align-items:center;justify-content:center;padding:16px}#mjnPdfPanel.open{display:flex}.mjn-pdf-card{background:#fff;color:#1c2135;width:min(540px,100%);max-height:90vh;overflow:auto;border-radius:16px;padding:22px;font:16px/1.45 system-ui}.mjn-pdf-card h2{margin:0 0 8px}.mjn-pdf-card p{margin:0 0 14px}.mjn-pdf-list{display:grid;gap:8px;margin:14px 0;max-height:42vh;overflow:auto}.mjn-pdf-list label{display:flex;gap:10px;align-items:flex-start;padding:9px;border:1px solid #d4dbeb;border-radius:8px}.mjn-pdf-actions{display:flex;flex-wrap:wrap;gap:8px}.mjn-pdf-actions button{border:0;border-radius:9px;padding:10px 13px;font-weight:700;cursor:pointer;background:#24318a;color:white}.mjn-pdf-actions .secondary{background:#e8edff;color:#24318a}#mjnPdfPrintArea{display:none}
 @media print{body>*:not(#mjnPdfPrintArea){display:none!important}#mjnPdfPrintArea{display:block!important;color:#111;background:white;font:11pt/1.45 Arial,sans-serif}#mjnPdfPrintArea .mjn-print-ex{break-inside:avoid;margin:0 0 18px;padding:0 0 12px;border-bottom:1px solid #bbb}#mjnPdfPrintArea h1{font-size:18pt}#mjnPdfPrintArea h2{font-size:14pt}#mjnPdfPrintArea button,#mjnPdfPrintArea input{display:none!important}#mjnPdfPrintArea .corr{display:block!important}#mjnPdfPrintArea .hint{display:none!important}#mjnPdfPrintArea svg{max-width:100%}@page{size:A4;margin:15mm}}`;document.head.appendChild(css);
 const panel=document.createElement('div');panel.id='mjnPdfPanel';panel.innerHTML='<div class="mjn-pdf-card" role="dialog" aria-modal="true"><h2>Composer ma série d’exercices</h2><p>Sélectionne les exercices à réunir dans un document PDF.</p><div class="mjn-pdf-actions"><button type="button" id="mjnSelectAll" class="secondary">Tout sélectionner</button><button type="button" id="mjnSelectNone" class="secondary">Tout désélectionner</button></div><div class="mjn-pdf-list" id="mjnPdfList"></div><label style="display:flex;gap:9px;margin:12px 0"><input type="checkbox" id="mjnWithCorrections"> Inclure les corrections</label><div class="mjn-pdf-actions"><button type="button" id="mjnMakePdf">🖨️ Préparer le PDF</button><button type="button" id="mjnCancelPdf" class="secondary">Annuler</button></div><p style="font-size:13px;color:#596282;margin-top:12px">Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ».</p></div>';document.body.appendChild(panel);
@@ -3546,7 +3546,7 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
  const menu0=evMenu,start0=evStart,answer0=evAnswer,end0=evEnd,show0=evShow;
  let mode='each',timer=null,deadline=0,expired=false,answers=[];
  const st=document.createElement('style');
- st.textContent='.ev-options{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:10px}.ev-deferred-correction .ev-c.ok,.ev-deferred-correction .ev-c.ko,.ev-deferred-correction .ev-c.dim{background:var(--card)!important;border-color:var(--line)!important;color:var(--text)!important;opacity:1!important}.ev-deferred-correction .ev-c .L{background:var(--accent-soft)!important;color:var(--accent)!important}.ev-deferred-correction #evSc{visibility:hidden!important}.ev-clock{font-weight:800;padding:5px 10px;border:1px solid var(--line);border-radius:20px;font-variant-numeric:tabular-nums}.ev-clock.urgent{color:#b22;border-color:#b22}@media print{.ev-options,.btn,.row,nav,footer{display:none!important}.sheet{box-shadow:none!important}}';
+ st.textContent='.ev-options{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:10px}.ev-deferred-correction .ev-c.ok,.ev-deferred-correction .ev-c.ko,.ev-deferred-correction .ev-c.dim{background:var(--card)!important;border-color:var(--line)!important;color:var(--text)!important;opacity:1!important}.ev-deferred-correction .ev-c .L{background:var(--accent-soft)!important;color:var(--accent)!important}.ev-deferred-correction #evSc{display:none!important;visibility:hidden!important}.ev-clock{font-weight:800;padding:5px 10px;border:1px solid var(--line);border-radius:20px;font-variant-numeric:tabular-nums}.ev-clock.urgent{color:#b22;border-color:#b22}@media print{.ev-options,.btn,.row,nav,footer{display:none!important}.sheet{box-shadow:none!important}}';
  document.head.appendChild(st);
  function stop(){if(timer)clearInterval(timer);timer=null}
  function current(){return EV&&EV.run&&!EV.run.end?EV.run:null}
@@ -3579,7 +3579,18 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
    const meta=document.querySelector('.ev-meta');if(meta&&!document.getElementById('evClock')){const c=document.createElement('span');c.id='evClock';c.className='ev-clock';meta.append(c)}tick()
   }
  };
- evShow=function(){show0();tick()};
+ evShow=function(){
+  show0();
+  if(mode==='end'&&EV&&EV.run&&!EV.run.end){
+   document.body.classList.add('ev-deferred-correction');
+   document.querySelectorAll('.ev-c').forEach(b=>b.classList.remove('ok','ko','dim'));
+   const scoreEl=document.getElementById('evSc');if(scoreEl){scoreEl.textContent='';scoreEl.style.display='none'}
+   const fb=document.getElementById('evFb');if(fb){fb.hidden=true;fb.innerHTML=''}
+  } else {
+   const scoreEl=document.getElementById('evSc');if(scoreEl)scoreEl.style.display='';
+  }
+  tick()
+ };
  evAnswer=function(k){
   const r=current(); if(!r||!r.order||!r.order[k])return;
   const q=r.list[r.i],o=r.order[k];answers[r.i]={q,chosen:o.t,good:o.ok};
