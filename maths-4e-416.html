@@ -5124,5 +5124,7 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
  document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.id==='qz-all'||b.classList.contains('qz-part'))start();if(b.id==='qz-next'&&b.textContent.includes('résultat'))stop();if(b.classList.contains('qz-c')&&mode==='end')setTimeout(()=>{const fb=document.getElementById('qz-fb');if(fb)fb.hidden=true},0)});
 })();
 </script>
+
+<style id="mjn-floating-buttons-spacing">/* Le bouton PDF est placé au-dessus du bouton Retour à l’accueil pour éviter leur chevauchement, notamment sur téléphone. */ #mjnPrintBtn{bottom:92px!important;right:14px!important;max-width:calc(100vw - 28px);white-space:normal}@media(max-width:600px){#mjnPrintBtn{bottom:92px!important;right:12px!important;max-width:calc(100vw - 24px);font-size:14px;padding:11px 13px}}</style>
 </body>
 </html>
