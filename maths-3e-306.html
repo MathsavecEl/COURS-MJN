@@ -1918,7 +1918,7 @@ const AUTO = [
 
 /* ============================================================
    ENTRAÎNEMENT À L'ÉVALUATION : moteur des QCM de révision
-   (repris des QCM de l’enseignant : EVAL {id,title,sub,exs:[{name,o,r,ctx,fig,qs:[{o,r,ctx,fig,q,ok,bad,m,h}]}]})
+   (repris des QCM de cours : EVAL {id,title,sub,exs:[{name,o,r,ctx,fig,qs:[{o,r,ctx,fig,q,ok,bad,m,h}]}]})
    ============================================================ */
 const QF = {
   fmt: (n, d = 2) => { const v = Math.round(n * 10 ** d) / 10 ** d; return String(v).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' '); },
@@ -2450,7 +2450,7 @@ function brevetFig(p) { const s = 300 / p.W, W = p.W * s, H = p.H * s, h = p.h *
   <text class="la" x="${x0 + g / 2}" y="${y0 + H + 22}" text-anchor="middle">${p.g} m</text><text class="la" x="${xO + d / 2}" y="${y0 + H + 22}" text-anchor="middle">${p.d} m</text></svg>`; }
 EVAL.ch = 8; return EVAL; })());
 /* ============================================================
-   QCM D'ENTRAÎNEMENT À L'ÉVALUATION — nouveaux sujets (même modèle que les QCM de l’enseignant)
+   QCM D'ENTRAÎNEMENT À L'ÉVALUATION — nouveaux sujets (même modèle que les QCM d’entraînement)
    ============================================================ */
 EVALS.push((() => { const { fmt, eur } = QF; return {
   id: 'operations', ch: 1, title: 'Les 4 opérations', htitle: 'Révision : <span>Les 4 opérations</span>',
@@ -3163,7 +3163,7 @@ const BRAVO_N = n => [`Bravo ${n} !`, `Excellent ${n}, continue !`, `C'est juste
 const ENCORE = ['Pas encore… Ouvre le coup de pouce, il est là pour ça.', 'Presque ! Relis bien l\'énoncé.', 'Se tromper, c\'est apprendre. Essaie encore !', 'Pas tout à fait. Reprends calmement, étape par étape.', 'Courage, tu vas trouver !'];
 const PER = { 1: 'Période 1 · Août à Toussaint', 2: 'Période 2 · Toussaint à Noël', 3: 'Période 3 · Noël à février', 4: 'Période 4 · Février à avril', 5: 'Période 5 · Fin de l\'année' };
 const MAIL = 'mathsclavie20@gmail.com';
-const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. — <b>l’enseignant</b></p></div>`;
+const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. </p></div>`;
 const pick2 = L => L[Math.floor(Math.random() * L.length)];
 const DED = '';
 
