@@ -3649,7 +3649,7 @@ document.getElementById('mjnMakePdf').onclick=()=>{const exs=list(),chosen=Array
    while((m=rx.exec(value))){
     changed=true;frag.appendChild(document.createTextNode(value.slice(last,m.index)));
     if(m[1]){frag.appendChild(document.createTextNode(m[1]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[2];frag.appendChild(s);}
-    else{frag.appendChild(document.createTextNode(m[3]));frag.appendChild(document.createTextNode(m[4]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[5];frag.appendChild(s);frag.appendChild(document.createTextNode(m[6]));}
+    else{frag.appendChild(document.createTextNode(m[3]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[4];frag.appendChild(s);frag.appendChild(document.createTextNode(m[5]));}
     last=rx.lastIndex;
    }
    if(changed){frag.appendChild(document.createTextNode(value.slice(last)));n.parentNode.replaceChild(frag,n);}
