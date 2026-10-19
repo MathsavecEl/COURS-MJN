@@ -9,12 +9,12 @@
   let boiteActuelle = null;
 
   const messages = [
-    minutes => `Tu as déjà consacré ${minutes} minutes à t’entraîner : bravo ! Continue, chaque exercice te fait progresser. 💪📐`,
-    minutes => `Déjà ${minutes} minutes de travail ! Tes efforts comptent. Continue à ton rythme, tu es capable d’y arriver !`,
-    minutes => `Bravo pour ta persévérance : ${minutes} minutes d’entraînement ! Les progrès viennent avec la pratique. Garde confiance en toi !`,
-    minutes => `Tu as travaillé ${minutes} minutes : c’est un bel effort. Les erreurs font partie de l’apprentissage ; continue !`,
-    minutes => `${minutes} minutes d’apprentissage, un beau pas en avant ! Fais une petite pause si besoin, puis reprends avec confiance.`,
-    minutes => `Tu construis tes progrès exercice après exercice. Déjà ${minutes} minutes : sois fier de tes efforts et ne baisse pas les bras !`
+    minutes => `Bravo, tu as déjà fait ${minutes} minutes d’entraînement ! M. AHA MAJANI t’encourage à continuer tes efforts : chaque exercice te fait progresser. 💪📐`,
+    minutes => `Déjà ${minutes} minutes de travail ! M. AHA MAJANI t’encourage à poursuivre à ton rythme : tes efforts comptent et tu es capable d’y arriver !`,
+    minutes => `Bravo pour ta persévérance : ${minutes} minutes d’entraînement ! M. AHA MAJANI t’encourage à garder confiance en toi et à continuer à t’exercer.`,
+    minutes => `Tu as travaillé ${minutes} minutes : c’est un bel effort. M. AHA MAJANI t’encourage à apprendre de tes erreurs et à persévérer !`,
+    minutes => `${minutes} minutes d’apprentissage, un beau pas en avant ! M. AHA MAJANI t’encourage à poursuivre avec confiance, en faisant une petite pause si besoin.`,
+    minutes => `Tu construis tes progrès exercice après exercice. Déjà ${minutes} minutes ! M. AHA MAJANI t’encourage à continuer et à ne pas baisser les bras.`
   ];
 
   const style = document.createElement("style");
