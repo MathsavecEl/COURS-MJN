@@ -3384,7 +3384,7 @@ function pageHome() {
       <p class="lead">Bienvenue sur votre site de mathématiques ! Vous y trouverez tous les chapitres de l'année dans l'ordre de notre progression, avec pour chacun un cours court, des exemples, des exercices d'application et des exercices pour aller plus loin. Une partie <b>Automatismes</b> vous entraîne aux calculs rapides du brevet.</p>
       <div class="namebox"><label for="nm"><b>Ton prénom :</b></label><input id="nm" type="text" maxlength="24" value="${esc(ST.name)}" placeholder="Écris ton prénom" autocomplete="given-name"><button class="btn small" id="nmok" type="button">OK</button></div>
       <p class="hand" id="hello">${ST.name ? 'Bon courage ' + esc(ST.name) + ' !' : 'Bon courage à tous !'}</p>
-    </div><div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>Chers élèves de 312, ce site a été conçu pour vous. Les maths ne sont pas réservées à quelques-uns : avec de la régularité, tout le monde progresse. Faites un peu chaque jour, n'ayez pas peur de vous tromper, utilisez les coups de pouce, et lisez les corrections. Je crois en chacun de vous. Le brevet, on va le préparer ensemble !</p></div></section>
+    </div></section>
     <section class="sheet"><h3>Ta progression</h3><div class="row prog">${bar(d, all.length)}<span class="muted">questions réussies sur l'ensemble des chapitres</span></div>
       <div class="go-grid">
         <a class="go" href="#/chapitres"><span class="gi">📘</span><b>Les ${CH.length} chapitres</b><span>Cours, exemples et exercices, dans l'ordre de l'année</span></a>
