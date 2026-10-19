@@ -3663,9 +3663,9 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 
 <!-- mjn-angle-notation-fix : chapeau couvrant les trois lettres de l’angle -->
 <style id="mjn-angle-notation-fix">
-.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.18em;line-height:1.15}
-.mjn-angle3::before{content:"⌒";position:absolute;left:0;right:0;top:-.43em;height:.35em;line-height:.35em;text-align:center;font-family:Arial,sans-serif;font-size:.9em;font-weight:400;color:currentColor;transform:none}
-@media print{.mjn-angle3{padding-top:.18em}.mjn-angle3::before{top:-.43em}}
+.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.32em;line-height:1.15;vertical-align:baseline}
+.mjn-angle3::before{content:"";position:absolute;left:4%;right:4%;top:.02em;height:.26em;border-top:1.6px solid currentColor;border-radius:100% 100% 0 0;box-sizing:border-box}
+@media print{.mjn-angle3{padding-top:.32em}.mjn-angle3::before{border-top-width:1.3px}}
 </style>
 <script id="mjn-angle-notation-fix-script">
 (function(){
