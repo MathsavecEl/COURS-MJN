@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Maths 5e · NLS</title>
-<meta name="description" content="Site de mathématiques des 5e NLS de M. AHA MAJANI : remise à niveau, programme de 6e et de 5e, automatismes, exercices interactifs et entraînement à l'évaluation.">
+<meta name="description" content="Site de mathématiques des 5e NLS de l’enseignant : remise à niveau, programme de 6e et de 5e, automatismes, exercices interactifs et entraînement à l'évaluation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@700&display=swap">
 <style>
-/* Mise en page : feuille de cahier, même famille que les cours Scratch et Tableur de M. AHA MAJANI */
+/* Mise en page : feuille de cahier, même famille que les cours Scratch et Tableur de l’enseignant */
 :root{
   --paper:#f4f6fb; --grid:#e2e8f4; --card:#ffffff; --text:#1c2135; --ink:#24318a; --muted:#596282;
   --line:#d4dbeb; --red:#c22e2e; --red-soft:#fcebea; --green:#16764a; --green-soft:#e2f3e9;
@@ -499,7 +499,7 @@ h4.sub{font-size:1rem;color:var(--ink)}
 html.big .q .qt{font-size:1.08em}
 .readbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 
-/* ===== automatismes en classe (application de M. AHA MAJANI) ===== */
+/* ===== automatismes en classe (application de l’enseignant) ===== */
 .nlsframe{width:100%;height:min(78vh,760px);border:2px solid var(--line);border-radius:12px;background:#fff7e8;display:block}
 .nls-tools{display:flex;flex-wrap:wrap;gap:8px}
 
@@ -517,7 +517,7 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
   <div class="wrap">
     <button class="brand" type="button" id="brandHome" aria-label="Retour à l'accueil">
       <span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28"><text x="14" y="20" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="17" fill="#fff">5ᵉ</text></svg></span>
-      <span><h1>Maths 5<sup>e</sup> · NLS</h1><p>Le site de <b>M. AHA MAJANI</b></p></span>
+      <span><h1>Maths 5<sup>e</sup> · NLS</h1></span>
     </button>
     <nav class="tabs" aria-label="Navigation">
       <a href="#/" data-nav="accueil">Accueil</a>
@@ -532,7 +532,7 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
 </header>
 <main class="wrap" id="app"></main>
 <div id="toast" role="status" aria-live="polite"></div>
-<footer class="wrap">Site de mathématiques de M. AHA MAJANI · À l'attention de mes élèves de cinquième (NLS)<br>
+<footer class="wrap">Cours et activités interactives de mathématiques.<br>
 Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:mathsclavie20@gmail.com">mathsclavie20@gmail.com</a><br>
 <button class="btn small ghost no-print" type="button" id="profBtn" style="margin-top:10px">Mode professeur : afficher toutes les corrections</button></footer>
 <script>
@@ -3700,7 +3700,7 @@ CH.push({
 
 /* ============================================================
    ENTRAÎNEMENT À L'ÉVALUATION : moteur des QCM de révision
-   (repris des QCM de M. AHA MAJANI : EVAL {id,title,sub,exs:[{name,o,r,ctx,fig,qs:[{o,r,ctx,fig,q,ok,bad,m,h}]}]})
+   (repris des QCM de l’enseignant : EVAL {id,title,sub,exs:[{name,o,r,ctx,fig,qs:[{o,r,ctx,fig,q,ok,bad,m,h}]}]})
    ============================================================ */
 const QF = {
   fmt: (n, d = 2) => { const v = Math.round(n * 10 ** d) / 10 ** d; return String(v).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' '); },
@@ -3815,7 +3815,7 @@ const QZ = (() => {
 
 /* ============================================================
    QCM D'ENTRAÎNEMENT À L'ÉVALUATION — les bases et le programme de 6e
-   (même modèle que les QCM de M. AHA MAJANI ; v = la bonne réponse recalculée autrement, pour le contrôle)
+   (même modèle que les QCM de l’enseignant ; v = la bonne réponse recalculée autrement, pour le contrôle)
    ============================================================ */
 const fm = n => QF.fmt(n).replace(/^-/, '−');
 const EV = (id, ch, title, sub, exs) => ({ id, ch, title, htitle: `Révision : <span>${title}</span>`, sub, exs });
@@ -4458,7 +4458,7 @@ const PARTS = {
 };
 const PER = { 1: 'Période 1', 2: 'Période 2', 3: 'Période 3', 4: 'Période 4', 5: 'Période 5' };
 const MAIL = 'mathsclavie20@gmail.com';
-const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. — <b>M. AHA MAJANI</b></p></div>`;
+const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. — <b>l’enseignant</b></p></div>`;
 const pick2 = L => L[Math.floor(Math.random() * L.length)];
 const DED = 'À l\'attention de mes élèves de cinquième (NLS)';
 const SAY = '<button type="button" class="say" data-say="1" aria-label="Écouter">🔊 Écouter</button>';
@@ -4632,7 +4632,7 @@ function pageHome() {
       <p class="lead">Bienvenue sur ton site de mathématiques ! Ici, on avance doucement, une marche après l'autre. On commence par les <b>bases</b>, puis on fait tout le programme de <b>6<sup>e</sup></b>, puis celui de <b>5<sup>e</sup></b>. Chaque leçon est expliquée simplement, avec des exemples, des indices et des exercices. Tu peux faire <b>lire le texte à voix haute</b> avec le bouton 🔊.</p>
       <div class="namebox"><label for="nm"><b>Ton prénom :</b></label><input id="nm" type="text" maxlength="24" value="${esc(ST.name)}" placeholder="Écris ton prénom" autocomplete="given-name"><button class="btn small" id="nmok" type="button">OK</button></div>
       <p class="hand" id="hello">${ST.name ? 'Bon courage ' + esc(ST.name) + ' !' : 'Bon courage à tous !'}</p>
-    </div><div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b> ${SAY}</h4><p>Chers élèves de cinquième, ce site a été fait pour vous. Tout le monde peut progresser en maths, et vous aussi ! Ce qui compte, ce n'est pas d'aller vite, c'est d'avancer un peu chaque jour. Si vous vous trompez, ce n'est pas grave : c'est comme ça qu'on apprend. Utilisez les indices, écoutez les leçons, recommencez autant de fois que vous voulez. Je crois en chacun de vous. Allez, on y va ensemble !</p></div></section>
+    </div><div class="box ret"><h4>Conseil ${SAY}</h4><p>Chers élèves de cinquième, ce site a été fait pour vous. Tout le monde peut progresser en maths, et vous aussi ! Ce qui compte, ce n'est pas d'aller vite, c'est d'avancer un peu chaque jour. Si vous vous trompez, ce n'est pas grave : c'est comme ça qu'on apprend. Utilisez les indices, écoutez les leçons, recommencez autant de fois que vous voulez. Je crois en chacun de vous. Allez, on y va ensemble !</p></div></section>
     <section class="sheet"><h3>Par où commencer ?</h3><p>Si c'est ta première visite, fais le <b>petit test de départ</b> : 12 questions faciles pour savoir quelles leçons revoir en premier.</p>
       <div class="row"><a class="btn" href="#/depart">🚦 Faire le test de départ</a>${ST.diag ? `<span class="pill">Dernier test : ${ST.diag.s} / ${ST.diag.n}</span>` : ''}</div></section>
     <section class="sheet"><h3>Mon parcours</h3><div class="parts">${['B', '6', '5'].map(p => { const Q = CH.filter(c => c.part === p).flatMap(chapQs); return `<a class="partcard ${PARTS[p].cls}" href="#/chapitres/${p}"><b>${PARTS[p].ic} ${PARTS[p].t}</b><span>${PARTS[p].s}</span><span class="muted">${nb(p)} chapitres</span><span class="row">${bar(doneCount(Q), Q.length)}</span></a>`; }).join('')}</div>
@@ -4676,7 +4676,7 @@ function pageChapter(id) {
   const i = CH.indexOf(c), prev = CH[i - 1], next = CH[i + 1], E = evalOf(id), P = PARTS[c.part];
   app().innerHTML = `<section class="band ${P.cls}"><div class="bn"><small>${c.part === 'B' ? 'Bases' : c.part + 'e'}</small>${c.k}</div><h2>${c.t}</h2><p>${P.t}${c.per ? ' · ' + PER[c.per] : ''} · ${c.dom}</p><p class="ded">${DED}</p></section>
     <nav class="subnav" aria-label="Parties du chapitre"><a href="#retiens" data-jump="retiens">1. Je retiens</a><a href="#entraine" data-jump="entraine">2. Je m'entraîne</a><a href="#loin" data-jump="loin">3. Je vais plus loin</a>${E ? `<a href="#/eval/${E.id}">4. QCM d'évaluation</a>` : ''}</nav>
-    <section class="sheet"><div class="split2"><div class="sayzone"><h3>Ce que je vais apprendre ${SAY}</h3><ul class="objectifs">${c.obj.map(o => `<li>${fmt(o)}</li>`).join('')}</ul></div><div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b> ${SAY}</h4><p>${c.mot}</p></div></div></section>
+    <section class="sheet"><div class="split2"><div class="sayzone"><h3>Ce que je vais apprendre ${SAY}</h3><ul class="objectifs">${c.obj.map(o => `<li>${fmt(o)}</li>`).join('')}</ul></div><div class="box ret"><h4>Conseil ${SAY}</h4><p>${c.mot}</p></div></div></section>
     <section class="sheet" id="retiens"><h2>1. Je retiens</h2>${c.cours.map(coursHTML).join('')}</section>
     <section class="sheet" id="entraine"><div class="lvl-h"><span class="stars">★</span><h2>2. Je m'entraîne</h2><span class="muted">Exercices d'application</span></div>${c.dir.map((e, j) => exHTML(e, j + 1, 'e')).join('')}</section>
     <section class="sheet" id="loin"><div class="lvl-h"><span class="stars">★★</span><h2>3. Je vais plus loin</h2><span class="muted">Exercices d'approfondissement et problèmes</span></div>${c.app.map((e, j) => exHTML(e, j + 1, 'p')).join('')}
@@ -4690,7 +4690,7 @@ const AGRP = { B: 'Les bases', 6: 'Niveau 6e', 5: 'Niveau 5e' };
 function pageAutoList() {
   nav('automatismes'); CUR = null;
   app().innerHTML = `<section class="sheet"><p class="kicker">${DED}</p><h2>Automatismes</h2><p class="lead">Les automatismes, ce sont les calculs que l'on doit savoir faire vite, sans réfléchir longtemps : les tables, les compléments, les doubles… Choisis un thème : une nouvelle série de 10 questions est tirée au hasard à chaque fois. Quelques minutes par jour suffisent !</p>
-    <a class="go wide" href="#/nls"><span class="gi">🎬</span><b>Les automatismes de la classe (M. AHA MAJANI)</b><span>Les automatismes faits en classe, période par période, avec la voix et les animations</span></a>
+    <a class="go wide" href="#/nls"><span class="gi">🎬</span><b>Les automatismes de la classe (l’enseignant)</b><span>Les automatismes faits en classe, période par période, avec la voix et les animations</span></a>
     <a class="go wide" href="#/auto/mix"><span class="gi">🎯</span><b>Grand mélange</b><span>12 questions de tous les thèmes</span>${ST.auto.mix !== undefined ? `<span class="pill g">Meilleur score : ${ST.auto.mix}/12</span>` : ''}</a>
     ${['B', '6', '5'].map(g => `<h3 style="margin-top:16px">${AGRP[g]}</h3><div class="auto-grid">${AUTO.filter(a => a.g === g).map(a => `<a class="acard" href="#/auto/${a.id}"><span class="aic">${a.ic}</span><b>${a.t}</b>${ST.auto[a.id] !== undefined ? `<span class="pill${ST.auto[a.id] === 10 ? ' g' : ''}">Record : ${ST.auto[a.id]}/10</span>` : '<span class="pill">Pas encore fait</span>'}</a>`).join('')}</div>`).join('')}${mailBox()}</section>`;
 }
@@ -4732,7 +4732,7 @@ function renderSerie() {
     <article class="ex"><ol class="qs">${SERIE.qs.map(q => qHTML(q).replace('<div class="qt">', `<div class="qt">${id === 'mix' ? `<span class="tag">${q.th}</span> ` : ''}${q.fig ? `<div class="figbox">${q.fig}</div>` : ''}`)).join('')}</ol></article><div id="aEnd"></div>${mailBox()}</section>`;
   document.getElementById('reroll').onclick = () => { newSerie(id); renderSerie(); };
 }
-/* automatismes de la classe : application de M. AHA MAJANI, intégrée telle quelle */
+/* automatismes de la classe : application de l’enseignant, intégrée telle quelle */
 let NLS_URL = null;
 function nlsHTML() { const b = atob(NLS_APP), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new TextDecoder().decode(u); }
 function pageNLS() {
@@ -4740,7 +4740,7 @@ function pageNLS() {
   app().innerHTML = `<section class="sheet"><p class="kicker">Automatismes · ${DED}</p><h2>🎬 Les automatismes de la classe</h2>
     <p class="lead">Ce sont les automatismes que nous faisons en classe, période par période. Choisis la période, puis la semaine. La question est lue à voix haute : réfléchis, écris ta réponse sur ton ardoise ou ton cahier, puis appuie sur la flèche pour voir la correction animée.</p>
     <div class="nls-tools"><button class="btn small" type="button" id="nlsFull">⛶ Plein écran</button><a class="btn small ghost" href="#/automatismes">← Les autres automatismes</a></div>
-    <iframe class="nlsframe" id="nlsF" title="Automatismes NLS 5e de M. AHA MAJANI" allow="fullscreen; autoplay" allowfullscreen></iframe>${mailBox()}</section>`;
+    <iframe class="nlsframe" id="nlsF" title="Automatismes NLS 5e de l’enseignant" allow="fullscreen; autoplay" allowfullscreen></iframe>${mailBox()}</section>`;
   const f = document.getElementById('nlsF');
   try { if (!NLS_URL) NLS_URL = URL.createObjectURL(new Blob([nlsHTML()], { type: 'text/html' })); f.src = NLS_URL; } catch (e) { f.srcdoc = nlsHTML(); }
   document.getElementById('nlsFull').onclick = () => { const r = f.requestFullscreen || f.webkitRequestFullscreen; if (r) r.call(f); };
