@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Maths 5e · NLS</title>
-<meta name="description" content="Site de mathématiques des 5e NLS de l’enseignant : remise à niveau, programme de 6e et de 5e, automatismes, exercices interactifs et entraînement à l'évaluation.">
+<meta name="description" content="Cours de mathématiques, remise à niveau, automatismes et exercices interactifs de 6e et de 5e.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@700&display=swap">
@@ -4460,7 +4460,7 @@ const PER = { 1: 'Période 1', 2: 'Période 2', 3: 'Période 3', 4: 'Période 4'
 const MAIL = 'mathsclavie20@gmail.com';
 const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. — <b>l’enseignant</b></p></div>`;
 const pick2 = L => L[Math.floor(Math.random() * L.length)];
-const DED = 'À l\'attention de mes élèves de cinquième (NLS)';
+const DED = '';
 const SAY = '<button type="button" class="say" data-say="1" aria-label="Écouter">🔊 Écouter</button>';
 
 /* registre des questions : id → question ; étiquette des chapitres */
@@ -4690,7 +4690,7 @@ const AGRP = { B: 'Les bases', 6: 'Niveau 6e', 5: 'Niveau 5e' };
 function pageAutoList() {
   nav('automatismes'); CUR = null;
   app().innerHTML = `<section class="sheet"><p class="kicker">${DED}</p><h2>Automatismes</h2><p class="lead">Les automatismes, ce sont les calculs que l'on doit savoir faire vite, sans réfléchir longtemps : les tables, les compléments, les doubles… Choisis un thème : une nouvelle série de 10 questions est tirée au hasard à chaque fois. Quelques minutes par jour suffisent !</p>
-    <a class="go wide" href="#/nls"><span class="gi">🎬</span><b>Les automatismes de la classe (l’enseignant)</b><span>Les automatismes faits en classe, période par période, avec la voix et les animations</span></a>
+    <a class="go wide" href="#/nls"><span class="gi">🎬</span><b>Les automatismes de la classe</b><span>Les automatismes faits en classe, période par période, avec la voix et les animations</span></a>
     <a class="go wide" href="#/auto/mix"><span class="gi">🎯</span><b>Grand mélange</b><span>12 questions de tous les thèmes</span>${ST.auto.mix !== undefined ? `<span class="pill g">Meilleur score : ${ST.auto.mix}/12</span>` : ''}</a>
     ${['B', '6', '5'].map(g => `<h3 style="margin-top:16px">${AGRP[g]}</h3><div class="auto-grid">${AUTO.filter(a => a.g === g).map(a => `<a class="acard" href="#/auto/${a.id}"><span class="aic">${a.ic}</span><b>${a.t}</b>${ST.auto[a.id] !== undefined ? `<span class="pill${ST.auto[a.id] === 10 ? ' g' : ''}">Record : ${ST.auto[a.id]}/10</span>` : '<span class="pill">Pas encore fait</span>'}</a>`).join('')}</div>`).join('')}${mailBox()}</section>`;
 }
@@ -4740,7 +4740,7 @@ function pageNLS() {
   app().innerHTML = `<section class="sheet"><p class="kicker">Automatismes · ${DED}</p><h2>🎬 Les automatismes de la classe</h2>
     <p class="lead">Ce sont les automatismes que nous faisons en classe, période par période. Choisis la période, puis la semaine. La question est lue à voix haute : réfléchis, écris ta réponse sur ton ardoise ou ton cahier, puis appuie sur la flèche pour voir la correction animée.</p>
     <div class="nls-tools"><button class="btn small" type="button" id="nlsFull">⛶ Plein écran</button><a class="btn small ghost" href="#/automatismes">← Les autres automatismes</a></div>
-    <iframe class="nlsframe" id="nlsF" title="Automatismes NLS 5e de l’enseignant" allow="fullscreen; autoplay" allowfullscreen></iframe>${mailBox()}</section>`;
+    <iframe class="nlsframe" id="nlsF" title="Automatismes de 5e NLS" allow="fullscreen; autoplay" allowfullscreen></iframe>${mailBox()}</section>`;
   const f = document.getElementById('nlsF');
   try { if (!NLS_URL) NLS_URL = URL.createObjectURL(new Blob([nlsHTML()], { type: 'text/html' })); f.src = NLS_URL; } catch (e) { f.srcdoc = nlsHTML(); }
   document.getElementById('nlsFull').onclick = () => { const r = f.requestFullscreen || f.webkitRequestFullscreen; if (r) r.call(f); };
