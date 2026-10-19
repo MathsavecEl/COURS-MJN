@@ -347,7 +347,7 @@ button.btn:not(.danger):not(.ko),a.btn { background:var(--accent); color:#fff; }
   <div class="wrap">
     <a class="brand" href="#accueil" aria-label="Retour à l'accueil">
       <span class="logo" aria-hidden="true"><span>4<sup style="font-size:.55em">e</sup></span></span>
-      <span><h1>Maths en 4<sup>e</sup></h1><p> · <b>M. AHA MAJANI</b></p></span>
+      <span><h1>Maths en 4<sup>e</sup></h1><p> · <b>l’enseignant</b></p></span>
     </a>
     <nav class="tabs" aria-label="Navigation">
       <a href="#accueil" data-nav="accueil">Accueil</a>
@@ -362,11 +362,11 @@ button.btn:not(.danger):not(.ko),a.btn { background:var(--accent); color:#fff; }
   </div>
 </header>
 <main class="wrap" id="app"></main>
-<footer class="wrap">Maths en 4<sup>e</sup> · M. AHA MAJANI · année 2025-2026 · d'après le programme du cycle 4 et les attendus de fin de 4<sup>e</sup><br>
+<footer class="wrap">Maths en 4<sup>e</sup> · l’enseignant · année 2025-2026 · d'après le programme du cycle 4 et les attendus de fin de 4<sup>e</sup><br>
 Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:mathsclavie20@gmail.com">mathsclavie20@gmail.com</a></footer>
 <script>
 /* =====================================================================
-   MOTEUR DU SITE « Maths en 4e » · M. AHA MAJANI
+   MOTEUR DU SITE « Maths en 4e » · l’enseignant
    - CH : chapitres (définis dans les fichiers de contenu)
    - AUTOS : thèmes d'automatismes (générateurs aléatoires)
    - Types de champs : num (nombre), frac (fraction), expr (expression en x),
@@ -754,7 +754,7 @@ document.addEventListener('keydown',function(ev){ if(ev.key==='Enter'&&ev.target
 /* ---------- pages ---------- */
 var app=document.getElementById('app');
 function chapStats(c){ var ids=c.app.concat(c.appro).map(function(e){return e.id;}), n=ids.filter(function(i){return ST.done[i];}).length; return {n:n,t:ids.length}; }
-function contactBox(){ return '<div class="contact">✉️ Si vous remarquez une erreur ou si vous bloquez, n\'hésitez pas à m\'écrire à <a href="mailto:'+MAIL+'">'+MAIL+'</a>. <span class="muted">M. AHA MAJANI</span></div>'; }
+function contactBox(){ return '<div class="contact">✉️ Si vous remarquez une erreur ou si vous bloquez, n\'hésitez pas à m\'écrire à <a href="mailto:'+MAIL+'">'+MAIL+'</a>. <span class="muted">l’enseignant</span></div>'; }
 function updateProgressBits(){ var el=document.getElementById('chprog'); if(el&&CUR){ var s=chapStats(CUR); el.innerHTML=progHTML(s); } }
 function progHTML(s){ return '<span class="minibar" style="max-width:240px"><span style="width:'+(s.t?Math.round(100*s.n/s.t):0)+'%"></span></span> <span class="pill'+(s.n===s.t?' g':'')+'">'+s.n+' / '+s.t+' exercices réussis</span>'; }
 
@@ -764,7 +764,7 @@ function pageAccueil(){
   '<h2>Bienvenue sur ton site de maths !</h2>'+
   '<p class="lead">Tu trouveras ici tous les chapitres de l\'année, dans l\'ordre où nous les étudions en classe. Pour chaque chapitre : un <b>rappel de cours avec des exemples</b>, des <b>exercices d\'application directe</b> pour t\'entraîner, puis des <b>exercices d\'approfondissement</b> pour aller plus loin. Tous les exercices sont corrigés et se vérifient tout seuls.</p>'+
   '<div class="namebox"><label for="nm"><b>Ton prénom :</b></label><input id="nm" maxlength="30" placeholder="ex. Inès" value="'+esc(ST.name)+'"><button class="btn small" id="nmok" type="button">OK</button><span class="muted" id="nmfb">'+(ST.name?'Bonjour '+esc(ST.name)+' !':'(facultatif, il reste sur ton appareil)')+'</span></div>'+
-  '<div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>Les maths, ça s\'apprend comme un sport : un peu chaque jour, avec de la régularité. Ne t\'inquiète pas si tu te trompes, c\'est en faisant des erreurs qu\'on progresse. Commence toujours par relire le rappel de cours, fais les exercices d\'application, et quand tu te sens prêt(e), relève les défis. Je suis fier de chacun de vos progrès !</p></div>'+
+  '<div class="box ret"><h4>Conseil</h4><p>Les maths, ça s\'apprend comme un sport : un peu chaque jour, avec de la régularité. Ne t\'inquiète pas si tu te trompes, c\'est en faisant des erreurs qu\'on progresse. Commence toujours par relire le rappel de cours, fais les exercices d\'application, et quand tu te sens prêt(e), relève les défis. Je suis fier de chacun de vos progrès !</p></div>'+
   contactBox()+'</section>';
   h+='<section class="grid2">'+
    '<a class="bigcard" href="#chapitres"><span class="bt">📚 Les '+(CH.length-1)+' chapitres + 1 bonus</span><span class="bd">Rappels de cours, exemples, exercices d\'application et défis, rangés par période.</span><span class="pill'+(ok&&ok===tot?' g':'')+'">'+ok+' / '+tot+' exercices réussis</span></a>'+
@@ -797,10 +797,10 @@ var CUR=null;
 function pageChap(id){
   var i=CH.findIndex(function(c){return c.id===id;}); if(i<0){ location.hash='#chapitres'; return; }
   var c=CH[i]; CUR=c; var per=PERIODES[c.p-1];
-  var h='<section class="band"><div class="bn"><small>Chapitre</small>'+c.n+'</div><h2>'+c.t+'</h2><p> · M. AHA MAJANI</p><div class="bt"><span>'+per.l+'</span><span>'+c.dom+'</span></div></section>';
+  var h='<section class="band"><div class="bn"><small>Chapitre</small>'+c.n+'</div><h2>'+c.t+'</h2><p> · l’enseignant</p><div class="bt"><span>'+per.l+'</span><span>'+c.dom+'</span></div></section>';
   h+='<nav class="subnav" aria-label="Parties du chapitre"><a href="#ch/'+c.id+'/cours">📘 Rappels de cours</a><a href="#ch/'+c.id+'/app">✏️ Application directe ('+c.app.length+')</a><a href="#ch/'+c.id+'/appro">🚀 Approfondissement ('+c.appro.length+')</a></nav>';
   h+='<section class="sheet"><h3>Ce que tu dois savoir faire</h3><ul class="objectifs">'+c.obj.map(function(o){return '<li>'+o+'</li>';}).join('')+'</ul><p id="chprog" class="row">'+progHTML(chapStats(c))+'</p>'+
-     '<div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>'+(c.mot||MOTS[i%MOTS.length])+'</p></div></section>';
+     '<div class="box ret"><h4>Conseil</h4><p>'+(c.mot||MOTS[i%MOTS.length])+'</p></div></section>';
   h+='<section class="sheet" id="sec-cours"><h2>📘 Rappels de cours</h2><div class="cours">'+c.cours+'</div></section>';
   h+='<section class="sheet" id="sec-app"><div class="lvl-h"><span class="stars">★</span><h3>Exercices d\'application directe</h3><span class="muted">pour appliquer le cours</span></div><div class="exlist">'+c.app.map(function(e,k){ return exHTML(e,k+1,'app'); }).join('')+'</div></section>';
   h+='<section class="sheet" id="sec-appro"><div class="lvl-h"><span class="stars">★★★</span><h3>Exercices d\'approfondissement</h3><span class="muted">des problèmes pour aller plus loin</span></div>'+
@@ -823,7 +823,7 @@ var SERIE=null;
 function pageAuto(id){
   var a=AUTOS.find(function(x){return x.id===id;}); if(!a){ location.hash='#automatismes'; return; }
   SERIE={a:a, qs:[]}; for(var k=0;k<10;k++){ var q, tries=0; do{ q=a.gen(); tries++; }while(tries<20&&SERIE.qs.some(function(z){return z.q===q.q;})); SERIE.qs.push(q); }
-  var h='<section class="band"><div class="bn"><small>Auto</small>⚡</div><h2>'+a.t+'</h2><p> · M. AHA MAJANI</p><div class="bt"><span>'+PERIODES[a.p-1].l+'</span><span>10 questions</span></div></section>';
+  var h='<section class="band"><div class="bn"><small>Auto</small>⚡</div><h2>'+a.t+'</h2><p> · l’enseignant</p><div class="bt"><span>'+PERIODES[a.p-1].l+'</span><span>10 questions</span></div></section>';
   h+='<section class="sheet"><div class="box sav"><h4>Rappel</h4>'+a.r+'</div><div id="aqs">'+SERIE.qs.map(function(q,k){
     var f=q.f; return '<div class="aq" data-aq="'+k+'"><span class="an">'+(k+1)+'.</span><div>'+q.q+'<div class="fields" style="margin-top:6px">'+fieldHTML('aq'+k,f,0)+'</div>'+(fieldHelp(f)?'<p class="help">'+fieldHelp(f)+'</p>':'')+'</div><div class="ac" hidden></div></div>'; }).join('')+'</div>'+
     '<div class="row"><button class="btn check" type="button" id="corrige">✔ Corriger ma série</button><button class="btn ghost" type="button" id="again">🔄 Nouvelle série</button><a class="btn ghost" href="#automatismes">Autres thèmes</a></div><div id="score"></div>'+contactBox()+'</section>';
@@ -1895,7 +1895,7 @@ appro:[
 ]});
 
 /* =====================================================================
-   CHAPITRES REMANIÉS à la demande de M. AHA MAJANI (octobre 2026)
+   CHAPITRES REMANIÉS à la demande de l’enseignant (octobre 2026)
    - ch. 4 : repérage guidé pas à pas (d'après sa fiche « Se repérer dans l'espace »)
    - ch. 5 : tout le calcul littéral en un seul chapitre
    - ch. 7 : divisibilité et nombres premiers (arithmétique), d'après son cours
@@ -2402,7 +2402,7 @@ var EXPOSES=['Les nombres relatifs : les baguettes chinoises de Liu Hui et l\'ar
 function excOrder(){ var o=[]; EXC_SECTIONS.forEach(function(s){ EXC.forEach(function(x){ if((x.sec||SEC_OF[x.id])===s.id) o.push(x); }); }); EXC.forEach(function(x){ if(o.indexOf(x)<0) o.push(x); }); return o; }
 function pageExcellence(){
   var h='<section class="sheet"><h2>🏆 Maths excellence</h2><p class="lead">Ici, pas de contrôle : de la <b>curiosité</b> ! Des énigmes, des histoires de grands mathématiciens, des nombres étonnants, des codes secrets et des défis pour aller plus loin que le cours. Les curiosités sont rangées en 8 rubriques.</p>'+
-   '<div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>Les mathématiques ne sont pas qu\'une suite d\'exercices : c\'est une aventure humaine de plusieurs milliers d\'années, pleine de surprises. Sois curieux(se), pose-toi des questions, et n\'aie pas peur de chercher longtemps : c\'est comme ça que font les vrais mathématiciens !</p></div>'+
+   '<div class="box ret"><h4>Conseil</h4><p>Les mathématiques ne sont pas qu\'une suite d\'exercices : c\'est une aventure humaine de plusieurs milliers d\'années, pleine de surprises. Sois curieux(se), pose-toi des questions, et n\'aie pas peur de chercher longtemps : c\'est comme ça que font les vrais mathématiciens !</p></div>'+
    '<nav class="subnav" aria-label="Rubriques">'+EXC_SECTIONS.map(function(s,k){ return '<a href="#excellence" data-sec="'+s.id+'">'+(k+1)+'. '+s.t+'</a>'; }).join('')+'</nav></section>';
   EXC_SECTIONS.forEach(function(s,k){ var xs=EXC.filter(function(x){ return (x.sec||SEC_OF[x.id])===s.id; }); if(!xs.length) return;
     h+='<section class="sheet" id="sec-'+s.id+'"><div class="per-h"><h3>'+(k+1)+'. '+s.t+'</h3><span>'+s.d+'</span></div><div class="grid3">'+xs.map(function(x){ var n=x.ex.filter(function(e){return ST.done[e.id];}).length;
@@ -2413,7 +2413,7 @@ function pageExcellence(){
 }
 function pageExc(id){
   var L=excOrder(), i=L.findIndex(function(x){return x.id===id;}); if(i<0){ location.hash='#excellence'; return; } var x=L[i], sec=EXC_SECTIONS.filter(function(s){ return s.id===(x.sec||SEC_OF[x.id]); })[0];
-  var h='<section class="band" style="background:var(--violet)"><div class="bn"><small>Excellence</small>🏆</div><h2>'+x.t+'</h2><p> · M. AHA MAJANI</p><div class="bt">'+(sec?'<span>'+sec.t+'</span>':'')+'<span>'+x.tag+'</span></div></section>';
+  var h='<section class="band" style="background:var(--violet)"><div class="bn"><small>Excellence</small>🏆</div><h2>'+x.t+'</h2><p> · l’enseignant</p><div class="bt">'+(sec?'<span>'+sec.t+'</span>':'')+'<span>'+x.tag+'</span></div></section>';
   h+='<section class="sheet"><h3>📜 L\'histoire</h3>'+x.story+(x.tool||'')+'</section>';
   h+='<section class="sheet"><div class="lvl-h"><span class="stars">★★★</span><h3>À toi de jouer</h3></div><div class="exlist">'+x.ex.map(function(e,k){ return exHTML(e,k+1,'appro'); }).join('')+'</div>'+contactBox()+'</section>';
   h+='<nav class="pnav">'+(i>0?'<a class="btn ghost" href="#exc/'+L[i-1].id+'">◀ '+L[i-1].t+'</a>':'<span></span>')+'<a class="btn ghost" href="#excellence">Toutes les curiosités</a>'+(i<L.length-1?'<a class="btn" href="#exc/'+L[i+1].id+'">'+L[i+1].t+' ▶</a>':'<span></span>')+'</nav>';
@@ -2421,7 +2421,7 @@ function pageExc(id){
 }
 
 /* =====================================================================
-   MATHS EXCELLENCE · compléments d'après la progression de M. AHA MAJANI
+   MATHS EXCELLENCE · compléments d'après la progression de l’enseignant
    ===================================================================== */
 var EXC_SECTIONS=[
  {id:'nombres', t:'Nombres et géométrie', d:'Nombres premiers, parfaits, figurés, triplets de Pythagore, suites de Farey.'},
@@ -2944,7 +2944,7 @@ X({id:'lumiere', sec:'culture', t:'Les années-lumière : la notation scientifiq
 })();
 
 /* =====================================================================
-   FICHES RAPPELS · l'essentiel sur une page (d'après les fiches de M. AHA MAJANI)
+   FICHES RAPPELS · l'essentiel sur une page (d'après les fiches de l’enseignant)
    ===================================================================== */
 var FICHES=[];
 function FI(o){ (o.ex||[]).forEach(function(e,k){ e.id='fiche-'+o.id+'-'+(k+1); }); FICHES.push(o); }
@@ -3098,7 +3098,7 @@ function pageFiches(){
 }
 function pageFiche(id){
   var i=FICHES.findIndex(function(f){ return f.id===id; }); if(i<0){ location.hash='#fiches'; return; } var f=FICHES[i];
-  var h='<section class="band" style="background:var(--green)"><div class="bn"><small>Fiche</small>'+f.ic+'</div><h2>'+f.t+'</h2><p> · M. AHA MAJANI</p><div class="bt">'+f.ch.map(function(c){ var x=CH.filter(function(k){ return k.id===c; })[0]; return x?'<span>Chapitre '+x.n+'</span>':''; }).join('')+'</div></section>';
+  var h='<section class="band" style="background:var(--green)"><div class="bn"><small>Fiche</small>'+f.ic+'</div><h2>'+f.t+'</h2><p> · l’enseignant</p><div class="bt">'+f.ch.map(function(c){ var x=CH.filter(function(k){ return k.id===c; })[0]; return x?'<span>Chapitre '+x.n+'</span>':''; }).join('')+'</div></section>';
   h+='<section class="sheet"><div class="cours">'+f.html+'</div></section>';
   h+='<section class="sheet"><div class="lvl-h"><span class="stars">✔</span><h3>Je vérifie que j\'ai compris</h3></div><div class="exlist">'+f.ex.map(function(e,k){ return exHTML(e,k+1,'app'); }).join('')+'</div>'+
     '<p class="row">'+f.ch.map(function(c){ var x=CH.filter(function(k){ return k.id===c; })[0]; return x?'<a class="btn small ghost" href="#ch/'+x.id+'">📘 Chapitre '+x.n+' : '+x.t+'</a>':''; }).join('')+'</p>'+contactBox()+'</section>';
@@ -3492,7 +3492,7 @@ function qzCount(Q){ return Q.parties.reduce(function(s,p){ return s+p.qs.length
 function pageEvals(){
   var b=qzBest();
   var h='<section class="sheet"><h2>📝 Entraînement à l\'évaluation</h2><p class="lead">Avant chaque évaluation, entraîne-toi avec un <b>QCM</b> : une question à la fois, quatre réponses possibles, et la correction expliquée tout de suite. Tu peux faire tout le QCM ou seulement une partie, puis refaire uniquement tes erreurs.</p>'+
-    '<div class="box met"><h4>Conseil de M. AHA MAJANI</h4><p>Garde un brouillon à côté de toi et fais le calcul <b>avant</b> de cliquer. Les nombres sont différents de ceux de l\'évaluation : c\'est la méthode qui compte ! Les QCM marqués ✍️ sont ceux que j\'ai préparés pour la classe.</p></div></section>';
+    '<div class="box met"><h4>Conseil</h4><p>Garde un brouillon à côté de toi et fais le calcul <b>avant</b> de cliquer. Les nombres sont différents de ceux de l\'évaluation : c\'est la méthode qui compte ! Les QCM marqués ✍️ sont ceux que j\'ai préparés pour la classe.</p></div></section>';
   PERIODES.forEach(function(p){
     var qs=qzOrder().filter(function(Q){ var c=qzChap(Q); return c&&c.p===p.n; }); if(!qs.length) return;
     h+='<section class="sheet"><div class="per-h"><h3>'+p.l+'</h3><span>'+p.d+'</span></div><div class="grid3">'+qs.map(function(Q){ var c=qzChap(Q), r=b[Q.id+':all'];
@@ -3506,7 +3506,7 @@ function pageEval(id){
   var Q=EVALS.filter(function(x){ return x.id===id; })[0]; if(!Q){ location.hash='#evaluations'; return; }
   Q.parties.forEach(function(p,pi){ p.qs.forEach(function(q,qi){ q.pi=pi; q.num=qi+1; }); });
   var c=qzChap(Q), b=qzBest(), all=[]; Q.parties.forEach(function(p){ all=all.concat(p.qs); });
-  function band(){ return '<section class="band" style="background:var(--c6)"><div class="bn"><small>QCM</small>📝</div><h2>'+Q.titre+'</h2><p> · M. AHA MAJANI</p><div class="bt">'+(c?'<span>Chapitre '+c.n+'</span>':'')+'<span>'+all.length+' questions</span></div></section>'; }
+  function band(){ return '<section class="band" style="background:var(--c6)"><div class="bn"><small>QCM</small>📝</div><h2>'+Q.titre+'</h2><p> · l’enseignant</p><div class="bt">'+(c?'<span>Chapitre '+c.n+'</span>':'')+'<span>'+all.length+' questions</span></div></section>'; }
   function fmt(k){ return b[k]?'<span class="pill g">record '+b[k][0]+'/'+b[k][1]+'</span> ':''; }
   function menu(){
     QZ=null; b=qzBest();
@@ -3982,7 +3982,7 @@ QCM.ch='arithmetique'; QCM.auteur=true; EVALS.push(QCM);
 })();
 
 /* =====================================================================
-   ENTRAÎNEMENT À L'ÉVALUATION · QCM construits sur le modèle de M. AHA MAJANI
+   ENTRAÎNEMENT À L'ÉVALUATION · QCM construits sur le modèle de l’enseignant
    Chapitres : relatifs, Pythagore, proportionnalité, repérage, triangles égaux,
    puissances, réciproque de Pythagore, fractions (bonus)
    ===================================================================== */
@@ -4600,7 +4600,7 @@ EVALS.push({ id: 'fractions', ch: 'fractions', titre: 'Fractions', prof: 'Enseig
 })();
 
 /* =====================================================================
-   ENTRAÎNEMENT À L'ÉVALUATION · QCM sur le modèle de M. AHA MAJANI
+   ENTRAÎNEMENT À L'ÉVALUATION · QCM sur le modèle de l’enseignant
    Thalès, probabilités, solides, cosinus, équations, volumes, transformations
    ===================================================================== */
 (function(){
