@@ -324,3 +324,134 @@ body { background:#f7f8f1; color:#173f35; }
  .bouton-groupe:hover,.bouton-groupe:focus-visible { border-color:#79b6ff!important; }
  .chevron-groupe { background:#233c59!important; color:#79b6ff!important; }
 }
+
+
+/* ---------- Palette sobre et cohérente (accueil + toutes les pages) ---------- */
+:root {
+  --fond: #f7f7f7;
+  --surface: #ffffff;
+  --surface-2: #f1f2f4;
+  --texte: #20242b;
+  --doux: #606873;
+  --bord: #d9dde3;
+  --accent: #465568;
+  --accent-doux: #edf0f4;
+  --ombre: 0 2px 8px rgb(20 28 40 / .045);
+}
+body {
+  background: var(--fond) !important;
+  background-image: none !important;
+  color: var(--texte);
+}
+.barre-haute {
+  background: #fff !important;
+  color: var(--texte) !important;
+  border-bottom: 1px solid var(--bord);
+}
+.identite, .liens-haut a { color: var(--texte) !important; }
+.identite small { color: var(--doux) !important; }
+.logo-pi {
+  border: 1px solid var(--bord) !important;
+  color: var(--texte) !important;
+  background: var(--surface-2);
+  transform: none;
+}
+.liens-haut a[aria-current="page"] { border-color: var(--texte) !important; }
+.hero {
+  background: #f0f2f5 !important;
+  color: var(--texte) !important;
+  border-bottom: 1px solid var(--bord);
+}
+.hero::after { color: #aab2bd !important; opacity: .10 !important; }
+.hero h1, .hero p.intro, .hero .surtitre,
+.hero .surtitre span { color: var(--texte) !important; }
+.hero .surtitre span {
+  background: #fff !important;
+  border: 1px solid var(--bord) !important;
+}
+.message-programmes {
+  background: var(--surface) !important;
+  color: var(--texte) !important;
+  border-color: var(--bord) !important;
+}
+.accueil-main .classe-accueil,
+.accueil-main .classe-accueil[data-nom],
+.accueil-main .classe-accueil[aria-pressed="true"] {
+  background: var(--surface) !important;
+  color: var(--texte) !important;
+  border-color: var(--bord) !important;
+  box-shadow: none !important;
+}
+.accueil-main .classe-accueil:hover,
+.carte:hover, .resultat-recherche:hover {
+  border-color: #929ba7 !important;
+  box-shadow: var(--ombre) !important;
+}
+.accueil-main .classe-accueil .icone-classe,
+.classe .pastille, .classe .icone-classe {
+  background: var(--surface-2) !important;
+  color: var(--texte) !important;
+}
+.accueil-main .classe-accueil[aria-pressed="true"] {
+  background: #edf0f4 !important;
+  border-color: #aab2bd !important;
+}
+.encouragement-accueil { color: var(--doux) !important; }
+.derniere-mise-a-jour { border-color: var(--bord) !important; color: var(--doux) !important; }
+.a-propos, .contact, .bloc, .carte, .resultat-recherche,
+.bouton-groupe, .recherche input {
+  background: var(--surface) !important;
+  color: var(--texte) !important;
+  border-color: var(--bord) !important;
+  box-shadow: none !important;
+}
+.contact { background: var(--surface-2) !important; }
+.carte::after, section.groupe h2::before { display: none !important; }
+.carte .ouvrir, .resultat-recherche .ouvrir { color: var(--texte) !important; }
+.etiquette, .resultat-classe, .chevron-groupe {
+  background: var(--surface-2) !important;
+  color: var(--doux) !important;
+  border: 1px solid var(--bord);
+}
+.bouton { background: #e9edf1 !important; color: #20242b !important; border: 1px solid var(--bord) !important; }
+footer { background: transparent !important; color: var(--doux) !important; border-color: var(--bord) !important; }
+footer .blague-bas { background: var(--surface) !important; color: var(--doux) !important; box-shadow: none !important; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: #111318;
+    --surface: #191c22;
+    --surface-2: #22262e;
+    --texte: #f1f3f6;
+    --doux: #c0c5ce;
+    --bord: #363c46;
+    --accent: #dce2ea;
+    --accent-doux: #252a33;
+    --ombre: 0 2px 8px rgb(0 0 0 / .12);
+    color-scheme: dark;
+  }
+  body { background: var(--fond) !important; color: var(--texte) !important; }
+  .barre-haute { background: #15181e !important; color: var(--texte) !important; border-color: var(--bord) !important; }
+  .identite, .liens-haut a, .identite strong, .identite small { color: var(--texte) !important; }
+  .logo-pi { background: var(--surface-2) !important; border-color: var(--bord) !important; color: var(--texte) !important; }
+  .hero { background: #191d24 !important; color: var(--texte) !important; border-color: var(--bord) !important; }
+  .hero h1, .hero p.intro, .hero .surtitre, .hero .surtitre span { color: var(--texte) !important; }
+  .hero .surtitre span { background: var(--surface) !important; border-color: var(--bord) !important; }
+  .message-programmes, .a-propos, .contact, .bloc, .carte,
+  .resultat-recherche, .bouton-groupe, .recherche input,
+  .accueil-main .classe-accueil, .accueil-main .classe-accueil[data-nom],
+  .accueil-main .classe-accueil[aria-pressed="true"] {
+    background: var(--surface) !important;
+    color: var(--texte) !important;
+    border-color: var(--bord) !important;
+    box-shadow: none !important;
+  }
+  .contact, .encouragement-accueil, .accueil-main .classe-accueil .icone-classe,
+  .classe .pastille, .classe .icone-classe, .chevron-groupe,
+  .etiquette, .resultat-classe { background: var(--surface-2) !important; color: var(--texte) !important; }
+  .accueil-main .classe-accueil[aria-pressed="true"] { background: #292e37 !important; border-color: #69717e !important; }
+  .carte p, .carte .ouvrir, .classe small, .a-propos p, .contact small,
+  .page-cours .chapo, footer, .derniere-mise-a-jour { color: var(--doux) !important; }
+  .bouton { background: #292e37 !important; color: var(--texte) !important; border-color: #454c57 !important; }
+  input, textarea, select { background: var(--surface) !important; color: var(--texte) !important; border-color: var(--bord) !important; }
+  a { color: var(--texte); }
+}
