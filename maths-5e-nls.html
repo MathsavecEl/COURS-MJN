@@ -4535,7 +4535,9 @@ async function speak(btn) {
   if (sayBtn === btn) return stopSpeak();
   stopSpeak();
   sayBtn = btn;
-  const voice = await waitForFrenchVoice();
+  // Si une voix française est déjà chargée, la récupérer immédiatement dans le clic utilisateur :
+  // sur certains mobiles, attendre une promesse avant speak() peut empêcher le lancement audio.
+  const voice = pickFrenchVoice() || await waitForFrenchVoice();
   if (sayBtn !== btn) return;
   if (!voice) {
     stopSpeak();
