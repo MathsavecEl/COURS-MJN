@@ -3700,7 +3700,7 @@ CH.push({
 
 /* ============================================================
    ENTRAÎNEMENT À L'ÉVALUATION : moteur des QCM de révision
-   (repris des QCM de l’enseignant : EVAL {id,title,sub,exs:[{name,o,r,ctx,fig,qs:[{o,r,ctx,fig,q,ok,bad,m,h}]}]})
+   (repris des QCM de cours : EVAL {id,title,sub,exs:[{name,o,r,ctx,fig,qs:[{o,r,ctx,fig,q,ok,bad,m,h}]}]})
    ============================================================ */
 const QF = {
   fmt: (n, d = 2) => { const v = Math.round(n * 10 ** d) / 10 ** d; return String(v).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' '); },
@@ -3815,7 +3815,7 @@ const QZ = (() => {
 
 /* ============================================================
    QCM D'ENTRAÎNEMENT À L'ÉVALUATION — les bases et le programme de 6e
-   (même modèle que les QCM de l’enseignant ; v = la bonne réponse recalculée autrement, pour le contrôle)
+   (même modèle que les QCM de cours ; v = la bonne réponse recalculée autrement, pour le contrôle)
    ============================================================ */
 const fm = n => QF.fmt(n).replace(/^-/, '−');
 const EV = (id, ch, title, sub, exs) => ({ id, ch, title, htitle: `Révision : <span>${title}</span>`, sub, exs });
@@ -4458,7 +4458,7 @@ const PARTS = {
 };
 const PER = { 1: 'Période 1', 2: 'Période 2', 3: 'Période 3', 4: 'Période 4', 5: 'Période 5' };
 const MAIL = 'mathsclavie20@gmail.com';
-const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. — <b>l’enseignant</b></p></div>`;
+const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. </p></div>`;
 const pick2 = L => L[Math.floor(Math.random() * L.length)];
 const DED = '';
 const SAY = '<button type="button" class="say" data-say="1" aria-label="Écouter">🔊 Écouter</button>';
