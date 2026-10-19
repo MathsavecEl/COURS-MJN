@@ -270,7 +270,7 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
   <div class="wrap">
     <button class="brand" type="button" id="brandHome" aria-label="Retour à l'accueil">
       <span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28"><path d="M4 8a3 3 0 0 1 3-3h4l2 2h2l2-2h4a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z" fill="#fff"/><path d="M4 18a3 3 0 0 1 3-3h4l2 2h2l2-2h4a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z" fill="#fff" opacity=".7"/></svg></span>
-      <span><h1>Scratch pas à pas</h1><p>De la 5<sup>e</sup> à la 3<sup>e</sup> · <b>M. AHA MAJANI</b></p></span>
+      <span><h1>Scratch pas à pas</h1><p>De la 5<sup>e</sup> à la 3<sup>e</sup> · <b>Enseignant</b></p></span>
     </button>
     <nav class="tabs" aria-label="Navigation">
       <a href="#accueil" data-nav="accueil">Accueil</a>
@@ -281,7 +281,7 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
   </div>
 </header>
 <main class="wrap" id="app"></main>
-<footer class="wrap">Cours progressif d'algorithmique et programmation · M. AHA MAJANI · Cycle 4 (5<sup>e</sup>, 4<sup>e</sup>, 3<sup>e</sup>)<br>
+<footer class="wrap">Cours progressif d'algorithmique et programmation · Cycle 4 (5<sup>e</sup>, 4<sup>e</sup>, 3<sup>e</sup>)<br>
 <button class="btn small ghost no-print" type="button" id="profBtn" style="margin-top:10px">Mode professeur : afficher toutes les corrections</button></footer>
 <script>
 /* ============================================================
@@ -2085,7 +2085,7 @@ function viewHome(scrollTo){
         mo tourner ↻ de [30] degrés
       `, 'data-run id="demo"')+'</div></div></section>';
 
-  h += '<section class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>Ce cours est fait pour toi, même si la programmation te paraît difficile. Avance étape par étape, ouvre les indices sans honte, et exécute les scripts pour vérifier tes idées. Chaque exercice réussi est une vraie victoire : on ne devient pas bon en un jour, on le devient en s\'entraînant. Allez, au travail, je compte sur toi !</p></section>';
+  h += '<section class="box ret"><h4>Conseil</h4><p>Ce cours est fait pour toi, même si la programmation te paraît difficile. Avance étape par étape, ouvre les indices sans honte, et exécute les scripts pour vérifier tes idées. Chaque exercice réussi est une vraie victoire : on ne devient pas bon en un jour, on le devient en s\'entraînant. Allez, au travail, je compte sur toi !</p></section>';
 
   h += '<section class="sheet" id="parcours"><h2>Choisis ton parcours</h2><p class="lead muted">Le parcours met en avant les étapes et les exercices conseillés. Tout le reste reste accessible.</p><div class="parcours">' +
     PARCOURS.map(q => '<button type="button" class="pc'+(q.id === p.id ? ' on' : '')+'" data-pc="'+q.id+'">'+(q.id === p.id ? '<span class="on-flag">✔ Mon parcours</span>' : '')+'<span class="pt">'+q.t+'</span><span class="pd">'+q.d+'</span><span class="ps">Étapes '+q.steps.join(', ')+' · exercices '+q.lv.map(l => LV[l][0]).join(' et ')+'</span></button>').join('') +
@@ -2132,7 +2132,7 @@ function viewHome(scrollTo){
     const pc = reco <= 3 ? 'decouverte' : reco <= 6 ? 'essentiel' : 'mention';
     ST.parcours = pc; save();
     const P = PARCOURS.find(q => q.id === pc);
-    document.getElementById('diagRes').innerHTML = '<div class="diag-res" style="margin-top:14px"><p><b>'+score+' / '+DIAG.length+'</b> · '+(score >= 8 ? 'Impressionnant, tu as de solides bases !' : score >= 5 ? 'C\'est un bon début, tu as déjà des acquis.' : 'Pas de panique : on va construire tes bases ensemble.')+'</p><p>Je te conseille de commencer à l\'<b>étape '+reco+'</b> avec le <b>'+P.t+'</b> (il est maintenant sélectionné).</p><p style="margin-top:8px"><a class="btn small" href="#e'+reco+'">Aller à l\'étape '+reco+'</a></p><p class="muted" style="margin-top:6px">— M. AHA MAJANI</p></div>';
+    document.getElementById('diagRes').innerHTML = '<div class="diag-res" style="margin-top:14px"><p><b>'+score+' / '+DIAG.length+'</b> · '+(score >= 8 ? 'Impressionnant, tu as de solides bases !' : score >= 5 ? 'C\'est un bon début, tu as déjà des acquis.' : 'Pas de panique : on va construire tes bases ensemble.')+'</p><p>Je te conseille de commencer à l\'<b>étape '+reco+'</b> avec le <b>'+P.t+'</b> (il est maintenant sélectionné).</p><p style="margin-top:8px"><a class="btn small" href="#e'+reco+'">Aller à l\'étape '+reco+'</a></p><p class="muted" style="margin-top:6px">— Enseignant</p></div>';
   });
   if (scrollTo){ const el = document.getElementById(scrollTo); if (el) el.scrollIntoView(); } else window.scrollTo(0,0);
 }
@@ -2142,7 +2142,7 @@ function viewStep(n){
   const s = STEPS.find(x => x.n === n); if (!s) return viewHome();
   const p = curP(), inP = p.steps.includes(n);
   let h = '<section class="band y'+s.y+'"><div class="bn"><small>Étape</small>'+s.n+'</div><div class="bt"><span>Niveau '+YEAR[s.y]+'</span>'+(inP ? '<span>Dans ton parcours</span>' : '<span>Hors de ton parcours</span>')+'</div><h2>'+s.t+'</h2><p>'+s.sub+'</p></section>';
-  h += '<section class="sheet"><div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>'+MOTS[n]+'</p></div>' +
+  h += '<section class="sheet"><div class="box ret"><h4>Conseil</h4><p>'+MOTS[n]+'</p></div>' +
     '<h3>Mes objectifs · à la fin de cette étape, je sais…</h3><ul class="objectifs">'+s.obj.map(o => '<li>'+o+'</li>').join('')+'</ul></section>';
   h += '<section class="sheet"><h2>La leçon</h2>'+s.lesson+'</section>';
   h += '<section class="sheet" id="exos"><h2>✎ Je m\'entraîne</h2><p class="lead muted">Commence par les ★. Si tu bloques, ouvre un indice ; la correction est là quand tu as vraiment cherché. Coche « Tableau de suivi » sous une scène pour vérifier ton tableau.</p>';
@@ -2220,7 +2220,7 @@ function stepEnd(s, fresh){
   const d = stepDone(s), tot = s.ex.length, box = document.getElementById('stepEnd'); if (!box) return;
   const next = STEPS.find(x => x.n === s.n+1);
   if (d === tot){
-    box.innerHTML = '<div class="box exe" style="margin-top:18px"><h4>Étape validée · <b>'+tot+' / '+tot+' exercices</b></h4><p class="hand">'+(ST.name ? 'Bravo '+esc(ST.name)+' !' : 'Bravo !')+' Tu as réussi toute l\'étape '+s.n+'.</p><p>Chaque étape réussie te rapproche du brevet. Quel beau travail : continue comme ça !</p><p class="muted">— M. AHA MAJANI</p>'+(next ? '<p><a class="btn small" href="#e'+next.n+'">Passer à l\'étape '+next.n+' →</a></p>' : '')+'</div>';
+    box.innerHTML = '<div class="box exe" style="margin-top:18px"><h4>Étape validée · <b>'+tot+' / '+tot+' exercices</b></h4><p class="hand">'+(ST.name ? 'Bravo '+esc(ST.name)+' !' : 'Bravo !')+' Tu as réussi toute l\'étape '+s.n+'.</p><p>Chaque étape réussie te rapproche du brevet. Quel beau travail : continue comme ça !</p><p class="muted">— Enseignant</p>'+(next ? '<p><a class="btn small" href="#e'+next.n+'">Passer à l\'étape '+next.n+' →</a></p>' : '')+'</div>';
   } else {
     box.innerHTML = '<div class="box ast" style="margin-top:18px"><h4>Ma progression · <b>'+d+' / '+tot+' exercices réussis</b></h4><p>'+(d === 0 ? 'Lance-toi sur le premier exercice ★ : il est guidé pas à pas.' : d >= tot/2 ? 'Plus de la moitié ! Encore un petit effort, tu y es presque.' : 'Bien parti ! Chaque bonne réponse compte.')+'</p></div>';
   }
