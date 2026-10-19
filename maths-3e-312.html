@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@700&display=swap">
 <style>
-/* Mise en page : feuille de cahier, même famille que les cours Scratch et Tableur de M. AHA MAJANI */
+/* Mise en page : feuille de cahier, même famille que les cours Scratch et Tableur de l’enseignant */
 :root{
   --paper:#f4f6fb; --grid:#e2e8f4; --card:#ffffff; --text:#1c2135; --ink:#24318a; --muted:#596282;
   --line:#d4dbeb; --red:#c22e2e; --red-soft:#fcebea; --green:#16764a; --green-soft:#e2f3e9;
@@ -367,7 +367,7 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
   <div class="wrap">
     <button class="brand" type="button" id="brandHome" aria-label="Retour à l'accueil">
       <span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28"><text x="14" y="20" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="17" fill="#fff">3ᵉ</text></svg></span>
-      <span><h1>Maths 3<sup>e</sup> · 312</h1><p>Le site de <b>M. AHA MAJANI</b></p></span>
+      <span><h1>Maths 3<sup>e</sup> · 312</h1></span>
     </button>
     <nav class="tabs" aria-label="Navigation">
       <a href="#/" data-nav="accueil">Accueil</a>
@@ -381,7 +381,7 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
 </header>
 <main class="wrap" id="app"></main>
 <div id="toast" role="status" aria-live="polite"></div>
-<footer class="wrap">Site de mathématiques de 3<sup>e</sup> · M. AHA MAJANI · <br>
+<footer class="wrap">Cours et activités interactives de mathématiques.<br>
 Une erreur, un blocage ? Écrivez-moi : <a href="mailto:mathsclavie20@gmail.com">mathsclavie20@gmail.com</a><br>
 <button class="btn small ghost no-print" type="button" id="profBtn" style="margin-top:10px">Mode professeur : afficher toutes les corrections</button></footer>
 <script>
@@ -2401,7 +2401,7 @@ AUTO.find(a => a.id === 'a11').gen.push(() => {
   return { q: 'Le diagramme donne le nombre de frères et sœurs (1 à 4) des élèves d\'un groupe. Combien d\'élèves ont été interrogés ?' + svgBars({ labels: ['1', '2', '3', '4'], vals: E, ymax: 7, ys: 1, yt: 'effectif', w: 230, h: 170 }), t: 'num', a: N, c: `${E.join(' + ')} = ${N} élèves (et la moyenne vaut ${F(m, N)}).`, chk: `${E.join('+')}` };
 });
 
-/* QCM d'entraînement fournis par M. AHA MAJANI (repris tels quels, chacun dans sa propre portée) */
+/* QCM d'entraînement fournis par l’enseignant (repris tels quels, chacun dans sa propre portée) */
 const EVALS = [];
 EVALS.push((function () {
 // Petites aides d'écriture mathématique utilisées par les fichiers de questions
@@ -3300,7 +3300,7 @@ const ENCORE = ['Pas encore… Ouvre le coup de pouce, il est là pour ça.', 'P
 const PER = { 1: 'Période 1 · Août à Toussaint', 2: 'Période 2 · Toussaint à Noël', 3: 'Période 3 · Noël à février', 4: 'Période 4 · Vacances de mars', 5: 'Période 5 · Fin de l\'année' };
 const MAIL = 'mathsclavie20@gmail.com';
 const MAJ = '16 octobre 2026';
-const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. — <b>M. AHA MAJANI</b></p></div>`;
+const mailBox = () => `<div class="box mail"><h4>Une question ?</h4><p>Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à <a href="mailto:${MAIL}">${MAIL}</a>. — <b>l’enseignant</b></p></div>`;
 const pick2 = L => L[Math.floor(Math.random() * L.length)];
 
 /* registre des questions : id → question */
@@ -3420,7 +3420,7 @@ function pageChapter(n) {
   const prev = CH.find(x => x.n === n - 1), next = CH.find(x => x.n === n + 1);
   app().innerHTML = `<section class="band p${c.per}"><div class="bn"><small>Chapitre</small>${c.n}</div><h2>${c.t}</h2><p>${c.dom} · ${PER[c.per]}</p></section>
     <nav class="subnav" aria-label="Parties du chapitre"><a href="#retiens" data-jump="retiens">1. Je retiens</a><a href="#entraine" data-jump="entraine">2. Je m'entraîne</a><a href="#loin" data-jump="loin">3. Je vais plus loin</a></nav>
-    <section class="sheet"><div class="split2"><div><h3>Ce que je dois savoir faire</h3><ul class="objectifs">${c.obj.map(o => `<li>${o}</li>`).join('')}</ul></div><div class="box ret"><h4>Le mot de <b>M. AHA MAJANI</b></h4><p>${c.mot}</p></div></div></section>
+    <section class="sheet"><div class="split2"><div><h3>Ce que je dois savoir faire</h3><ul class="objectifs">${c.obj.map(o => `<li>${o}</li>`).join('')}</ul></div><div class="box ret"><h4>Conseil</h4><p>${c.mot}</p></div></div></section>
     <section class="sheet" id="retiens"><h2>1. Je retiens</h2>${c.cours.map(k => `<div class="box ${k.k}"><h4>${{ def: 'Définition', sav: 'Propriété', met: 'Méthode', pie: 'Attention' }[k.k]} · <b>${k.h}</b></h4><div>${fmt(k.b)}</div>${k.ex ? `<div class="exemple"><span class="exl">Exemple</span><div>${fmt(k.ex)}</div></div>` : ''}</div>`).join('')}</section>
     <section class="sheet" id="entraine"><div class="lvl-h"><span class="stars">★</span><h2>2. Je m'entraîne</h2><span class="muted">Exercices d'application directe</span></div>${c.dir.map((e, i) => exHTML(e, i + 1, 'e')).join('')}</section>
     <section class="sheet" id="loin"><div class="lvl-h"><span class="stars">★★</span><h2>3. Je vais plus loin</h2><span class="muted">Exercices d'approfondissement</span></div>${c.app.map((e, i) => exHTML(e, i + 1, 'p')).join('')}
