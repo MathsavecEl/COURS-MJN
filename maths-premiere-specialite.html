@@ -2712,14 +2712,14 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 
 <!-- mjn-angle-notation-fix : chapeau couvrant les trois lettres de l’angle -->
 <style id="mjn-angle-notation-fix">
-.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.24em;line-height:1}
-.mjn-angle3::before{content:"";position:absolute;left:2%;right:2%;top:.06em;height:.22em;border-top:1.5px solid currentColor;border-radius:55% 55% 0 0}
-@media print{.mjn-angle3{padding-top:.24em}.mjn-angle3::before{border-top-width:1.3px}}
+.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.18em;line-height:1.15}
+.mjn-angle3::before{content:"⌒";position:absolute;left:0;right:0;top:-.43em;height:.35em;line-height:.35em;text-align:center;font-family:Arial,sans-serif;font-size:.9em;font-weight:400;color:currentColor;transform:none}
+@media print{.mjn-angle3{padding-top:.18em}.mjn-angle3::before{top:-.43em}}
 </style>
 <script id="mjn-angle-notation-fix-script">
 (function(){
  if(window.__mjnAngleNotationFix)return;window.__mjnAngleNotationFix=true;
- const rx=/(\bangle\s+)([A-Z]{3}\b)|(\bcos\s*\()([A-Z]{3})(\))/g;
+ const rx=/(\\bangle\\s+)([A-Z]{3}\\b|[xy]O[xy])|(\\bcos\\s*\\()([A-Z]{3})(\\))/g;
  function fix(root){if(!root)return;
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){const p=n.parentElement;if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-angle3'))return NodeFilter.FILTER_REJECT;rx.lastIndex=0;rx.lastIndex=0;return rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
   const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
@@ -2730,4 +2730,5 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 })();
 </script>
 
+<script id="mjn-lycee-download-code">(function(){if(window.__mjnLyceeDownloadCode)return;window.__mjnLyceeDownloadCode=true;document.addEventListener('click',function(e){const el=e.target.closest('a,button,[role="button"]');if(!el||el.dataset.mjnAuthorizedDownload==='1')return;const href=(el.getAttribute('href')||'').toLowerCase();const label=(el.innerText||el.getAttribute('aria-label')||el.getAttribute('title')||'').toLowerCase();const isDownload=el.hasAttribute('download')||/\\.pdf(?:$|[?#])/.test(href)||/télécharg|telecharg|download|exporter en pdf|enregistrer en pdf/.test(label);if(!isDownload)return;e.preventDefault();e.stopImmediatePropagation();const code=prompt('Code requis pour télécharger ou imprimer un document du lycée :');if(code===null)return;if(code.trim()!=='MJN-COURS-26'){alert('Code incorrect. Téléchargement annulé.');return;}if(el.tagName==='A'&&el.href){const a=document.createElement('a');a.href=el.href;if(el.hasAttribute('download'))a.download=el.getAttribute('download')||'';a.target=el.target||'_self';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();}else if(el.tagName==='BUTTON'){el.dataset.mjnAuthorizedDownload='1';el.click();delete el.dataset.mjnAuthorizedDownload;}},true);})();</script>
 </body></html>
