@@ -14,6 +14,14 @@ html body .hat,html body .mjn-angle-notation,html body .mjn-angle3{display:inlin
 html body .hat::before,html body .mjn-angle-notation::before,html body .mjn-angle3::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:currentColor!important;clip-path:polygon(0 100%,6% 100%,47% 12%,50% 0,53% 12%,94% 100%,100% 100%,54% 100%,50% 20%,46% 100%)!important;box-sizing:border-box;border:0!important;border-radius:0!important}
 @media print{html body .hat::before,html body .mjn-angle-notation::before,html body .mjn-angle3::before{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 </style>
+
+<style id="mjn-angle-robust-fix-20261020">
+html body .mjn-angle3,html body .mjn-angle-notation,html body .hat,html body .angle-letter{display:inline-block!important;position:relative!important;white-space:nowrap!important;padding-top:.34em!important;line-height:1.12!important;vertical-align:baseline}
+html body .mjn-angle3::before,html body .mjn-angle-notation::before,html body .hat::before{content:""!important;position:absolute!important;left:0!important;right:0!important;top:.02em!important;height:.30em!important;background:linear-gradient(to top right,transparent 45%,currentColor 48%,currentColor 53%,transparent 56%) left/50% 100% no-repeat,linear-gradient(to top left,transparent 45%,currentColor 48%,currentColor 53%,transparent 56%) right/50% 100% no-repeat!important;clip-path:none!important;border:0!important;border-radius:0!important}
+.mjn-home-float{position:fixed!important;right:16px!important;bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;z-index:2147483000!important;display:flex!important;align-items:center!important;gap:8px!important;padding:11px 15px!important;border:2px solid #fff!important;border-radius:999px!important;background:#155e4b!important;color:#fff!important;box-shadow:0 4px 18px #0005!important;font:700 15px/1.2 system-ui,sans-serif!important;text-decoration:none!important;cursor:pointer!important}
+.mjn-home-float:hover,.mjn-home-float:focus-visible{background:#a91f1f!important;color:#fff!important;outline:3px solid #f5c451!important;outline-offset:2px!important}
+@media print{.mjn-home-float{display:none!important}}
+</style>
 </head>
 <body>
 <header class="hero"><h1>Mathématiques en 4e ordinaire</h1></header>
@@ -55,5 +63,6 @@ html body .hat::before,html body .mjn-angle-notation::before,html body .mjn-angl
 })();
 </script>
 
+<a class="mjn-home-float" href="index.html" aria-label="Revenir à l’écran d’accueil">⌂ <span>Accueil</span></a>
 </body>
 </html>
