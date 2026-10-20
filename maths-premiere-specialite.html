@@ -315,6 +315,32 @@ html body .mjn-angle3::before,html body .mjn-angle-notation::before,html body .h
 .mjn-home-float:hover,.mjn-home-float:focus-visible{background:#a91f1f!important;color:#fff!important;outline:3px solid #f5c451!important;outline-offset:2px!important}
 @media print{.mjn-home-float{display:none!important}}
 </style>
+<style id="mjn-radical-fraction-fix-20261020">
+/* Racine carrée : la barre supérieure doit couvrir tout le radicande,
+   y compris une fraction complète (numérateur ET dénominateur). */
+html body .sq, html body .rac, html body .rad{
+  display:inline-flex!important; align-items:stretch!important; vertical-align:middle!important;
+  white-space:nowrap!important; width:max-content!important; max-width:none!important;
+  line-height:1.18!important; flex-shrink:0!important;
+}
+html body .sq>.rad, html body .rac>span, html body .rad>span{
+  display:inline-flex!important; align-items:center!important; justify-content:center!important;
+  width:max-content!important; max-width:none!important; min-width:max-content!important;
+  box-sizing:content-box!important; border-top:1.5px solid currentColor!important;
+  padding:.12em .12em 0 .08em!important; margin:0 0 0 .02em!important;
+  line-height:1.18!important; white-space:nowrap!important; flex-shrink:0!important;
+}
+html body .sq>.rad .fr, html body .rac>span .fr, html body .rad>span .fr{
+  display:inline-flex!important; flex:0 0 auto!important; width:max-content!important;
+  vertical-align:middle!important; margin:0 .08em!important;
+}
+html body .sq>.rad .fr>span, html body .rac>span .fr>span, html body .rad>span .fr>span{
+  flex:0 0 auto!important;
+}
+@media print{
+ html body .sq,html body .rac,html body .rad{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
+</style>
 </head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '1spe', classe: 'Première', court: '1re', titre: 'Maths en Première spécialité', prof: 'M AHA MAJANI', mail: 'mathsclavie20@gmail.com',
@@ -2721,7 +2747,7 @@ def maximum(pas):
 
 boot();
 
-</script><script src="progression.js?v=2"></script>
+</script><script src="progression.js?v=3"></script>
 <script src="encouragement.js?v=3"></script>
 <script id="mjn-print-script">(()=>{const css=document.createElement('style');css.textContent=`
 #mjnPrintBtn{position:fixed;right:14px;bottom:14px;z-index:9999;border:0;border-radius:999px;padding:12px 16px;background:#24318a;color:#fff;font:700 15px system-ui;box-shadow:0 4px 16px #0003;cursor:pointer}
