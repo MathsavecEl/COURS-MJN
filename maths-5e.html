@@ -5093,4 +5093,46 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 </script>
 
 <a class="mjn-home-float" href="index.html" aria-label="Revenir à l’écran d’accueil">⌂ <span>Accueil</span></a>
+<!-- mjn-root-fraction-fix: the radical covers numerator and denominator -->
+<style id="mjn-root-fraction-fix">
+.mjn-rootfrac{display:inline-flex;align-items:stretch;white-space:nowrap;vertical-align:middle;line-height:1.15}
+.mjn-rootfrac .mjn-radicand{display:inline-flex;align-items:center;border-top:1.5px solid currentColor;padding:.1em .12em 0;margin-top:0}
+.mjn-rootfrac .mjn-frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.05;font-size:.94em}
+.mjn-rootfrac .mjn-frac span:first-child{border-bottom:1px solid currentColor;padding:0 .16em .04em}
+.mjn-rootfrac .mjn-frac span:last-child{padding:.04em .16em 0}
+</style>
+<script id="mjn-root-fraction-fix">
+(function(){
+ if(window.__mjnRootFractionFix)return;
+ window.__mjnRootFractionFix=true;
+ const re=/√\s*\(\s*(\d+(?:[.,]\d+)?)\s*\/\s*(\d+(?:[.,]\d+)?)\s*\)/g;
+ function fix(root){
+  if(!root)return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+   const p=n.parentElement;
+   if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-rootfrac'))return NodeFilter.FILTER_REJECT;
+   re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+  }});
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(n=>{
+   re.lastIndex=0;const value=n.nodeValue;let m,last=0,changed=false;const frag=document.createDocumentFragment();
+   while((m=re.exec(value))){
+    if(m.index>last)frag.appendChild(document.createTextNode(value.slice(last,m.index)));
+    const rootSpan=document.createElement('span');rootSpan.className='mjn-rootfrac';
+    rootSpan.appendChild(document.createTextNode('√'));
+    const rad=document.createElement('span');rad.className='mjn-radicand';
+    const frac=document.createElement('span');frac.className='mjn-frac';
+    const num=document.createElement('span');num.textContent=m[1];
+    const den=document.createElement('span');den.textContent=m[2];
+    frac.append(num,den);rad.appendChild(frac);rootSpan.appendChild(rad);frag.appendChild(rootSpan);
+    last=re.lastIndex;changed=true;
+   }
+   if(changed){if(last<value.length)frag.appendChild(document.createTextNode(value.slice(last)));n.parentNode.replaceChild(frag,n);}
+  });
+ }
+ function run(){fix(document.body);}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+ new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3&&n.parentNode)fix(n.parentNode)}))).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body></html>
