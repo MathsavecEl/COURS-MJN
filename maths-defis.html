@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Défis et exercices mélangés | MJN COURS</title>
+<style>
+:root{--ink:#172033;--muted:#5c6678;--bg:#f3f6fb;--card:#fff;--accent:#176b55;--line:#dce4ed;--ok:#18794e;--bad:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:#153d35;color:white;padding:18px max(16px,calc((100% - 900px)/2))}header a{color:white}header h1{margin:8px 0;font-size:clamp(25px,5vw,36px)}main{max-width:900px;margin:22px auto;padding:0 14px 50px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 3px 12px #1720330b}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:end}.field{flex:1;min-width:150px}label{display:block;font-weight:700;margin-bottom:5px}select,input{width:100%;padding:11px;border:1px solid #aab6c5;border-radius:9px;background:white;color:var(--ink);font:inherit}
+button{border:0;border-radius:10px;padding:11px 16px;background:var(--accent);color:white;font:700 16px system-ui;cursor:pointer}button.secondary{background:#e7eee9;color:#174a3b;border:1px solid #c8d9d0}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f0bd4f;outline-offset:2px}
+.pill{display:inline-block;background:#e5f2ec;color:#155742;border-radius:20px;padding:3px 10px;font-size:14px;font-weight:700}.muted{color:var(--muted)}.question{font-size:20px;font-weight:700;margin:6px 0 14px}.answers{display:grid;gap:9px}.answers button{text-align:left;background:white;color:var(--ink);border:1px solid #cbd5e1;font-weight:500}.answers button:hover{border-color:var(--accent);background:#f0f8f4}.answers button.correct{background:#e5f6eb;border-color:#4d9b6d}.answers button.wrong{background:#fff0ee;border-color:#d66}.feedback{margin-top:12px;padding:12px;border-radius:10px;background:#f1f5f9}.feedback.good{background:#e5f6eb;color:#14532d}.feedback.bad{background:#fff0ee;color:#7f1d1d}.row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.progress{height:8px;background:#e1e7ef;border-radius:8px;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;background:#26956f;width:0}#resultat{font-size:20px;font-weight:800}.hidden{display:none!important}
+@media(max-width:560px){.card{padding:14px}.question{font-size:18px}}
+</style></head>
+<body>
+<header><a href="./">← Retour à MJN COURS</a><h1>🎲 Défis et exercices mélangés</h1><div>Révise plusieurs chapitres, vérifie tes réponses et entraîne-toi à résoudre des problèmes qui croisent différentes notions.</div></header>
+<main>
+<section class="card"><h2>Prépare ta série</h2><p class="muted">Les questions sont mélangées à chaque nouvelle série. Les réponses et les explications apparaissent après ton choix.</p>
+<div class="controls"><div class="field"><label for="niveau">Niveau</label><select id="niveau"><option value="6e">6e</option><option value="5e">5e</option><option value="4e">4e</option><option value="3e">3e</option><option value="Seconde">Seconde</option><option value="Première">Première spécialité</option></select></div>
+<div class="field"><label for="nb">Nombre de questions</label><select id="nb"><option>5</option><option selected>10</option><option>15</option></select></div>
+<div class="field"><label for="diff">Difficulté</label><select id="diff"><option value="toutes">Mélangée</option><option value="facile">Consolidation</option><option value="moyen">Approfondissement</option></select></div></div>
+<p style="margin-top:14px"><button id="demarrer">Générer une nouvelle série</button></p></section>
+<section class="card hidden" id="zone"><div class="row"><span class="pill" id="etiquette"></span><span id="compteur" class="muted"></span></div><div class="progress"><span id="barre"></span></div><div class="question" id="question"></div><div class="answers" id="reponses"></div><div id="feedback" class="feedback hidden" aria-live="polite"></div><div class="row" style="margin-top:16px"><span id="score" class="muted"></span><button id="suivant" class="hidden">Question suivante →</button></div></section>
+<section class="card hidden" id="fin"><h2>Série terminée !</h2><p id="resultat"></p><p id="bilan" class="muted"></p><button id="rejouer">Nouvelle série</button></section>
+<section class="card"><h2>Conseil</h2><p>Pour progresser, essaie d’expliquer ta méthode avant de regarder la correction. Dans les problèmes à plusieurs notions, commence par relever les informations utiles et cherche quelles notions peuvent être combinées.</p><p class="muted">Les séries proposées constituent un entraînement complémentaire : elles ne remplacent pas les chapitres et exercices détaillés du niveau.</p></section>
+</main>
+<script>
+const banque={
+"6e":[
+["Calcul","Calcule 48 + 27.",["65","75","85","71"],1,"48 + 20 = 68, puis + 7 = 75.","facile"],
+["Fractions","Quelle fraction représente la moitié ?",["1/3","2/3","1/2","2/4 seulement"],2,"Une moitié s’écrit 1/2. La fraction 2/4 est aussi égale à 1/2.","facile"],
+["Proportionnalité","3 cahiers coûtent 6 €. Combien coûtent 5 cahiers au même prix ?",["8 €","10 €","12 €","15 €"],1,"Un cahier coûte 6 ÷ 3 = 2 €, donc 5 cahiers coûtent 10 €.","moyen"],
+["Géométrie","Un rectangle mesure 8 cm de long et 3 cm de large. Quel est son périmètre ?",["11 cm","22 cm","24 cm","48 cm"],1,"P = 2 × (8 + 3) = 22 cm.","facile"],
+["Mesures","2,5 m correspondent à…",["25 cm","250 cm","2 500 cm","0,25 cm"],1,"1 m = 100 cm, donc 2,5 m = 250 cm.","facile"],
+["Problème à étapes","Lina a 24 billes. Elle en donne un quart puis en gagne 5. Combien en a-t-elle ?",["18","23","24","29"],1,"Un quart de 24 vaut 6. Il reste 18 billes, puis 18 + 5 = 23.","moyen"]],
+"5e":[
+["Nombres relatifs","Calcule −7 + 12.",["−19","−5","5","19"],2,"Ajouter 12 à −7 donne 5.","facile"],
+["Fractions","Calcule 1/4 + 2/4.",["3/8","3/4","2/4","1/2"],1,"Les dénominateurs sont identiques : on additionne les numérateurs.","facile"],
+["Proportionnalité","4 places coûtent 28 €. Combien coûtent 6 places au même tarif ?",["34 €","42 €","48 €","56 €"],1,"Une place coûte 28 ÷ 4 = 7 €, donc 6 × 7 = 42 €.","moyen"],
+["Calcul littéral","Pour x = 3, combien vaut 2x + 5 ?",["10","11","13","16"],1,"2 × 3 + 5 = 11.","facile"],
+["Géométrie","Un triangle a deux angles de 50° et 60°. Le troisième angle mesure…",["60°","70°","80°","90°"],1,"La somme des angles d’un triangle vaut 180° : 180 − 50 − 60 = 70°.","moyen"],
+["Problème à étapes","Un jeu coûte 40 €. Il est soldé à −25 %, puis on ajoute 3 € de livraison. Prix final ?",["30 €","33 €","35 €","43 €"],1,"25 % de 40 € vaut 10 €. Prix soldé : 30 €, puis 30 + 3 = 33 €.","moyen"]],
+"4e":[
+["Nombres relatifs","Calcule (−6) × (−4).",["−24","−10","10","24"],3,"Le produit de deux nombres négatifs est positif : 24.","facile"],
+["Puissances","Combien vaut 10³ ?",["30","100","1 000","10 000"],2,"10³ = 10 × 10 × 10 = 1 000.","facile"],
+["Calcul littéral","Développe 3(x + 4).",["3x + 4","3x + 12","x + 12","7x"],1,"On distribue 3 : 3 × x + 3 × 4 = 3x + 12.","facile"],
+["Pythagore","Un triangle rectangle a pour côtés de l’angle droit 6 cm et 8 cm. Son hypoténuse mesure…",["10 cm","12 cm","14 cm","100 cm"],0,"c² = 6² + 8² = 36 + 64 = 100, donc c = 10 cm.","moyen"],
+["Proportionnalité","Un article à 80 € bénéficie d’une réduction de 15 %. Quel est son nouveau prix ?",["12 €","65 €","68 €","72 €"],2,"15 % de 80 vaut 12 €, donc 80 − 12 = 68 €.","moyen"],
+["Problème à étapes","Un rectangle a une longueur de x + 3 et une largeur de x. Pour x = 5, quel est son périmètre ?",["13","16","26","40"],2,"Longueur 8, largeur 5 ; P = 2 × (8 + 5) = 26.","moyen"]],
+"3e":[
+["Calcul littéral","Factorise 6x + 18.",["6(x + 3)","6(x + 18)","3(2x + 18)","x(6 + 18)"],0,"Le facteur commun est 6 : 6x + 18 = 6(x + 3).","facile"],
+["Fonctions","Si f(x) = 2x − 3, calcule f(5).",["5","7","10","13"],1,"f(5) = 2 × 5 − 3 = 7.","facile"],
+["Théorème de Pythagore","Un triangle rectangle a des côtés de l’angle droit de 9 cm et 12 cm. L’hypoténuse mesure…",["15 cm","18 cm","21 cm","225 cm"],0,"√(9² + 12²) = √225 = 15 cm.","moyen"],
+["Pourcentages","Après une hausse de 20 %, un prix vaut 72 €. Quel était le prix initial ?",["52 €","57,60 €","60 €","62 €"],2,"Le prix final représente 120 % du prix initial : 72 ÷ 1,2 = 60 €.","moyen"],
+["Probabilités","Un sac contient 3 boules rouges et 2 bleues. Probabilité de tirer une boule bleue ?",["2/3","2/5","3/5","1/2"],1,"Il y a 2 boules bleues sur 5 boules au total.","facile"],
+["Problème à plusieurs notions","Un taxi facture 4 € de prise en charge puis 1,80 € par km. Quel prix pour 12 km, puis quel montant pour 3 personnes qui partagent à parts égales ?",["25,60 € puis environ 8,53 € chacun","21,60 € puis 7,20 € chacun","25,60 € chacun","28 € puis 9,60 € chacun"],0,"4 + 1,80 × 12 = 25,60 €. Partage : 25,60 ÷ 3 ≈ 8,53 € par personne.","moyen"]],
+"Seconde":[
+["Calcul littéral","Développe (x + 3)(x − 3).",["x² + 9","x² − 9","x² − 6x + 9","2x"],1,"Identité remarquable : (a + b)(a − b) = a² − b².","facile"],
+["Fonctions","Pour f(x) = x² − 4, quelle est l’image de 3 ?",["3","5","9","13"],1,"f(3) = 3² − 4 = 9 − 4 = 5.","facile"],
+["Équations","Résous 3x − 7 = 11.",["4/3","6","18","−6"],1,"3x = 18, donc x = 6.","facile"],
+["Pourcentages et fonctions","Une quantité de 200 augmente de 10 %, puis diminue de 10 %. Valeur finale ?",["200","198","202","180"],1,"200 × 1,10 × 0,90 = 198 : les variations opposées ne s’annulent pas.","moyen"],
+["Géométrie repérée","La distance entre A(0 ; 0) et B(3 ; 4) vaut…",["5","7","12","25"],0,"Distance = √(3² + 4²) = √25 = 5.","facile"],
+["Problème à plusieurs notions","Une entreprise facture 15 € fixes et 8 € par heure. Pour un budget de 55 €, combien d’heures entières peut-on payer au maximum ?",["4","5","6","7"],1,"15 + 8h ≤ 55, donc 8h ≤ 40 et h ≤ 5.","moyen"]],
+"Première":[
+["Dérivation","Si f(x) = x² + 3x, alors f'(x) vaut…",["x + 3","2x + 3","2x² + 3","x² + 3"],1,"La dérivée de x² est 2x et celle de 3x est 3.","facile"],
+["Second degré","Les racines de x² − 9 = 0 sont…",["9 seulement","−9 seulement","−3 et 3","0 et 9"],2,"x² = 9, donc x = −3 ou x = 3.","facile"],
+["Suites","Une suite arithmétique a u₀ = 4 et une raison r = 3. u₅ vaut…",["7","15","19","20"],2,"u₅ = u₀ + 5r = 4 + 15 = 19.","facile"],
+["Probabilités","Si P(A) = 0,3, alors P(non A) vaut…",["0,3","0,7","1,3","3"],1,"L’événement contraire a pour probabilité 1 − 0,3 = 0,7.","facile"],
+["Dérivée et variations","Pour f(x) = x² − 4x, f'(x) = 0 pour x égal à…",["−4","−2","2","4"],2,"f'(x) = 2x − 4 ; 2x − 4 = 0 donne x = 2.","moyen"],
+["Problème à plusieurs notions","Un capital de 500 € augmente de 4 % par an. Quelle valeur après 2 ans, avec intérêts composés ?",["520 €","540 €","540,80 €","580 €"],2,"500 × 1,04² = 540,80 €.","moyen"]]
+};
+const params=new URLSearchParams(location.search);const aliases={"premiere":"Première","Première":"Première","seconde":"Seconde","Seconde":"Seconde","6e":"6e","5e":"5e","4e":"4e","3e":"3e"};
+const niveau=document.getElementById('niveau');const initial=aliases[params.get('classe')]||params.get('classe');if(banque[initial])niveau.value=initial;
+let serie=[],index=0,points=0,answered=false,history=[];
+function melanger(a){return [...a].sort(()=>Math.random()-.5)}
+function lancer(){const n=niveau.value,d=document.getElementById('diff').value,count=Number(document.getElementById('nb').value);let pool=banque[n].filter(q=>d==='toutes'||q[5]===d);if(pool.length<count)pool=banque[n];serie=melanger(pool).slice(0,Math.min(count,pool.length));index=0;points=0;history=[];document.getElementById('fin').classList.add('hidden');document.getElementById('zone').classList.remove('hidden');afficher()}
+function afficher(){answered=false;const q=serie[index];document.getElementById('etiquette').textContent=q[0];document.getElementById('compteur').textContent='Question '+(index+1)+' / '+serie.length;document.getElementById('barre').style.width=(index/serie.length*100)+'%';document.getElementById('question').textContent=q[1];document.getElementById('feedback').className='feedback hidden';document.getElementById('suivant').classList.add('hidden');document.getElementById('score').textContent='Score : '+points+' / '+index;const zone=document.getElementById('reponses');zone.innerHTML='';q[2].forEach((rep,i)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+i)+'. '+rep;b.onclick=()=>choisir(i,b);zone.appendChild(b)})}
+function choisir(i,btn){if(answered)return;answered=true;const q=serie[index],ok=i===q[3];if(ok)points++;history.push(ok);[...document.querySelectorAll('#reponses button')].forEach((b,j)=>{b.disabled=true;if(j===q[3])b.classList.add('correct');if(j===i&&!ok)b.classList.add('wrong')});const f=document.getElementById('feedback');f.className='feedback '+(ok?'good':'bad');f.textContent=(ok?'Bonne réponse ! ':'Pas tout à fait. ')+q[4];document.getElementById('score').textContent='Score : '+points+' / '+(index+1);document.getElementById('suivant').classList.remove('hidden');document.getElementById('suivant').textContent=index===serie.length-1?'Voir mon résultat →':'Question suivante →'}
+function suivant(){if(index<serie.length-1){index++;afficher()}else{document.getElementById('zone').classList.add('hidden');document.getElementById('fin').classList.remove('hidden');document.getElementById('resultat').textContent=points+' / '+serie.length+' bonnes réponses ('+Math.round(points/serie.length*100)+' %)';document.getElementById('bilan').textContent=points===serie.length?'Excellent ! Tu peux augmenter la difficulté ou changer de niveau.':points>=serie.length*.7?'Bon travail ! Revois les explications des questions manquées, puis tente une autre série.':'Continue à t’entraîner : reprends les chapitres concernés et recommence une série.';document.getElementById('barre').style.width='100%'}}
+document.getElementById('demarrer').onclick=lancer;document.getElementById('suivant').onclick=suivant;document.getElementById('rejouer').onclick=lancer;
+if(banque[niveau.value])lancer();
+</script></body></html>
