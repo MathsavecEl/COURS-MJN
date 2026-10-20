@@ -144,7 +144,7 @@ const COURS = [
     description: "Découvre les blocs Scratch, construis des scripts et teste tes idées dans une activité guidée et interactive.",
     lien: "scratch-pas-a-pas.html",
     nouveau: true
-  }
+  },
   {
     classe: "6e",
     titre: "Défis et exercices mélangés — 6e",
