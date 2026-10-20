@@ -16,7 +16,7 @@ button{border:0;border-radius:10px;padding:11px 16px;background:var(--accent);co
 <header><a href="./">← Retour à MJN COURS</a><h1>🎲 Défis et exercices mélangés</h1><div>Révise plusieurs chapitres, vérifie tes réponses et entraîne-toi à résoudre des problèmes qui croisent différentes notions.</div></header>
 <main>
 <section class="card"><h2>Prépare ta série</h2><p class="muted">Les questions sont mélangées à chaque nouvelle série. Les réponses et les explications apparaissent après ton choix.</p>
-<div class="controls"><div class="field"><label for="niveau">Niveau</label><select id="niveau"><option value="6e">6e</option><option value="5e">5e</option><option value="4e">4e</option><option value="3e">3e</option><option value="Seconde">Seconde</option><option value="Première">Première spécialité</option><option value="Terminale">Terminale spécialité</option></select></div>
+<div class="controls"><div class="field"><label for="niveau">Niveau</label><select id="niveau"><option value="6e">6e</option><option value="5e">5e</option><option value="4e">4e</option><option value="3e">3e</option><option value="Seconde">Seconde</option><option value="Première">Première spécialité</option></select></div>
 <div class="field"><label for="nb">Nombre de questions</label><select id="nb"><option>5</option><option selected>10</option><option>15</option></select></div>
 <div class="field"><label for="diff">Difficulté</label><select id="diff"><option value="toutes">Mélangée</option><option value="facile">Consolidation</option><option value="moyen">Approfondissement</option></select></div><div class="field"><label for="mode">Type d’entraînement</label><select id="mode"><option value="mixte">Questions et problèmes mélangés</option><option value="problemes">Problèmes à plusieurs étapes</option><option value="questions">Questions courtes</option></select></div></div>
 <p style="margin-top:14px"><button id="demarrer">Générer une nouvelle série</button></p></section>
@@ -134,25 +134,7 @@ banque["Première"].push(
   ["Dérivation et tangente","Pour f(x)=x², le coefficient directeur de la tangente au point d’abscisse 3 vaut…",["3","6","9","12"],1,"f'(x)=2x, donc f'(3)=6.","moyen"],
   ["Équations","Résous x² = 16 dans ℝ.",["4 seulement","−4 seulement","−4 et 4","8 et −8"],2,"Les deux nombres dont le carré vaut 16 sont −4 et 4.","facile"],
   ["Problème à plusieurs notions","Une population de 800 augmente de 5 % par an pendant 3 ans. Valeur arrondie à l’unité ?",["920","926","932","960"],1,"800 × 1,05³ ≈ 926,1, soit 926.","moyen"]
-);
-banque["Terminale"].push(
-  ["Limites","La limite de 1/x quand x tend vers +∞ est…",["+∞","−∞","0","1"],2,"Le dénominateur devient arbitrairement grand : 1/x tend vers 0.","facile"],
-  ["Dérivation","La dérivée de f(x)=eˣ est…",["xeˣ","eˣ","1/x","ln(x)"],1,"La fonction exponentielle est sa propre dérivée.","facile"],
-  ["Logarithme","Pour x > 0, ln(eˣ) vaut…",["eˣ","x","1","ln(x)"],1,"Le logarithme népérien et l’exponentielle sont des fonctions réciproques.","facile"],
-  ["Suites","Une suite géométrique de premier terme u₀=3 et de raison 0,5 a u₂ égal à…",["0,75","1,5","2,25","6"],0,"u₂ = 3 × 0,5² = 0,75.","facile"],
-  ["Probabilités","Si X suit une loi binomiale B(10 ; 0,2), son espérance vaut…",["0,2","2","5","10"],1,"Pour une loi binomiale, E(X)=np=10×0,2=2.","moyen"],
-  ["Primitives","Une primitive de 2x est…",["2","x²","2x²","x"],1,"La dérivée de x² est 2x.","facile"],
-  ["Convexité","Si f''(x) > 0 sur un intervalle, f est…",["concave","convexe","constante","décroissante nécessairement"],1,"Une dérivée seconde positive caractérise la convexité.","moyen"],
-  ["Équation exponentielle","Résous eˣ = e⁴.",["x=0","x=1","x=4","x=e⁴"],2,"L’exponentielle est injective : x = 4.","facile"],
-  ["Intégrales","La valeur de ∫₀² 1 dx est…",["0","1","2","4"],2,"L’aire sous la courbe y=1 entre 0 et 2 vaut 2.","moyen"],
-  ["Géométrie dans l’espace","Le produit scalaire de deux vecteurs perpendiculaires non nuls vaut…",["−1","0","1","la somme de leurs normes"],1,"u·v = ||u|| ||v|| cos(90°) = 0.","moyen"],
-  ["Probabilités conditionnelles","Si P(A∩B)=0,12 et P(B)=0,3, P_B(A) vaut…",["0,04","0,4","0,42","2,5"],1,"P_B(A)=0,12/0,3=0,4.","moyen"],
-  ["Limites","La limite de (3x²+1)/x² quand x tend vers +∞ vaut…",["0","1","3","+∞"],2,"On divise par x² : 3 + 1/x² tend vers 3.","moyen"],
-  ["Dérivation et variations","Si f'(x)>0 sur un intervalle, f y est…",["croissante","décroissante","constante","convexe nécessairement"],0,"Une dérivée strictement positive implique que la fonction est strictement croissante.","facile"],
-  ["Problème à plusieurs notions","Une quantité initiale de 1 200 diminue de 8 % chaque année. Quelle quantité reste après 2 ans, arrondie à l’unité ?",["1 008","1 016","1 104","1 104,96"],1,"1200 × 0,92² = 1015,68, donc arrondi à l’unité : 1 016.","moyen"],
-  ["Équation logarithmique","Résous ln(x)=2.",["x=2","x=e²","x=ln(2)","x=0"],1,"En appliquant l’exponentielle aux deux membres, x=e².","moyen"]
-);
-const params=new URLSearchParams(location.search);const aliases={"premiere":"Première","Première":"Première","seconde":"Seconde","Seconde":"Seconde","Terminale":"Terminale","terminale":"Terminale","6e":"6e","5e":"5e","4e":"4e","3e":"3e"};
+);const params=new URLSearchParams(location.search);const aliases={"premiere":"Première","Première":"Première","seconde":"Seconde","Seconde":"Seconde","6e":"6e","5e":"5e","4e":"4e","3e":"3e"};
 const niveau=document.getElementById('niveau');const initial=aliases[params.get('classe')]||params.get('classe');if(banque[initial])niveau.value=initial;
 let serie=[],index=0,points=0,answered=false,history=[];
 function melanger(a){return [...a].sort(()=>Math.random()-.5)}
