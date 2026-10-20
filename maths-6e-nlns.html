@@ -17,6 +17,12 @@
 @media print{.mjn-angle-notation::before,.mjn-angle3::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:linear-gradient(to top right,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) left/50% 100% no-repeat,linear-gradient(to top left,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) right/50% 100% no-repeat;box-sizing:border-box}}
 </style>
 <style id="mjn-defis-tab-style">.mjn-defis-tab{position:fixed;z-index:9999;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;padding:11px 15px;border-radius:999px;background:#155e4b;color:#fff!important;border:2px solid #fff;box-shadow:0 3px 14px #0003;font:700 15px/1.2 system-ui,sans-serif;text-decoration:none!important}.mjn-defis-tab:focus-visible{outline:3px solid #f5c451;outline-offset:3px}@media print{.mjn-defis-tab{display:none}}</style>
+<style id="mjn-angle-final-correction-20261020">
+/* Chapeau d’angle en pointe, centré au-dessus de la lettre centrale. */
+.hat,.mjn-angle-notation,.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.32em;line-height:1.15;vertical-align:baseline}
+.hat::before,.mjn-angle-notation::before,.mjn-angle3::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:currentColor;clip-path:polygon(0 100%,6% 100%,47% 10%,50% 0,53% 10%,94% 100%,100% 100%,53% 8%,50% 0,47% 8%);box-sizing:border-box;border:0;border-radius:0}
+@media print{.hat::before,.mjn-angle-notation::before,.mjn-angle3::before{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
 </head>
 <body>
 <header class="hero"><h1>Mathématiques en 6e NLNS</h1></header>
