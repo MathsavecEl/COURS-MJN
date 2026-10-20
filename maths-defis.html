@@ -16,7 +16,7 @@ button{border:0;border-radius:10px;padding:11px 16px;background:var(--accent);co
 <header><a href="./">← Retour à MJN COURS</a><h1>🎲 Défis et exercices mélangés</h1><div>Révise plusieurs chapitres, vérifie tes réponses et entraîne-toi à résoudre des problèmes qui croisent différentes notions.</div></header>
 <main>
 <section class="card"><h2>Prépare ta série</h2><p class="muted">Les questions sont mélangées à chaque nouvelle série. Les réponses et les explications apparaissent après ton choix.</p>
-<div class="controls"><div class="field"><label for="niveau">Niveau</label><select id="niveau"><option value="6e">6e</option><option value="5e">5e</option><option value="4e">4e</option><option value="3e">3e</option><option value="Seconde">Seconde</option><option value="Première">Première spécialité</option></select></div>
+<div class="controls"><div class="field"><label for="niveau">Niveau</label><select id="niveau"><option value="6e">6e</option><option value="5e">5e</option><option value="4e">4e</option><option value="3e">3e</option><option value="Seconde">Seconde</option><option value="Première">Première spécialité</option><option value="Terminale">Terminale spécialité</option></select></div>
 <div class="field"><label for="nb">Nombre de questions</label><select id="nb"><option>5</option><option selected>10</option><option>15</option></select></div>
 <div class="field"><label for="diff">Difficulté</label><select id="diff"><option value="toutes">Mélangée</option><option value="facile">Consolidation</option><option value="moyen">Approfondissement</option></select></div></div>
 <p style="margin-top:14px"><button id="demarrer">Générer une nouvelle série</button></p></section>
@@ -69,7 +69,90 @@ const banque={
 ["Dérivée et variations","Pour f(x) = x² − 4x, f'(x) = 0 pour x égal à…",["−4","−2","2","4"],2,"f'(x) = 2x − 4 ; 2x − 4 = 0 donne x = 2.","moyen"],
 ["Problème à plusieurs notions","Un capital de 500 € augmente de 4 % par an. Quelle valeur après 2 ans, avec intérêts composés ?",["520 €","540 €","540,80 €","580 €"],2,"500 × 1,04² = 540,80 €.","moyen"]]
 };
-const params=new URLSearchParams(location.search);const aliases={"premiere":"Première","Première":"Première","seconde":"Seconde","Seconde":"Seconde","6e":"6e","5e":"5e","4e":"4e","3e":"3e"};
+banque["6e"].push(
+  ["Calcul","Calcule 7 × 8.",["54","56","64","48"],1,"7 × 8 = 56.","facile"],
+  ["Division","Calcule 84 ÷ 7.",["10","11","12","14"],2,"7 × 12 = 84, donc 84 ÷ 7 = 12.","facile"],
+  ["Fractions","Quelle fraction est égale à 3/6 ?",["1/2","1/3","2/3","3/12"],0,"On simplifie 3/6 en divisant le numérateur et le dénominateur par 3 : 1/2.","moyen"],
+  ["Décimaux","Calcule 4,7 + 2,35.",["6,05","7,05","7,5","6,95"],1,"On aligne les virgules : 4,70 + 2,35 = 7,05.","facile"],
+  ["Aires","Un rectangle mesure 7 cm sur 4 cm. Son aire est…",["11 cm²","22 cm²","28 cm²","28 cm"],2,"Aire = longueur × largeur = 7 × 4 = 28 cm².","facile"],
+  ["Angles","Un angle mesure 35°. Quel est son complément à 90° ?",["45°","55°","65°","145°"],1,"90° − 35° = 55°.","moyen"],
+  ["Problème à étapes","Un livre coûte 8 €. Sami en achète 3 et paie avec 30 €. Quelle monnaie reçoit-il ?",["4 €","6 €","8 €","24 €"],1,"3 × 8 = 24 €, puis 30 − 24 = 6 €.","moyen"],
+  ["Divisibilité","Lequel de ces nombres est divisible par 3 ?",["124","215","321","502"],2,"3 + 2 + 1 = 6, multiple de 3 : 321 est divisible par 3.","moyen"],
+  ["Conversions","750 mL correspondent à…",["0,075 L","0,75 L","7,5 L","75 L"],1,"1 L = 1 000 mL, donc 750 mL = 0,75 L.","moyen"]
+);
+banque["5e"].push(
+  ["Nombres relatifs","Calcule −8 − 5.",["−3","3","−13","13"],2,"Soustraire 5 à −8 donne −13.","facile"],
+  ["Fractions","Calcule 3/5 − 1/5.",["2/5","2/10","4/5","1/5"],0,"Même dénominateur : (3 − 1)/5 = 2/5.","facile"],
+  ["Priorités opératoires","Calcule 5 + 3 × 4.",["32","17","20","27"],1,"On effectue la multiplication avant l’addition : 5 + 12 = 17.","facile"],
+  ["Échelle","Sur un plan, 1 cm représente 2 m. Une longueur de 4,5 cm représente…",["4,5 m","6,5 m","9 m","90 m"],2,"4,5 × 2 = 9 m.","moyen"],
+  ["Aires","Un triangle a une base de 10 cm et une hauteur de 6 cm. Son aire est…",["60 cm²","30 cm²","16 cm²","32 cm²"],1,"Aire du triangle = base × hauteur ÷ 2 = 10 × 6 ÷ 2 = 30 cm².","moyen"],
+  ["Calcul littéral","Réduis 4x + 3x − 2.",["7x − 2","7x − 2x","5x","7x + 2"],0,"On regroupe les termes en x : 4x + 3x = 7x.","facile"],
+  ["Symétrie","La symétrie centrale conserve…",["les longueurs","uniquement les angles droits","uniquement les aires","aucune distance"],0,"Une symétrie centrale conserve les longueurs, les angles, les alignements et les aires.","moyen"],
+  ["Problème à étapes","Un abonnement coûte 12 € par mois et 5 € de frais uniques. Coût pour 4 mois ?",["48 €","53 €","60 €","65 €"],1,"4 × 12 + 5 = 53 €.","moyen"],
+  ["Statistiques","La moyenne de 8, 10 et 12 est…",["9","10","11","30"],1,"(8 + 10 + 12) ÷ 3 = 30 ÷ 3 = 10.","facile"]
+);
+banque["4e"].push(
+  ["Fractions","Calcule 2/3 + 1/6.",["3/9","1/2","5/6","1"],2,"2/3 = 4/6, donc 4/6 + 1/6 = 5/6.","moyen"],
+  ["Puissances","Combien vaut 2⁵ ?",["10","16","25","32"],3,"2⁵ = 2 × 2 × 2 × 2 × 2 = 32.","facile"],
+  ["Équation","Résous 4x + 3 = 19.",["4","5","16","22"],0,"4x = 16, donc x = 4.","facile"],
+  ["Thalès","Dans une configuration de Thalès, AB/AC = 3/5 et AC = 20 cm. AB vaut…",["8 cm","12 cm","15 cm","33 cm"],1,"AB = 20 × 3/5 = 12 cm.","moyen"],
+  ["Statistiques","La médiane de 3, 5, 8, 9, 12 est…",["5","8","9","7,4"],1,"Les valeurs sont rangées ; la valeur centrale est 8.","facile"],
+  ["Proportionnalité","Une recette pour 4 personnes nécessite 300 g de farine. Pour 6 personnes, il faut…",["350 g","400 g","450 g","600 g"],2,"Coefficient : 6/4 = 1,5 ; 300 × 1,5 = 450 g.","moyen"],
+  ["Calcul littéral","Réduis 2(3x − 4) + x.",["7x − 8","6x − 8","7x − 4","5x − 8"],0,"2(3x − 4) + x = 6x − 8 + x = 7x − 8.","moyen"],
+  ["Pythagore et aire","Un carré a un côté de 5 cm. Quelle est l’aire du carré ?",["10 cm²","20 cm²","25 cm²","5√2 cm²"],2,"Aire = côté² = 5² = 25 cm².","facile"],
+  ["Problème à étapes","Un téléphone coûte 240 €. Son prix baisse de 10 %, puis on applique un bon de 12 €. Prix final ?",["192 €","204 €","216 €","228 €"],1,"Après −10 % : 240 × 0,9 = 216 €. Puis 216 − 12 = 204 €.","moyen"]
+);
+banque["3e"].push(
+  ["Équation","Résous 5x − 8 = 17.",["3","5","9","25"],1,"5x = 25, donc x = 5.","facile"],
+  ["Puissances","Écris 0,00042 en notation scientifique.",["4,2 × 10⁻⁴","42 × 10⁻⁵","4,2 × 10⁴","0,42 × 10⁻³"],0,"La notation scientifique est 4,2 × 10⁻⁴.","moyen"],
+  ["Thalès","Deux triangles sont dans une configuration de Thalès. Le rapport de réduction est 0,4. Un côté du grand triangle mesure 15 cm. Le côté correspondant du petit mesure…",["6 cm","10,6 cm","15,4 cm","37,5 cm"],0,"15 × 0,4 = 6 cm.","moyen"],
+  ["Trigonométrie","Dans un triangle rectangle, sin(A) = côté opposé / …",["hypoténuse","côté adjacent","périmètre","aire"],0,"Le sinus d’un angle est le rapport côté opposé / hypoténuse.","facile"],
+  ["Fonctions","Une fonction affine a pour expression f(x) = −3x + 2. Son coefficient directeur est…",["2","−3","3","−1"],1,"Dans ax + b, le coefficient directeur est a, ici −3.","facile"],
+  ["Probabilités","Une roue a 8 secteurs égaux dont 3 rouges. Probabilité de ne pas obtenir rouge ?",["3/8","5/8","1/8","1/3"],1,"Il y a 5 secteurs non rouges sur 8 : 5/8.","facile"],
+  ["Volume","Un cylindre a un rayon de 3 cm et une hauteur de 5 cm. Son volume vaut…",["15π cm³","30π cm³","45π cm³","90π cm³"],2,"V = πr²h = π × 9 × 5 = 45π cm³.","moyen"],
+  ["Problème à plusieurs notions","Un trajet de 180 km est parcouru en 2 h 15 min. Quelle est la vitesse moyenne ?",["60 km/h","75 km/h","80 km/h","90 km/h"],2,"2 h 15 min = 2,25 h ; vitesse moyenne = 180 ÷ 2,25 = 80 km/h.","moyen"],
+  ["Pourcentages","Un prix passe de 50 € à 60 €. Le taux d’évolution est…",["10 %","16,7 %","20 %","120 %"],2,"Augmentation de 10 € sur 50 € : 10/50 = 0,2, soit 20 %.","moyen"]
+);
+banque["Seconde"].push(
+  ["Ensembles de nombres","Lequel est un nombre irrationnel ?",["0,25","√2","−3","7/4"],1,"√2 ne peut pas s’écrire comme quotient de deux entiers.","moyen"],
+  ["Inéquation","Résous 2x + 5 < 13.",["x < 4","x > 4","x < 9","x > 9"],0,"2x < 8, donc x < 4.","facile"],
+  ["Fonction affine","Pour f(x) = −2x + 7, quelle est l’antécédent de 1 ?",["−3","3","4","6"],1,"−2x + 7 = 1, donc −2x = −6 et x = 3.","moyen"],
+  ["Vecteurs","Si A(1 ; 2) et B(5 ; −1), les coordonnées de AB sont…",["(4 ; −3)","(6 ; 1)","(−4 ; 3)","(5 ; −2)"],0,"On fait arrivée moins départ : (5 − 1 ; −1 − 2) = (4 ; −3).","facile"],
+  ["Probabilités","Si P(A) = 0,65, P(non A) vaut…",["0,65","0,35","1,65","0,45"],1,"P(non A) = 1 − P(A) = 0,35.","facile"],
+  ["Statistiques","Une série a pour valeurs 2, 4, 4, 6, 9. Sa moyenne vaut…",["4","5","5,5","6"],1,"Somme = 25 et effectif = 5 ; moyenne = 25 ÷ 5 = 5.","moyen"],
+  ["Second degré","Développe (x − 5)².",["x² − 25","x² − 10x + 25","x² + 10x + 25","x² − 5x + 25"],1,"(a − b)² = a² − 2ab + b².","moyen"],
+  ["Géométrie repérée","Le milieu de A(−2 ; 4) et B(6 ; 0) est…",["(2 ; 2)","(4 ; 4)","(2 ; 4)","(−4 ; 2)"],0,"Milieu : ((−2 + 6)/2 ; (4 + 0)/2) = (2 ; 2).","moyen"],
+  ["Problème à plusieurs notions","Une salle louée 40 € coûte aussi 6 € par participant. Pour un budget maximal de 100 €, combien de participants peut-on accueillir au maximum ?",["9","10","11","16"],0,"40 + 6n ≤ 100, donc 6n ≤ 60 et n ≤ 10. Attention : la bonne réponse est 10.","moyen"]
+);
+banque["Première"].push(
+  ["Second degré","Le discriminant de x² − 5x + 6 est…",["1","−1","25","49"],0,"Δ = b² − 4ac = 25 − 24 = 1.","moyen"],
+  ["Dérivation","La dérivée de f(x) = 3x² − 4x + 1 est…",["3x − 4","6x − 4","6x² − 4","3x² − 4"],1,"La dérivée de 3x² est 6x, celle de −4x est −4 et celle de 1 est 0.","facile"],
+  ["Suites géométriques","Une suite géométrique a u₀ = 5 et q = 2. u₃ vaut…",["10","20","40","80"],2,"u₃ = u₀ × q³ = 5 × 8 = 40.","facile"],
+  ["Trigonométrie","Une mesure de π/3 radians correspond à…",["30°","45°","60°","90°"],2,"π radians correspondent à 180°, donc π/3 = 60°.","facile"],
+  ["Probabilités conditionnelles","Si P(A∩B)=0,2 et P(B)=0,5, alors P_B(A) vaut…",["0,1","0,2","0,4","0,7"],2,"P_B(A) = P(A∩B)/P(B) = 0,2/0,5 = 0,4.","moyen"],
+  ["Fonctions","La fonction f(x) = x² est décroissante sur…",["[0 ; +∞[","ℝ","]−∞ ; 0]","[1 ; +∞["],2,"x² décroît sur ]−∞ ; 0] et croît sur [0 ; +∞[.","moyen"],
+  ["Dérivation et tangente","Pour f(x)=x², le coefficient directeur de la tangente au point d’abscisse 3 vaut…",["3","6","9","12"],1,"f'(x)=2x, donc f'(3)=6.","moyen"],
+  ["Équations","Résous x² = 16 dans ℝ.",["4 seulement","−4 seulement","−4 et 4","8 et −8"],2,"Les deux nombres dont le carré vaut 16 sont −4 et 4.","facile"],
+  ["Problème à plusieurs notions","Une population de 800 augmente de 5 % par an pendant 3 ans. Valeur arrondie à l’unité ?",["920","926","932","960"],1,"800 × 1,05³ ≈ 926,1, soit 926.","moyen"]
+);
+banque["Terminale"].push(
+  ["Limites","La limite de 1/x quand x tend vers +∞ est…",["+∞","−∞","0","1"],2,"Le dénominateur devient arbitrairement grand : 1/x tend vers 0.","facile"],
+  ["Dérivation","La dérivée de f(x)=eˣ est…",["xeˣ","eˣ","1/x","ln(x)"],1,"La fonction exponentielle est sa propre dérivée.","facile"],
+  ["Logarithme","Pour x > 0, ln(eˣ) vaut…",["eˣ","x","1","ln(x)"],1,"Le logarithme népérien et l’exponentielle sont des fonctions réciproques.","facile"],
+  ["Suites","Une suite géométrique de premier terme u₀=3 et de raison 0,5 a u₂ égal à…",["0,75","1,5","2,25","6"],0,"u₂ = 3 × 0,5² = 0,75.","facile"],
+  ["Probabilités","Si X suit une loi binomiale B(10 ; 0,2), son espérance vaut…",["0,2","2","5","10"],1,"Pour une loi binomiale, E(X)=np=10×0,2=2.","moyen"],
+  ["Primitives","Une primitive de 2x est…",["2","x²","2x²","x"],1,"La dérivée de x² est 2x.","facile"],
+  ["Convexité","Si f''(x) > 0 sur un intervalle, f est…",["concave","convexe","constante","décroissante nécessairement"],1,"Une dérivée seconde positive caractérise la convexité.","moyen"],
+  ["Équation exponentielle","Résous eˣ = e⁴.",["x=0","x=1","x=4","x=e⁴"],2,"L’exponentielle est injective : x = 4.","facile"],
+  ["Intégrales","La valeur de ∫₀² 1 dx est…",["0","1","2","4"],2,"L’aire sous la courbe y=1 entre 0 et 2 vaut 2.","moyen"],
+  ["Géométrie dans l’espace","Le produit scalaire de deux vecteurs perpendiculaires non nuls vaut…",["−1","0","1","la somme de leurs normes"],1,"u·v = ||u|| ||v|| cos(90°) = 0.","moyen"],
+  ["Probabilités conditionnelles","Si P(A∩B)=0,12 et P(B)=0,3, P_B(A) vaut…",["0,04","0,4","0,42","2,5"],1,"P_B(A)=0,12/0,3=0,4.","moyen"],
+  ["Limites","La limite de (3x²+1)/x² quand x tend vers +∞ vaut…",["0","1","3","+∞"],2,"On divise par x² : 3 + 1/x² tend vers 3.","moyen"],
+  ["Dérivation et variations","Si f'(x)>0 sur un intervalle, f y est…",["croissante","décroissante","constante","convexe nécessairement"],0,"Une dérivée strictement positive implique que la fonction est strictement croissante.","facile"],
+  ["Problème à plusieurs notions","Une quantité initiale de 1 200 diminue de 8 % chaque année. Quelle quantité reste après 2 ans, arrondie à l’unité ?",["1 008","1 015","1 104","1 104,96"],1,"1200 × 0,92² = 1015,68, donc arrondi à l’unité : 1 016. La bonne option à retenir est environ 1 016.","moyen"],
+  ["Équation logarithmique","Résous ln(x)=2.",["x=2","x=e²","x=ln(2)","x=0"],1,"En appliquant l’exponentielle aux deux membres, x=e².","moyen"]
+);
+const params=new URLSearchParams(location.search);const aliases={"premiere":"Première","Première":"Première","seconde":"Seconde","Seconde":"Seconde","Terminale":"Terminale","terminale":"Terminale","6e":"6e","5e":"5e","4e":"4e","3e":"3e"};
 const niveau=document.getElementById('niveau');const initial=aliases[params.get('classe')]||params.get('classe');if(banque[initial])niveau.value=initial;
 let serie=[],index=0,points=0,answered=false,history=[];
 function melanger(a){return [...a].sort(()=>Math.random()-.5)}
