@@ -3813,5 +3813,14 @@ html body .mjn-rootfrac .mjn-frac span:last-child{padding:.04em .16em 0!importan
  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3&&n.parentNode)fix(n.parentNode)}))).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
-</body>
+<style id="mjn-math-layout-last-fix">
+/* Force le radical à prendre la largeur complète du contenu, fraction comprise */
+html body .sq{display:inline-flex!important;align-items:stretch!important;white-space:nowrap!important;vertical-align:middle!important;width:max-content!important;max-width:none!important;flex-shrink:0!important}
+html body .sq>.rad{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:max-content!important;min-width:max-content!important;max-width:none!important;box-sizing:content-box!important;border-top:1.6px solid currentColor!important;padding:.12em .14em 0 .08em!important;margin:0 0 0 .02em!important;flex-shrink:0!important;white-space:nowrap!important}
+html body .sq>.rad .fr{display:inline-flex!important;flex:0 0 auto!important;flex-direction:column!important;width:max-content!important;min-width:max-content!important;max-width:none!important;vertical-align:middle!important;margin:0 .08em!important}
+html body .sq>.rad .fr>span{flex:0 0 auto!important;white-space:nowrap!important}
+html body .mjn-angle3{display:inline-block!important;position:relative!important;white-space:nowrap!important;padding:.36em .02em 0!important;line-height:1.12!important;vertical-align:baseline!important}
+html body .mjn-angle3::before{content:""!important;position:absolute!important;left:0!important;right:0!important;top:.02em!important;height:.29em!important;background:linear-gradient(120deg,transparent 47%,currentColor 48%,currentColor 52%,transparent 53%) left top/51% 100% no-repeat,linear-gradient(60deg,transparent 47%,currentColor 48%,currentColor 52%,transparent 53%) right top/51% 100% no-repeat!important;clip-path:none!important;border:0!important}
+@media print{html body .sq>.rad{print-color-adjust:exact;-webkit-print-color-adjust:exact}html body .mjn-angle3::before{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style></body>
 </html>
