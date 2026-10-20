@@ -301,41 +301,6 @@ html body .mjn-angle3::before,html body .mjn-angle-notation::before,html body .h
 .mjn-home-float:hover,.mjn-home-float:focus-visible{background:#a91f1f!important;color:#fff!important;outline:3px solid #f5c451!important;outline-offset:2px!important}
 @media print{.mjn-home-float{display:none!important}}
 </style>
-<style id="mjn-radical-fraction-visual-fix-20261020">
-/* Un seul trait de racine : le signe √ possède déjà sa barre courte.
-   Le trait long est dessiné au-dessus du radicande, sans bordure doublée. */
-html body .sq{display:inline-flex!important;align-items:stretch!important;vertical-align:middle!important;white-space:nowrap!important;width:max-content!important;max-width:none!important;flex-shrink:0!important}
-html body .sq>.rad{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:max-content!important;min-width:max-content!important;max-width:none!important;box-sizing:content-box!important;border-top:0!important;text-decoration:overline!important;text-decoration-thickness:1.5px!important;text-decoration-color:currentColor!important;padding:.12em .14em 0 .08em!important;margin:0 0 0 .02em!important;flex-shrink:0!important;white-space:nowrap!important}
-html body .sq>.rad .fr{display:inline-flex!important;flex:0 0 auto!important;flex-direction:column!important;width:max-content!important;min-width:max-content!important;max-width:none!important;vertical-align:middle!important;margin:0 .08em!important;text-decoration:none!important}
-html body .sq>.rad .fr>span{flex:0 0 auto!important;white-space:nowrap!important;text-decoration:none!important}
-@media print{html body .sq>.rad{text-decoration-color:currentColor!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
-</style>
-<style id="mjn-radical-fraction-fix-20261020">
-/* Racine carrée : la barre supérieure doit couvrir tout le radicande,
-   y compris une fraction complète (numérateur ET dénominateur). */
-html body .sq, html body .rac, html body .rad{
-  display:inline-flex!important; align-items:stretch!important; vertical-align:middle!important;
-  white-space:nowrap!important; width:max-content!important; max-width:none!important;
-  line-height:1.18!important; flex-shrink:0!important;
-}
-html body .sq>.rad, html body .rac>span, html body .rad>span{
-  display:inline-flex!important; align-items:center!important; justify-content:center!important;
-  width:max-content!important; max-width:none!important; min-width:max-content!important;
-  box-sizing:content-box!important; border-top:1.5px solid currentColor!important;
-  padding:.12em .12em 0 .08em!important; margin:0 0 0 .02em!important;
-  line-height:1.18!important; white-space:nowrap!important; flex-shrink:0!important;
-}
-html body .sq>.rad .fr, html body .rac>span .fr, html body .rad>span .fr{
-  display:inline-flex!important; flex:0 0 auto!important; width:max-content!important;
-  vertical-align:middle!important; margin:0 .08em!important;
-}
-html body .sq>.rad .fr>span, html body .rac>span .fr>span, html body .rad>span .fr>span{
-  flex:0 0 auto!important;
-}
-@media print{
- html body .sq,html body .rac,html body .rad{print-color-adjust:exact;-webkit-print-color-adjust:exact}
-}
-</style>
 </head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '2nde', classe: 'Seconde', court: '2de', titre: 'Maths en Seconde', prof: 'M AHA MAJANI', mail: 'mathsclavie20@gmail.com',
@@ -2987,4 +2952,12 @@ html body .sq>.rad .fr>span{flex:0 0 auto!important;white-space:nowrap!important
 html body .mjn-angle3{display:inline-block!important;position:relative!important;white-space:nowrap!important;padding:.36em .02em 0!important;line-height:1.12!important;vertical-align:baseline!important}
 html body .mjn-angle3::before{content:""!important;position:absolute!important;left:0!important;right:0!important;top:.02em!important;height:.29em!important;background:linear-gradient(120deg,transparent 47%,currentColor 48%,currentColor 52%,transparent 53%) left top/51% 100% no-repeat,linear-gradient(60deg,transparent 47%,currentColor 48%,currentColor 52%,transparent 53%) right top/51% 100% no-repeat!important;clip-path:none!important;border:0!important}
 @media print{html body .sq>.rad{print-color-adjust:exact;-webkit-print-color-adjust:exact}html body .mjn-angle3::before{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
-</style></body></html>
+</style><style id="mjn-radical-fraction-final-20261020">
+/* Correction ciblée : une seule barre de radical au-dessus du radicande complet.
+   Ne jamais appliquer la barre du radical au conteneur de fraction lui-même. */
+html body .sq{display:inline-flex!important;align-items:stretch!important;vertical-align:middle!important;white-space:nowrap!important;width:max-content!important;max-width:none!important;flex-shrink:0!important}
+html body .sq>.rad{display:inline-flex!important;align-items:center!important;justify-content:center!important;border-top:1.5px solid currentColor!important;text-decoration:none!important;padding:.12em .14em 0 .08em!important;margin:0 0 0 .02em!important;box-sizing:content-box!important;width:max-content!important;min-width:max-content!important;max-width:none!important;white-space:nowrap!important;flex-shrink:0!important}
+html body .sq>.rad>.fr{display:inline-flex!important;flex:0 0 auto!important;flex-direction:column!important;border-top:0!important;padding-top:0!important;margin:0 .08em!important;width:max-content!important;min-width:max-content!important;max-width:none!important;text-decoration:none!important}
+html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important}
+</style>
+</body></html>
