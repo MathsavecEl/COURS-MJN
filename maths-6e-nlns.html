@@ -75,14 +75,14 @@ html body .hat::before,html body .mjn-angle-notation::before,html body .mjn-angl
 })();
 </script>
 
-<a class="mjn-defis-tab" href="maths-defis.html?classe=6e" aria-label="Ouvrir les défis et exercices mélangés">🎲 Défis mélangés</a>
+<a class="mjn-defis-tab" href="maths-defis.html?classe=6e" aria-label="Ouvrir les défis et exercices mélangés">🎲 Exercices mélangés</a>
 <script id="mjn-defis-nav-script">
 (function(){
  const classe="6e";
  function addTab(){
    const nav=document.querySelector('header nav, nav.tabs, nav[aria-label="Navigation"]');
    if(!nav||nav.querySelector('[data-nav="defis-transversaux"]')||Array.from(nav.querySelectorAll('a')).some(a=>a.href.includes('maths-defis.html')))return;
-   const a=document.createElement('a');a.href="maths-defis.html?classe=6e";a.textContent='🎲 Défis mélangés';a.setAttribute('data-nav','defis-transversaux');nav.appendChild(a);
+   const a=document.createElement('a');a.href="maths-defis.html?classe=6e";a.textContent='🎲 Exercices mélangés';a.setAttribute('data-nav','defis-transversaux');nav.appendChild(a);
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addTab);else addTab();
  new MutationObserver(addTab).observe(document.documentElement,{childList:true,subtree:true});
