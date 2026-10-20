@@ -514,7 +514,16 @@ a[href="#accueil"],a[href="#/"],a[data-nav="accueil"],a[data-r="accueil"],[aria-
 <style id="mjn-print-style">
 #mjnPrintBtn{position:fixed;right:14px;bottom:14px;z-index:9999;border:0;border-radius:999px;padding:12px 16px;background:#176b55;color:#fff;font:700 14px system-ui;box-shadow:0 4px 18px #0003;cursor:pointer}
 @media print{#mjnPrintBtn{display:none!important} body{background:#fff!important;color:#000!important} .on{color:inherit}}
-</style></head>
+</style>
+<style id="mjn-angle-notation-final">
+.mjn-angle-notation{display:inline-block;position:relative;white-space:nowrap;padding-top:.30em;line-height:1.15;font-style:italic;vertical-align:baseline}
+.mjn-angle-notation::before{content:"";position:absolute;left:1%;right:1%;top:.035em;height:.27em;border-top:1.5px solid currentColor;border-radius:100% 100% 0 0;box-sizing:border-box}
+.mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.30em;line-height:1.15;vertical-align:baseline}
+.mjn-angle3::before{content:"";position:absolute;left:1%;right:1%;top:.035em;height:.27em;border-top:1.5px solid currentColor;border-radius:100% 100% 0 0;box-sizing:border-box}
+@media print{.mjn-angle-notation::before,.mjn-angle3::before{border-top-width:1.2px}}
+</style>
+<style id="mjn-defis-tab-style">.mjn-defis-tab{position:fixed;z-index:9999;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;padding:11px 15px;border-radius:999px;background:#155e4b;color:#fff!important;border:2px solid #fff;box-shadow:0 3px 14px #0003;font:700 15px/1.2 system-ui,sans-serif;text-decoration:none!important}.mjn-defis-tab:focus-visible{outline:3px solid #f5c451;outline-offset:3px}@media print{.mjn-defis-tab{display:none}}</style>
+</head>
 <body>
 <header class="top">
   <div class="wrap">
@@ -4922,7 +4931,7 @@ register(); route();
 <script id="mjn-angle-notation-fix-script">
 (function(){
  if(window.__mjnAngleNotationFix)return;window.__mjnAngleNotationFix=true;
- const rx=/(\\bangle\\s+)([A-Z]{3}\\b|[xy]O[xy])|(\\bcos\\s*\\()([A-Z]{3})(\\))/g;
+ const rx=/(\bangle\s+)([A-Z]{3}\b|[xy]O[xy])|(\bcos\s*\()([A-Z]{3})(\))/g;
  function fix(root){
   if(!root)return;
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
@@ -4947,5 +4956,6 @@ register(); route();
 })();
 </script>
 
+<a class="mjn-defis-tab" href="maths-defis.html?classe=5e" aria-label="Ouvrir les défis et exercices mélangés">🎲 Défis mélangés</a>
 </body>
 </html>
