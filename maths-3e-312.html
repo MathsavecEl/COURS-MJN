@@ -3708,7 +3708,7 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
   if(!root)return;
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
    const p=n.parentElement;
-   if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-angle3,.mjn-angle-notation'))return NodeFilter.FILTER_REJECT;
+   if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-angle3'))return NodeFilter.FILTER_REJECT;
    rx.lastIndex=0;
    return rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
   }});
@@ -3716,25 +3716,18 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
   nodes.forEach(n=>{
    rx.lastIndex=0;const value=n.nodeValue;let m,last=0,changed=false;const frag=document.createDocumentFragment();
    while((m=rx.exec(value))){
-    changed=true;frag.appendChild(document.createTextNode(value.slice(last,m.index)));
-    if(m[1]){
-      const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[2];frag.appendChild(s);
-    }else if(m[3]){
-      frag.appendChild(document.createTextNode(m[3]));
-      const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[4];frag.appendChild(s);
-    }else{
-      frag.appendChild(document.createTextNode(m[5]));
-      const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[6];frag.appendChild(s);
-      frag.appendChild(document.createTextNode(m[7]));
-    }
-    last=rx.lastIndex;
+    if(m.index>last)frag.appendChild(document.createTextNode(value.slice(last,m.index)));
+    if(m[1]){frag.appendChild(document.createTextNode(m[1]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[2];frag.appendChild(s);}
+    else if(m[3]){frag.appendChild(document.createTextNode(m[3]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[4];frag.appendChild(s);}
+    else if(m[5]){frag.appendChild(document.createTextNode(m[5]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[6];frag.appendChild(s);frag.appendChild(document.createTextNode(m[7]));}
+    last=rx.lastIndex;changed=true;
    }
-   if(changed){frag.appendChild(document.createTextNode(value.slice(last)));n.parentNode.replaceChild(frag,n);}
+   if(changed){if(last<value.length)frag.appendChild(document.createTextNode(value.slice(last)));n.parentNode.replaceChild(frag,n);}
   });
  }
  function run(){fix(document.body);}
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
- new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3&&n.parentNode)fix(n.parentNode);}))).observe(document.documentElement,{childList:true,subtree:true});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+ new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3)fix(n.parentNode)}))).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
 
