@@ -347,10 +347,10 @@ button.btn:not(.danger):not(.ko),a.btn { background:var(--accent); color:#fff; }
 </style>
 <style id="mjn-angle-notation-final">
 .mjn-angle-notation{display:inline-block;position:relative;white-space:nowrap;padding-top:.30em;line-height:1.15;font-style:italic;vertical-align:baseline}
-.mjn-angle-notation::before{content:"";position:absolute;left:1%;right:1%;top:.035em;height:.27em;border-top:1.5px solid currentColor;border-radius:100% 100% 0 0;box-sizing:border-box}
+.mjn-angle-notation::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:linear-gradient(to top right,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) left/50% 100% no-repeat,linear-gradient(to top left,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) right/50% 100% no-repeat;box-sizing:border-box}
 .mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.30em;line-height:1.15;vertical-align:baseline}
-.mjn-angle3::before{content:"";position:absolute;left:1%;right:1%;top:.035em;height:.27em;border-top:1.5px solid currentColor;border-radius:100% 100% 0 0;box-sizing:border-box}
-@media print{.mjn-angle-notation::before,.mjn-angle3::before{border-top-width:1.2px}}
+.mjn-angle3::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:linear-gradient(to top right,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) left/50% 100% no-repeat,linear-gradient(to top left,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) right/50% 100% no-repeat;box-sizing:border-box}
+@media print{.mjn-angle-notation::before,.mjn-angle3::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:linear-gradient(to top right,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) left/50% 100% no-repeat,linear-gradient(to top left,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) right/50% 100% no-repeat;box-sizing:border-box}}
 </style>
 <style id="mjn-defis-tab-style">.mjn-defis-tab{position:fixed;z-index:9999;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;padding:11px 15px;border-radius:999px;background:#155e4b;color:#fff!important;border:2px solid #fff;box-shadow:0 3px 14px #0003;font:700 15px/1.2 system-ui,sans-serif;text-decoration:none!important}.mjn-defis-tab:focus-visible{outline:3px solid #f5c451;outline-offset:3px}@media print{.mjn-defis-tab{display:none}}</style>
 </head>
@@ -364,7 +364,7 @@ button.btn:not(.danger):not(.ko),a.btn { background:var(--accent); color:#fff; }
     <nav class="tabs" aria-label="Navigation">
       <a href="#accueil" data-nav="accueil">Accueil</a>
       <a href="#chapitres" data-nav="chapitres">Chapitres</a>
-      <a href="maths-defis.html?classe=4e" data-nav="defis-transversaux">🎲 Défis mélangés</a>
+      <a href="maths-defis.html?classe=4e" data-nav="defis-transversaux">🎲 Exercices mélangés</a>
       <a href="#fiches" data-nav="fiches">Fiches rappels</a>
       <a href="#automatismes" data-nav="automatismes">Automatismes</a>
       <a href="#brevet" data-nav="brevet">Type brevet</a>
@@ -5140,8 +5140,8 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 <!-- mjn-angle-notation-fix : chapeau couvrant les trois lettres de l’angle -->
 <style id="mjn-angle-notation-fix">
 .mjn-angle3{display:inline-block;position:relative;white-space:nowrap;padding-top:.32em;line-height:1.15;vertical-align:baseline}
-.mjn-angle3::before{content:"";position:absolute;left:4%;right:4%;top:.02em;height:.26em;border-top:1.6px solid currentColor;border-radius:100% 100% 0 0;box-sizing:border-box}
-@media print{.mjn-angle3{padding-top:.32em}.mjn-angle3::before{border-top-width:1.3px}}
+.mjn-angle3::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:linear-gradient(to top right,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) left/50% 100% no-repeat,linear-gradient(to top left,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) right/50% 100% no-repeat;box-sizing:border-box}
+@media print{.mjn-angle3{padding-top:.32em}.mjn-angle3::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:linear-gradient(to top right,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) left/50% 100% no-repeat,linear-gradient(to top left,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) right/50% 100% no-repeat;box-sizing:border-box}}
 </style>
 <script id="mjn-angle-notation-fix-script">
 (function(){
@@ -5182,14 +5182,14 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 })();
 </script>
 
-<a class="mjn-defis-tab" href="maths-defis.html?classe=4e" aria-label="Ouvrir les défis et exercices mélangés">🎲 Défis mélangés</a>
+<a class="mjn-defis-tab" href="maths-defis.html?classe=4e" aria-label="Ouvrir les défis et exercices mélangés">🎲 Exercices mélangés</a>
 <script id="mjn-defis-nav-script">
 (function(){
  const classe="4e";
  function addTab(){
    const nav=document.querySelector('header nav, nav.tabs, nav[aria-label="Navigation"]');
    if(!nav||nav.querySelector('[data-nav="defis-transversaux"]')||Array.from(nav.querySelectorAll('a')).some(a=>a.href.includes('maths-defis.html')))return;
-   const a=document.createElement('a');a.href="maths-defis.html?classe=4e";a.textContent='🎲 Défis mélangés';a.setAttribute('data-nav','defis-transversaux');nav.appendChild(a);
+   const a=document.createElement('a');a.href="maths-defis.html?classe=4e";a.textContent='🎲 Exercices mélangés';a.setAttribute('data-nav','defis-transversaux');nav.appendChild(a);
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addTab);else addTab();
  new MutationObserver(addTab).observe(document.documentElement,{childList:true,subtree:true});
