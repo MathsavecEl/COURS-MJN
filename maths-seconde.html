@@ -166,7 +166,7 @@ details.rap[open]{padding-bottom:10px}
 .vec::after{content:"";position:absolute;right:-2px;top:-5.2px;border:4.5px solid transparent;border-left:6px solid currentColor;border-right:0}
 .ovl{text-decoration:overline}
 .hat{display:inline-block;position:relative;padding-top:.3em}
-.hat::before{content:"";position:absolute;left:1%;right:1%;top:.04em;height:.28em;border-top:1.5px solid currentColor;border-radius:100% 100% 0 0;box-sizing:border-box}
+.hat::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.32em;background:linear-gradient(to top right,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) left/50% 100% no-repeat,linear-gradient(to top left,transparent 46%,currentColor 48%,currentColor 53%,transparent 55%) right/50% 100% no-repeat}
 .m sup,.m sub{font-size:.75em}
 .sys{display:inline-flex;align-items:center;vertical-align:middle}
 .sys .br{font-size:2.2em;line-height:1;margin-right:4px;font-weight:200}
@@ -2799,14 +2799,39 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 </style>
 <script id="mjn-angle-notation-fix-script">
 (function(){
- if(window.__mjnAngleNotationFix)return;window.__mjnAngleNotationFix=true;
- const rx=/(\bangle\s+)([A-Z]{3}\b|[xy]O[xy])|(\bcos\s*\()([A-Z]{3})(\))/g;
- function fix(root){if(!root)return;
-  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){const p=n.parentElement;if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-angle3'))return NodeFilter.FILTER_REJECT;rx.lastIndex=0;rx.lastIndex=0;return rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
+ if(window.__mjnAngleNotationFix)return;
+ window.__mjnAngleNotationFix=true;
+ const rx=/(∠\s*)([A-Z]{3}\b)|(\bangle\s+)([A-Z]{3}\b|[xy]O[xy])|(\bcos\s*\()([A-Z]{3})(\))/g;
+ function fix(root){
+  if(!root)return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+   const p=n.parentElement;
+   if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-angle3,.mjn-angle-notation'))return NodeFilter.FILTER_REJECT;
+   rx.lastIndex=0;
+   return rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+  }});
   const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
-  nodes.forEach(n=>{rx.lastIndex=0;const value=n.nodeValue;let m,last=0,changed=false;const frag=document.createDocumentFragment();while((m=rx.exec(value))){changed=true;frag.appendChild(document.createTextNode(value.slice(last,m.index)));if(m[1]){frag.appendChild(document.createTextNode(m[1]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[2];frag.appendChild(s);}else{frag.appendChild(document.createTextNode(m[3]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[4];frag.appendChild(s);frag.appendChild(document.createTextNode(m[5]));}last=rx.lastIndex;}if(changed){frag.appendChild(document.createTextNode(value.slice(last)));n.parentNode.replaceChild(frag,n);}});
+  nodes.forEach(n=>{
+   rx.lastIndex=0;const value=n.nodeValue;let m,last=0,changed=false;const frag=document.createDocumentFragment();
+   while((m=rx.exec(value))){
+    changed=true;frag.appendChild(document.createTextNode(value.slice(last,m.index)));
+    if(m[1]){
+      const s=document.createElement('span');s.className='mjn-angle-notation';s.textContent=m[2];frag.appendChild(s);
+    }else if(m[3]){
+      frag.appendChild(document.createTextNode(m[3]));
+      const s=document.createElement('span');s.className='mjn-angle-notation';s.textContent=m[4];frag.appendChild(s);
+    }else{
+      frag.appendChild(document.createTextNode(m[5]));
+      const s=document.createElement('span');s.className='mjn-angle-notation';s.textContent=m[6];frag.appendChild(s);
+      frag.appendChild(document.createTextNode(m[7]));
+    }
+    last=rx.lastIndex;
+   }
+   if(changed){frag.appendChild(document.createTextNode(value.slice(last)));n.parentNode.replaceChild(frag,n);}
+  });
  }
- function run(){fix(document.body);}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+ function run(){fix(document.body);}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3&&n.parentNode)fix(n.parentNode);}))).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
