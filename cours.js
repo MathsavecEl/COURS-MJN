@@ -145,4 +145,58 @@ const COURS = [
     lien: "scratch-pas-a-pas.html",
     nouveau: true
   }
+  {
+    classe: "6e",
+    titre: "Défis et exercices mélangés — 6e",
+    chapitre: "défis transversaux",
+    type: "Entraînement interactif",
+    description: "Séries aléatoires et problèmes qui mélangent plusieurs notions, avec corrections expliquées.",
+    lien: "maths-defis.html?classe=6e",
+    nouveau: true
+  },
+  {
+    classe: "5e",
+    titre: "Défis et exercices mélangés — 5e",
+    chapitre: "défis transversaux",
+    type: "Entraînement interactif",
+    description: "Séries aléatoires et problèmes qui mélangent plusieurs notions, avec corrections expliquées.",
+    lien: "maths-defis.html?classe=5e",
+    nouveau: true
+  },
+  {
+    classe: "4e",
+    titre: "Défis et exercices mélangés — 4e",
+    chapitre: "défis transversaux",
+    type: "Entraînement interactif",
+    description: "Séries aléatoires et problèmes qui mélangent plusieurs notions, avec corrections expliquées.",
+    lien: "maths-defis.html?classe=4e",
+    nouveau: true
+  },
+  {
+    classe: "3e",
+    titre: "Défis et exercices mélangés — 3e",
+    chapitre: "défis transversaux",
+    type: "Entraînement interactif",
+    description: "Séries aléatoires et problèmes qui mélangent plusieurs notions, avec corrections expliquées.",
+    lien: "maths-defis.html?classe=3e",
+    nouveau: true
+  },
+  {
+    classe: "Seconde",
+    titre: "Défis et exercices mélangés — Seconde",
+    chapitre: "défis transversaux",
+    type: "Entraînement interactif",
+    description: "Séries aléatoires et problèmes qui mélangent plusieurs notions, avec corrections expliquées.",
+    lien: "maths-defis.html?classe=Seconde",
+    nouveau: true
+  },
+  {
+    classe: "Première",
+    titre: "Défis et exercices mélangés — Première spécialité",
+    chapitre: "défis transversaux",
+    type: "Entraînement interactif",
+    description: "Séries aléatoires et problèmes qui mélangent plusieurs notions, avec corrections expliquées.",
+    lien: "maths-defis.html?classe=Première",
+    nouveau: true
+  },
 ];
