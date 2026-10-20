@@ -277,6 +277,14 @@ html body .hat,html body .mjn-angle-notation,html body .mjn-angle3{display:inlin
 html body .hat::before,html body .mjn-angle-notation::before,html body .mjn-angle3::before{content:"";position:absolute;left:0;right:0;top:.02em;height:.30em;background:currentColor!important;clip-path:polygon(0 100%,6% 100%,47% 12%,50% 0,53% 12%,94% 100%,100% 100%,54% 100%,50% 20%,46% 100%)!important;box-sizing:border-box;border:0!important;border-radius:0!important}
 @media print{html body .hat::before,html body .mjn-angle-notation::before,html body .mjn-angle3::before{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 </style>
+
+<style id="mjn-angle-robust-fix-20261020">
+html body .mjn-angle3,html body .mjn-angle-notation,html body .hat,html body .angle-letter{display:inline-block!important;position:relative!important;white-space:nowrap!important;padding-top:.34em!important;line-height:1.12!important;vertical-align:baseline}
+html body .mjn-angle3::before,html body .mjn-angle-notation::before,html body .hat::before{content:""!important;position:absolute!important;left:0!important;right:0!important;top:.02em!important;height:.28em!important;background:currentColor!important;clip-path:polygon(0 100%,44% 100%,50% 0,56% 100%,100% 100%,100% 88%,58% 88%,50% 18%,42% 88%,0 88%)!important;border:0!important;border-radius:0!important}
+.mjn-home-float{position:fixed!important;right:16px!important;bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;z-index:2147483000!important;display:flex!important;align-items:center!important;gap:8px!important;padding:11px 15px!important;border:2px solid #fff!important;border-radius:999px!important;background:#155e4b!important;color:#fff!important;box-shadow:0 4px 18px #0005!important;font:700 15px/1.2 system-ui,sans-serif!important;text-decoration:none!important;cursor:pointer!important}
+.mjn-home-float:hover,.mjn-home-float:focus-visible{background:#a91f1f!important;color:#fff!important;outline:3px solid #f5c451!important;outline-offset:2px!important}
+@media print{.mjn-home-float{display:none!important}}
+</style>
 </head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '5e', classe: '5ème', court: '5e', titre: 'Maths en 5ème', prof: 'Enseignant', mail: 'mathsclavie20@gmail.com',
@@ -326,6 +334,7 @@ function tex(src){
       if (c === 'frac' || c === 'dfrac'){ const a = group(), b = group(); return `<span class="fr"><span class="nu">${a}</span><span class="de">${b}</span></span>`; }
       if (c === 'sqrt') return `<span class="sq">√<span class="rad">${group()}</span></span>`;
       if (c === 'vec') return `<span class="vec">${group()}</span>`;
+      if (c === 'widehat' || c === 'hat') return `<span class="mjn-angle3">${group()}</span>`;
       if (c === 'overline' || c === 'bar') return `<span class="ovl">${group()}</span>`;
       if (c === 'text' || c === 'mathrm') return raw();
       if (c === 'sys'){ const rows = raw().split('\\\\').map(r => `<span>${tex(r)}</span>`).join(''); return `<span class="sys"><span class="br">{</span><span class="rows">${rows}</span></span>`; }
@@ -5063,4 +5072,6 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
  new MutationObserver(addTab).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
+
+<a class="mjn-home-float" href="index.html" aria-label="Revenir à l’écran d’accueil">⌂ <span>Accueil</span></a>
 </body></html>
