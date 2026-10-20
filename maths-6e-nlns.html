@@ -32,21 +32,32 @@
 </style>
 <script id="mjn-angle-notation-fix-script">
 (function(){
- if(window.__mjnAngleNotationFix)return;window.__mjnAngleNotationFix=true;
- const rx=/(\bangle\s+)([A-Z]{3}\b|[xy]O[xy])|(\bcos\s*\()([A-Z]{3})(\))/g;
+ if(window.__mjnAngleNotationFix)return;
+ window.__mjnAngleNotationFix=true;
+ const rx=/(∠\s*)([A-Z]{3}\b)|(\bangle\s+)([A-Z]{3}\b|[xy]O[xy])|(\bcos\s*\()([A-Z]{3})(\))/g;
  function fix(root){
   if(!root)return;
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
-   const p=n.parentElement;if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-angle3'))return NodeFilter.FILTER_REJECT;
-   rx.lastIndex=0;return rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+   const p=n.parentElement;
+   if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-angle3,.mjn-angle-notation'))return NodeFilter.FILTER_REJECT;
+   rx.lastIndex=0;
+   return rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
   }});
   const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
   nodes.forEach(n=>{
    rx.lastIndex=0;const value=n.nodeValue;let m,last=0,changed=false;const frag=document.createDocumentFragment();
    while((m=rx.exec(value))){
     changed=true;frag.appendChild(document.createTextNode(value.slice(last,m.index)));
-    if(m[1]){frag.appendChild(document.createTextNode(m[1]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[2];frag.appendChild(s);}
-    else{frag.appendChild(document.createTextNode(m[3]));const s=document.createElement('span');s.className='mjn-angle3';s.textContent=m[4];frag.appendChild(s);frag.appendChild(document.createTextNode(m[5]));}
+    if(m[1]){
+      const s=document.createElement('span');s.className='mjn-angle-notation';s.textContent=m[2];frag.appendChild(s);
+    }else if(m[3]){
+      frag.appendChild(document.createTextNode(m[3]));
+      const s=document.createElement('span');s.className='mjn-angle-notation';s.textContent=m[4];frag.appendChild(s);
+    }else{
+      frag.appendChild(document.createTextNode(m[5]));
+      const s=document.createElement('span');s.className='mjn-angle-notation';s.textContent=m[6];frag.appendChild(s);
+      frag.appendChild(document.createTextNode(m[7]));
+    }
     last=rx.lastIndex;
    }
    if(changed){frag.appendChild(document.createTextNode(value.slice(last)));n.parentNode.replaceChild(frag,n);}
