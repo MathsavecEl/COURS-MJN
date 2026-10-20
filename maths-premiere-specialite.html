@@ -2766,4 +2766,16 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 
 <script id="mjn-lycee-download-code">(function(){if(window.__mjnLyceeDownloadCode)return;window.__mjnLyceeDownloadCode=true;document.addEventListener('click',function(e){const el=e.target.closest('a,button,[role="button"]');if(!el||el.dataset.mjnAuthorizedDownload==='1')return;const href=(el.getAttribute('href')||'').toLowerCase();const label=(el.innerText||el.getAttribute('aria-label')||el.getAttribute('title')||'').toLowerCase();const isDownload=el.hasAttribute('download')||/\\.pdf(?:$|[?#])/.test(href)||/télécharg|telecharg|download|exporter en pdf|enregistrer en pdf/.test(label);if(!isDownload)return;e.preventDefault();e.stopImmediatePropagation();const code=prompt('Code requis pour télécharger ou imprimer un document du lycée :');if(code===null)return;if(code.trim()!=='MJN-COURS-26'){alert('Code incorrect. Téléchargement annulé.');return;}if(el.tagName==='A'&&el.href){const a=document.createElement('a');a.href=el.href;if(el.hasAttribute('download'))a.download=el.getAttribute('download')||'';a.target=el.target||'_self';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();}else if(el.tagName==='BUTTON'){el.dataset.mjnAuthorizedDownload='1';el.click();delete el.dataset.mjnAuthorizedDownload;}},true);})();</script>
 <a class="mjn-defis-tab" href="maths-defis.html?classe=Premi%C3%A8re" aria-label="Ouvrir les défis et exercices mélangés">🎲 Défis mélangés</a>
+<script id="mjn-defis-nav-script">
+(function(){
+ const classe="Première";
+ function addTab(){
+   const nav=document.querySelector('header nav, nav.tabs, nav[aria-label="Navigation"]');
+   if(!nav||nav.querySelector('[data-nav="defis-transversaux"]')||Array.from(nav.querySelectorAll('a')).some(a=>a.href.includes('maths-defis.html')))return;
+   const a=document.createElement('a');a.href="maths-defis.html?classe=Premi%C3%A8re";a.textContent='🎲 Défis mélangés';a.setAttribute('data-nav','defis-transversaux');nav.appendChild(a);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addTab);else addTab();
+ new MutationObserver(addTab).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body></html>
