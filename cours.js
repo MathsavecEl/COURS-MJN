@@ -182,15 +182,6 @@ const COURS = [
     nouveau: true
   },
   {
-    classe: "Terminale",
-    titre: "Défis et exercices mélangés — Terminale spécialité",
-    chapitre: "défis transversaux",
-    type: "Entraînement interactif",
-    description: "Séries aléatoires et problèmes de spécialité, avec corrections expliquées.",
-    lien: "maths-defis.html?classe=Terminale",
-    nouveau: true
-  },
-  {
     classe: "Seconde",
     titre: "Défis et exercices mélangés — Seconde",
     chapitre: "défis transversaux",
