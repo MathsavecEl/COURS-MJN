@@ -315,6 +315,15 @@ html body .mjn-angle3::before,html body .mjn-angle-notation::before,html body .h
 .mjn-home-float:hover,.mjn-home-float:focus-visible{background:#a91f1f!important;color:#fff!important;outline:3px solid #f5c451!important;outline-offset:2px!important}
 @media print{.mjn-home-float{display:none!important}}
 </style>
+<style id="mjn-radical-fraction-visual-fix-20261020">
+/* Un seul trait de racine : le signe √ possède déjà sa barre courte.
+   Le trait long est dessiné au-dessus du radicande, sans bordure doublée. */
+html body .sq{display:inline-flex!important;align-items:stretch!important;vertical-align:middle!important;white-space:nowrap!important;width:max-content!important;max-width:none!important;flex-shrink:0!important}
+html body .sq>.rad{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:max-content!important;min-width:max-content!important;max-width:none!important;box-sizing:content-box!important;border-top:0!important;text-decoration:overline!important;text-decoration-thickness:1.5px!important;text-decoration-color:currentColor!important;padding:.12em .14em 0 .08em!important;margin:0 0 0 .02em!important;flex-shrink:0!important;white-space:nowrap!important}
+html body .sq>.rad .fr{display:inline-flex!important;flex:0 0 auto!important;flex-direction:column!important;width:max-content!important;min-width:max-content!important;max-width:none!important;vertical-align:middle!important;margin:0 .08em!important;text-decoration:none!important}
+html body .sq>.rad .fr>span{flex:0 0 auto!important;white-space:nowrap!important;text-decoration:none!important}
+@media print{html body .sq>.rad{text-decoration-color:currentColor!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
 <style id="mjn-radical-fraction-fix-20261020">
 /* Racine carrée : la barre supérieure doit couvrir tout le radicande,
    y compris une fraction complète (numérateur ET dénominateur). */
