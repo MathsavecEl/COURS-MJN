@@ -2857,4 +2857,44 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3&&n.parentNode)fix(n.parentNode)}))).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
+<!-- mjn-math-notation-final-fix -->
+<style id="mjn-math-notation-final-fix">
+html body .mjn-angle3{display:inline-block!important;position:relative!important;white-space:nowrap!important;padding:.34em .02em 0!important;line-height:1.12!important;vertical-align:baseline!important}
+html body .mjn-angle3::before{content:""!important;position:absolute!important;left:0!important;right:0!important;top:.02em!important;height:.28em!important;background:linear-gradient(120deg,transparent 47%,currentColor 48%,currentColor 52%,transparent 53%) left top/51% 100% no-repeat,linear-gradient(60deg,transparent 47%,currentColor 48%,currentColor 52%,transparent 53%) right top/51% 100% no-repeat!important;clip-path:none!important;border:0!important}
+@media print{html body .mjn-angle3{padding-top:.34em!important}html body .mjn-angle3::before{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+html body .mjn-rootfrac{display:inline-flex!important;align-items:stretch!important;white-space:nowrap!important;vertical-align:middle!important;line-height:1.15!important}
+html body .mjn-rootfrac>.mjn-radicand{display:inline-flex!important;align-items:center!important;border-top:1.5px solid currentColor!important;padding:.1em .12em 0!important}
+html body .mjn-rootfrac .mjn-frac{display:inline-flex!important;flex-direction:column!important;text-align:center!important;line-height:1.05!important;font-size:.94em!important}
+html body .mjn-rootfrac .mjn-frac span:first-child{border-bottom:1px solid currentColor!important;padding:0 .16em .04em!important}
+html body .mjn-rootfrac .mjn-frac span:last-child{padding:.04em .16em 0!important}
+</style>
+<script id="mjn-math-notation-final-fix-script">
+(function(){
+ if(window.__mjnMathNotationFinalFix)return;window.__mjnMathNotationFinalFix=true;
+ const re=/√\s*\(?\s*(\d+(?:[.,]\d+)?)\s*\/\s*(\d+(?:[.,]\d+)?)\s*\)?/g;
+ function fix(root){
+  if(!root)return;
+  if(root.nodeType===1&&root.matches&&root.matches('script,style,textarea,input,pre,code,.mjn-rootfrac'))return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+   const p=n.parentElement;if(!p||p.closest('script,style,textarea,input,pre,code,.mjn-rootfrac'))return NodeFilter.FILTER_REJECT;
+   re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+  }});
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  for(const n of nodes){
+   re.lastIndex=0;const v=n.nodeValue;let m,last=0,changed=false;const f=document.createDocumentFragment();
+   while((m=re.exec(v))){
+    if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
+    const outer=document.createElement('span');outer.className='mjn-rootfrac';outer.appendChild(document.createTextNode('√'));
+    const rad=document.createElement('span');rad.className='mjn-radicand';const frac=document.createElement('span');frac.className='mjn-frac';
+    const num=document.createElement('span');num.textContent=m[1];const den=document.createElement('span');den.textContent=m[2];frac.append(num,den);rad.appendChild(frac);outer.appendChild(rad);f.appendChild(outer);
+    last=re.lastIndex;changed=true;
+   }
+   if(changed){if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n);}
+  }
+ }
+ function run(){fix(document.body)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+ new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3&&n.parentNode)fix(n.parentNode)}))).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body></html>
