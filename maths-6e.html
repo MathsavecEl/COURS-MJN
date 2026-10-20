@@ -4838,7 +4838,7 @@ html body .mjn-rootfrac .mjn-frac span:last-child{padding:.04em .16em 0!importan
 <script id="mjn-math-notation-final-fix-script">
 (function(){
  if(window.__mjnMathNotationFinalFix)return;window.__mjnMathNotationFinalFix=true;
- const re=/√\s*\(?\s*(\d+(?:[.,]\d+)?)\s*\/\s*(\d+(?:[.,]\d+)?)\s*\)?/g;
+ const re=/√\s*\(\s*(\d+(?:[.,]\d+)?)\s*\/\s*(\d+(?:[.,]\d+)?)\s*\)/g;
  function fix(root){
   if(!root)return;
   if(root.nodeType===1&&root.matches&&root.matches('script,style,textarea,input,pre,code,.mjn-rootfrac'))return;
