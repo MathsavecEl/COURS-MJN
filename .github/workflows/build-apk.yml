@@ -45,6 +45,26 @@ jobs:
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
+      - name: Contrôles de sécurité statiques
+        shell: bash
+        run: |
+          set -euo pipefail
+          manifest="android/app/src/main/AndroidManifest.xml"
+          activity="android/app/src/main/java/fr/mjncours/app/MainActivity.java"
+          gradle_file="android/app/build.gradle"
+          grep -q 'android:allowBackup="false"' "$manifest"
+          grep -q 'android:usesCleartextTraffic="false"' "$manifest"
+          if grep -E 'uses-permission' "$manifest" | grep -v 'android.permission.INTERNET'; then
+            echo "Permission Android supplémentaire détectée : revue manuelle requise."
+            exit 1
+          fi
+          grep -q 'setAllowFileAccess(false)' "$activity"
+          grep -q 'setAllowContentAccess(false)' "$activity"
+          grep -q 'MIXED_CONTENT_NEVER_ALLOW' "$activity"
+          grep -q 'setSafeBrowsingEnabled(true)' "$activity"
+          grep -q 'targetSdk 36' "$gradle_file"
+          echo "Contrôles statiques réussis. Ils ne remplacent pas un audit de sécurité ni une analyse antivirus."
+
       - name: Compiler l’APK de test
         run: gradle --no-daemon --stacktrace :app:assembleDebug
         working-directory: android
