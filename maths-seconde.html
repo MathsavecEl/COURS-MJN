@@ -453,6 +453,7 @@ html body .mjn-radical-content .fr>span:last-child{display:block!important;paddi
 
 
 <!-- MJN : correction typographique des racines carrées, sans double barre -->
+<!-- MJN : barre unique du radical, prolongeant celle du glyphe √ -->
 <style id="mjn-radical-clean-fix">
 html body .mjn-radical{
  display:inline-flex!important;align-items:flex-start!important;vertical-align:middle!important;
@@ -460,18 +461,21 @@ html body .mjn-radical{
  position:relative!important;
 }
 html body .mjn-radical>.mjn-radical-sign{
- display:inline-block!important;align-self:auto!important;position:static!important;
+ display:inline-block!important;align-self:auto!important;position:relative!important;z-index:1!important;
  font-family:"Cambria Math","STIX Two Math","DejaVu Sans",serif!important;
  font-size:1.16em!important;font-weight:400!important;line-height:1!important;
  padding:0!important;margin:0 -.035em 0 0!important;transform:none!important;
 }
 html body .mjn-radical>.mjn-radical-content{
  display:inline-flex!important;align-items:center!important;align-self:auto!important;
- border-top:1.5px solid currentColor!important;
- padding:.025em .08em 0 .025em!important;margin:.12em 0 0 0!important;
- line-height:1.15!important;min-width:max-content!important;position:static!important;
+ border-top:0!important;padding:.025em .08em 0 .025em!important;
+ margin:0!important;line-height:1.15!important;min-width:max-content!important;position:static!important;
 }
-html body .mjn-radical::after{content:none!important;display:none!important}
+html body .mjn-radical::after{
+ content:""!important;display:block!important;position:absolute!important;z-index:2!important;
+ left:.34em!important;right:0!important;top:.105em!important;
+ border-top:1.5px solid currentColor!important;height:0!important;pointer-events:none!important;
+}
 html body .mjn-radical-content .fr,html body .mjn-radical-content>.fr{
  display:inline-flex!important;flex:0 0 auto!important;flex-direction:column!important;
  align-items:stretch!important;justify-content:center!important;border-top:0!important;
