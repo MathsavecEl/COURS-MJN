@@ -480,29 +480,30 @@ html body .rac,html body .rad,html body .sq{vertical-align:middle!important;whit
 
 <!-- Correctif final : barre de radical solidaire du signe √ -->
 <style id="mjn-radical-connected-bar">
+/* Radical typographique : le trait rejoint la pointe du signe, sans flotter au-dessus. */
 html body .mjn-radical{
  position:relative!important;display:inline-flex!important;align-items:stretch!important;
  vertical-align:middle!important;white-space:nowrap!important;line-height:1.18!important;
- padding-top:.08em!important;margin:0 .07em!important;
+ padding-top:.02em!important;margin:0 .07em!important;
 }
 html body .mjn-radical>.mjn-radical-sign{
  position:relative!important;z-index:1!important;display:inline-flex!important;
  align-items:flex-end!important;align-self:stretch!important;
  font-family:"Cambria Math","STIX Two Math","DejaVu Sans",serif!important;
- font-size:1.42em!important;font-weight:400!important;line-height:.92!important;
- padding:0!important;margin:0 -.015em -.035em 0!important;
- transform:scaleY(1.06)!important;transform-origin:bottom left!important;
+ font-size:1.38em!important;font-weight:400!important;line-height:.92!important;
+ padding:0!important;margin:0 -.045em -.035em 0!important;
+ transform:none!important;
 }
 html body .mjn-radical>.mjn-radical-content{
  position:relative!important;display:inline-flex!important;align-items:center!important;
  align-self:stretch!important;border-top:0!important;
- padding:.18em .09em .02em .06em!important;margin:0!important;
+ padding:.26em .09em .02em .02em!important;margin:0!important;
  line-height:1.18!important;min-width:max-content!important;
 }
 html body .mjn-radical::after{
  content:""!important;position:absolute!important;display:block!important;
- left:.57em!important;right:0!important;top:.075em!important;
- border-top:1.6px solid currentColor!important;height:0!important;
+ left:.43em!important;right:0!important;top:.29em!important;
+ border-top:1.5px solid currentColor!important;height:0!important;
  pointer-events:none!important;
 }
 html body .mjn-radical-content .fr,html body .mjn-radical-content>.fr{
