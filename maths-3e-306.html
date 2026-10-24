@@ -3869,7 +3869,7 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
    if(found){frag.append(document.createTextNode(s.slice(last)));node.parentNode&&node.parentNode.replaceChild(frag,node)}
   }
  }
- function run(){const root=document.querySelector('main')||document.body;if(!root)return;root.querySelectorAll('.formula,.exemple,.box').forEach(el=>{const h=el.innerHTML;const v=h.replace(/\^<i>([^<]+)<\\/i>/g,'<sup><i>$1</i></sup>');if(v!==h)el.innerHTML=v});polish(root)}
+ function run(){const root=document.querySelector('main')||document.body;if(!root)return;root.querySelectorAll('.formula,.exemple,.box').forEach(el=>{const h=el.innerHTML;const v=h.replace(/\^<i>([^<]+)<\/i>/g,'<sup><i>$1</i></sup>');if(v!==h)el.innerHTML=v});polish(root)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
  const root=document.querySelector('main')||document.body;
  new MutationObserver(()=>run()).observe(root,{childList:true,subtree:true});
