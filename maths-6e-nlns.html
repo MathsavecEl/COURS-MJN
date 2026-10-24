@@ -127,7 +127,7 @@ sub{font-size:.70em!important;line-height:0!important;vertical-align:sub!importa
    if(found){frag.append(document.createTextNode(s.slice(last)));node.parentNode&&node.parentNode.replaceChild(frag,node)}
   }
  }
- function run(){polish(document.querySelector('main')||document.body)}
+ function run(){const root=document.querySelector('main')||document.body;if(!root)return;root.querySelectorAll('.formula,.exemple,.box').forEach(el=>{const h=el.innerHTML;const v=h.replace(/\^<i>([^<]+)<\\/i>/g,'<sup><i>$1</i></sup>');if(v!==h)el.innerHTML=v});polish(root)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
  const root=document.querySelector('main')||document.body;
  new MutationObserver(()=>run()).observe(root,{childList:true,subtree:true});
