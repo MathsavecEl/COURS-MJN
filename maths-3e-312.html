@@ -388,6 +388,17 @@ html body .mjn-angle3::before,html body .mjn-angle-notation::before,html body .h
 .mjn-home-float:hover,.mjn-home-float:focus-visible{background:#a91f1f!important;color:#fff!important;outline:3px solid #f5c451!important;outline-offset:2px!important}
 @media print{.mjn-home-float{display:none!important}}
 </style>
+<style id="mjn-math-polish-css">
+/* MJN COURS — typographie mathématique claire, sans zéros barrés */
+:root{--f-display:Arial,"Segoe UI",sans-serif!important;--f-body:Arial,"Segoe UI",sans-serif!important}
+html,body{font-family:Arial,"Segoe UI",sans-serif!important;font-variant-numeric:normal!important;font-feature-settings:"zero" 0!important;font-kerning:normal}
+body,body *{font-feature-settings:"zero" 0!important}
+sup{font-size:.70em!important;line-height:0!important;vertical-align:super!important;position:static!important}
+sub{font-size:.70em!important;line-height:0!important;vertical-align:sub!important;position:static!important}
+.formula,.math,.maths,.eq,.equation,.m,.fr{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif!important;font-feature-settings:"zero" 0!important}
+/* Exemples et propriétés : lecture sobre, proche d'un manuel */
+.box,.card,.panel{font-variant-numeric:normal}
+</style>
 </head>
 <body>
 <header class="top">
@@ -3606,7 +3617,33 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
   const e=EV.e,esc=s=>String(s||'');
   const html=e.parties.map((p,i)=>'<section class="partie"><h2>Partie '+(i+1)+' — '+esc(p.nom)+'</h2>'+(p.ctx?'<div class="contexte">'+p.ctx+'</div>':'')+p.qs.map((q,j)=>'<article><p><b>'+(j+1)+'.</b> '+q.q+'</p>'+(q.fig?'<div class="figure">'+q.fig+'</div>':'')+'<ol type="A">'+q.c.map(a=>'<li>'+a+'</li>').join('')+'</ol>'+(corr?'<p class="reponse"><b>Réponse :</b> '+q.c[0]+'</p><div class="correction">'+q.e+'</div>':'<p class="ligne">Réponse : ____________________________________</p><p class="ligne">____________________________________________</p>')).join('')+'</section>').join('');
   const w=window.open('','_blank');if(!w){alert('Autorise les fenêtres contextuelles pour imprimer.');return}
-  w.document.write('<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>'+esc(e.titre)+'</title><style>body{font:12pt Arial,sans-serif;line-height:1.45;max-width:800px;margin:25px auto;color:#111}h1{font-size:22pt}h2{font-size:15pt;border-bottom:1px solid #aaa;padding-bottom:5px}.partie{margin:22px 0}.contexte{border:1px solid #888;background:#f5f5f5;padding:12px;margin:12px 0;break-inside:avoid}.prog{border:1px solid #777;border-left:5px solid #3457a5;padding:10px 14px;margin:8px 0;background:#f5f7ff}.scr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0;align-items:start}.scr>div{border:1px solid #bbb;border-radius:8px;padding:10px;break-inside:avoid}.sp{font-weight:bold;margin-bottom:8px}.blk{display:block;width:fit-content;max-width:100%;padding:7px 10px;margin:3px 0;border-radius:7px;font-weight:bold;border:1px solid #777;overflow-wrap:anywhere}.blk.ev{background:#ffcf5a}.blk.se{background:#ffbf8f}.blk.va{background:#ff8dca}.blk.lo{background:#9bdb65}.blk .o{display:inline-block;background:#fff;border:1px solid #777;border-radius:12px;padding:1px 6px}.blk .r{display:inline-block;background:#ffed80;border:1px solid #777;border-radius:12px;padding:1px 6px}.blk .op{display:inline-block;background:#fff;border:1px solid #777;border-radius:6px;padding:2px 5px}.figure{margin:8px 0;max-width:100%;overflow:visible}.figure svg{display:block;max-width:100%;height:auto}.figure table{border-collapse:collapse;width:auto;max-width:100%}.figure td,.figure th{border:1px solid #777;padding:5px 8px}.figure .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.9em;line-height:1.2}.figure .fr span:first-child{border-bottom:1px solid #111}.correction{margin:6px 0 14px;padding:8px 10px;border-left:3px solid #27824b;background:#f0f8f2}.reponse{margin-top:12px}.ligne{min-height:20px;border-bottom:1px solid #bbb;margin:8px 0}.partie article{break-inside:avoid;margin:18px 0;padding-bottom:12px;border-bottom:1px solid #ddd}ol{padding-left:28px}li{margin:4px 0}@media(max-width:600px){.scr{grid-template-columns:1fr}}@media print{body{margin:0}.contexte,.scr>div,.prog{break-inside:avoid}}@page{size:A4;margin:15mm}</style></head><body><h1>'+esc(e.titre)+'</h1><p>Nom : ____________________ Date : __________ Durée : 45 min</p>'+html+'</body></html>');w.document.close();w.onload=()=>w.print()
+  w.document.write('<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>'+esc(e.titre)+'</title><style>body{font:12pt Arial,sans-serif;line-height:1.45;max-width:800px;margin:25px auto;color:#111}h1{font-size:22pt}h2{font-size:15pt;border-bottom:1px solid #aaa;padding-bottom:5px}.partie{margin:22px 0}.contexte{border:1px solid #888;background:#f5f5f5;padding:12px;margin:12px 0;break-inside:avoid}.prog{border:1px solid #777;border-left:5px solid #3457a5;padding:10px 14px;margin:8px 0;background:#f5f7ff}.scr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0;align-items:start}.scr>div{border:1px solid #bbb;border-radius:8px;padding:10px;break-inside:avoid}.sp{font-weight:bold;margin-bottom:8px}.blk{display:block;width:fit-content;max-width:100%;padding:7px 10px;margin:3px 0;border-radius:7px;font-weight:bold;border:1px solid #777;overflow-wrap:anywhere}.blk.ev{background:#ffcf5a}.blk.se{background:#ffbf8f}.blk.va{background:#ff8dca}.blk.lo{background:#9bdb65}.blk .o{display:inline-block;background:#fff;border:1px solid #777;border-radius:12px;padding:1px 6px}.blk .r{display:inline-block;background:#ffed80;border:1px solid #777;border-radius:12px;padding:1px 6px}.blk .op{display:inline-block;background:#fff;border:1px solid #777;border-radius:6px;padding:2px 5px}.figure{margin:8px 0;max-width:100%;overflow:visible}.figure svg{display:block;max-width:100%;height:auto}.figure table{border-collapse:collapse;width:auto;max-width:100%}.figure td,.figure th{border:1px solid #777;padding:5px 8px}.figure .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.9em;line-height:1.2}.figure .fr span:first-child{border-bottom:1px solid #111}.correction{margin:6px 0 14px;padding:8px 10px;border-left:3px solid #27824b;background:#f0f8f2}.reponse{margin-top:12px}.ligne{min-height:20px;border-bottom:1px solid #bbb;margin:8px 0}.partie article{break-inside:avoid;margin:18px 0;padding-bottom:12px;border-bottom:1px solid #ddd}ol{padding-left:28px}li{margin:4px 0}@media(max-width:600px){.scr{grid-template-columns:1fr}}@media print{body{margin:0}.contexte,.scr>div,.prog{break-inside:avoid}}@page{size:A4;margin:15mm}</style></head><body><h1>'+esc(e.titre)+'</h1><p>Nom : ____________________ Date : __________ Durée : 45 min</p>'+html+'
+<script id="mjn-math-polish">
+(()=>{
+ const skip='SCRIPT,STYLE,NOSCRIPT,TEXTAREA,INPUT,PRE,CODE,KBD,SAMP,SVG,SUP,SUB';
+ const re=/([A-Za-z0-9π)\]])\^(?:\{([^{}]+)\}|([−-]?[A-Za-z0-9]+))/g;
+ function polish(root){
+  if(!root)return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+   if(!n.nodeValue||n.nodeValue.indexOf('^')<0)return NodeFilter.FILTER_REJECT;
+   let p=n.parentElement;while(p){if(p.matches&&p.matches(skip))return NodeFilter.FILTER_REJECT;p=p.parentElement}
+   return NodeFilter.FILTER_ACCEPT;
+  }});
+  const nodes=[];let n;while((n=walker.nextNode()))nodes.push(n);
+  for(const node of nodes){
+   const s=node.nodeValue;re.lastIndex=0;let m,last=0,found=false;const frag=document.createDocumentFragment();
+   while((m=re.exec(s))){found=true;frag.append(document.createTextNode(s.slice(last,m.index)+m[1]));const exp=m[2]!==undefined?m[2]:m[3];const sup=document.createElement('sup');sup.textContent=exp;frag.append(sup);last=re.lastIndex;}
+   if(found){frag.append(document.createTextNode(s.slice(last)));node.parentNode&&node.parentNode.replaceChild(frag,node)}
+  }
+ }
+ function run(){polish(document.querySelector('main')||document.body)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+ const root=document.querySelector('main')||document.body;
+ new MutationObserver(()=>run()).observe(root,{childList:true,subtree:true});
+})();
+</script>
+
+</body></html>');w.document.close();w.onload=()=>w.print()
  }
  evMenu=function(){menu0();addOptions()};
  evStart=function(list,key,label){
