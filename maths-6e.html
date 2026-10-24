@@ -364,6 +364,36 @@ html body .sq>.rad>.fr,html body .sq>.rad>.fr>span{box-sizing:content-box!import
 }
 </style>
 
+
+<!-- Racines carrées : signe et barre du radical correctement raccordés -->
+<style id="mjn-radical-typesetting-final">
+html body .mjn-radical{
+ display:inline-flex!important;align-items:stretch!important;vertical-align:middle!important;
+ white-space:nowrap!important;line-height:1.25!important;max-width:100%;margin:0 .06em!important;
+}
+html body .mjn-radical-sign{
+ display:inline-flex!important;align-items:flex-end!important;align-self:stretch!important;
+ font-family:"Cambria Math","STIX Two Math","DejaVu Sans",serif!important;
+ font-size:1.08em!important;line-height:1!important;padding:0!important;margin:0 -.015em 0 0!important;
+}
+html body .mjn-radical-content{
+ display:inline-flex!important;align-items:center!important;align-self:stretch!important;
+ border-top:1.6px solid currentColor!important;padding:.13em .08em 0 .06em!important;
+ margin:.02em 0 0 0!important;line-height:1.18!important;min-width:max-content!important;
+}
+html body .mjn-radical-content .fr,html body .mjn-radical-content>.fr{
+ display:inline-flex!important;flex:0 0 auto!important;flex-direction:column!important;
+ align-items:stretch!important;justify-content:center!important;border-top:0!important;
+ padding:0!important;margin:0 .04em!important;line-height:1.1!important;
+}
+html body .mjn-radical-content .fr>span:first-child{
+ display:block!important;border-bottom:1.3px solid currentColor!important;padding:0 .18em .07em!important;
+}
+html body .mjn-radical-content .fr>span:last-child{display:block!important;padding:.07em .18em 0!important}
+html body .rac,html body .rad,html body .sq{vertical-align:middle!important;white-space:nowrap!important}
+@media print{html body .mjn-radical{break-inside:avoid!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
+
 </head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '6e', classe: '6ème', court: '6e', titre: 'Maths en 6ème', prof: 'Enseignant', mail: 'mathsclavie20@gmail.com',
@@ -411,7 +441,7 @@ function tex(src){
     if (ch === '\\'){
       const m = /^\\([a-zA-Z]+|.)/.exec(s.slice(i)); i += m[0].length; const c = m[1];
       if (c === 'frac' || c === 'dfrac'){ const a = group(), b = group(); return `<span class="fr"><span class="nu">${a}</span><span class="de">${b}</span></span>`; }
-      if (c === 'sqrt') return `<span class="sq">√<span class="rad">${group()}</span></span>`;
+      if (c === 'sqrt') return `<span class="sq mjn-radical"><span class="mjn-radical-sign">√</span><span class="rad mjn-radical-content">${group()}</span></span>`;
       if (c === 'vec') return `<span class="vec">${group()}</span>`;
       if (c === 'widehat' || c === 'hat') return `<span class="mjn-angle3">${group()}</span>`;
       if (c === 'overline' || c === 'bar') return `<span class="ovl">${group()}</span>`;
