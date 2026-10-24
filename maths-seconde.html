@@ -301,6 +301,17 @@ html body .mjn-angle3::before,html body .mjn-angle-notation::before,html body .h
 .mjn-home-float:hover,.mjn-home-float:focus-visible{background:#a91f1f!important;color:#fff!important;outline:3px solid #f5c451!important;outline-offset:2px!important}
 @media print{.mjn-home-float{display:none!important}}
 </style>
+<style id="mjn-math-polish-css">
+/* MJN COURS — typographie mathématique claire, sans zéros barrés */
+:root{--f-display:Arial,"Segoe UI",sans-serif!important;--f-body:Arial,"Segoe UI",sans-serif!important}
+html,body{font-family:Arial,"Segoe UI",sans-serif!important;font-variant-numeric:normal!important;font-feature-settings:"zero" 0!important;font-kerning:normal}
+body,body *{font-feature-settings:"zero" 0!important}
+sup{font-size:.70em!important;line-height:0!important;vertical-align:super!important;position:static!important}
+sub{font-size:.70em!important;line-height:0!important;vertical-align:sub!important;position:static!important}
+.formula,.math,.maths,.eq,.equation,.m,.fr{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif!important;font-feature-settings:"zero" 0!important}
+/* Exemples et propriétés : lecture sobre, proche d'un manuel */
+.box,.card,.panel{font-variant-numeric:normal}
+</style>
 </head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '2nde', classe: 'Seconde', court: '2de', titre: 'Maths en Seconde', prof: 'M AHA MAJANI', mail: 'mathsclavie20@gmail.com',
@@ -2961,4 +2972,30 @@ html body .sq>.rad>.fr>.nu{border-bottom:1.4px solid currentColor!important;padd
 html body .sq>.rad>.fr>.de{padding:.08em .2em 0!important}
 html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important}
 </style>
+
+<script id="mjn-math-polish">
+(()=>{
+ const skip='SCRIPT,STYLE,NOSCRIPT,TEXTAREA,INPUT,PRE,CODE,KBD,SAMP,SVG,SUP,SUB';
+ const re=/([A-Za-z0-9π)\]])\^(?:\{([^{}]+)\}|([−-]?[A-Za-z0-9]+))/g;
+ function polish(root){
+  if(!root)return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+   if(!n.nodeValue||n.nodeValue.indexOf('^')<0)return NodeFilter.FILTER_REJECT;
+   let p=n.parentElement;while(p){if(p.matches&&p.matches(skip))return NodeFilter.FILTER_REJECT;p=p.parentElement}
+   return NodeFilter.FILTER_ACCEPT;
+  }});
+  const nodes=[];let n;while((n=walker.nextNode()))nodes.push(n);
+  for(const node of nodes){
+   const s=node.nodeValue;re.lastIndex=0;let m,last=0,found=false;const frag=document.createDocumentFragment();
+   while((m=re.exec(s))){found=true;frag.append(document.createTextNode(s.slice(last,m.index)+m[1]));const exp=m[2]!==undefined?m[2]:m[3];const sup=document.createElement('sup');sup.textContent=exp;frag.append(sup);last=re.lastIndex;}
+   if(found){frag.append(document.createTextNode(s.slice(last)));node.parentNode&&node.parentNode.replaceChild(frag,node)}
+  }
+ }
+ function run(){polish(document.querySelector('main')||document.body)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+ const root=document.querySelector('main')||document.body;
+ new MutationObserver(()=>run()).observe(root,{childList:true,subtree:true});
+})();
+</script>
+
 </body></html>
