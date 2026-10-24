@@ -497,7 +497,7 @@ Une erreur, un blocage ? Écrivez-moi : <a href="mailto:mathsclavie20@gmail.com"
 const F = (n, d) => `<span class="fr"><span>${n}</span><span>${d}</span></span>`;
 const R = s => `<span class="rad">√<span>${s}</span></span>`;
 const V = s => { const n = String(s).normalize('NFD'); return n.includes('\u0302') ? '<span class="mjn-angle-notation">' + n.replace(/\u0302/g, '') + '</span>' : '<i>' + s + '</i>'; };
-const fmt = s => String(s).replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>').replace(/\^(−?-?\d+|[a-zA-Z])/g, '<sup>$1</sup>');
+const fmt = s => String(s).replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>').replace(/\^(−?-?\d+|[a-zA-Z])/g, '<sup>$1</sup>').replace(/\^<i>([^<]+)<\/i>/g, '<sup><i>$1</i></sup>');
 
 /* nombre en écriture française : virgule, espace des milliers, signe − */
 function nf(v, dec) {
