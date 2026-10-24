@@ -140,6 +140,46 @@ html body .rac,html body .rad,html body .sq{vertical-align:middle!important;whit
 @media print{html body .mjn-radical{break-inside:avoid!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 </style>
 
+
+<!-- Correctif final : barre de radical solidaire du signe √ -->
+<style id="mjn-radical-connected-bar">
+html body .mjn-radical{
+ position:relative!important;display:inline-flex!important;align-items:stretch!important;
+ vertical-align:middle!important;white-space:nowrap!important;line-height:1.18!important;
+ padding-top:.08em!important;margin:0 .07em!important;
+}
+html body .mjn-radical>.mjn-radical-sign{
+ position:relative!important;z-index:1!important;display:inline-flex!important;
+ align-items:flex-end!important;align-self:stretch!important;
+ font-family:"Cambria Math","STIX Two Math","DejaVu Sans",serif!important;
+ font-size:1.42em!important;font-weight:400!important;line-height:.92!important;
+ padding:0!important;margin:0 -.015em -.035em 0!important;
+ transform:scaleY(1.06)!important;transform-origin:bottom left!important;
+}
+html body .mjn-radical>.mjn-radical-content{
+ position:relative!important;display:inline-flex!important;align-items:center!important;
+ align-self:stretch!important;border-top:0!important;
+ padding:.18em .09em .02em .06em!important;margin:0!important;
+ line-height:1.18!important;min-width:max-content!important;
+}
+html body .mjn-radical::after{
+ content:""!important;position:absolute!important;display:block!important;
+ left:.57em!important;right:0!important;top:.075em!important;
+ border-top:1.6px solid currentColor!important;height:0!important;
+ pointer-events:none!important;
+}
+html body .mjn-radical-content .fr,html body .mjn-radical-content>.fr{
+ display:inline-flex!important;flex:0 0 auto!important;flex-direction:column!important;
+ align-items:stretch!important;justify-content:center!important;border-top:0!important;
+ padding:0!important;margin:0 .04em!important;line-height:1.1!important;
+}
+html body .mjn-radical-content .fr>span:first-child{
+ display:block!important;border-bottom:1.3px solid currentColor!important;padding:0 .18em .07em!important;
+}
+html body .mjn-radical-content .fr>span:last-child{display:block!important;padding:.07em .18em 0!important}
+@media print{html body .mjn-radical{break-inside:avoid!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
+
 </head>
 <body>
 <header class="hero"><h1>Mathématiques en 6e NLNS</h1></header>
