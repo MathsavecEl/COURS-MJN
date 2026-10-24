@@ -97,7 +97,7 @@
   $('surtitre').innerHTML = [SITE.enseignant, SITE.matiere, SITE.etablissement].filter(Boolean).map(t => `<span>${echap(t)}</span>`).join('');
   $('pied').textContent = [SITE.enseignant ? '© ' + new Date().getFullYear() + ' ' + SITE.enseignant : '', SITE.etablissement, SITE.droits, 'Site hébergé avec GitHub Pages'].filter(Boolean).join(' · ');
 
-  $('apropos').innerHTML = (SITE.aPropos || []).map(t => `<p>${echap(t)}</p>`).join('');
+  $('apropos').innerHTML = (SITE.aPropos || []).map((t, i) => i === 1 ? `<div class="programmes-box"><h4><span aria-hidden="true">🎓</span> Programmes</h4><p>${echap(t.replace(/^Programmes\s*:\s*/, ''))}</p></div>` : `<p>${echap(t)}</p>`).join('');
   if (SITE.signature) $('apropos').innerHTML += `<p class="signature">${echap(SITE.signature)}</p>`;
   if (SITE.blague) $('pied').innerHTML += `<p class="blague-bas"><span aria-hidden="true">😄</span>${echap(SITE.blague)}</p>`;
   if (SITE.email) {
