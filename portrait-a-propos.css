@@ -1,1 +1,124 @@
-.apropos-corps{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr);align-items:start;gap:24px}.portrait-prof{margin:4px 0 12px}.portrait-prof img{display:block;width:100%;max-width:220px;max-height:360px;object-fit:cover;object-position:center 24%;aspect-ratio:4/5;border-radius:18px;border:1px solid var(--bord);box-shadow:var(--ombre)}.portrait-prof figcaption{margin-top:9px;color:var(--doux);font-size:.9rem;font-weight:600}@media(max-width:560px){.apropos-corps{grid-template-columns:1fr;gap:14px}.portrait-prof{max-width:220px;margin-inline:auto}.portrait-prof img{max-height:320px}}
+/* Présentation À propos : portrait net, texte hiérarchisé et couleurs sobres */
+.a-propos {
+  display: block !important;
+  margin-top: 34px !important;
+  padding: clamp(18px, 3vw, 34px) !important;
+  background: linear-gradient(145deg, #ffffff 0%, #f5faff 100%) !important;
+  border: 1px solid #dceafa !important;
+  border-radius: 24px !important;
+  box-shadow: 0 12px 34px rgba(20, 55, 100, .08) !important;
+  color: #15335f !important;
+}
+.a-propos h2 {
+  color: #12366e !important;
+  font-size: clamp(1.65rem, 3vw, 2.15rem) !important;
+  margin: 0 0 22px !important;
+}
+.apropos-corps {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(22px, 3vw, 38px);
+}
+.portrait-prof { margin: 0; min-width: 0; }
+.portrait-prof img {
+  display: block;
+  width: 100%;
+  max-width: 390px;
+  max-height: 600px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 20px;
+  border: 1px solid #d9e7f7;
+  box-shadow: 0 10px 28px rgba(18, 54, 110, .14);
+  image-rendering: auto;
+}
+.portrait-prof figcaption {
+  margin-top: 10px;
+  color: #526987;
+  font-size: .92rem;
+  line-height: 1.45;
+}
+.apropos-texte { min-width: 0; }
+.apropos-nom {
+  margin: 0 0 5px;
+  color: #12366e;
+  font-size: clamp(1.35rem, 2.7vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -.025em;
+}
+.apropos-metier {
+  margin: 0 0 22px !important;
+  color: #0875e1 !important;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 600;
+}
+.apropos-metier::after {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 3px;
+  margin-top: 15px;
+  border-radius: 99px;
+  background: #d8e8fb;
+}
+.a-propos #apropos p {
+  color: #1b345b !important;
+  font-size: clamp(.98rem, 1.4vw, 1.08rem);
+  line-height: 1.8;
+  max-width: 68ch;
+  margin: 0 0 14px !important;
+}
+.programmes-box {
+  margin: 22px 0 25px;
+  padding: 20px 22px;
+  border: 1px solid #d9eafb;
+  border-radius: 17px;
+  background: #eaf4ff;
+}
+.programmes-box h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  color: #0875e1;
+  font-size: 1.2rem;
+}
+.programmes-box h4 span { font-size: 1.35rem; }
+.a-propos #apropos .programmes-box p {
+  margin: 0 !important;
+  line-height: 1.7;
+}
+.a-propos p.signature {
+  display: inline-block;
+  position: relative;
+  margin: 12px 0 8px !important;
+  padding: 0 4px 13px;
+  color: #1253b7 !important;
+  font-family: "Caveat", "Segoe Script", cursive;
+  font-size: clamp(1.5rem, 2.7vw, 2.2rem) !important;
+  line-height: 1.25 !important;
+  font-weight: 600;
+  transform: rotate(-2deg);
+}
+.a-propos p.signature::after {
+  content: "";
+  position: absolute;
+  left: 22%;
+  bottom: 1px;
+  width: 62%;
+  height: 4px;
+  border-radius: 100%;
+  background: #2ebd59;
+  transform: rotate(-4deg);
+}
+@media (max-width: 720px) {
+  .a-propos { padding: 18px !important; }
+  .apropos-corps { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .portrait-prof { max-width: 310px; margin: 0 auto; width: 100%; }
+  .portrait-prof img { max-height: 440px; aspect-ratio: 3 / 4; object-position: center 22%; }
+  .apropos-texte { width: 100%; }
+  .programmes-box { padding: 16px; }
+  .a-propos p.signature { font-size: 1.7rem !important; }
+}
