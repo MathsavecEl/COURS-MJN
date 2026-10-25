@@ -4818,7 +4818,7 @@ function waitForFrenchVoice() {
 }
 function speakText(el) {
   const c = el.cloneNode(true);
-  c.querySelectorAll('svg, button, .say, input, .unit, .ans-prof').forEach(x => x.remove());
+  c.querySelectorAll('svg, button, .say, input, .unit, .ans-prof, .corr, .fb, .hint, [hidden], [aria-hidden="true"]').forEach(x => x.remove());
   c.querySelectorAll('.fr').forEach(f => { const [a, b] = f.children; f.replaceWith(` ${a ? a.textContent : ''} sur ${b ? b.textContent : ''} `); });
   c.querySelectorAll('sup').forEach(s => s.replaceWith(s.textContent === '2' ? ' au carré ' : s.textContent === '3' ? ' au cube ' : ' puissance ' + s.textContent + ' '));
   c.querySelectorAll('td, th, li, p, div, br').forEach(x => x.after('. '));
@@ -4848,7 +4848,7 @@ async function speak(btn) {
     alert('Aucune voix française n’est disponible pour le moment. Sur Android, ouvre les paramètres de synthèse vocale et installe/active une voix française, puis réessaie. Le site ne lancera pas une voix anglaise à la place.');
     return;
   }
-  const zone = btn.closest('.box, .q, .ex-e, .qz, .rap, .sayzone') || btn.parentElement;
+  const zone = btn.closest('.hint, .qt, .box, .ex-e, .qz, .rap, .sayzone') || btn.parentElement;
   const parts = (speakText(zone).match(/[^.!?;:]+[.!?;:]*/g) || []).map(p => p.trim()).filter(Boolean);
   if (!parts.length) { stopSpeak(); return; }
   btn.classList.add('on'); btn.textContent = '⏹ Arrêter';
