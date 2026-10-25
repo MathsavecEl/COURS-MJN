@@ -22,7 +22,7 @@
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(function (node) {
       var value = node.nodeValue;
-      var re = /(^|[^A-Za-zÀ-ÿ0-9])([xX])(?=$|[^A-Za-zÀ-ÿ0-9])/g;
+      var re = /(^|[^A-Za-zÀ-ÿ])([xX])(?=$|[^A-Za-zÀ-ÿ])/g;
       var last = 0, match, frag = document.createDocumentFragment(), found = false;
       while ((match = re.exec(value))) {
         found = true;
