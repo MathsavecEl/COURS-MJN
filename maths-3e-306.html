@@ -4127,8 +4127,7 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
 
 <!-- MJN COURS : distinction typographique entre la variable x et le signe × -->
 <style id="mjn-variable-x-style">.mjn-variable-x{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif!important;font-style:italic!important;font-weight:400!important}</style>
-<script id="mjn-variable-x-math">
-(function(){
+<script id="mjn-variable-x-math">(function(){
  const zones='.formula,.math,.maths,.eq,.equation,.m,.fr,.ev,.cours,.contenu-cours,.question,.correction,.lesson,.lesson-content,.chapter-content';
  const excluded=new Set(['SCRIPT','STYLE','TEXTAREA','INPUT','CODE','PRE','BUTTON','OPTION','SUP','SUB']);
  function traiter(zone){
@@ -4141,7 +4140,7 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
    if(!skip)nodes.push(n);
   }
   nodes.forEach(n=>{
-   const parts=n.nodeValue.split(/(^|[^A-Za-z])x(?=$|[^A-Za-z])/g);
+   const parts=n.nodeValue.split(/(^|[^A-Za-z])(x)(?=$|[^A-Za-z])/g);
    if(!parts.some(v=>v==='x'))return;
    const frag=document.createDocumentFragment();
    parts.forEach(part=>{if(part==='x'){const s=document.createElement('i');s.className='mjn-variable-x';s.textContent='x';frag.appendChild(s)}else if(part)frag.appendChild(document.createTextNode(part))});
@@ -4152,8 +4151,7 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
  function start(){scan(document.body)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)scan(n);else if(n.nodeType===3&&n.parentElement){const z=n.parentElement.closest(zones);if(z)traiter(z)}}))).observe(document.documentElement,{childList:true,subtree:true});
-})();
-</script>
+})();</script>
 
 </body>
 </html>
