@@ -4879,7 +4879,7 @@ function qHTML(q) {
   return `<li class="q${done ? ' qdone' : ''}" id="q-${q.id}"><div class="qt">${fmt(q.q)} ${SAY}</div><div class="qa">${inp}</div>
     <div class="fb" aria-live="polite">${done ? '<span class="ok">✓ Déjà réussie</span>' : ''}</div>
     <div class="qbtns"><button type="button" class="lnk hintb show" data-q="${q.id}">💡 Coup de pouce${H.length > 1 ? ` (1/${H.length})` : ''}</button><button type="button" class="lnk corrb" data-q="${q.id}">Voir la correction</button></div>
-    <div class="hint" hidden data-n="0">${H.map((h, i) => `<span class="hn"${i ? ' hidden' : ''}><b class="hl">Indice ${H.length > 1 ? i + 1 : ''} :</b> ${fmt(h)}</span>`).join('')}</div>
+    <div class="hint" hidden data-n="0">${H.map((h, i) => `<span class="hn"${i ? ' hidden' : ''}><b class="hl">Indice ${H.length > 1 ? i + 1 : ''} :</b> ${fmt(h)} ${SAY}</span>`).join('')}</div>
     <div class="corr" hidden><span class="ct">Correction</span><p>${fmt(q.c)}</p><p class="ans-prof">Réponse attendue : <b>${fmt(ansText(q))}</b></p></div></li>`;
 }
 function exHTML(ex, n, pre) {
