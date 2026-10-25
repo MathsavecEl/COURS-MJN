@@ -5590,5 +5590,39 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
 <script src="focus-mode.js?v=1"></script>
 
 <script src="mjn-math-typography.js?v=1"></script>
+
+<!-- MJN COURS : variables x en véritable italique mathématique, sans toucher au signe × -->
+<script id="mjn-variable-x-math">
+(function(){
+  const zones = '.formula,.math,.maths,.eq,.equation,.m,.fr,.ev,.cours,.contenu-cours,.question,.correction';
+  const exclusions = new Set(['SCRIPT','STYLE','TEXTAREA','INPUT','CODE','PRE','BUTTON','OPTION']);
+  function corriger(racine){
+    if(!racine || !racine.querySelectorAll) return;
+    const candidats = [];
+    if(racine.nodeType === 1 && racine.matches && racine.matches(zones)) candidats.push(racine);
+    candidats.push(...racine.querySelectorAll(zones));
+    candidats.forEach(zone=>{
+      const walker=document.createTreeWalker(zone,NodeFilter.SHOW_TEXT);
+      const noeuds=[];
+      while(walker.nextNode()){
+        const n=walker.currentNode;
+        if(!n.nodeValue || !/\bx\b/.test(n.nodeValue)) continue;
+        let p=n.parentElement, interdit=false;
+        while(p && p!==zone.parentElement){
+          if(exclusions.has(p.tagName) || p.isContentEditable){interdit=true;break;}
+          p=p.parentElement;
+        }
+        if(!interdit) noeuds.push(n);
+      }
+      noeuds.forEach(n=>{n.nodeValue=n.nodeValue.replace(/\bx\b/g,'𝑥');});
+    });
+  }
+  function lancer(){corriger(document.body);}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',lancer,{once:true}); else lancer();
+  const observer=new MutationObserver(mutations=>mutations.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1) corriger(n); else if(n.nodeType===3 && n.parentElement && n.parentElement.closest(zones)) corriger(n.parentElement.closest(zones));})));
+  observer.observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
 </body>
 </html>
