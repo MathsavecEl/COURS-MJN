@@ -520,6 +520,20 @@ html body .mjn-radical-content .fr>span:last-child{display:block!important;paddi
 @media print{html body .mjn-radical{break-inside:avoid!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 </style>
 
+
+<!-- MJN : ajuste la longueur de la barre pour qu'elle s'arrête au bord du radicande -->
+<style id="mjn-radical-right-edge">
+html body .mjn-radical>.mjn-radical-content{
+  padding-right:0!important;
+  margin-right:0!important;
+  box-sizing:border-box!important;
+}
+html body .mjn-radical-content .fr,
+html body .mjn-radical-content>.fr{
+  margin-right:0!important;
+}
+</style>
+
 </head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '2nde', classe: 'Seconde', court: '2de', titre: 'Maths en Seconde', prof: 'M AHA MAJANI', mail: 'mathsclavie20@gmail.com',
