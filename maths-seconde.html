@@ -3246,4 +3246,35 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
 <script src="focus-mode.js?v=1"></script>
 
 <script src="mjn-math-typography.js?v=1"></script>
+
+<!-- MJN COURS : distinction typographique entre la variable x et le signe × -->
+<style id="mjn-variable-x-style">.mjn-variable-x{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif!important;font-style:italic!important;font-weight:400!important}</style>
+<script id="mjn-variable-x-math">
+(function(){
+ const zones='.formula,.math,.maths,.eq,.equation,.m,.fr,.ev,.cours,.contenu-cours,.question,.correction,.lesson,.lesson-content,.chapter-content';
+ const excluded=new Set(['SCRIPT','STYLE','TEXTAREA','INPUT','CODE','PRE','BUTTON','OPTION','SUP','SUB']);
+ function traiter(zone){
+  if(!zone||zone.nodeType!==1)return;
+  const w=document.createTreeWalker(zone,NodeFilter.SHOW_TEXT),nodes=[];
+  while(w.nextNode()){
+   const n=w.currentNode;if(!new RegExp('(^|[^A-Za-z])x($|[^A-Za-z])').test(n.nodeValue||''))continue;
+   let p=n.parentElement,skip=false;
+   while(p&&p!==zone){if(excluded.has(p.tagName)||p.classList.contains('mjn-variable-x')){skip=true;break}p=p.parentElement}
+   if(!skip)nodes.push(n);
+  }
+  nodes.forEach(n=>{
+   const parts=n.nodeValue.split(/(^|[^A-Za-z])x(?=$|[^A-Za-z])/g);
+   if(!parts.some(v=>v==='x'))return;
+   const frag=document.createDocumentFragment();
+   parts.forEach(part=>{if(part==='x'){const s=document.createElement('i');s.className='mjn-variable-x';s.textContent='x';frag.appendChild(s)}else if(part)frag.appendChild(document.createTextNode(part))});
+   n.parentNode.replaceChild(frag,n);
+  });
+ }
+ function scan(root){if(!root||root.nodeType!==1)return;if(root.matches(zones))traiter(root);root.querySelectorAll(zones).forEach(traiter)}
+ function start(){scan(document.body)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+ new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)scan(n);else if(n.nodeType===3&&n.parentElement){const z=n.parentElement.closest(zones);if(z)traiter(z)}}))).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
 </body></html>
