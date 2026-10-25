@@ -518,6 +518,28 @@ html body .mjn-radical-content>.fr{
 }
 </style>
 
+
+<!-- MJN : barre de racine dessinée indépendamment du contenu pour éviter tout dépassement à droite -->
+<style id="mjn-radical-bar-end-20261025">
+html body .mjn-radical>.mjn-radical-content{
+  border-top:0!important;
+  position:relative!important;
+  padding-right:0!important;
+  margin-right:0!important;
+}
+html body .mjn-radical>.mjn-radical-content::before{
+  content:""!important;
+  position:absolute!important;
+  display:block!important;
+  left:.02em!important;
+  right:.10em!important;
+  top:0!important;
+  height:0!important;
+  border-top:1.5px solid currentColor!important;
+  pointer-events:none!important;
+}
+</style>
+
 </head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '6e', classe: '6ème', court: '6e', titre: 'Maths en 6ème', prof: 'Enseignant', mail: 'mathsclavie20@gmail.com',
