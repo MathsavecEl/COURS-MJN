@@ -93,7 +93,7 @@
     var root = document.getElementById('app') || document.getElementById('main');
     if (!root) return;
     var old = root.querySelector(':scope > .mjn-focus-return');
-    if (old) old.remove();
+    if (old) return;
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'mjn-focus-return';
     b.innerHTML = '<span aria-hidden="true">←</span><span>Retour</span>';
