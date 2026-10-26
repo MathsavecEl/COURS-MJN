@@ -36,6 +36,44 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%233d4bd8'/><path d='M18 20h18a10 10 0 0 1 10 10v16H28a10 10 0 0 1-10-10z' fill='white'/></svg>">
 <link rel="stylesheet" href="style.css?v=22">
 <link rel="stylesheet" href="portrait-a-propos.css?v=2">
+<!-- MJN COURS : moteur LaTeX pour les expressions encadrées par \(...\) et \[...\] -->
+<script>
+window.MathJax = {
+ tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]'], ['$$','$$']], processEscapes: true },
+ options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code','annotation','annotation-xml'] },
+ chtml: { scale: 1, matchFontHeight: false, mtextInheritFont: true },
+ startup: { typeset: true }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style id="mjn-latex-rendering">
+.MathJax, mjx-container { font-size: 1.04em; color: inherit; }
+mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidden; max-width:100%; padding:.22em .05em .3em; margin:.45em 0; }
+@media(max-width:600px){mjx-container[display="true"]{font-size:.96em}}
+@media print{mjx-container{color:#111!important}}
+</style>
+<script id="mjn-latex-dynamic-typeset">
+(function(){
+ function start(){
+  if(!window.MathJax||!MathJax.typesetPromise||!document.body)return;
+  let pending=false;
+  const obs=new MutationObserver(records=>{
+   let targets=[];
+   records.forEach(record=>record.addedNodes.forEach(node=>{
+    if(node.nodeType!==1||node.matches('mjx-container,script,style'))return;
+    if(node.closest&&node.closest('mjx-container'))return;
+    if(node.querySelector&&node.querySelector('mjx-container'))return;
+    if(/\\\\\(|\\\\\[|\$\$/.test(node.textContent||''))targets.push(node);
+   }));
+   if(!targets.length||pending)return;
+   pending=true;
+   Promise.resolve().then(()=>MathJax.typesetPromise(targets).catch(()=>{})).finally(()=>{pending=false});
+  });
+  obs.observe(document.body,{childList:true,subtree:true});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script>
 </head>
 <body>
 <nav class="barre-haute">
