@@ -639,6 +639,17 @@ function tex(src){
   while (i < s.length) out += atom();
   return out;
 }
+/* Les expressions avec radicaux/fractions sont composées par MathJax,
+   et non par les anciennes barres dessinées en CSS. */
+const mjnTexMaison = tex;
+tex = function(src){
+  const s = String(src == null ? '' : src);
+  if (/\\(?:sqrt|frac|dfrac|tfrac|widehat|hat|overline|bar)\b/.test(s)) {
+    return '\\(' + s + '\\)';
+  }
+  return mjnTexMaison(s);
+};
+
 /* Remplace chaque $...$ d'un texte HTML par la formule mise en forme. */
 function M(html){
   if (html == null) return '';
