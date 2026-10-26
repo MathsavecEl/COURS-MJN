@@ -100,6 +100,7 @@
     b.addEventListener('click', function () { location.hash = parentRoute(route); });
     root.insertBefore(b, root.firstChild);
   }
+  var lastAppliedRoute = null;
   function apply() {
     var route = detailRoute();
     var active = !!route;
@@ -111,13 +112,10 @@
       if (old) old.remove();
     }
     hideFloatingActions(active);
-    if (active) window.scrollTo(0, 0);
+    if (active && route !== lastAppliedRoute) window.scrollTo(0, 0);
+    lastAppliedRoute = route;
   }
   window.addEventListener('hashchange', function () { window.setTimeout(apply, 0); });
-  document.addEventListener('click', function (e) {
-    if (e.target.closest('.mjn-focus-return')) return;
-    window.setTimeout(apply, 0);
-  });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
   else apply();
   window.setTimeout(apply, 120);
