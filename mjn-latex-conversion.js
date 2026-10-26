@@ -63,6 +63,102 @@
     }
     return found;
   }
+  function ensureMathJax() {
+    if (window.MathJax && MathJax.typesetPromise) return Promise.resolve();
+    if (window.__mjnMathJaxLoading) return window.__mjnMathJaxLoading;
+    window.MathJax = window.MathJax || {
+      tex: { inlineMath: [['\\\\(', '\\\\)'], ['
+    topmost(root).forEach(function (el) {
+      if (el.dataset.mjnLatexDone === '1') return;
+      var latex = tex(el).trim();
+      if (!latex || /\\text\{\s*\}/.test(latex)) return;
+      var wrapper = document.createElement('span');
+      wrapper.className = 'mjn-latex-converted';
+      wrapper.textContent = '\\(' + latex + '\\)';
+      el.dataset.mjnLatexDone = '1';
+      el.replaceWith(wrapper);
+    });
+    ensureMathJax().then(function () {
+      if (window.MathJax && MathJax.typesetPromise) {
+        var targets = root.nodeType === 1 ? [root] : [document.body];
+        return MathJax.typesetPromise(targets).catch(function () {});
+      }
+    });
+  }
+  function start() {
+    convert(document.body);
+    if (!window.MutationObserver) return;
+    var queued = false, changed = [];
+    new MutationObserver(function (records) {
+      records.forEach(function (record) {
+        record.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1 && !node.matches(skip)) changed.push(node);
+        });
+      });
+      if (queued || !changed.length) return;
+      queued = true;
+      Promise.resolve().then(function () {
+        queued = false;
+        var batch = changed.splice(0);
+        batch.forEach(convert);
+      });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
+})();
+, '
+    topmost(root).forEach(function (el) {
+      if (el.dataset.mjnLatexDone === '1') return;
+      var latex = tex(el).trim();
+      if (!latex || /\\text\{\s*\}/.test(latex)) return;
+      var wrapper = document.createElement('span');
+      wrapper.className = 'mjn-latex-converted';
+      wrapper.textContent = '\\(' + latex + '\\)';
+      el.dataset.mjnLatexDone = '1';
+      el.replaceWith(wrapper);
+    });
+    if (window.MathJax && MathJax.typesetPromise) {
+      var targets = root.nodeType === 1 ? [root] : [document.body];
+      MathJax.typesetPromise(targets).catch(function () {});
+    }
+  }
+  function start() {
+    convert(document.body);
+    if (!window.MutationObserver) return;
+    var queued = false, changed = [];
+    new MutationObserver(function (records) {
+      records.forEach(function (record) {
+        record.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1 && !node.matches(skip)) changed.push(node);
+        });
+      });
+      if (queued || !changed.length) return;
+      queued = true;
+      Promise.resolve().then(function () {
+        queued = false;
+        var batch = changed.splice(0);
+        batch.forEach(convert);
+      });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
+})();
+]], displayMath: [['\\\\[', '\\\\]'], ['$', '$']] },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+      startup: { typeset: false }
+    };
+    window.__mjnMathJaxLoading = new Promise(function(resolve) {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.async = true;
+      script.onload = function() { resolve(); };
+      script.onerror = function() { resolve(); };
+      document.head.appendChild(script);
+    });
+    return window.__mjnMathJaxLoading;
+  }
   function convert(root) {
     topmost(root).forEach(function (el) {
       if (el.dataset.mjnLatexDone === '1') return;
