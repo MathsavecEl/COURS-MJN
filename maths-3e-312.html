@@ -4145,27 +4145,30 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
  function start(){
   if(!window.MathJax||!MathJax.typesetPromise||!document.body)return;
   let queued=false;
-  const nodes=[];
+  const pending=new Set();
   function flush(){
-   if(queued||!nodes.length)return;
+   if(queued||!pending.size)return;
    queued=true;
    Promise.resolve().then(function run(){
-    const batch=nodes.splice(0,nodes.length);
+    const batch=Array.from(pending);pending.clear();
     if(!batch.length)return;
+    try{if(MathJax.typesetClear)MathJax.typesetClear(batch);}catch(e){}
     return MathJax.typesetPromise(batch).catch(function(){})
-      .then(function(){if(nodes.length)return run();});
-   }).finally(function(){queued=false;if(nodes.length)flush();});
+      .then(function(){if(pending.size)return run();});
+   }).finally(function(){queued=false;if(pending.size)flush();});
   }
   const obs=new MutationObserver(function(records){
-   for(const record of records)for(const node of record.addedNodes){
-    if(node.nodeType!==1||node.matches('mjx-container,script,style'))continue;
-    if(node.closest&&node.closest('mjx-container'))continue;
-    const t=node.textContent||'';
-    if(t.includes('\\(')||t.includes('\\[')||t.includes('$$'))nodes.push(node);
+   for(const record of records){
+    for(const node of record.addedNodes){
+     const el=node.nodeType===1?node:(node.nodeType===3?node.parentElement:null);
+     if(!el||el.closest('mjx-container,script,style,noscript,textarea,pre,code'))continue;
+     const t=node.nodeType===3?node.nodeValue:(node.textContent||'');
+     if(t&&(/\\\\\(|\\\\\[|\\\\begin\{|\$\$/.test(t)))pending.add(el);
+    }
    }
    flush();
   });
-  obs.observe(document.body,{childList:true,subtree:true});
+  obs.observe(document.body,{childList:true,subtree:true,characterData:true});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
