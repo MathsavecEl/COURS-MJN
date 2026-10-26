@@ -983,7 +983,7 @@ function fieldHTML(exid,f,i){
   if(f.t==='qcm'){
     h+='<span class="choices" role="group">'+f.o.map(function(o,j){ return '<button type="button" class="choice" data-c="'+j+'">'+o+'</button>'; }).join('')+'</span>';
   } else {
-    h+='<input id="'+id+'" type="text" inputmode="'+(f.t==='expr'||f.t==='txt'?'text':'decimal')+'" autocomplete="off" spellcheck="false" class="'+(f.t==='expr'?'wide':'')+'" aria-label="'+esc((f.l||'Réponse').replace(/<[^>]+>/g,''))+'">';
+    h+='<input id="'+id+'" type="text" inputmode="'+'text'+'" autocomplete="off" spellcheck="false" class="'+(f.t==='expr'?'wide':'')+'" aria-label="'+esc((f.l||'Réponse').replace(/<[^>]+>/g,''))+'">';
     if(f.u) h+='<span class="unit">'+f.u+'</span>';
   }
   h+='<span class="mk" aria-hidden="true"></span></div>';
