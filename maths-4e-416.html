@@ -3866,7 +3866,20 @@ document.addEventListener('keydown',function(e){ if(QZKEYS&&!/input|textarea/i.t
    ===================================================================== */
 (function(){
 // Petites aides d'écriture mathématique utilisées par les fichiers de questions
-const F = (n, d) => `<span class="fr"><span>${n}</span><span>${d}</span></span>`;
+function mjnToTex(value) {
+ const html = String(value)
+  .replace(/<span class=["']fr["']><span>([\s\S]*?)<\/span><span>([\s\S]*?)<\/span><\/span>/g, '\\frac{$1}{$2}')
+  .replace(/<sub>([\s\S]*?)<\/sub>/g, '_{$1}')
+  .replace(/<sup>([\s\S]*?)<\/sup>/g, '^{$1}')
+  .replace(/<i[^>]*>([\s\S]*?)<\/i>/g, '$1')
+  .replace(/<br\s*\/?>/gi, ' ')
+  .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&times;/g, '\\times ')
+  .replace(/&nbsp;/g, ' ').replace(/&minus;/g, '-').replace(/&amp;/g, '&')
+  .replace(/<[^>]+>/g, '')
+  .replace(/\\\(/g, '').replace(/\\\)/g, '');
+ return html;
+}
+const F = (n, d) => '\\(\\frac{' + mjnToTex(n) + '}{' + mjnToTex(d) + '}\\)';
 const x = '<i class="v">x</i>';
 const sq = '<sup>2</sup>';
 const m = '−';
