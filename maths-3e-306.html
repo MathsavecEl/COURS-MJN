@@ -3467,7 +3467,7 @@ function qHTML(q) {
   if (q.t === 'qcm') inp = q.o.map((o, i) => `<button type="button" class="choice" data-q="${q.id}" data-v="${i}">${o}</button>`).join('');
   else {
     const ph = { num: 'ta réponse', frac: 'ex. 7/17', dec: 'ex. 2^3×5', expr: 'ex. 3x+2', sol: 'ex. 3', sci: 'ex. 4,5×10^3', txt: 'ta réponse' }[q.t];
-    inp = `<input type="text" inputmode="${q.t === 'num' ? 'decimal' : 'text'}" autocomplete="off" spellcheck="false" data-q="${q.id}" placeholder="${ph}" aria-label="Réponse">${q.u ? `<span class="unit">${q.u}</span>` : ''}<button type="button" class="btn small chk" data-q="${q.id}">Vérifier</button>`;
+    inp = `<input type="text" inputmode="${'text'}" autocomplete="off" spellcheck="false" data-q="${q.id}" placeholder="${ph}" aria-label="Réponse">${q.u ? `<span class="unit">${q.u}</span>` : ''}<button type="button" class="btn small chk" data-q="${q.id}">Vérifier</button>`;
   }
   const done = ST.done[q.id];
   return `<li class="q${done ? ' qdone' : ''}" id="q-${q.id}"><div class="qt">${fmt(q.q)}</div><div class="qa">${inp}</div>
