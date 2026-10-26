@@ -1023,5 +1023,26 @@ renderHome();
 <script id="mjn-math-polish">(()=>{const skip='SCRIPT,STYLE,NOSCRIPT,TEXTAREA,INPUT,PRE,CODE,KBD,SAMP,SVG,SUP,SUB';const re=/([A-Za-z0-9π)\]])\^(?:\{([^{}]+)\}|([−-]?[A-Za-z0-9]+))/g;function run(){const root=document.querySelector('main')||document.body;if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){if(!n.nodeValue||!n.nodeValue.includes('^'))return NodeFilter.FILTER_REJECT;let p=n.parentElement;while(p){if(p.matches&&p.matches(skip))return NodeFilter.FILTER_REJECT;p=p.parentElement}return NodeFilter.FILTER_ACCEPT}});const nodes=[];let n;while(n=w.nextNode())nodes.push(n);for(const node of nodes){const s=node.nodeValue;re.lastIndex=0;let m,last=0,found=false;const frag=document.createDocumentFragment();while(m=re.exec(s)){found=true;frag.append(document.createTextNode(s.slice(last,m.index)+m[1]));const sup=document.createElement('sup');sup.textContent=m[2]!==undefined?m[2]:m[3];frag.append(sup);last=re.lastIndex}if(found){frag.append(document.createTextNode(s.slice(last)));node.parentNode&&node.parentNode.replaceChild(frag,node)}}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();const root=document.querySelector('main')||document.body;new MutationObserver(()=>run()).observe(root,{childList:true,subtree:true})})();</script>
 
 <script src="calculatrice-scientifique.js?v=1"></script>
+<script id="mjn-latex-dynamic-typeset">
+(function(){
+ function start(){
+  if(!window.MathJax||!MathJax.typesetPromise||!document.body)return;
+  let queued=false;
+  const obs=new MutationObserver(records=>{
+   let nodes=[];
+   for(const record of records) for(const node of record.addedNodes){
+    if(node.nodeType!==1||node.matches('mjx-container,script,style'))continue;
+    if(node.closest&&node.closest('mjx-container'))continue;
+    if(/\\\(|\\\[|\$\$/.test(node.textContent||''))nodes.push(node);
+   }
+   if(!nodes.length||queued)return;
+   queued=true;
+   MathJax.typesetPromise(nodes).catch(()=>{}).finally(()=>{queued=false});
+  });
+  obs.observe(document.body,{childList:true,subtree:true});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script>
 </body>
 </html>
