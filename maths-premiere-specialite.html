@@ -567,6 +567,22 @@ html body .mjn-radical>.mjn-radical-content::before{
 }
 </style>
 
+<!-- MJN COURS : moteur de composition mathématique LaTeX -->
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\\\(','\\\\)']], displayMath: [['\\\\[','\\\\]'], ['$$','$$']], processEscapes: true },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code','annotation','annotation-xml'] },
+  chtml: { scale: 1, matchFontHeight: false, mtextInheritFont: true },
+  startup: { typeset: true }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style id="mjn-latex-rendering">
+.MathJax, mjx-container { font-size: 1.04em; color: inherit; }
+mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: .22em .05em .3em; margin: .45em 0; }
+@media (max-width: 600px) { mjx-container[display="true"] { font-size: .96em; } }
+@media print { mjx-container { color: #111 !important; } }
+</style>
 </head><body><noscript>Active JavaScript pour utiliser ce site.</noscript><script>
 const SITE = {
   code: '1spe', classe: 'Première', court: '1re', titre: 'Maths en Première spécialité', prof: 'M AHA MAJANI', mail: 'mathsclavie20@gmail.com',
