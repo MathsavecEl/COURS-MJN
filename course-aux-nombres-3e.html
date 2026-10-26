@@ -889,7 +889,7 @@ function stepsHTML(st,anim){return `<ol class="steps${anim?' anim':''}">${st.map
 function renderQ(){renderWho();const q=ST.qs[ST.i],score=ST.ans.filter(a=>a.ok).length,ex=exampleFor(q);
   const dots=ST.qs.map((_,i)=>`<i class="${i<ST.ans.length?(ST.ans[i].ok?'ok':'ko'):''}${i===ST.i?' cur':''}"></i>`).join('');
   let inp;if(q.type==='qcm')inp=`<div class="choices" id="choices">${q.choices.map((c,i)=>`<button class="choice" type="button" data-i="${i}">${c}</button>`).join('')}</div>`;
-  else inp=`<form class="answer" id="ansForm" autocomplete="off"><input id="ans" inputmode="decimal" aria-label="Ta réponse" placeholder="Ta réponse"><span class="unit">${q.u||''}</span>
+  else inp=`<form class="answer" id="ansForm" autocomplete="off"><input id="ans" inputmode="text" aria-label="Ta réponse" placeholder="Ta réponse"><span class="unit">${q.u||''}</span>
     <span class="keys"><button type="button" data-k="−" aria-label="signe moins">−</button><button type="button" data-k="," aria-label="virgule">,</button>${q.type==='frac'?'<button type="button" data-k="/" aria-label="barre de fraction">/</button>':''}</span>
     <button class="btn" type="submit">Valider</button><button class="btn ghost" type="button" id="skip">Je ne sais pas</button></form>`;
   app.innerHTML=`<section><div class="qbar"><h2>${title(ST.s)}</h2><div class="stats"><span>Score : ${score}</span><span>⏱ <span id="timer">0:00</span></span></div></div>
@@ -962,7 +962,7 @@ function endExam(timeout){if(!ST||ST.mode!=='exam')return;storeCur();stopTimer()
 function renderExam(){renderWho();const q=ST.qs[ST.i],rem=Math.max(0,Math.ceil((ST.limit-elapsed())/1000));
   const dots=ST.qs.map((_,i)=>`<button type="button" class="qd${ST.given[i]!==''?' done':''}${i===ST.i?' cur':''}" data-i="${i}" aria-label="Question ${i+1}">${i+1}</button>`).join('');
   let inp;if(q.type==='qcm')inp=`<div class="choices">${q.choices.map((c,i)=>`<button class="choice${ST.given[ST.i]===i?' sel':''}" type="button" data-i="${i}">${c}</button>`).join('')}</div>`;
-  else inp=`<form class="answer" id="ansForm" autocomplete="off"><input id="ans" inputmode="decimal" aria-label="Ta réponse" placeholder="Ta réponse" value="${esc(ST.given[ST.i])}"><span class="unit">${q.u||''}</span>
+  else inp=`<form class="answer" id="ansForm" autocomplete="off"><input id="ans" inputmode="text" aria-label="Ta réponse" placeholder="Ta réponse" value="${esc(ST.given[ST.i])}"><span class="unit">${q.u||''}</span>
     <span class="keys"><button type="button" data-k="−" aria-label="signe moins">−</button><button type="button" data-k="," aria-label="virgule">,</button>${q.type==='frac'?'<button type="button" data-k="/" aria-label="barre de fraction">/</button>':''}</span>
     <button class="btn" type="submit">${ST.i===29?'Enregistrer':'Suivante →'}</button></form>`;
   const left=ST.given.filter(g=>g==='').length;
