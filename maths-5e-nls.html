@@ -863,7 +863,20 @@ Si vous remarquez une erreur ou si vous bloquez, n'hésitez pas à m'écrire à 
    NOYAU : écriture des maths, lecture des réponses, vérification
    (aucune dépendance au DOM : testé tel quel dans Node)
    ============================================================ */
-const F = (n, d) => `<span class="fr"><span>${n}</span><span>${d}</span></span>`;
+function mjnToTex(value) {
+ const html = String(value)
+  .replace(/<span class=["']fr["']><span>([\s\S]*?)<\/span><span>([\s\S]*?)<\/span><\/span>/g, '\\frac{$1}{$2}')
+  .replace(/<sub>([\s\S]*?)<\/sub>/g, '_{$1}')
+  .replace(/<sup>([\s\S]*?)<\/sup>/g, '^{$1}')
+  .replace(/<i[^>]*>([\s\S]*?)<\/i>/g, '$1')
+  .replace(/<br\s*\/?>/gi, ' ')
+  .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&times;/g, '\\times ')
+  .replace(/&nbsp;/g, ' ').replace(/&minus;/g, '-').replace(/&amp;/g, '&')
+  .replace(/<[^>]+>/g, '')
+  .replace(/\\\(/g, '').replace(/\\\)/g, '');
+ return html;
+}
+const F = (n, d) => '\\(\\frac{' + mjnToTex(n) + '}{' + mjnToTex(d) + '}\\)';
 const R = s => `<span class="rad mjn-radical"><span class="mjn-radical-sign">√</span><span class="mjn-radical-content">${s}</span></span>`;
 const V = s => `<i>${s}</i>`;
 const fmt = s => String(s).replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>').replace(/\^(−?-?\d+|[a-zA-Z])/g, '<sup>$1</sup>').replace(/\^<i>([^<]+)<\/i>/g, '<sup><i>$1</i></sup>');
