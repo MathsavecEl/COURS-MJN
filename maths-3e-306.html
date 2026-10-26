@@ -768,7 +768,7 @@ function mjnToTex(value) {
  return html;
 }
 const F = (n, d) => '\\(\\frac{' + mjnToTex(n) + '}{' + mjnToTex(d) + '}\\)';
-const R = s => `<span class="rad mjn-radical"><span class="mjn-radical-sign">√</span><span class="mjn-radical-content">${s}</span></span>`;
+const R = s => '\\(\\sqrt{' + mjnToTex(s) + '}\\)';
 const V = s => { const n = String(s).normalize('NFD'); return n.includes('\u0302') ? '<span class="mjn-angle-notation">' + n.replace(/\u0302/g, '') + '</span>' : '<i>' + s + '</i>'; };
 const fmt = s => String(s).replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>').replace(/\^(−?-?\d+|[a-zA-Z])/g, '<sup>$1</sup>').replace(/\^<i>([^<]+)<\/i>/g, '<sup><i>$1</i></sup>');
 
