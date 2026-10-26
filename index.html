@@ -61,6 +61,20 @@
 
 <main class="conteneur accueil-main">
   <div class="classes" id="classes" role="group" aria-label="Choisir une classe"></div>
+  <section class="partage-site" aria-labelledby="partage-titre" style="margin:24px auto;padding:20px;border:1px solid #dce5e8;border-radius:18px;background:#f7fafb;display:flex;gap:22px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;">
+    <div style="flex:0 1 210px;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=8&data=https%3A%2F%2Fmathsavecel.github.io%2FCOURS-MJN%2F" alt="QR code pour ouvrir le site MJN COURS" width="180" height="180" loading="lazy" style="display:block;width:180px;height:180px;max-width:100%;margin:0 auto 8px;background:#fff;border-radius:8px;">
+      <small>Scanne ce code avec l’appareil photo de ton téléphone.</small>
+    </div>
+    <div style="flex:1 1 240px;max-width:440px;">
+      <h2 id="partage-titre" style="margin:0 0 8px;">Partage MJN COURS avec tes camarades</h2>
+      <p style="margin:0 0 12px;">Envoie le lien à un camarade ou fais-lui scanner le QR code pour qu’il accède directement aux cours.</p>
+      <p style="overflow-wrap:anywhere;margin:0 0 14px;"><a href="https://mathsavecel.github.io/COURS-MJN/">https://mathsavecel.github.io/COURS-MJN/</a></p>
+      <button type="button" id="partager-site" class="bouton">↗ Partager le site</button>
+      <button type="button" id="copier-lien-site" class="bouton" style="margin:6px;">Copier le lien</button>
+      <p id="retour-partage" aria-live="polite" style="margin:8px 0 0;font-size:.9em;"></p>
+    </div>
+  </section>
   <p id="derniere-mise-a-jour" class="derniere-mise-a-jour">📅 Dernière mise à jour du site : <strong>24 octobre 2026</strong></p>
   <div class="outils">
     <label class="recherche">
@@ -222,6 +236,40 @@
   });
   afficherClasses(); afficherCours();
   // Le site utilise désormais les fichiers directement, sans service worker susceptible de servir une ancienne recherche.
+</script>
+<script>
+  (function () {
+    const urlSite = 'https://mathsavecel.github.io/COURS-MJN/';
+    const retour = document.getElementById('retour-partage');
+    const partager = document.getElementById('partager-site');
+    const copier = document.getElementById('copier-lien-site');
+    if (partager) partager.addEventListener('click', async function () {
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: 'MJN COURS', text: 'Découvre ce site de cours et d’exercices de mathématiques !', url: urlSite });
+        } else if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(urlSite);
+          retour.textContent = 'Lien copié : tu peux maintenant l’envoyer à tes camarades.';
+        } else {
+          window.prompt('Copie ce lien pour le partager :', urlSite);
+        }
+      } catch (e) {
+        if (e && e.name !== 'AbortError') retour.textContent = 'Tu peux copier le lien ci-dessous pour le partager.';
+      }
+    });
+    if (copier) copier.addEventListener('click', async function () {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(urlSite);
+          retour.textContent = 'Lien copié ! Envoie-le à tes camarades.';
+        } else {
+          window.prompt('Copie ce lien pour le partager :', urlSite);
+        }
+      } catch (e) {
+        window.prompt('Copie ce lien pour le partager :', urlSite);
+      }
+    });
+  })();
 </script>
 <script src="recherche-correctif.js?v=3"></script>
 <script src="progression.js?v=2"></script>
