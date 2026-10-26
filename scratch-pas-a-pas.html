@@ -2293,4 +2293,25 @@ route();
 <a class="mjn-home-float" href="index.html" aria-label="Revenir à l’écran d’accueil">⌂ <span>Accueil</span></a>
 
 <script src="calculatrice-scientifique.js?v=1"></script>
+<script id="mjn-latex-dynamic-typeset">
+(function(){
+ function start(){
+  if(!window.MathJax||!MathJax.typesetPromise||!document.body)return;
+  let queued=false;
+  const obs=new MutationObserver(records=>{
+   let nodes=[];
+   for(const record of records) for(const node of record.addedNodes){
+    if(node.nodeType!==1||node.matches('mjx-container,script,style'))continue;
+    if(node.closest&&node.closest('mjx-container'))continue;
+    if(/\\\(|\\\[|\$\$/.test(node.textContent||''))nodes.push(node);
+   }
+   if(!nodes.length||queued)return;
+   queued=true;
+   MathJax.typesetPromise(nodes).catch(()=>{}).finally(()=>{queued=false});
+  });
+  obs.observe(document.body,{childList:true,subtree:true});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script>
 </body></html>
