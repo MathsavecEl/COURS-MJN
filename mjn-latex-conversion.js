@@ -94,7 +94,7 @@
     });
     loadMathJax().then(function () {
       if (window.MathJax && MathJax.typesetPromise) {
-        var targets = root.nodeType === 1 ? [root] : [document.body];
+        var targets = [document.body];
         return MathJax.typesetPromise(targets).catch(function () {});
       }
     });
