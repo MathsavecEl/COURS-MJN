@@ -4189,20 +4189,26 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
 (function(){
  function start(){
   if(!window.MathJax||!MathJax.typesetPromise||!document.body)return;
-  let queued=false, nodes=[];
-  const obs=new MutationObserver(records=>{
-   for(const record of records) for(const node of record.addedNodes){
+  let queued=false;
+  const nodes=[];
+  function flush(){
+   if(queued||!nodes.length)return;
+   queued=true;
+   Promise.resolve().then(function run(){
+    const batch=nodes.splice(0,nodes.length);
+    if(!batch.length)return;
+    return MathJax.typesetPromise(batch).catch(function(){})
+      .then(function(){if(nodes.length)return run();});
+   }).finally(function(){queued=false;if(nodes.length)flush();});
+  }
+  const obs=new MutationObserver(function(records){
+   for(const record of records)for(const node of record.addedNodes){
     if(node.nodeType!==1||node.matches('mjx-container,script,style'))continue;
     if(node.closest&&node.closest('mjx-container'))continue;
     const t=node.textContent||'';
     if(t.includes('\\(')||t.includes('\\[')||t.includes('$$'))nodes.push(node);
    }
-   if(!nodes.length||queued)return;
-   queued=true;
-   Promise.resolve().then(()=>{
-    const batch=nodes;nodes=[];
-    return MathJax.typesetPromise(batch).catch(()=>{});
-   }).finally(()=>{queued=false;if(nodes.length)obs.takeRecords();});
+   flush();
   });
   obs.observe(document.body,{childList:true,subtree:true});
  }
