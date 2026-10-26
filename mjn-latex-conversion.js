@@ -1,17 +1,17 @@
-/* MJN COURS — conversion des fractions, racines et angles HTML vers LaTeX.
-   Conserve le contenu interactif et traite aussi les exercices injectés dynamiquement. */
+/* MJN COURS — conversion prudente des fractions, racines et angles en LaTeX.
+   Compatible avec le contenu injecté dynamiquement dans les exercices. */
 (function () {
   'use strict';
   if (window.__mjnLatexConversionInstalled) return;
   window.__mjnLatexConversionInstalled = true;
 
   var selector = '.mjn-radical, .fr, .mjn-angle-notation, .mjn-angle3, .hat';
-  var skip = 'script,style,noscript,textarea,input,select,option,button,svg,math,code,pre,mjx-container';
+  var skip = 'script,style,noscript,textarea,input,select,option,button,svg,math,code,pre,mjx-container,.mjn-latex-converted';
 
-  function escText(s) {
+  function escapeText(s) {
     return String(s).replace(/\\/g, '\\backslash ')
-      .replace(/&/g, '\\&').replace(/%/g, '\\%').replace(/#/g, '\\#')
-      .replace(/_/g, '\\_');
+      .replace(/&/g, '\\&').replace(/%/g, '\\%')
+      .replace(/#/g, '\\#').replace(/_/g, '\\_');
   }
   function textTex(s) {
     s = String(s).replace(/\u00a0/g, ' ').replace(/[\t\r\n]+/g, ' ');
@@ -26,8 +26,11 @@
       if (/^[+\-=×÷≤≥≠≈(),;:]$/.test(part)) return textTex(part);
       if (/^[A-Za-z]$/.test(part)) return part;
       if (/^\d+(?:[.,]\d+)?$/.test(part)) return part.replace(',', '{,}');
-      return '\\text{' + escText(part) + '}';
+      return '\\text{' + escapeText(part) + '}';
     }).join('');
+  }
+  function childrenTex(node) {
+    return Array.prototype.map.call(node.childNodes, tex).join('');
   }
   function tex(node) {
     if (node.nodeType === 3) return textTex(node.nodeValue);
@@ -42,16 +45,13 @@
       if (parts.length >= 2) return '\\frac{' + childrenTex(parts[0]) + '}{' + childrenTex(parts[1]) + '}';
     }
     if (cls.contains('mjn-angle-notation') || cls.contains('mjn-angle3') || cls.contains('hat')) {
-      var letters = node.textContent.replace(/\s+/g, '');
-      return letters ? '\\widehat{' + letters.replace(/[^A-Za-z0-9]/g, '') + '}' : '';
+      var letters = node.textContent.replace(/\s+/g, '').replace(/[^A-Za-z0-9]/g, '');
+      return letters ? '\\widehat{' + letters + '}' : '';
     }
-    if (node.tagName === 'SUP') return '^{'+childrenTex(node)+'}';
-    if (node.tagName === 'SUB') return '_{'+childrenTex(node)+'}';
+    if (node.tagName === 'SUP') return '^{' + childrenTex(node) + '}';
+    if (node.tagName === 'SUB') return '_{' + childrenTex(node) + '}';
     if (node.tagName === 'BR') return ' ';
     return childrenTex(node);
-  }
-  function childrenTex(node) {
-    return Array.prototype.map.call(node.childNodes, tex).join('');
   }
   function topmost(root) {
     var found = [];
@@ -63,11 +63,25 @@
     }
     return found;
   }
-  function ensureMathJax() {
-    if (window.MathJax && MathJax.typesetPromise) return Promise.resolve();
+  function loadMathJax() {
+    if (window.MathJax && window.MathJax.typesetPromise) return Promise.resolve();
     if (window.__mjnMathJaxLoading) return window.__mjnMathJaxLoading;
     window.MathJax = window.MathJax || {
-      tex: { inlineMath: [['\\\\(', '\\\\)'], ['
+      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['\\[', '\\]'], ['$$', '$$']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] },
+      startup: { typeset: false }
+    };
+    window.__mjnMathJaxLoading = new Promise(function (resolve) {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.async = true;
+      script.onload = resolve;
+      script.onerror = resolve;
+      document.head.appendChild(script);
+    });
+    return window.__mjnMathJaxLoading;
+  }
+  function convert(root) {
     topmost(root).forEach(function (el) {
       if (el.dataset.mjnLatexDone === '1') return;
       var latex = tex(el).trim();
@@ -78,7 +92,7 @@
       el.dataset.mjnLatexDone = '1';
       el.replaceWith(wrapper);
     });
-    ensureMathJax().then(function () {
+    loadMathJax().then(function () {
       if (window.MathJax && MathJax.typesetPromise) {
         var targets = root.nodeType === 1 ? [root] : [document.body];
         return MathJax.typesetPromise(targets).catch(function () {});
@@ -99,98 +113,7 @@
       queued = true;
       Promise.resolve().then(function () {
         queued = false;
-        var batch = changed.splice(0);
-        batch.forEach(convert);
-      });
-    }).observe(document.body, { childList: true, subtree: true });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
-  else start();
-})();
-, '
-    topmost(root).forEach(function (el) {
-      if (el.dataset.mjnLatexDone === '1') return;
-      var latex = tex(el).trim();
-      if (!latex || /\\text\{\s*\}/.test(latex)) return;
-      var wrapper = document.createElement('span');
-      wrapper.className = 'mjn-latex-converted';
-      wrapper.textContent = '\\(' + latex + '\\)';
-      el.dataset.mjnLatexDone = '1';
-      el.replaceWith(wrapper);
-    });
-    if (window.MathJax && MathJax.typesetPromise) {
-      var targets = root.nodeType === 1 ? [root] : [document.body];
-      MathJax.typesetPromise(targets).catch(function () {});
-    }
-  }
-  function start() {
-    convert(document.body);
-    if (!window.MutationObserver) return;
-    var queued = false, changed = [];
-    new MutationObserver(function (records) {
-      records.forEach(function (record) {
-        record.addedNodes.forEach(function (node) {
-          if (node.nodeType === 1 && !node.matches(skip)) changed.push(node);
-        });
-      });
-      if (queued || !changed.length) return;
-      queued = true;
-      Promise.resolve().then(function () {
-        queued = false;
-        var batch = changed.splice(0);
-        batch.forEach(convert);
-      });
-    }).observe(document.body, { childList: true, subtree: true });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
-  else start();
-})();
-]], displayMath: [['\\\\[', '\\\\]'], ['$', '$']] },
-      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
-      startup: { typeset: false }
-    };
-    window.__mjnMathJaxLoading = new Promise(function(resolve) {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.async = true;
-      script.onload = function() { resolve(); };
-      script.onerror = function() { resolve(); };
-      document.head.appendChild(script);
-    });
-    return window.__mjnMathJaxLoading;
-  }
-  function convert(root) {
-    topmost(root).forEach(function (el) {
-      if (el.dataset.mjnLatexDone === '1') return;
-      var latex = tex(el).trim();
-      if (!latex || /\\text\{\s*\}/.test(latex)) return;
-      var wrapper = document.createElement('span');
-      wrapper.className = 'mjn-latex-converted';
-      wrapper.textContent = '\\(' + latex + '\\)';
-      el.dataset.mjnLatexDone = '1';
-      el.replaceWith(wrapper);
-    });
-    if (window.MathJax && MathJax.typesetPromise) {
-      var targets = root.nodeType === 1 ? [root] : [document.body];
-      MathJax.typesetPromise(targets).catch(function () {});
-    }
-  }
-  function start() {
-    convert(document.body);
-    if (!window.MutationObserver) return;
-    var queued = false, changed = [];
-    new MutationObserver(function (records) {
-      records.forEach(function (record) {
-        record.addedNodes.forEach(function (node) {
-          if (node.nodeType === 1 && !node.matches(skip)) changed.push(node);
-        });
-      });
-      if (queued || !changed.length) return;
-      queued = true;
-      Promise.resolve().then(function () {
-        queued = false;
-        var batch = changed.splice(0);
-        batch.forEach(convert);
+        changed.splice(0).forEach(convert);
       });
     }).observe(document.body, { childList: true, subtree: true });
   }
