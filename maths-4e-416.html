@@ -1001,7 +1001,6 @@ function fieldHTML(exid,f,i){
   } else {
     h+='<input id="'+id+'" type="text" inputmode="'+'text'+'" autocomplete="off" spellcheck="false" class="'+(f.t==='expr'?'wide':'')+'" aria-label="'+esc((f.l||'Réponse').replace(/<[^>]+>/g,''))+'">';
     if(f.u) h+='<span class="unit">'+f.u+'</span>';
-    h+='<button type="button" class="mobile-minus-key" data-negative-toggle aria-label="Insérer ou retirer le signe moins" title="Signe moins">−</button>';
   }
   h+='<span class="mk" aria-hidden="true"></span></div>';
   return h;
@@ -5713,23 +5712,7 @@ html body .mjn-radical-content .fr>span:last-child{display:block!important;paddi
 @media print{html body .mjn-radical{break-inside:avoid!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 </style>
 
-<style id="mjn-mobile-negative-key">
-.mobile-minus-key{display:none;align-self:stretch;min-width:44px;margin-left:6px;border:1px solid #b8c7df;border-radius:10px;background:#e8effb;color:#183d7a;font-size:1.45rem;font-weight:700;touch-action:manipulation}
-@media(max-width:700px){.fld:has(input) .mobile-minus-key{display:inline-flex;align-items:center;justify-content:center}.fld{flex-wrap:wrap}.fld input{min-width:0;flex:1}}
-</style>
-<script id="mjn-mobile-negative-key-script">
-document.addEventListener('click',function(ev){
- var key=ev.target.closest('[data-negative-toggle]');if(!key)return;
- var field=key.closest('.fld'),input=field&&field.querySelector('input');if(!input)return;
- var value=input.value||'';
- if(value.charAt(0)==='-'||value.charAt(0)==='−')input.value=value.slice(1);
- else input.value='-'+value;
- input.focus();
- try{input.setSelectionRange(input.value.length,input.value.length)}catch(e){}
- input.dispatchEvent(new Event('input',{bubbles:true}));
- input.dispatchEvent(new Event('change',{bubbles:true}));
-});
-</script>
+
 
 <style id="mjn-negative-answer-key-style">
 .mjn-negative-answer-key{display:inline-flex;align-items:center;justify-content:center;flex:0 0 48px;min-width:48px;min-height:48px;margin:4px;border:1px solid #b7c9e5;border-radius:12px;background:#e8effb;color:#173d79;font-size:1.6rem;font-weight:750;line-height:1;touch-action:manipulation;cursor:pointer}
