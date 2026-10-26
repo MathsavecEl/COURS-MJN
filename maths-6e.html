@@ -634,7 +634,8 @@ function tex(src){
 /* Remplace chaque $...$ d'un texte HTML par la formule mise en forme. */
 function M(html){
   if (html == null) return '';
-  return String(html).replace(/\$([^$]+)\$/g, (_, t) => `<span class="m">${tex(t)}</span>`);
+  /* Laisse MathJax composer les expressions en vraie notation mathématique. */
+  return String(html).replace(/\$([^$]+)\$/g, (_, t) => '\\(' + t + '\\)');
 }
 /* Écriture française d'un nombre (virgule, sans erreurs d'arrondi). */
 function fr(x, d){
