@@ -112,12 +112,37 @@
       if (old) old.remove();
     }
     hideFloatingActions(active);
-    if (active && route !== lastAppliedRoute) window.scrollTo(0, 0);
+    if (active && route !== lastAppliedRoute) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     lastAppliedRoute = route;
   }
+
+  // Les scripts des exercices peuvent modifier le contenu après une réponse.
+  // Ces modifications ne doivent jamais renvoyer l'élève en haut du cours.
+  // On restaure la position uniquement si l'URL n'a pas changé : une vraie
+  // navigation conserve donc son comportement normal.
+  var pendingScroll = null;
+  function preserveExercisePosition(event) {
+    var target = event.target && event.target.closest
+      ? event.target.closest('input, textarea, select, button.chk, button.choice, button.hintb, button.corrb')
+      : null;
+    if (!target || !document.body.classList.contains('mjn-course-focus')) return;
+    var routeAtClick = location.hash;
+    var y = window.scrollY || window.pageYOffset || 0;
+    if (pendingScroll !== null) window.clearTimeout(pendingScroll);
+    pendingScroll = window.setTimeout(function () {
+      pendingScroll = null;
+      if (location.hash !== routeAtClick) return;
+      window.scrollTo({ top: y, left: 0, behavior: 'auto' });
+    }, 80);
+  }
+  document.addEventListener('pointerdown', preserveExercisePosition, true);
+  document.addEventListener('click', preserveExercisePosition, true);
+  document.addEventListener('focusin', function (event) {
+    preserveExercisePosition(event);
+  }, true);
+
   window.addEventListener('hashchange', function () { window.setTimeout(apply, 0); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
   else apply();
   window.setTimeout(apply, 120);
-  new MutationObserver(function () { apply(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();
