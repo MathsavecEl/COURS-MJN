@@ -62,7 +62,6 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
    records.forEach(record=>record.addedNodes.forEach(node=>{
     if(node.nodeType!==1||node.matches('mjx-container,script,style'))return;
     if(node.closest&&node.closest('mjx-container'))return;
-    if(node.querySelector&&node.querySelector('mjx-container'))return;
     if((node.textContent||'').includes('\\(')||(node.textContent||'').includes('\\[')||(node.textContent||'').includes('$$'))targets.push(node);
    }));
    if(!targets.length||pending)return;
