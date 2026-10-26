@@ -63,7 +63,7 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
     if(node.nodeType!==1||node.matches('mjx-container,script,style'))return;
     if(node.closest&&node.closest('mjx-container'))return;
     if(node.querySelector&&node.querySelector('mjx-container'))return;
-    if(/\\\\\(|\\\\\[|\$\$/.test(node.textContent||''))targets.push(node);
+    if((node.textContent||'').includes('\\(')||(node.textContent||'').includes('\\[')||(node.textContent||'').includes('$$'))targets.push(node);
    }));
    if(!targets.length||pending)return;
    pending=true;
