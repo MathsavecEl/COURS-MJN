@@ -3143,7 +3143,7 @@ html body .sq>.rad>.fr>span{flex:0 0 auto!important;white-space:nowrap!important
 </style>
 <script id="mjn-math-polish">(()=>{const skip='SCRIPT,STYLE,NOSCRIPT,TEXTAREA,INPUT,PRE,CODE,KBD,SAMP,SVG,SUP,SUB';const re=/([A-Za-z0-9π)\]])\^(?:\{([^{}]+)\}|([−-]?[A-Za-z0-9]+))/g;function run(){const root=document.querySelector('main')||document.body;if(!root)return;root.querySelectorAll('.formula,.exemple,.box').forEach(el=>{const h=el.innerHTML;const v=h.replace(/\^<i>([^<]+)<\\/i>/g,'<sup><i>$1</i></sup>');if(v!==h)el.innerHTML=v});const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){if(!n.nodeValue||!n.nodeValue.includes('^'))return NodeFilter.FILTER_REJECT;let p=n.parentElement;while(p){if(p.matches&&p.matches(skip))return NodeFilter.FILTER_REJECT;p=p.parentElement}return NodeFilter.FILTER_ACCEPT}});const nodes=[];let n;while(n=w.nextNode())nodes.push(n);for(const node of nodes){const s=node.nodeValue;re.lastIndex=0;let m,last=0,found=false;const frag=document.createDocumentFragment();while(m=re.exec(s)){found=true;frag.append(document.createTextNode(s.slice(last,m.index)+m[1]));const sup=document.createElement('sup');sup.textContent=m[2]!==undefined?m[2]:m[3];frag.append(sup);last=re.lastIndex}if(found){frag.append(document.createTextNode(s.slice(last)));node.parentNode&&node.parentNode.replaceChild(frag,node)}}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();const root=document.querySelector('main')||document.body;new MutationObserver(()=>run()).observe(root,{childList:true,subtree:true})})();</script>
 
-<script src="focus-mode.js?v=3"></script>
+<script src="focus-mode.js?v=4"></script>
 
 <script src="mjn-math-typography.js?v=1"></script>
 
