@@ -273,7 +273,8 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
     }
     const cl = CLASSES.find(c => c.nom === choisie);
     const liste = COURS.filter(c => c.classe === choisie);
-    $('liste').innerHTML = `<section class="groupe" id="${encodeURIComponent(choisie)}"><h2>${echap(cl?.label || cl?.nom || choisie)}</h2>${liste.length ? `<div class="grille">${liste.map(carte).join('')}</div>` : '<p class="vide">Les ressources de cette classe arrivent bientôt.</p>'}</section>`;
+    const activiteRaisonnement = `<a class="carte" style="--h:155" href="raisonnement.html?classe=${encodeURIComponent(choisie)}"><div class="meta"><span class="etiquette type">Toutes les classes</span><span class="etiquette">Raisonnement</span></div><h3>Justifier, chercher et trouver l’erreur</h3><p>Des activités adaptées au niveau choisi pour apprendre à expliquer sa démarche et analyser les erreurs.</p><span class="ouvrir">S’entraîner à raisonner →</span></a>`;
+    $('liste').innerHTML = `<section class="groupe" id="${encodeURIComponent(choisie)}"><h2>${echap(cl?.label || cl?.nom || choisie)}</h2>${liste.length ? `<div class="grille">${liste.map(carte).join('')}${activiteRaisonnement}</div>` : `<div class="grille">${activiteRaisonnement}</div><p class="vide">D’autres ressources de cette classe seront ajoutées progressivement.</p>`}</section>`;
   }
 
   $('recherche').addEventListener('input', afficherCours);
