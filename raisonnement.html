@@ -23,8 +23,8 @@ const activites={
 };
 const seriesPlus={
 "6e":[
-{nom:"6e · série 3",q1:"Explique pourquoi \\(7\\times 8=56\\) permet aussi d’affirmer que 56 est divisible par 7.",i1:"Relie multiplication et division exacte.",c1:"Comme \\(56=7\\times8\\), la division \\(56\\div7\\) donne 8 sans reste. Donc 56 est divisible par 7.",q2:"Un élève écrit \\(3,07>3,7\\) car 7 centièmes seraient plus grands que 7 dixièmes. Trouve l’erreur.",i2:"Écris les deux nombres avec deux chiffres après la virgule.",c2:"\\(3,7=3,70\\). Or \\(3,07<3,70\\). Sept centièmes sont plus petits que sept dixièmes.",q3:"Un ruban de 35 cm est coupé en morceaux de 4 cm. Combien de morceaux entiers peut-on obtenir et quelle longueur reste-t-il ?",i3:"Cherche une division euclidienne.",c3:"\\(35=4\\times8+3\\). On obtient 8 morceaux de 4 cm et il reste 3 cm."},
-{nom:"6e · série 4",q1:"Explique pourquoi le périmètre d’un carré de côté 6 cm est \\(24\\) cm.",i1:"Un carré a quatre côtés de même longueur.",c1:"Le périmètre est la somme des quatre côtés : \\(P=4\\times6=24\\) cm.",q2:"Un élève affirme que \\(\\frac{1}{4}>\\frac{1}{3}\\) parce que 4 est plus grand que 3. Explique pourquoi c’est faux.",i2:"Imagine une même unité partagée en 3 parts puis en 4 parts égales.",c2:"À unité égale, plus le dénominateur est grand, plus chaque part unitaire est petite : \\(\\frac14<\\frac13\\).",q3:"Une boîte contient 6 rangées de 5 crayons. On retire 7 crayons. Combien en reste-t-il ?",i3:"Calcule d’abord le nombre total de crayons.",c3:"Il y a \\(6\\times5=30\\) crayons. Après le retrait, \\(30-7=23\\) crayons restent."}
+{nom:"6e · série 2",q1:"Explique pourquoi \\(7\\times 8=56\\) permet aussi d’affirmer que 56 est divisible par 7.",i1:"Relie multiplication et division exacte.",c1:"Comme \\(56=7\\times8\\), la division \\(56\\div7\\) donne 8 sans reste. Donc 56 est divisible par 7.",q2:"Un élève écrit \\(3,07>3,7\\) car 7 centièmes seraient plus grands que 7 dixièmes. Trouve l’erreur.",i2:"Écris les deux nombres avec deux chiffres après la virgule.",c2:"\\(3,7=3,70\\). Or \\(3,07<3,70\\). Sept centièmes sont plus petits que sept dixièmes.",q3:"Un ruban de 35 cm est coupé en morceaux de 4 cm. Combien de morceaux entiers peut-on obtenir et quelle longueur reste-t-il ?",i3:"Cherche une division euclidienne.",c3:"\\(35=4\\times8+3\\). On obtient 8 morceaux de 4 cm et il reste 3 cm."},
+{nom:"6e · série 3",q1:"Explique pourquoi le périmètre d’un carré de côté 6 cm est \\(24\\) cm.",i1:"Un carré a quatre côtés de même longueur.",c1:"Le périmètre est la somme des quatre côtés : \\(P=4\\times6=24\\) cm.",q2:"Un élève affirme que \\(\\frac{1}{4}>\\frac{1}{3}\\) parce que 4 est plus grand que 3. Explique pourquoi c’est faux.",i2:"Imagine une même unité partagée en 3 parts puis en 4 parts égales.",c2:"À unité égale, plus le dénominateur est grand, plus chaque part unitaire est petite : \\(\\frac14<\\frac13\\).",q3:"Une boîte contient 6 rangées de 5 crayons. On retire 7 crayons. Combien en reste-t-il ?",i3:"Calcule d’abord le nombre total de crayons.",c3:"Il y a \\(6\\times5=30\\) crayons. Après le retrait, \\(30-7=23\\) crayons restent."}
 ],
 "5e":[
 {nom:"5e · série 3",q1:"Explique pourquoi \\(\\frac{3}{4}=\\frac{6}{8}\\).",i1:"Multiplie le numérateur et le dénominateur par le même nombre non nul.",c1:"\\(\\frac34=\\frac{3\\times2}{4\\times2}=\\frac68\\). La valeur de la fraction ne change pas.",q2:"Un élève calcule \\(\\frac{2}{3}\\times\\frac{1}{5}=\\frac{2}{8}\\). Corrige son calcul.",i2:"Pour multiplier deux fractions, multiplie les numérateurs entre eux et les dénominateurs entre eux.",c2:"\\(\\frac23\\times\\frac15=\\frac{2\\times1}{3\\times5}=\\frac{2}{15}\\).",q3:"Une randonnée mesure 12 km. Léa a parcouru les \\(\\frac{3}{4}\\) du trajet. Quelle distance lui reste-t-il ?",i3:"Calcule d’abord les trois quarts de 12 km.",c3:"\\(12\\times\\frac34=9\\) km parcourus. Il reste \\(12-9=3\\) km."},
@@ -55,9 +55,8 @@ const niveauActif=()=>{const n=new URLSearchParams(location.search).get("classe"
 let serieIndex=0;
 function charger(niveau){
  const base=activites[niveau]||activites["5e"];
- const suppl=seriesSupplementaires[niveau]||base;
  const extras=seriesPlus[niveau]||[];
- const liste=[base,suppl,...extras];
+ const liste=[base,...extras];
  serieIndex=((serieIndex%liste.length)+liste.length)%liste.length;
  const a=liste[serieIndex];
  document.getElementById("niveau-selectionne").textContent="Niveau : "+a.nom+" · Série "+(serieIndex+1)+"/"+liste.length;
@@ -71,7 +70,7 @@ function charger(niveau){
 }
 document.getElementById("niveaux").addEventListener("click",e=>{const b=e.target.closest("[data-niveau]");if(b){serieIndex=0;history.replaceState(null,"","?classe="+encodeURIComponent(b.dataset.niveau));charger(b.dataset.niveau);}});
 document.getElementById("series-navigation").addEventListener("click",e=>{const b=e.target.closest("[data-serie]");if(b){serieIndex=Number(b.dataset.serie);charger(niveauActif());}});
-document.getElementById("serie-suivante").addEventListener("click",()=>{const niveau=niveauActif();const count=2+(seriesPlus[niveau]||[]).length;serieIndex=(serieIndex+1)%count;charger(niveau);});
+document.getElementById("serie-suivante").addEventListener("click",()=>{const niveau=niveauActif();const count=1+(seriesPlus[niveau]||[]).length;serieIndex=(serieIndex+1)%count;charger(niveau);});
 const param=niveauActif();
 const mjConfig=document.createElement("script");mjConfig.type="text/javascript";mjConfig.textContent="window.MathJax = {tex:{inlineMath:[['\\\\(','\\\\)']],displayMath:[['\\\\[','\\\\]']],processEscapes:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};";document.head.appendChild(mjConfig);
 const mjScript=document.createElement("script");mjScript.src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";mjScript.async=true;mjScript.onload=()=>charger(niveauActif());document.head.appendChild(mjScript);
