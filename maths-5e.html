@@ -1696,6 +1696,7 @@ function route(){
 function boot(){
   document.title = SITE.titre + ' · ' + SITE.prof;
   document.body.innerHTML = `<header class="top"><button class="burger" aria-label="Menu">☰</button><div class="logo" onclick="location.hash='#accueil'"><span>${SITE.court}</span>Maths</div><div class="prof">${SITE.prof}</div></header>
+  <aside class="lien-raisonnement-mjn" style="max-width:1120px;margin:14px auto;padding:14px 18px;border:1px solid #cbd5e1;border-radius:14px;background:#f8fafc;color:#172033;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><strong>Un pas de plus : apprendre à raisonner</strong><div style="font-size:.95rem;margin-top:3px">Justifie une réponse, repère une erreur et cherche un problème avec des indices et des corrections.</div></div><a href="raisonnement.html?classe=5e" style="display:inline-block;padding:9px 13px;border-radius:9px;background:#2459a9;color:#fff;text-decoration:none;font-weight:650">Faire les activités →</a></aside>
   <div class="layout"><nav id="nav"></nav><main id="main"></main></div>
   <footer class="foot">Ressources de mathématiques pour les élèves de 5e.</footer>`;
   document.querySelector('.burger').onclick = () => document.getElementById('nav').classList.toggle('open');
