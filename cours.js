@@ -199,4 +199,13 @@ const COURS = [
     lien: "maths-defis.html?classe=Première",
     nouveau: true
   },
+  {
+    classe: "Divers",
+    titre: "Maths Excellence — Alphabet grec et formules de physique",
+    chapitre: "Alphabet grec, symboles et formules",
+    type: "Fiche mémo interactive",
+    description: "Découvre les lettres grecques et des formules utiles au collège, avec exemples et corrections détaillées.",
+    lien: "maths-excellence-formules.html",
+    nouveau: true
+  },
 ];
