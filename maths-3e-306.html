@@ -736,7 +736,7 @@ mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hi
     <nav class="tabs" aria-label="Navigation">
       <a href="#/" data-nav="accueil">Accueil</a>
       <a href="#/chapitres" data-nav="chapitres">Chapitres</a>
-      <a href="maths-defis.html?classe=3e" data-nav="defis-transversaux">🎲 Exercices mélangés</a>
+
       <a href="#/automatismes" data-nav="automatismes">Automatismes</a>
       <a href="#/evals" data-nav="evals">Entraînement à l'évaluation</a>
       <a href="#/decouverte" data-nav="decouverte">Découverte pro</a>
@@ -4005,20 +4005,6 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
  function run(){fix(document.body);}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n);else if(n.nodeType===3)fix(n.parentNode)}))).observe(document.documentElement,{childList:true,subtree:true});
-})();
-</script>
-
-<a class="mjn-defis-tab" href="maths-defis.html?classe=3e" aria-label="Ouvrir les défis et exercices mélangés">🎲 Exercices mélangés</a>
-<script id="mjn-defis-nav-script">
-(function(){
- const classe="3e";
- function addTab(){
-   const nav=document.querySelector('header nav, nav.tabs, nav[aria-label="Navigation"]');
-   if(!nav||nav.querySelector('[data-nav="defis-transversaux"]')||Array.from(nav.querySelectorAll('a')).some(a=>a.href.includes('maths-defis.html')))return;
-   const a=document.createElement('a');a.href="maths-defis.html?classe=3e";a.textContent='🎲 Exercices mélangés';a.setAttribute('data-nav','defis-transversaux');nav.appendChild(a);
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addTab);else addTab();
- new MutationObserver(addTab).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
 
