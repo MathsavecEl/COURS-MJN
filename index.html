@@ -204,8 +204,13 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
       groupeOuvert = ["6e", "5e", "4e", "3e", "Divers"].includes(choisie) ? "college" : "lycee";
       afficherClasses();
       afficherCours();
+      // Après le choix d'un niveau, placer les cours en haut de l'écran,
+      // sans faire défiler jusqu'à la section « À propos ».
       const cible = $('liste');
-      if (cible) setTimeout(() => cible.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+      if (cible) setTimeout(() => {
+        const y = cible.getBoundingClientRect().top + window.scrollY - 92;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }, 60);
     });
   }
 
