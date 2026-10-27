@@ -3,17 +3,13 @@
 <head>
 <meta charset="utf-8">
 <script>
-  // Nettoie uniquement l'ancien service worker du site principal.
-  // Ne pas désinscrire les service workers d'applications hébergées dans des sous-dossiers.
-  if ('serviceWorker' in navigator) {
+  // Active le cache léger du site principal pour les pages consultées.
+  // Les ressources des autres applications hébergées dans des sous-dossiers ne sont pas touchées.
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        return Promise.all(registrations
-          .filter(function (registration) {
-            return new URL(registration.scope).pathname.replace(/\\/$/, '') === '/COURS-MJN';
-          })
-          .map(function (registration) { return registration.unregister(); }));
-      }).catch(function () {});
+      navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(function (error) {
+        console.warn('Le mode hors ligne n’a pas pu être activé.', error);
+      });
     });
   }
 </script>
@@ -24,13 +20,13 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>MJN COURS | Cours de mathématiques et exercices interactifs</title>
-<meta name="description" content="MJN COURS : cours de mathématiques, exercices interactifs et automatismes pour les élèves de 6e, 5e, 4e, 3e, Seconde et Première. Révise, entraîne-toi et relève des défis.">
+<meta name="description" content="MJN COURS : cours de mathématiques, exercices interactifs et automatismes pour les élèves de 6e, 5e, 4e, 3e, Seconde et Première. Révise, entraîne-toi, justifie tes réponses et progresse à ton rythme.">
 <link rel="canonical" href="https://mathsavecel.github.io/COURS-MJN/">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="crv6C6owfUFLbtgbPX1ydA1oqrNsOuRanjTGkeikuWA" />
 <meta property="og:type" content="website">
 <meta property="og:title" content="MJN COURS | Cours de mathématiques">
-<meta property="og:description" content="Cours de maths, exercices interactifs et automatismes pour réviser, progresser et se défier.">
+<meta property="og:description" content="Cours de maths, exercices interactifs, problèmes et activités pour apprendre à raisonner et justifier.">
 <meta property="og:url" content="https://mathsavecel.github.io/COURS-MJN/">
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%233d4bd8'/><path d='M18 20h18a10 10 0 0 1 10 10v16H28a10 10 0 0 1-10-10z' fill='white'/></svg>">
