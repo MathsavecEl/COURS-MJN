@@ -650,7 +650,7 @@ mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hi
     <nav class="tabs" aria-label="Navigation">
       <a href="#accueil" data-nav="accueil">Accueil</a>
       <a href="#chapitres" data-nav="chapitres">Chapitres</a>
-      <a href="maths-defis.html?classe=4e" data-nav="defis-transversaux">🎲 Exercices mélangés</a>
+
       <a href="#fiches" data-nav="fiches">Fiches rappels</a>
       <a href="#automatismes" data-nav="automatismes">Automatismes</a>
       <a href="#brevet" data-nav="brevet">Type brevet</a>
@@ -5475,19 +5475,6 @@ document.getElementById('mjnMakePdf').onclick=()=>{const code=prompt('Code requi
 </script>
 
 <a class="mjn-defis-tab" href="maths-defis.html?classe=4e" aria-label="Ouvrir les défis et exercices mélangés">🎲 Exercices mélangés</a>
-<script id="mjn-defis-nav-script">
-(function(){
- const classe="4e";
- function addTab(){
-   const nav=document.querySelector('header nav, nav.tabs, nav[aria-label="Navigation"]');
-   if(!nav||nav.querySelector('[data-nav="defis-transversaux"]')||Array.from(nav.querySelectorAll('a')).some(a=>a.href.includes('maths-defis.html')))return;
-   const a=document.createElement('a');a.href="maths-defis.html?classe=4e";a.textContent='🎲 Exercices mélangés';a.setAttribute('data-nav','defis-transversaux');nav.appendChild(a);
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addTab);else addTab();
- new MutationObserver(addTab).observe(document.documentElement,{childList:true,subtree:true});
-})();
-</script>
-
 <a class="mjn-home-float" href="index.html" aria-label="Revenir à l’écran d’accueil">⌂ <span>Accueil</span></a>
 <!-- mjn-root-fraction-fix: the radical covers numerator and denominator -->
 <style id="mjn-root-fraction-fix">
