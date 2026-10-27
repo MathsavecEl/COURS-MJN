@@ -1,36 +1,20 @@
-const CACHE = 'maths-interactives-v29';
-const FILES = [
-  './', './index.html', './style.css?v=13', './cours.js?v=19', './recherche-index.js?v=6', './recherche-correctif.js?v=2', './progression.js?v=2', './manifest.webmanifest',
-  './maths-4e-416.html', './maths-3e-306.html', './maths-3e-312.html',
-  './maths-seconde.html', './maths-premiere-specialite.html', './scratch-pas-a-pas.html',
-  './maths-6e.html', './maths-5e-nls.html', './maths-5e.html', './maths-5e-plps.html', './maths-4e-ordinaire.html', './maths-6e-nlns.html', './tableur-pas-a-pas-5e-3e.html',
-  './course-aux-nombres-3e.html', './snt-seconde.html',
-  './icon-192.png', './icon-512.png'
-];
+/* Cache léger : les pages de niveaux sont mises en cache après consultation, pas toutes au premier chargement. */
+const CACHE = 'mjn-cours-v30';
+const CORE = ['./','./index.html','./style.css?v=23','./cours.js?v=29','./recherche-index.js?v=7','./manifest.webmanifest','./icon-192.png','./icon-512.png','./sources.html','./pedagogie.html'];
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('mjn-cours-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) return;
   const request = event.request;
-  const url = new URL(request.url);
-  const isPageOrScript = request.mode === 'navigate' ||
-    /\.(?:html|js|css)$/.test(url.pathname);
-  if (isPageOrScript) {
-    event.respondWith(fetch(request).then(response => {
-      if (response.ok) {
-        const copy = response.clone();
-        caches.open(CACHE).then(cache => cache.put(request, copy));
-      }
-      return response;
-    }).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html'))));
-    return;
-  }
-  event.respondWith(caches.match(request).then(cached => cached || fetch(request).then(response => {
-    if (response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put(request, copy)); }
+  event.respondWith(fetch(request).then(response => {
+    if (response.ok) {
+      const copy = response.clone();
+      caches.open(CACHE).then(cache => cache.put(request, copy)).catch(() => {});
+    }
     return response;
-  }).catch(() => caches.match('./index.html'))));
+  }).catch(() => caches.match(request).then(cached => cached || (request.mode === 'navigate' ? caches.match('./index.html') : Response.error()))));
 });
