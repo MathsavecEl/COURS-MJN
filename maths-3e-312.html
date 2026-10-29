@@ -3883,8 +3883,8 @@ window.MathJax = {
   chtml: { scale: 1, matchFontHeight: false, mtextInheritFont: true },
   startup: { typeset: true }
 };
-</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<\/script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"><\/script>
 <style id="mjn-latex-rendering">
 .MathJax, mjx-container { font-size: 1.04em; color: inherit; }
 mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: .22em .05em .3em; margin: .45em 0; }
@@ -3915,7 +3915,7 @@ mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hi
  const root=document.querySelector('main')||document.body;
  new MutationObserver(()=>run()).observe(root,{childList:true,subtree:true});
 })();
-</script>
+<\/script>
 
 
 
@@ -3947,7 +3947,7 @@ mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hi
  function start(){scan(document.body)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)scan(n);else if(n.nodeType===3&&n.parentElement){const z=n.parentElement.closest(zones);if(z)traiter(z)}}))).observe(document.documentElement,{childList:true,subtree:true});
-})();</script>
+})();<\/script>
 
 </body></html>');w.document.close();w.onload=()=>w.print()
  }
