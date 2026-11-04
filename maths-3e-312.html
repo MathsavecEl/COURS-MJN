@@ -598,12 +598,17 @@ const val = a => typeof a === 'number' ? a : parseNum(String(a));
 const PTS = [{ x: 1.37, y: -0.61, a: 2.13, b: -1.29, n: 3.17, k: 0.73, t: 1.91 }, { x: -2.21, y: 1.83, a: -0.77, b: 2.41, n: -1.53, k: 2.29, t: -0.37 },
   { x: 0.53, y: 2.97, a: 1.61, b: 0.39, n: 0.67, k: -1.41, t: 2.71 }, { x: 3.09, y: -1.47, a: -2.53, b: -0.83, n: 2.29, k: 1.13, t: 0.29 }];
 function sameExpr(A, B) {
+  // Ignore les points de test où une expression n'est pas définie
+  // (par exemple un dénominateur nul) au lieu de rejeter toute la réponse.
+  let comparisons = 0;
   for (const env0 of PTS) {
     const env = {}; 'abcdefghijklmnopqrstuvwxyz'.split('').forEach((c, i) => env[c] = env0[c] !== undefined ? env0[c] : 0.37 + i * 0.113);
     const u = evalAst(A, env), v = evalAst(B, env);
-    if (!Number.isFinite(u) || !Number.isFinite(v) || Math.abs(u - v) > 1e-7 * Math.max(1, Math.abs(v))) return false;
+    if (!Number.isFinite(u) || !Number.isFinite(v)) continue;
+    comparisons++;
+    if (Math.abs(u - v) > 1e-7 * Math.max(1, Math.abs(v))) return false;
   }
-  return true;
+  return comparisons >= 2;
 }
 /* monôme : produit de nombres et de lettres (puissances entières) → signature, ou null */
 function monomial(n, acc = { c: 0, v: {} }) {
