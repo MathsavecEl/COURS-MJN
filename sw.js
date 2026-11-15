@@ -1,5 +1,5 @@
 /* Cache léger : les pages de cours sont mises en cache après consultation, pas toutes au premier chargement. */
-const CACHE = 'mjn-cours-v31';
+const CACHE = 'mjn-cours-v32';
 const CORE = [
   './',
   './index.html',
