@@ -595,3 +595,16 @@ footer .blague-bas { background: var(--surface) !important; color: var(--doux) !
   .fleche-niveau { font-size:1.05rem; }
   .partage-site { margin:24px 0 !important; }
 }
+
+
+/* Navigation par trois espaces : collège, lycée et ressources diverses. */
+.groupe-niveaux-college .niveaux-groupe { grid-template-columns:repeat(4,minmax(0,1fr)) !important; }
+.groupe-niveaux-lycee .niveaux-groupe { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+.groupe-niveaux-divers .niveaux-groupe { grid-template-columns:minmax(0,260px) !important; }
+@media(max-width:900px) {
+  .groupe-niveaux-college .niveaux-groupe { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+@media(max-width:700px) {
+  .groupe-niveaux-lycee .niveaux-groupe { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  .groupe-niveaux-divers .niveaux-groupe { grid-template-columns:minmax(0,1fr) !important; }
+}
