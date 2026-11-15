@@ -56,7 +56,7 @@
 <meta property="og:url" content="https://mathsavecel.github.io/COURS-MJN/">
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%233d4bd8'/><path d='M18 20h18a10 10 0 0 1 10 10v16H28a10 10 0 0 1-10-10z' fill='white'/></svg>">
-<link rel="stylesheet" href="style.css?v=22">
+<link rel="stylesheet" href="style.css?v=23">
 <link rel="stylesheet" href="portrait-a-propos.css?v=2">
 <!-- MJN COURS : moteur LaTeX pour les expressions encadrées par \(...\) et \[...\] -->
 <script>
@@ -128,20 +128,6 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
 
 <main class="conteneur accueil-main">
   <div class="classes" id="classes" role="group" aria-label="Choisir une classe"></div>
-  <section class="partage-site" aria-labelledby="partage-titre" style="margin:24px auto;padding:20px;border:1px solid #dce5e8;border-radius:18px;background:#f7fafb;display:flex;gap:22px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;">
-    <div style="flex:0 1 210px;">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=8&data=https%3A%2F%2Fmathsavecel.github.io%2FCOURS-MJN%2F" alt="QR code pour ouvrir le site MJN COURS" width="180" height="180" loading="lazy" style="display:block;width:180px;height:180px;max-width:100%;margin:0 auto 8px;background:#fff;border-radius:8px;">
-      <small>Scanne ce code avec l’appareil photo de ton téléphone.</small>
-    </div>
-    <div style="flex:1 1 240px;max-width:440px;">
-      <h2 id="partage-titre" style="margin:0 0 8px;">Partage MJN COURS avec tes camarades</h2>
-      <p style="margin:0 0 12px;">Envoie le lien à un camarade ou fais-lui scanner le QR code pour qu’il accède directement aux cours.</p>
-      <p style="overflow-wrap:anywhere;margin:0 0 14px;"><a href="https://mathsavecel.github.io/COURS-MJN/">https://mathsavecel.github.io/COURS-MJN/</a></p>
-      <button type="button" id="partager-site" class="bouton">↗ Partager le site</button>
-      <button type="button" id="copier-lien-site" class="bouton" style="margin:6px;">Copier le lien</button>
-      <p id="retour-partage" aria-live="polite" style="margin:8px 0 0;font-size:.9em;"></p>
-    </div>
-  </section>
   <p id="derniere-mise-a-jour" class="derniere-mise-a-jour">📅 Dernière mise à jour du site : <strong>27 octobre 2026</strong></p>
   <div class="outils">
     <label class="recherche">
@@ -162,6 +148,21 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
     <aside class="contact" id="contact"></aside>
   </div>
 </section>
+
+  <section class="partage-site" aria-labelledby="partage-titre" style="margin:24px auto;padding:20px;border:1px solid #dce5e8;border-radius:18px;background:#f7fafb;display:flex;gap:22px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;">
+    <div style="flex:0 1 210px;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=8&data=https%3A%2F%2Fmathsavecel.github.io%2FCOURS-MJN%2F" alt="QR code pour ouvrir le site MJN COURS" width="180" height="180" loading="lazy" style="display:block;width:180px;height:180px;max-width:100%;margin:0 auto 8px;background:#fff;border-radius:8px;">
+      <small>Scanne ce code avec l’appareil photo de ton téléphone.</small>
+    </div>
+    <div style="flex:1 1 240px;max-width:440px;">
+      <h2 id="partage-titre" style="margin:0 0 8px;">Partage MJN COURS avec tes camarades</h2>
+      <p style="margin:0 0 12px;">Envoie le lien à un camarade ou fais-lui scanner le QR code pour qu’il accède directement aux cours.</p>
+      <p style="overflow-wrap:anywhere;margin:0 0 14px;"><a href="https://mathsavecel.github.io/COURS-MJN/">https://mathsavecel.github.io/COURS-MJN/</a></p>
+      <button type="button" id="partager-site" class="bouton">↗ Partager le site</button>
+      <button type="button" id="copier-lien-site" class="bouton" style="margin:6px;">Copier le lien</button>
+      <p id="retour-partage" aria-live="polite" style="margin:8px 0 0;font-size:.9em;"></p>
+    </div>
+  </section>
 
 <footer><div class="conteneur" id="pied"></div><div class="conteneur liens-informations" style="display:flex;gap:16px;flex-wrap:wrap;padding-bottom:16px"><a href="pedagogie.html">Démarche pédagogique</a><a href="sources.html">Sources et crédits</a></div></footer>
 
@@ -191,43 +192,32 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
   let choisie = new URLSearchParams(location.search).get('classe');
   if (!CLASSES.some(c => c.nom === choisie)) choisie = null;
 
-  let groupeOuvert = "";
   function afficherClasses() {
     const groupes = [
-      { titre: "Collège et divers", id: "college", niveaux: ["6e", "5e", "4e", "3e", "Divers"] },
-      { titre: "Lycée", id: "lycee", niveaux: ["Seconde", "Première", "Terminale"] }
+      { titre: "Collège", id: "college", niveaux: ["6e", "5e", "4e", "3e", "Divers"] },
+      { titre: "Lycée", id: "lycee", niveaux: ["Seconde", "Première"] }
     ];
     $('classes').innerHTML = groupes.map(g => {
-      const ouvert = groupeOuvert === g.id;
       const cartes = g.niveaux.map(nom => CLASSES.find(c => c.nom === nom)).filter(Boolean).map(c => {
         const label = c.nom === "Première" ? "Première · spécialité" : (c.label || c.nom);
-        const icone = c.nom === "Divers" ? "▤" : "🎓";
-        return `<button class="classe classe-accueil" style="--h:215" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}" ${c.lienDirect ? 'data-lien="' + c.lienDirect + '"' : ''}>
+        const icone = c.nom === "Divers" ? "✦" : (c.nom === "Seconde" || c.nom === "Première" ? "∑" : "π");
+        return `<button class="classe classe-accueil" style="--h:215" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}">
           <span class="icone-classe" aria-hidden="true">${icone}</span>
-          <span class="texte-classe"><strong>${echap(label)}</strong></span>
+          <span class="texte-classe"><strong>${echap(label)}</strong><span class="accroche-niveau">Accéder aux cours et exercices</span></span>
+          <span class="fleche-niveau" aria-hidden="true">→</span>
         </button>`;
       }).join('');
-      return `<section class="groupe-niveaux">
-        <button type="button" class="bouton-groupe" data-groupe="${g.id}" aria-expanded="${ouvert}">
-          <span>${g.titre}</span><span class="chevron-groupe" aria-hidden="true">${ouvert ? '−' : '+'}</span>
-        </button>
-        <div class="niveaux-groupe" ${ouvert ? '' : 'hidden'}>${cartes}</div>
+      return `<section class="groupe-niveaux" aria-labelledby="titre-${g.id}">
+        <h2 class="titre-section" id="titre-${g.id}">${g.titre}</h2>
+        <div class="niveaux-groupe">${cartes}</div>
       </section>`;
-    }).join('') + `<div class="encouragement-accueil"><span>Crois en toi,</span><strong>tu es capable !</strong><span class="sourire">☺</span></div>`;
+    }).join('');
 
-    $('classes').querySelectorAll('.bouton-groupe').forEach(b => b.onclick = () => {
-      groupeOuvert = groupeOuvert === b.dataset.groupe ? "" : b.dataset.groupe;
-      afficherClasses();
-    });
     $('classes').querySelectorAll('.classe').forEach(b => b.onclick = () => {
-      if (b.dataset.lien) { location.href = b.dataset.lien; return; }
       choisie = b.dataset.nom;
       history.pushState({ classe: choisie }, '', '?classe=' + encodeURIComponent(choisie));
-      groupeOuvert = ["6e", "5e", "4e", "3e", "Divers"].includes(choisie) ? "college" : "lycee";
       afficherClasses();
       afficherCours();
-      // Après le choix d'un niveau, placer les cours en haut de l'écran,
-      // sans faire défiler jusqu'à la section « À propos ».
       const cible = $('liste');
       if (cible) setTimeout(() => {
         const y = cible.getBoundingClientRect().top + window.scrollY - 92;
@@ -290,7 +280,7 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
     const terme = $('recherche').value.trim();
     if (afficherRecherche(terme)) return;
     if (!choisie) {
-      $('liste').innerHTML = '<p class="vide accueil-invite">Choisis « Collège et divers » ou « Lycée », puis un niveau pour afficher les ressources.</p>';
+      $('liste').innerHTML = '<p class="vide accueil-invite">Choisis directement ton niveau pour accéder aux cours et aux exercices.</p>';
       return;
     }
     const cl = CLASSES.find(c => c.nom === choisie);
