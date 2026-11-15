@@ -194,20 +194,26 @@ mjx-container[display="true"] { display:block; overflow-x:auto; overflow-y:hidde
 
   function afficherClasses() {
     const groupes = [
-      { titre: "Collège", id: "college", niveaux: ["6e", "5e", "4e", "3e", "Divers"] },
-      { titre: "Lycée", id: "lycee", niveaux: ["Seconde", "Première"] }
+      { titre: "Collège", id: "college", niveaux: ["6e", "5e", "4e", "3e"] },
+      { titre: "Lycée", id: "lycee", niveaux: ["Seconde", "Première"] },
+      { titre: "Divers", id: "divers", niveaux: ["Divers"] }
     ];
     $('classes').innerHTML = groupes.map(g => {
       const cartes = g.niveaux.map(nom => CLASSES.find(c => c.nom === nom)).filter(Boolean).map(c => {
         const label = c.nom === "Première" ? "Première · spécialité" : (c.label || c.nom);
+        const sousTitre = c.nom === "3e"
+          ? "306 prépa-métiers et 312 ordinaire"
+          : c.nom === "Divers"
+            ? "Tableur, Scratch, course aux nombres et autres ressources"
+            : "Accéder aux cours et exercices";
         const icone = c.nom === "Divers" ? "✦" : (c.nom === "Seconde" || c.nom === "Première" ? "∑" : "π");
         return `<button class="classe classe-accueil" style="--h:215" aria-pressed="${c.nom === choisie}" data-nom="${echap(c.nom)}">
           <span class="icone-classe" aria-hidden="true">${icone}</span>
-          <span class="texte-classe"><strong>${echap(label)}</strong><span class="accroche-niveau">Accéder aux cours et exercices</span></span>
+          <span class="texte-classe"><strong>${echap(label)}</strong><span class="accroche-niveau">${echap(sousTitre)}</span></span>
           <span class="fleche-niveau" aria-hidden="true">→</span>
         </button>`;
       }).join('');
-      return `<section class="groupe-niveaux" aria-labelledby="titre-${g.id}">
+      return `<section class="groupe-niveaux groupe-niveaux-${g.id}" aria-labelledby="titre-${g.id}">
         <h2 class="titre-section" id="titre-${g.id}">${g.titre}</h2>
         <div class="niveaux-groupe">${cartes}</div>
       </section>`;
