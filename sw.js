@@ -1,15 +1,19 @@
 /* Cache léger : les pages de cours sont mises en cache après consultation, pas toutes au premier chargement. */
-const CACHE = 'mjn-cours-v32';
+const CACHE = 'mjn-cours-v33';
 const CORE = [
   './',
   './index.html',
-  './style.css?v=22',
+  './style.css?v=23',
+  './portrait-a-propos.css?v=2',
   './cours.js?v=29',
   './recherche-index.js?v=7',
   './recherche-correctif.js?v=3',
   './progression.js?v=2',
   './encouragement.js?v=3',
   './mjn-latex-conversion.js?v=2',
+  './mjn-math-typography.js?v=2',
+  './calculatrice-scientifique.js?v=1',
+  './focus-mode.js?v=4',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
