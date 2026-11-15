@@ -22,7 +22,6 @@ const CLASSES = [
   { nom: "3e", court: "3e", couleur: 25 },
   { nom: "Seconde", court: "2de", couleur: 330 },
   { nom: "Première", label: "Première spécialité", court: "1re spé", couleur: 45 },
-  { nom: "Terminale", label: "Terminale spécialité", court: "Tle spé", couleur: 190 },
   { nom: "Divers", court: "★", couleur: 285 }
 ];
 
